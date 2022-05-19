@@ -1,8 +1,17 @@
-rmd_files: ["index.Rmd", "01-introR.Rmd"]
-book_filename: "kribb2022R"
+rmd_files: ["index.Rmd", 
+            "01-Rintro.Rmd",
+            "02-Rmarkdown.Rmd",
+            "03-Rprogramming.Rmd",
+            ]
+book_filename: "kribbr2022"
+repo: https://github.com/greendaygh/Rprog2021/
+output_dir: docs
 new_session: true
 before_chapter_script: _common.R
 delete_merged_file: true
 language:
+  label:
+    fig: "FIGURE"
+    tab: "TABLE"
   ui:
     chapter_name: "Chapter "
