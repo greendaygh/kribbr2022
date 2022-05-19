@@ -1,13 +1,7 @@
-Welcome! 
+- 2022년 한국생명공학연구원 연구데이터 분석과정 R
+- 장소: 코빅 3층 전산교육장(1304호)
+- 강사: 한국생명공학연구원 합성생물학전문연구단 김하성
+- 연락처: 042-860-4372, haseong@kribb.re.kr 
+- 강의자료: https://greendaygh.github.io/kribbr2022/
 
-This is a minimal example of a book based on R Markdown and **bookdown** (https://github.com/rstudio/bookdown). 
 
-This template provides a skeleton file structure that you can edit to create your book. 
-
-The contents inside the .Rmd files provide some pointers to help you get started, but feel free to also delete the content in each file and start fresh.
-
-Additional resources:
-
-The **bookdown** book: https://bookdown.org/yihui/bookdown/
-
-The **bookdown** package reference site: https://pkgs.rstudio.com/bookdown
