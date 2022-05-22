@@ -118,7 +118,7 @@
 
 \title{2022년 한국생명공학연구원 연구데이터 분석과정 R}
 \author{합성생물학전문연구단 김하성}
-\date{2022-05-19}
+\date{2022-05-22}
 
 \begin{document}
 \maketitle
@@ -144,7 +144,7 @@
 \item
   연락처: 042-860-4372, \href{mailto:haseong@kribb.re.kr}{\nolinkurl{haseong@kribb.re.kr}}
 \item
-  강의자료: \url{https://greendaygh.github.io/kribb2022R/}
+  강의자료: \url{https://greendaygh.github.io/kribbr2022/}
 \end{itemize}
 
 \hypertarget{Schedule}{%
@@ -216,19 +216,19 @@
 \hypertarget{what-is-r-rstudio}{%
 \section{What is R / Rstudio}\label{what-is-r-rstudio}}
 
-\includegraphics{images/01/r.jpg}
+\includegraphics[width=1.04167in,height=\textheight]{images/01/r.jpg}
 
 R은 통계나 생물통계, 유전학을 연구하는 사람들 사이에서 널리 사용되는 오픈소스 프로그래밍 언어 입니다. Bell Lab에서 개발한 S 언어에서 유래했으며 많은 라이브러리 (다른 사람들이 만들어 놓은 코드)가 있어서 쉽게 가져다 사용할 수 있습니다. R은 복잡한 수식이나 통계 알고리즘을 간단히 구현하고 사용할 수 있으며 C, C++, Python 등 다른 언어들과의 병행 사용도 가능합니다. R은 IEEE에서 조사하는 Top programming languages에서 2018년 7위, 2019년 5위, 2020년 6위, 2021년 7위로 꾸준히 높은 사용자를 확보하며 빅데이터, AI 시대의 주요한 프로그래밍 언어로 사용되고 있습니다.
 
 \begin{figure}
 \centering
-\includegraphics[width=4.6875in,height=\textheight]{images/01/toplanguage2021.png}
+\includegraphics[width=2.60417in,height=\textheight]{images/01/toplanguage2021.png}
 \caption{\url{https://spectrum.ieee.org/top-programming-languages/}}
 \end{figure}
 
 R은 데이터를 통계분석에 널리 사용되는데 이는 데이터를 눈으로 확인하기 위한 visualization 이나 벡터 연산 등의 강력한 기능 때문에 점점 더 많은 사람들이 사용하고 있습니다. 기존에는 속도나 확장성이 다른 언어들에 비해 단점으로 지적되었으나 R 언어의 계속적인 개발과 업데이트로 이러한 단점들이 빠르게 보완되고 있습니다. R 사용을 위해서는 R 언어의 코어 프로그램을 먼저 설치하고 그 다음 R 언어용 IDE(Integrated Development Environment)인 RStudio 설치가 필요합니다.
 
-\includegraphics[width=2.60417in,height=\textheight]{images/01/rstudio.png}
+\includegraphics[width=1.5625in,height=\textheight]{images/01/rstudio.png}
 
 Rstudio는 R 언어를 위한 오픈소스 기반 통합개발환경(IDE)으로 R 프로그래밍을 위한 편리한 기능들을 제공해 줍니다. R언어가 주목을 받고 두터운 사용자 층을 확보할 수 있게된 핵심 동력이 Rstudio 입니다. 자체적으로 최고수준의 오픈소스 개발팀이 있으며 \texttt{tidyverse}, `\texttt{,}shiny` 등의 데이터 분석 관련 주요 패키지를 개발하였고 정기적으로 conference 개최를 하면서 기술 보급의 핵심 역할을 하고 있습니다.
 
@@ -284,7 +284,7 @@ Rstudio는 R 언어를 위한 오픈소스 기반 통합개발환경(IDE)으로 
 \hypertarget{rstudio-interface}{%
 \section{Rstudio interface}\label{rstudio-interface}}
 
-\includegraphics[width=6.25in,height=\textheight]{images/01/01-11.PNG}
+\includegraphics[width=5.20833in,height=\textheight]{images/01/01-11.PNG}
 
 \begin{itemize}
 \tightlist
@@ -333,8 +333,7 @@ Rstudio는 R 언어를 위한 오픈소스 기반 통합개발환경(IDE)으로 
   자동 완성 기능 (Tab completion) in RStudio
 \end{itemize}
 
-\hypertarget{exercise}{%
-\subsection{Exercise}\label{exercise}}
+\textbf{Exercises}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -369,9 +368,9 @@ Rstudio는 R 언어를 위한 오픈소스 기반 통합개발환경(IDE)으로 
 \hypertarget{environment-and-files}{%
 \subsection{Environment and Files}\label{environment-and-files}}
 
-\includegraphics{images/01/envandhist.png}
+\includegraphics[width=4.16667in,height=\textheight]{images/01/envandhist.png}
 
-\includegraphics{images/01/fileandpackages.png}
+\includegraphics[width=4.16667in,height=\textheight]{images/01/fileandpackages.png}
 
 \hypertarget{start-a-project}{%
 \section{Start a project}\label{start-a-project}}
@@ -418,7 +417,7 @@ R은 방대한 양의 도움말 데이터를 제공하며 다음과 같은 명�
 또한 \url{https://www.rstudio.com/resources/cheatsheets/} 에서는 다양한 R언어의 기능을 한 눈에 알아볼 수 있게 만든 cheatsheet 형태의 문서를 참고할 수 있습니다.
 
 \includegraphics[width=5.72917in,height=\textheight]{images/01/base-r_1.png}
-\includegraphics[width=56.77083in,height=\textheight]{images/01/base-r_2.png}
+\includegraphics[width=5.72917in,height=\textheight]{images/01/base-r_2.png}
 
 \hypertarget{r-packages-and-dataset}{%
 \section{R packages and Dataset}\label{r-packages-and-dataset}}
@@ -427,7 +426,7 @@ R 패키지는 함수와 데이터셋의 묶음으로 다른 사람들이 만들
 
 이러한 패키지는 인터넷의 \texttt{repository}에서 구할 수 있으며 대표적인 \texttt{repository}는 The Comprehensive R Archive Network (CRAN) (\url{http://cran.r-project.org/web/views/}) 와 생물학자를 위한 Bioconductor (\url{http://www.bioconductor.org/}) 가 있습니다. 이러한 패키지의 설치는 아래와 같이 RStudio를 이용하거나 콘솔창에서 \texttt{install.packages()} 함수를 이용할 수 있습니다.
 
-\includegraphics[width=5.72917in,height=\textheight]{images/01/01-18.PNG}
+\includegraphics[width=4.6875in,height=\textheight]{images/01/01-18.PNG}
 
 패키지를 설치하고 사용하기 위해서는 \texttt{library()} 함수를 사용해서 관련 명령어를 사용하기 전에 미리 loading 해 두어야 합니다. 한 번 로딩으로 작업 세션이 끝날때까지 관련된 함수를 사용할 수 있으나 R 세션이나 RStudio를 재시작 할 경우 다시 로딩해야 사용할 수 있습니다.
 
@@ -452,7 +451,7 @@ R 패키지는 함수와 데이터셋의 묶음으로 다른 사람들이 만들
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=6.25in,height=\textheight]{images/01/01-19.PNG}
+\includegraphics[width=4.6875in,height=\textheight]{images/01/01-19.PNG}
 
 일반적으로 패키지 안에 관련된 데이터도 같이 저장되어 있으며 \texttt{data()} 함수를 이용해서 패키지 데이터를 사용자 작업공간에 복사해서 사용 가능합니다.
 
@@ -477,28 +476,28 @@ R 패키지는 함수와 데이터셋의 묶음으로 다른 사람들이 만들
 \hypertarget{rmarkdown}{%
 \chapter{Rmarkdown}\label{rmarkdown}}
 
-R markdown은 데이터를 분석하는 코드와 리포트를 동시에 수행할 수 있는 일종의 통합 문서입니다. 워드나 아래한글에서 프로그래밍과 데이터분석을 위한 코드를 작성할 수 있는 경우라고 생각해도 됩니다. Plain-text 기반의 markdown 문법을 사용하며 R markdown으로 작성된 문서는 HTML, PDF, MS word, Beamer, HTML5 slides, books, website 등 다양한 포멧의 출력물로 변환할 수 있습니다.
+Rmarkdown은 데이터를 분석하는 코드와 리포트를 동시에 수행할 수 있는 일종의 통합 문서입니다. 워드나 아래한글에서 프로그래밍과 데이터분석을 위한 코드를 작성할 수 있는 경우라고 생각해도 됩니다. Plain-text 기반의 markdown 문법을 사용하며 Rmarkdown으로 작성된 문서는 HTML, PDF, MS word, Beamer, HTML5 slides, books, website 등 다양한 포멧의 출력물로 변환할 수 있습니다.
 
 \begin{figure}
 \centering
-\includegraphics{images/rmarkdown/rmarkdown-01.PNG}
+\includegraphics[width=5.20833in,height=\textheight]{images/rmarkdown/rmarkdown-01.PNG}
 \caption{Image from rmarkdown.rstudio.com}
 \end{figure}
 
-Rmarkdown 웹사이트에 R markdown 소개 동영상과 \href{https://rmarkdown.rstudio.com/lesson-1.html}{R markdown 공식 사이트 메뉴얼} 관련 서적 \href{https://bookdown.org/yihui/rmarkdown/}{R markdown: The Definitive Guide}를 참고하세요. 또한 R markdown을 사용할 때 \href{https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf}{cheatsheet}를 옆에 두고 수시로 보면서 사용하시면 많은 도움이 될 수 있습니다.
+Rmarkdown 웹사이트에 Rmarkdown 소개 동영상과 \href{https://rmarkdown.rstudio.com/lesson-1.html}{Rmarkdown 공식 사이트 메뉴얼} 관련 서적 \href{https://bookdown.org/yihui/rmarkdown/}{Rmarkdown: The Definitive Guide}를 참고하세요. 또한 Rmarkdown을 사용할 때 \href{https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf}{cheatsheet}를 옆에 두고 수시로 보면서 사용하시면 많은 도움이 될 수 있습니다.
 
-\hypertarget{r-markdownuxc758-uxae30uxbcf8-uxc791uxb3d9-uxc6d0uxb9ac}{%
-\section{R markdown의 기본 작동 원리}\label{r-markdownuxc758-uxae30uxbcf8-uxc791uxb3d9-uxc6d0uxb9ac}}
+\hypertarget{rmarkdownuxc758-uxae30uxbcf8-uxc791uxb3d9-uxc6d0uxb9ac}{%
+\section{Rmarkdown의 기본 작동 원리}\label{rmarkdownuxc758-uxae30uxbcf8-uxc791uxb3d9-uxc6d0uxb9ac}}
 
-R markdown은 plain text 기반으로 작성되며 Rmd 라는 확장자를 갖는 파일로 저장됩니다. 다음과 같은 텍스트 파일이 Rmd 파일의 전형적인 예 입니다.
+Rmarkdown은 plain text 기반으로 작성되며 Rmd 라는 확장자를 갖는 파일로 저장됩니다. 다음과 같은 텍스트 파일이 Rmd 파일의 전형적인 예 입니다.
 
-\includegraphics[width=5.72917in,height=\textheight]{images/rmarkdown/how-1-file.png}
+\includegraphics[width=5.20833in,height=\textheight]{images/rmarkdown/how-1-file.png}
 
 위 예제에서 네 가지 다른 종류의 컨텐츠를 볼 수 있습니다. 하나는 - - - 으로 둘러쌓인 내용으로 YAML 이라고 하며 JSON과 같은 데이터 직렬화를 수행하는 하나의 데이터 저장 포멧입니다. 백틱(`) 으로 둘러쌓인 코드청그(Code Chunks)라고 하는 부분에는 R이나 python 등의 다양한 코드(실재 작동하는)를 넣어서 사용합니다. 그리고 \#\#\# 으로 표시된 글은 제목 글을 나타내며 나머지는 일반적인 텍스트를 나타냅니다.
 
-이러한 R markdown 파일은 \texttt{render}라는 명령어로 원하는 포맷의 문서로 변환할 수 있습니다. 다음 예의 파일을 pdf 형식으로 rendering 하기 위해서는 YAML에 pdf 임을 명시하고 아래와 같이 \texttt{render}함수를 사용하면 됩니다. 또는 Rstudio 코드 입력창 상단의 Knit 버튼으로 pdf나 html 문서를 생성할 수 있습니다.
+이러한 Rmarkdown 파일은 \texttt{render}라는 명령어로 원하는 포맷의 문서로 변환할 수 있습니다. 다음 예의 파일을 pdf 형식으로 rendering 하기 위해서는 YAML에 pdf 임을 명시하고 아래와 같이 \texttt{render}함수를 사용하면 됩니다. 또는 Rstudio 코드 입력창 상단의 Knit 버튼으로 pdf나 html 문서를 생성할 수 있습니다.
 
-\includegraphics[width=5.72917in,height=\textheight]{images/rmarkdown/example2.PNG}
+\includegraphics[width=5.20833in,height=\textheight]{images/rmarkdown/example2.PNG}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -506,14 +505,14 @@ R markdown은 plain text 기반으로 작성되며 Rmd 라는 확장자를 갖�
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=5.72917in,height=\textheight]{images/rmarkdown/ex_pdf.PNG}
+\includegraphics[width=4.6875in,height=\textheight]{images/rmarkdown/ex_pdf.PNG}
 
-R markdown의 작동 원리는 Rmd 파일을 만든 후 \texttt{render} 함수를 부르면 \href{https://yihui.org/knitr/}{knitr} 소프트웨어가 R 코드를 실행시킨 후 markdown (.md) 파일을 생성합니다. 이 후 .md 파일을 \href{https://pandoc.org/}{pandoc} 이라는 문서변환기가 원하는 문서 형태로 전환해 줍니다.
+Rmarkdown의 작동 원리는 Rmd 파일을 만든 후 \texttt{render} 함수를 부르면 \href{https://yihui.org/knitr/}{knitr} 소프트웨어가 R 코드를 실행시킨 후 markdown (.md) 파일을 생성합니다. 이 후 .md 파일을 \href{https://pandoc.org/}{pandoc} 이라는 문서변환기가 원하는 문서 형태로 전환해 줍니다.
 
 \hypertarget{uxcf54uxb4dc-uxc785uxb825}{%
 \section{코드 입력}\label{uxcf54uxb4dc-uxc785uxb825}}
 
-R markdown에서 사용하는 코드청크는 CTRL+ALT+I 단축키를 사용해서 넣을 수 있으며 다음과 같은 몇 가지 옵션으로 코드 스니펫들의 실행/숨김 여부를 결정할 수 있습니다.
+Rmarkdown에서 사용하는 코드청크는 \texttt{CTRL+ALT+i} 단축키를 사용해서 넣을 수 있으며 다음과 같은 몇 가지 옵션으로 코드 스니펫들의 실행/숨김 여부를 결정할 수 있습니다.
 
 \begin{itemize}
 \tightlist
@@ -531,9 +530,11 @@ R markdown에서 사용하는 코드청크는 CTRL+ALT+I 단축키를 사용해�
 
 \begin{figure}
 \centering
-\includegraphics[width=3.125in,height=\textheight]{images/rmarkdown/codechunk1.PNG}
+\includegraphics[width=2.60417in,height=\textheight]{images/rmarkdown/codechunk1.PNG}
 \caption{코드청크 옵션 예시}
 \end{figure}
+
+실행 결과는 아래와 같습니다.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -556,7 +557,13 @@ R markdown에서 사용하는 코드청크는 CTRL+ALT+I 단축키를 사용해�
 #> [1] 2
 \end{verbatim}
 
-R markdown에서는 \texttt{r} 을 사용해서 코드청크가 아닌 곳에 R 코드를 넣을 수 있습니다. 예를 들어 n은 1, 2, 3 값을 가지는 벡터 입니다. 또한 R 언어 외에도 \texttt{Python}, \texttt{SQL}, \texttt{Bash}, \texttt{Rcpp}, \texttt{Stan}, \texttt{JavaScript}, \texttt{CSS} 등의 다양한 프로그래밍 언어에 대해서도 지원합니다. 그런데 이러한 언어들이 사용 가능해지기 위해서는 해당 언어들을 실행해주는 엔진이 있어야 하며 python의 경우 \texttt{reticulate} 라는 패키지가 이러한 기능을 담당합니다. 이 패키지를 설치할 경우 miniconda라는 가상환경 및 데이터 분석을 위한 오픈소스 패키지가 자동으로 설치됩니다.
+Rmarkdown에서는 ` r`을 사용해서 코드청크가 아닌 곳에 R 코드를 넣을 수 있습니다. 또한 R 언어 외에도 \texttt{Python}, \texttt{SQL}, \texttt{Bash}, \texttt{Rcpp}, \texttt{Stan}, \texttt{JavaScript}, \texttt{CSS} 등의 다양한 프로그래밍 언어에 대해서도 코드청크 기능을 사용할 수 있습니다. 그런데 이러한 언어들이 사용 가능해지기 위해서는 해당 언어들을 실행해주는 엔진이 있어야 하며 python의 경우 \texttt{reticulate} 라는 패키지가 이러한 기능을 담당합니다. 이 패키지를 설치할 경우 miniconda라는 가상환경 및 데이터 분석을 위한 오픈소스 패키지가 자동으로 설치됩니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(reticulate)}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -565,30 +572,44 @@ R markdown에서는 \texttt{r} 을 사용해서 코드청크가 아닌 곳에 R 
 \end{Highlighting}
 \end{Shaded}
 
+아래는 위에 해당하는 소스코드 입니다.
+
+\includegraphics[width=2.60417in,height=\textheight]{images/02/lecticulate.png}
+
 \hypertarget{markdown-uxbb38uxbc95}{%
 \section{Markdown 문법}\label{markdown-uxbb38uxbc95}}
 
 마크다운은 plain text 기반의 마크업 언어로서 마크업 언어는 태그 등을 이용해서 문서의 데이터 구조를 명시하는데 이러한 태그를 사용하는 방법 체계를 마크업 언어라고 합니다. 가장 대표적으로 html 이 있습니다.
 
 \begin{verbatim}
-<html>
-  <head>
-    <title> Hello HTML </title>
-  </head>
-  <body>
-  Hello markup world!
-  </body>
-</html>
+    <html>
+      <head>
+        <title> Hello HTML </title>
+      </head>
+      <body>
+      Hello markup world!
+      </body>
+    </html>
 \end{verbatim}
 
-마크다운도 몇 가지 태그를 이용해서 문서의 구조를 정의하고 있으며 상세한 내용은 \href{https://rmarkdown.rstudio.com/authoring_pandoc_markdown.html}{Pandoc 마크다운 문서}를 참고하시기 바랍니다. 마크다운언어의 철학은 쉽게 읽고 쓸 수 있는 문서입니다. plain text 기반으로 작성되어 쓰기 쉬우며 (아직도 사람들이 메모장 많이 사용하는 이유와 같습니다) 태그가 포함되어 있어도 읽는데 어려움이 없습니다. html 언어와 rmd 파일의 예를 보시면 그 철학을 어렵지 않게 알 수 있습니다.
+마크다운도 몇 가지 태그를 이용해서 문서의 구조를 정의하고 있으며 상세한 내용은 \href{https://rmarkdown.rstudio.com/authoring_pandoc_markdown.html}{Pandoc 마크다운 문서}를 참고하시기 바랍니다. 마크다운언어의 철학은 쉽게 읽고 쓸 수 있는 문서입니다. plain text 기반으로 작성되어 쓰기 쉬우며 (아직도 사람들이 메모장 많이 사용하는 이유와 같습니다) 태그가 포함되어 있어도 읽는데 어려움이 없습니다. 위 html 언어와 아래 markdown 파일의 예들을 보시면 그 차이를 어렵지 않게 이해할 수 있습니다.
 
 마크다운에서는 Enter를 한 번 입력해서 줄바꿈이 되지 않습니다. \texttt{\textless{}br\textgreater{}} 또는 문장 마지막에 공백을 두 개 입력하면 되겠습니다.
+
+\begin{verbatim}
+이 문장은 줄바꿈이 
+되지 않습니다
+\end{verbatim}
 
 이 문장은 줄바꿈이
 되지 않습니다
 
-이 분장은 줄바꿈이\\
+\begin{verbatim}
+이 분장은 줄바꿈이<br>
+됩니다
+\end{verbatim}
+
+이 분장은 줄바꿈이
 됩니다
 
 마크다운 테그를 몇 가지 살펴보면 먼저 \# 을 붙여서 만드는 header 가 있습니다.
@@ -597,9 +618,7 @@ R markdown에서는 \texttt{r} 을 사용해서 코드청크가 아닌 곳에 R 
 # A level-one header
 ## A level-two header
 ### A level-three header
-\end{verbatim}
 
-\begin{verbatim}
 # A level-one header {#l1-1}
 ## A level-two header {#l2-1}
 ### A level-three header {#l3-1}
@@ -612,14 +631,12 @@ R markdown에서는 \texttt{r} 을 사용해서 코드청크가 아닌 곳에 R 
 Block quotations
 
 \begin{quote}
-This is block quote. This
-paragraph has two lines
+This is block quote. This paragraph has two lines
 \end{quote}
 
-\begin{quote}
-This is a block quote. This
-paragraph has two lines.
-\end{quote}
+\begin{verbatim}
+> This is block quote. This paragraph has two lines
+\end{verbatim}
 
 \begin{quote}
 This is a block quote.
@@ -629,25 +646,43 @@ A block quote within a block quote.
 \end{quote}
 \end{quote}
 
-\begin{quote}
 \begin{verbatim}
- code with five spaces
+> This is a block quote.
+>
+> > A block quote within a block quote.
 \end{verbatim}
-\end{quote}
 
 \emph{Italic}
 
+\begin{verbatim}
+*Italic*
+\end{verbatim}
+
 \textbf{Bold}
 
+\begin{verbatim}
+**Bold**
+\end{verbatim}
+
 \href{https://www.naver.com/}{Naver link}
+
+\begin{verbatim}
+[Naver link](https://www.naver.com/)
+\end{verbatim}
 
 이미지를 직접 삽입하고 가운데 정렬합니다.
 
 \begin{figure}
 \centering
-\includegraphics[width=3.125in,height=\textheight]{images/rmarkdown/000002.png}
+\includegraphics[width=2.08333in,height=\textheight]{images/rmarkdown/000002.png}
 \caption{자동차 모델에 따른 고속도로 연비 분포}
 \end{figure}
+
+\begin{verbatim}
+<center>
+![자동차 모델에 따른 고속도로 연비 분포](images/rmarkdown/000002.png){width="200"}
+</center>
+\end{verbatim}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -678,24 +713,81 @@ A block quote within a block quote.
   \end{itemize}
 \end{itemize}
 
-소스코드 그대로 표현하기 위해서는 \texttt{\textasciitilde{}\textasciitilde{}\textasciitilde{}} 를 사용합니다.
+\begin{verbatim}
+1.  첫 번째
+2.  두 번째
+3.  세 번째
+
+-   아이템 1
+-   아이템 2
+-   아이템 3
+    -   아이템 3-1
+    -   아이템 3-2
+\end{verbatim}
+
+참고로 소스코드 그대로 표현하기 위해서는 \texttt{\textasciitilde{}\textasciitilde{}\textasciitilde{}} 를 사용합니다.
+
+\hypertarget{uxc2a4uxd0c0uxc77c}{%
+\section{스타일}\label{uxc2a4uxd0c0uxc77c}}
+
+아래와 같이 코드청크를 이용해서 css 코드를 삽입하고 해당되는 class 또는 id에 해당하는 내용에 스타일을 적용할 수 있습니다.
+
+\includegraphics[width=1.5625in,height=\textheight]{images/02/style.png}
+
+\leavevmode\vadjust pre{\hypertarget{header1}{}}%
+소스코드
 
 \begin{verbatim}
-<div>
-  소스코드 
+<div id='header1'>
+소스코드 
 </div>
 \end{verbatim}
+
+\hypertarget{uxd14cuxc774uxbe14}{%
+\section{테이블}\label{uxd14cuxc774uxbe14}}
+
+\texttt{kable} 함수를 이용하여 Rmarkdown 문서에 포함되는 표를 원하는 방향으로 작성할 수 있습니다. \texttt{mtcars}는 데이터프레임 형식의 데이터입니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
+\NormalTok{  mtcars[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, ], }
+  \AttributeTok{caption =} \StringTok{"A knitr kable."}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}
+
+\caption{\label{tab:unnamed-chunk-8}A knitr kable.}
+\centering
+\begin{tabular}[t]{l|r|r|r|r|r|r|r|r|r|r|r}
+\hline
+  & mpg & cyl & disp & hp & drat & wt & qsec & vs & am & gear & carb\\
+\hline
+Mazda RX4 & 21.0 & 6 & 160 & 110 & 3.90 & 2.620 & 16.46 & 0 & 1 & 4 & 4\\
+\hline
+Mazda RX4 Wag & 21.0 & 6 & 160 & 110 & 3.90 & 2.875 & 17.02 & 0 & 1 & 4 & 4\\
+\hline
+Datsun 710 & 22.8 & 4 & 108 & 93 & 3.85 & 2.320 & 18.61 & 1 & 1 & 4 & 1\\
+\hline
+Hornet 4 Drive & 21.4 & 6 & 258 & 110 & 3.08 & 3.215 & 19.44 & 1 & 0 & 3 & 1\\
+\hline
+Hornet Sportabout & 18.7 & 8 & 360 & 175 & 3.15 & 3.440 & 17.02 & 0 & 0 & 3 & 2\\
+\hline
+\end{tabular}
+\end{table}
 
 \hypertarget{yaml-uxd5e4uxb354}{%
 \section{YAML 헤더}\label{yaml-uxd5e4uxb354}}
 
-R markdown 파일에서 YAML의 가장 중요한 기능은 output 포멧을 지정하는 것이며 title, author, date, 등을 설정할수도 있습니다.
+Rmarkdown 파일에서 YAML의 가장 중요한 기능은 output 포멧을 지정하는 것이며 title, author, date, 등을 설정할수도 있습니다.
 
 \begin{verbatim}
 ---
 layout: page
 title: "R프로그래밍"
-subtitle: "R markdown 활용법"
+subtitle: "Rmarkdown 활용법"
 output:
   html_document:
     css: style.css
@@ -733,6 +825,10 @@ mainfont: NanumGothic
   powerpoint\_presentation: PowerPoint presentation
 \end{itemize}
 
+\textbf{Exercises}
+
+``KRIBBR2022-Lecture2'' 라는 이름의 다음과 같은 형태의 Rmarkdown 문서를 만들고 이 번 강의의 실습 코드 및 설명, 질문, 코멘트 등을 적어 보시기 바랍니다.
+
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 이 저작물은 크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제 라이선스에 따라 이용할 수 있습니다.
@@ -756,9 +852,7 @@ mainfont: NanumGothic
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{exercise-1}{%
-\subsection*{Exercise}\label{exercise-1}}
-\addcontentsline{toc}{subsection}{Exercise}
+\textbf{Exercises}
 
 다음 공식들을 계산하는 R 코드를 작성하시오
 
@@ -771,8 +865,9 @@ mainfont: NanumGothic
 \hypertarget{what-is-a-programming-language}{%
 \section{What is a programming language}\label{what-is-a-programming-language}}
 
-\includegraphics[width=6.25in,height=\textheight]{images/01/24.PNG}
-\includegraphics[width=6.45833in,height=\textheight]{images/01/25.PNG}
+\includegraphics[width=4.16667in,height=\textheight]{images/01/24.PNG}
+
+\includegraphics[width=4.375in,height=\textheight]{images/01/25.PNG}
 
 R은 programming language로서 다른 프로그래밍 언어와 같이 몇 가지 공통적 개념을 가집니다 (\texttt{변수}, \texttt{자료형}, \texttt{함수}, \texttt{조건문}, \texttt{반복문})
 
@@ -893,7 +988,7 @@ R은 programming language로서 다른 프로그래밍 언어와 같이 몇 가�
   \end{itemize}
 \end{itemize}
 
-\includegraphics[width=4.16667in,height=\textheight]{images/02/01.png}
+\includegraphics[width=3.125in,height=\textheight]{images/02/01.png}
 
 \begin{itemize}
 \tightlist
@@ -1026,23 +1121,60 @@ numeric 형식의 벡터는 다음과 같은 다양한 편의 함수들을 사�
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{exercise-2}{%
-\subsubsection*{Exercise}\label{exercise-2}}
-\addcontentsline{toc}{subsubsection}{Exercise}
+\textbf{Exercises}
 
 odds라는 이름의 변수에 1부터 100까지의 홀수만을 저장하시오 (\texttt{seq()} 함수 사용)
+
+인덱싱은 배열형 (vector, matrix 등) 데이터의 일부 데이터를 참조할 때 사용하는 방법입니다. \texttt{{[}}와 \texttt{{]}}를 사용하며 위치를 나타내는 수로 참조합니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\DecValTok{1}\NormalTok{]}
+\NormalTok{x[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{]}
+\NormalTok{i }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{3}
+\NormalTok{x[i]}
+\NormalTok{x[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{)]}
+\NormalTok{y[}\DecValTok{3}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+또한 해당 위치의 이름으로 참조하기도 합니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(precip)}
+\NormalTok{precip[}\DecValTok{1}\NormalTok{]}
+\NormalTok{precip[}\DecValTok{2}\SpecialCharTok{:}\DecValTok{10}\NormalTok{]}
+\NormalTok{precip[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{)]}
+\NormalTok{precip[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]}
+\NormalTok{precip[}\StringTok{"Seattle Tacoma"}\NormalTok{]}
+\NormalTok{precip[}\FunctionTok{c}\NormalTok{(}\StringTok{"Seattle Tacoma"}\NormalTok{, }\StringTok{"Portland"}\NormalTok{)]}
+\NormalTok{precip[}\DecValTok{2}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{10}
+\end{Highlighting}
+\end{Shaded}
+
+참고로 vector 들은 다음과 같은 builtin 함수들을 사용해서 해당 변수의 attribute를 알아낼 수 있습니다. attribute에는 원소 이름, 타입, 길이 등 vector형 변수가 가질 수 있는 특성을 말합니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(precip)}
+\FunctionTok{class}\NormalTok{(precip)}
+\FunctionTok{length}\NormalTok{(precip)}
+\FunctionTok{names}\NormalTok{(precip)}
+
+\NormalTok{test\_scores }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{80}\NormalTok{)}
+\FunctionTok{names}\NormalTok{(test\_scores) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Alice"}\NormalTok{, }\StringTok{"Bob"}\NormalTok{, }\StringTok{"Shirley"}\NormalTok{)}
+\NormalTok{test\_scores}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{logical}{%
 \subsubsection{logical}\label{logical}}
 
-Logical 벡터는 \texttt{True} 또는 \texttt{False}를 원소로 갖는 벡터 입니다. 앞글자가 대분자로 시작하는 것을 기억하시고 \texttt{T} 또는 \texttt{F}와 같이 한 문자로 표현할 수도 있습니다. 특정 조건에 대한 판단 결과를 반환할 경우에도 논리값을 사용합니다. 이 경우 조건을 판단 후 인덱싱 방법으로 해당 값들을 뽑아내기도 합니다.
+Logical 벡터는 \texttt{True} 또는 \texttt{False}를 원소로 갖는 벡터 입니다. 앞글자가 대분자로 시작하는 것을 기억하시고 \texttt{T} 또는 \texttt{F}와 같이 한 문자로 표현할 수도 있습니다. 특정 조건에 대한 판단 결과를 반환할 경우에도 논리값을 사용합니다. 이 경우 조건을 판단 후 인덱싱 방법으로 (\texttt{which}, \texttt{any}, \texttt{all} 등 사용) 해당 값들을 뽑아내기도 합니다. 또한 활용이 많은 \texttt{sample} 함수의 사용법을 익혀둡니다.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{is.na}\NormalTok{(}\DecValTok{1}\NormalTok{)}
-\FunctionTok{is.numeric}\NormalTok{(}\DecValTok{1}\NormalTok{)}
-\FunctionTok{is.logical}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{)}
-
 \NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{20}
 \NormalTok{x }\SpecialCharTok{\textgreater{}} \DecValTok{13}
 \NormalTok{temp }\OtherTok{\textless{}{-}}\NormalTok{ x }\SpecialCharTok{\textgreater{}} \DecValTok{13}
@@ -1055,19 +1187,27 @@ Logical 벡터는 \texttt{True} 또는 \texttt{False}를 원소로 갖는 벡터
 \NormalTok{ages[i]}
 \FunctionTok{any}\NormalTok{(ages }\SpecialCharTok{\textless{}} \DecValTok{30}\NormalTok{)}
 \FunctionTok{all}\NormalTok{(ages }\SpecialCharTok{\textless{}} \DecValTok{30}\NormalTok{)}
+
+\NormalTok{random\_number }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{), }\DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{exercise-3}{%
-\subsubsection*{Exercise}\label{exercise-3}}
-\addcontentsline{toc}{subsubsection}{Exercise}
+\textbf{Exercises}
+1. 1부터 100까지의 수를 evens이라는 이름의 변수에 저장하고 이 중 짝수만을 뽑아내서 출력하시오 (\texttt{which()}함수 사용)
 
-1부터 100까지의 수를 n이라는 이름의 변수에 저장하고 이 중 짝수만을 뽑아내서 출력하시오 (\texttt{which()}함수 사용)
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+  \texttt{sample} 함수를 사용하여 앞서 odds와 evens 변수에서 랜덤하게 1개씩의 샘플을 뽑아서 \texttt{mynumbers}에 저장하시오
+\item
+  어떤 짝수가 뽑혔는지 찾아서 출력하시오 (\texttt{which}와 인덱싱 사용)
+\end{enumerate}
 
 \hypertarget{character}{%
 \subsubsection{character}\label{character}}
 
-Character(문자형) 벡터의 경우 문자열을 다루는데 자주 쓰이는 \texttt{paste()} 함수의 사용법을 알아두면 편리합니다. \texttt{paste()} 함수는 서로 다른 문자열을 붙이는데 주로 사용됩니다. 참고로 문자열을 나누는 함수는 \texttt{strsplit()} 입니다. \texttt{paste()}에서 붙이는 문자 사이에 들어가는 문자를 지정하는 파라메터는 \texttt{sep} 이고 \texttt{strsplit()}함수에서 자르는 기준이 되는 문자는\texttt{split} 파라메터로 지정해 줍니다 (\texttt{?split} 또는 \texttt{?paste} 확인).
+Character(문자형) 벡터의 경우 문자열을 다루는데 자주 쓰이는 \texttt{paste()} 함수의 사용법을 알아두면 편리합니다. \texttt{paste()} 함수는 서로 다른 문자열을 붙이는데 주로 사용됩니다. 참고로 문자열을 나누는 함수는 \texttt{strsplit()} 입니다. \texttt{paste()}에서 붙이는 문자 사이에 들어가는 문자를 지정하는 파라메터는 \texttt{sep} 이고 \texttt{strsplit()}함수에서 자르는 기준이 되는 문자는\texttt{split} 파라미터로 지정해 줍니다 (\texttt{?split} 또는 \texttt{?paste} 확인).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1082,23 +1222,32 @@ Character(문자형) 벡터의 경우 문자열을 다루는데 자주 쓰이는
 \FunctionTok{paste}\NormalTok{(x, }\AttributeTok{collapse=}\StringTok{"\_"}\NormalTok{)}
 
 \FunctionTok{strsplit}\NormalTok{(}\StringTok{"XYZ"}\NormalTok{, }\AttributeTok{split=}\StringTok{""}\NormalTok{)}
+\FunctionTok{sort}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"B"}\NormalTok{, }\StringTok{"C"}\NormalTok{, }\StringTok{"A"}\NormalTok{, }\StringTok{"D"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{exercise-4}{%
-\subsubsection*{Exercise}\label{exercise-4}}
-\addcontentsline{toc}{subsubsection}{Exercise}
+\textbf{Exercises}
 
-\texttt{m}이라는 변수에 ``Capital of South Korea is Seoul'' 문자열을 저장하고 ``Capital of South Korea''를 따로 뽑아내 \texttt{m2}에 저장하시오 (\texttt{substr()} 사용)
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \texttt{m}이라는 변수에 ``Capital of South Korea is Seoul'' 문자열을 저장하고 ``Capital of South Korea''를 따로 뽑아내 \texttt{m2}에 저장하시오 (\texttt{substr()} 사용)
+\item
+  \texttt{LETTERS} 내장함수에서 랜덤하게 10개의 문자를 뽑아내 myletters 변수에 저장하고 이들을 연결하여 (\texttt{paste} 사용) 하나의 문장(String)을 만드시오
+\item
+  myletters 변수의 문자들을 알파벳 순서대로 정렬하고 (\texttt{sort} 사용) 이들을 연결하여 하나의 문장 (String)을 만드시오
+\end{enumerate}
 
 \hypertarget{factor}{%
 \subsubsection{factor}\label{factor}}
 
 Factor형은 범주형데이터를 저장하기 위한 object 이며 R 언어에서 특별히 만들어져 사용되고 있습니다. \texttt{factor()} 함수를 이용해 생성하며 생성된 객체는 다음과 같이 \texttt{level}이라는 범주를 나타내는 특성값을 가지고 있습니다.
 
+예를 들어 어린이 5명이 각각 빨강, 파랑, 노랑, 빨강, 파랑 색종이를 들고 있을때 색의 종류를 나타내는 값들은 빨강, 파랑, 노랑 입니다. 다섯 명의 아이들이 어떤 색의 색종이를 들고 있는지와는 상관없이 세 가지 범주의 값을 가지는 것 입니다.
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Red"}\NormalTok{, }\StringTok{"Blue"}\NormalTok{, }\StringTok{"Yellow"}\NormalTok{, }\StringTok{"Green"}\NormalTok{, }\StringTok{"Blue"}\NormalTok{, }\StringTok{"Green"}\NormalTok{)}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Red"}\NormalTok{, }\StringTok{"Blue"}\NormalTok{, }\StringTok{"Yellow"}\NormalTok{, }\StringTok{"Red"}\NormalTok{, }\StringTok{"Blue"}\NormalTok{)}
 \NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(x)}
 \NormalTok{y}
 \end{Highlighting}
@@ -1124,7 +1273,7 @@ Factor형은 범주형데이터를 저장하기 위한 object 이며 R 언어에
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\#library(UsingR)}
+\FunctionTok{library}\NormalTok{(MASS)}
 \FunctionTok{str}\NormalTok{(Cars93)}
 \NormalTok{x }\OtherTok{\textless{}{-}}\NormalTok{ Cars93}\SpecialCharTok{$}\NormalTok{Origin}
 \FunctionTok{plot}\NormalTok{(x)}
@@ -1134,48 +1283,14 @@ Factor형은 범주형데이터를 저장하기 위한 object 이며 R 언어에
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{attribute}{%
-\subsubsection{Attribute}\label{attribute}}
+::: rmdnote
+\textbf{Exercises}
 
-vector 들은 다음과 같은 builtin 함수들을 사용해서 해당 변수의 attribute를 알아낼 수 있습니다. attribute에는 원소 이름, 타입, 길이 등 vector형 변수가 가질 수 있는 특성을 말합니다.
+\includegraphics[width=3.64583in,height=\textheight]{images/03/codon_table.png}
+1. 아미노산 Phe, Leu, Ser 를 값으로 갖는 범주형 변수 (factor)를 생성하시오
+2. 각 아미노산과 해당 아미노산을 코딩하는 nucleotide triplets (codon)을 어떤 형태의 변수로 저장할 수 있을지 고민해 보시오
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{head}\NormalTok{(precip)}
-\FunctionTok{class}\NormalTok{(precip)}
-\FunctionTok{length}\NormalTok{(precip)}
-\FunctionTok{names}\NormalTok{(precip)}
-
-\NormalTok{test\_scores }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{80}\NormalTok{)}
-\FunctionTok{names}\NormalTok{(test\_scores) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Alice"}\NormalTok{, }\StringTok{"Bob"}\NormalTok{, }\StringTok{"Shirley"}\NormalTok{)}
-\NormalTok{test\_scores}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{indexing}{%
-\subsubsection{indexing}\label{indexing}}
-
-인덱싱은 vector 데이터의 일부 데이터를 참조할 때 사용하는 방법입니다.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{x[}\DecValTok{1}\NormalTok{]}
-\NormalTok{x[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{]}
-\NormalTok{i }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{3}
-\NormalTok{x[i]}
-\NormalTok{x[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{)]}
-\NormalTok{y[}\DecValTok{3}\NormalTok{]}
-
-\FunctionTok{head}\NormalTok{(precip)}
-\NormalTok{precip[}\DecValTok{1}\NormalTok{]}
-\NormalTok{precip[}\DecValTok{2}\SpecialCharTok{:}\DecValTok{10}\NormalTok{]}
-\NormalTok{precip[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{)]}
-\NormalTok{precip[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]}
-\NormalTok{precip[}\StringTok{"Seattle Tacoma"}\NormalTok{]}
-\NormalTok{precip[}\FunctionTok{c}\NormalTok{(}\StringTok{"Seattle Tacoma"}\NormalTok{, }\StringTok{"Portland"}\NormalTok{)]}
-\NormalTok{precip[}\DecValTok{2}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{10}
-\end{Highlighting}
-\end{Shaded}
+:::
 
 \hypertarget{missing-values}{%
 \subsubsection{Missing values}\label{missing-values}}
@@ -1217,9 +1332,33 @@ vector 들은 다음과 같은 builtin 함수들을 사용해서 해당 변수�
 \FunctionTok{table}\NormalTok{(z)}
 \NormalTok{p }\OtherTok{\textless{}{-}}\NormalTok{ z}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(z)}
 \FunctionTok{round}\NormalTok{(p, }\AttributeTok{digits=}\DecValTok{1}\NormalTok{)}
-\NormalTok{digits }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(z)}
-\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(digits)}
-\NormalTok{d }\OtherTok{\textless{}{-}} \FunctionTok{as.integer}\NormalTok{(digits)}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{is} 함수를 사용하여 데이터 타입이 사용자가 의도한 타입과 맞는지 검사할 수 있습니다. 콘솔창에서 \texttt{is.}를 타이핑한 후 잠시 기다리면 다양한 is 합수를 볼 수 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{is.na}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\FunctionTok{is.numeric}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\FunctionTok{is.logical}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{is.data.frame}\NormalTok{(}\StringTok{"A"}\NormalTok{)}
+\FunctionTok{is.character}\NormalTok{(}\StringTok{"A"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{as} 함수는 데이터 타입을 변환해주는 함수입니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{digits }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(}\DecValTok{10}\NormalTok{)}\SpecialCharTok{*}\DecValTok{10}
+\FunctionTok{class}\NormalTok{(digits)}
+\NormalTok{digits\_int }\OtherTok{\textless{}{-}} \FunctionTok{as.integer}\NormalTok{(digits)}
+\FunctionTok{class}\NormalTok{(digits\_int)}
+\NormalTok{digits\_char }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(digits\_int)}
+\FunctionTok{class}\NormalTok{(digits\_char)}
+\NormalTok{digits\_num }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(digits\_char)}
+\FunctionTok{class}\NormalTok{(digits\_num)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1263,11 +1402,10 @@ vector 들은 다음과 같은 builtin 함수들을 사용해서 해당 변수�
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{exercise-5}{%
-\subsubsection*{Exercise}\label{exercise-5}}
-\addcontentsline{toc}{subsubsection}{Exercise}
+\textbf{Exercises}
 
-\begin{itemize}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
   score 라는 변수에 1부터 100까지 중 랜덤하게 선택된 20개의 수로 10 x 2 matrix를 만드시오 (\texttt{sample()} 사용)
@@ -1281,12 +1419,12 @@ vector 들은 다음과 같은 builtin 함수들을 사용해서 해당 변수�
   \texttt{total\_score}의의 오름차순 순서를 나타내는 인덱스 (\texttt{order()}함수 사용)를 \texttt{o}라는 변수에 저장하시오
 \item
   score를 \texttt{o}순서로 재배치하고 score\_ordered 변수에 저장하시오
-\end{itemize}
+\end{enumerate}
 
 \hypertarget{data.frame}{%
 \subsection{data.frame}\label{data.frame}}
 
-데이터프레임은 형태는 매트릭스와 같으나 컬럼 하나가 하나의 변수로서 각 변수들이 다른 모드의 값을 저장할 수 있다는 차이가 있습니다. \texttt{\$} 기호를 이용하여 각 구성 변수를 참조할 수 있습니다. 컬럼 한 줄이 하나의 변수 이므로 새로운 변수도 컬럼 형태로 붙여 넣을 수 있습니다. 즉, 각 row는 샘플을 나타내고 각 column은 변수를 나타내며 각 변수들이 갖는 샘플의 개수 (row의 길이, vector 의 길이)는 같아야 합니다. R 기반의 데이터 분석에서는 가장 선호되는 데이터 타입이라고 볼 수 있습니다.
+데이터프레임은 형태는 매트릭스와 같으나 컬럼 하나가 하나의 vector형 변수로서 각 변수들이 다른 모드의 값을 저장할 수 있다는 차이가 있습니다. \texttt{\$} 기호를 이용하여 각 구성 변수를 참조할 수 있습니다. 컬럼 한 줄이 하나의 변수 이므로 새로운 변수도 컬럼 형태로 붙여 넣을 수 있습니다. 즉, 각 row는 샘플을 나타내고 각 column은 변수를 나타내며 각 변수들이 갖는 샘플의 개수 (row의 길이, vector 의 길이)는 같아야 합니다. R 기반의 데이터 분석에서는 가장 선호되는 데이터 타입이라고 볼 수 있습니다.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1310,7 +1448,7 @@ vector 들은 다음과 같은 builtin 함수들을 사용해서 해당 변수�
 \end{Highlighting}
 \end{Shaded}
 
-데이터프레임에서도 변수 이름으로 인덱싱이 가능합니다.
+데이터프레임에서는 \texttt{\$}를 사용하여 변수 이름으로 인덱싱이 가능합니다.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1321,11 +1459,10 @@ vector 들은 다음과 같은 builtin 함수들을 사용해서 해당 변수�
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{exercise-6}{%
-\subsubsection*{Exercise}\label{exercise-6}}
-\addcontentsline{toc}{subsubsection}{Exercise}
+\textbf{Exercises}
 
-\begin{itemize}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
   \texttt{math}라는 변수에 1부터 100까지 중 랜덤하게 선택된 10개의 수를 넣으시오
@@ -1341,14 +1478,14 @@ vector 들은 다음과 같은 builtin 함수들을 사용해서 해당 변수�
   \texttt{math}와 \texttt{eng} 변수를 지우시오 (\texttt{rm()}사용)
 \item
   \texttt{score} data frame의 \texttt{math}와 \texttt{eng}를 각각 더한 후 \texttt{total\_score}라는 변수에 저장 하시오
-\end{itemize}
+\end{enumerate}
 
 \hypertarget{list}{%
 \subsection{list}\label{list}}
 
 리스트는 변수들의 모임이라는 점에서 데이터프레임과 같으나 구성 변수들의 길이가 모두 같아야 하는 데이터프레임과는 달리 다른 길이의 변수를 모아둘 수 있는 점이 다릅니다. 즉, R언어에서 두 변수를 담을 수 있는 데이터 타입은 \texttt{list}와 \texttt{data\ frame} 두 종류가 있는데 \texttt{list} 변수 타입은 \texttt{vector} 형태의 여러개의 element를 가질 수 있으며 각 \texttt{vector의} 길이가 모두 달라도 됩니다. list의 인덱싱에서 \texttt{{[}} \texttt{{]}}는 리스트를 반환하고 \texttt{{[}{[}} \texttt{{]}{]}}는 vector element들을 반환합니다.
 
-\includegraphics[width=4.16667in,height=\textheight]{images/03/05.PNG}
+\includegraphics[width=3.125in,height=\textheight]{images/03/05.PNG}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1367,12 +1504,27 @@ vector 들은 다음과 같은 builtin 함수들을 사용해서 해당 변수�
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=5.20833in,height=\textheight]{images/03/06.PNG}
+\includegraphics[width=2.60417in,height=\textheight]{images/03/06.PNG}
+
+\textbf{Exercises}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  위 아미노산 예제에서 Phe, Leu, Ser 각각의 코돈을 원소로 갖는 세 개의 vector 변수들을 만들고 이를 \texttt{aalist} 라는 이름의 하나의 리스트 변수로 만드시오
+\item
+  \texttt{aalist} 리스트를 data.frame 형식의 \texttt{aadf} 변수로 만드시오 (데이터 구조를 바꾸어 저장 가능)
+\end{enumerate}
+
+\hypertarget{functions}{%
+\section{Functions}\label{functions}}
+
+함수(Function)란 사용자가 원하는 기능을 수행하는 코드의 모음으로서 반복적으로 쉽게 사용할 수 있도록 만들어 놓은 코드 입니다.
 
 \hypertarget{a-script-in-r}{%
-\section{A script in R}\label{a-script-in-r}}
+\subsection{A script in R}\label{a-script-in-r}}
 
-R 프로그래밍을 통해서 사용자가 원하는 기능을 수행하는 방법은 다음과 같이 스크립트를 만들어서 실행하는 것 입니다. 일반적으로 R을 이용한 스크립트 명령을 어떻게 실행하는지 알아보겠습니다. 다음 예제는 입력 값들의 평균을 계산해서 출력해 주는 스크립트 명령입니다. R base 패키지에서 기본으로 제공되는 \texttt{mean()}이라는 함수가 있지만 사용하지 않고 \texttt{sum()}과 \texttt{length()} 함수를 사용했습니다.
+함수의 개념을 배우기 전에 스크립트를 활용한 명령어 수행을 알아보겠습니다. R 프로그래밍을 통해서 사용자가 원하는 기능을 수행하는 방법은 다음과 같이 스크립트를 만들어서 실행하는 것 입니다. 일반적으로 R을 이용한 스크립트 명령을 어떻게 실행하는지 알아보겠습니다. 다음 예제는 입력 값들의 평균을 계산해서 출력해 주는 스크립트 명령입니다. R base 패키지에서 기본으로 제공되는 \texttt{mean()}이라는 함수가 있지만 사용하지 않고 \texttt{sum()}과 \texttt{length()} 함수를 사용했습니다.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1395,10 +1547,10 @@ R 프로그래밍을 통해서 사용자가 원하는 기능을 수행하는 방
 
 그러나 위와 같은 식으로 실행할 경우 다음 몇 가지 문제가 있습니다. 하나는 입력 값이 바뀔 때마나 파일을 열어 바뀐 값을 저장해 줄 필요가 있습니다. 결과 값에 대해서 다른 처리를 하고 싶을 경우 또한 파일을 직접 수정해 주어야 합니다. 또한 모든 변수들이 전역변수로 사용되어 코드가 복잡해질 경우 변수간 간섭이 생길 가능성이 높습니다.
 
-\hypertarget{functions}{%
-\section{Functions}\label{functions}}
+\hypertarget{build-a-function}{%
+\subsection{Build a function}\label{build-a-function}}
 
-함수(Function)란 사용자가 원하는 기능을 수행하는 코드의 모음으로서 반복적으로 쉽게 사용할 수 있도록 만들어 놓은 코드 입니다. 특정 데이터를 입력으로 받아 원하는 기능을 수행한 후 결과 데이터를 반환하는 구조를 가집니다. 함수는 일반적으로 다음과 같은 포멧으로 구현할 수 있습니다.
+함수는 특정 데이터를 입력으로 받아 원하는 기능을 수행한 후 결과 데이터를 반환하는 구조를 가집니다. 함수는 일반적으로 다음과 같은 포멧으로 구현할 수 있습니다.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1420,7 +1572,7 @@ R 프로그래밍을 통해서 사용자가 원하는 기능을 수행하는 방
 \end{Highlighting}
 \end{Shaded}
 
-만들어진 함수는 다음과 같이 사용할 수 있습니다. 만들어진 함수는 처음에 한 번 실행해 주어 실행중인 R session에 등록한 후 사용할 수 있습니다. 여기서 함수로 전달되는 값 \texttt{pi}는 argument (전달인자) 라고 합니다. 전달인자는 함수에서 정의된 매개변수의 갯수와 같은 수의 전달인자를 입력해 주어야 합니다.
+만들어진 함수는 다음과 같이 사용할 수 있습니다. 만들어진 함수는 처음에 한 번 실행해 주어 실행중인 R session에 등록한 후 사용할 수 있습니다. 여기서 함수로 전달되는 값 \texttt{pi}는 argument (전달인자) 라고 합니다. 전달인자는 함수에서 정의된 매개변수의 갯수와 같은 수의 전달인자를 입력해 주어야 합니다. 참고로 parameter와 argument는 많은 사람들이 혼동하는 단어입니다. 본 예에서 \texttt{my\_sine}함수의 괄호 안에 있는 변수 \texttt{x}는 parameter이고 \texttt{x}에 들어가는 값인 \texttt{pi} 나 \texttt{90}은 argument 입니다.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1447,7 +1599,7 @@ R 프로그래밍을 통해서 사용자가 원하는 기능을 수행하는 방
   \end{itemize}
 \end{itemize}
 
-이제 위 스크립트 (`myscript.R') 에서 사용된 코드를 함수로 바꿔봅니다. numbers (전달인자)를 받는 매개변수를 x로 하고 함수 이름은 \texttt{mymean} 이고 평균값 (numbers\_mean)을 반환하는 합수입니다.
+이제 위 스크립트 (\texttt{myscript.R}) 에서 사용된 코드를 함수로 바꿔봅니다. numbers (전달인자)를 받는 매개변수를 x로 하고 함수 이름은 \texttt{mymean} 이고 평균값 (numbers\_mean)을 반환하는 합수입니다.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1476,9 +1628,7 @@ R 프로그래밍을 통해서 사용자가 원하는 기능을 수행하는 방
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{exercise-7}{%
-\subsubsection*{Exercise}\label{exercise-7}}
-\addcontentsline{toc}{subsubsection}{Exercise}
+\textbf{Exercises}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1492,9 +1642,7 @@ R 프로그래밍을 통해서 사용자가 원하는 기능을 수행하는 방
   \texttt{mymean} 이라는 이름의 함수를 작성하되 두 변수를 입력으로 받아 평균을 구한 후 결과를 반환하는 코드를 작성하시오
 \end{enumerate}
 
-\hypertarget{exercise-8}{%
-\subsubsection*{Exercise}\label{exercise-8}}
-\addcontentsline{toc}{subsubsection}{Exercise}
+\textbf{Exercises}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi})}
@@ -1521,22 +1669,8 @@ R 프로그래밍을 통해서 사용자가 원하는 기능을 수행하는 방
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi})}
 \setcounter{enumi}{1}
-\tightlist
 \item
   1부터 100까지의 값을 \texttt{x}에 저장하고 mysd 함수를 사용해서 표준편차를 구하시오
-\end{enumerate}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{100}
-\FunctionTok{mysd}\NormalTok{(x)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi})}
-\setcounter{enumi}{2}
-\tightlist
 \item
   앞서 작성한 \texttt{mymean} 함수와 \texttt{mysd} 함수를 같이 사용하여 \texttt{x}를 표준화 하고 \texttt{z}로 저장하시오. 표준화 공식은 다음과 같음
 \end{enumerate}
@@ -1545,24 +1679,18 @@ R 프로그래밍을 통해서 사용자가 원하는 기능을 수행하는 방
 z = \frac{x - mean(x)}{sd(x)}
 \]
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{z }\OtherTok{\textless{}{-}}\NormalTok{ (x }\SpecialCharTok{{-}} \FunctionTok{mymean}\NormalTok{(x))}\SpecialCharTok{/}\FunctionTok{mysd}\NormalTok{(x)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi})}
 \setcounter{enumi}{3}
 \tightlist
 \item
-  \texttt{x} 와 \texttt{z}를 갖는 \texttt{y}라는 이름의 \texttt{data.frame}을 생성하시오
+  \texttt{x} 와 \texttt{z} 변수를 원소로 갖는 \texttt{y}라는 이름의 \texttt{data.frame}을 생성하시오
 \end{enumerate}
 
 \hypertarget{local-and-global-variables}{%
 \subsection{local and global variables}\label{local-and-global-variables}}
 
-다음 코드를 보면 전역변수 \texttt{x}, \texttt{y}는 지역변수 \texttt{x}, \texttt{y}와 독립적으로 사용됨을 알 수 있습니다.
+함수를 사용함에 따라서 함수 안에서 사용되는 변수와 함수 밖에서 사용되는 변수들의 경우를 명확히 이해할 필요가 있습니다. 다음 코드를 보면 전역변수 \texttt{x}, \texttt{y}는 지역변수 \texttt{x}, \texttt{y}와 독립적으로 사용되고 있습니다.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1629,9 +1757,7 @@ z = \frac{x - mean(x)}{sd(x)}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{exercise-9}{%
-\subsubsection*{Exercise}\label{exercise-9}}
-\addcontentsline{toc}{subsubsection}{Exercise}
+\textbf{Exercises}
 
 다음은 한 다이어트 프로그램의 수행 전 후의 다섯 명의 몸무게이다.
 
@@ -1651,9 +1777,7 @@ after & 67 & 65 & 79 & 70 & 93 \\
   diff에 저장된 값들의 합, 평균, 표준편차를 구하시오
 \end{enumerate}
 
-\hypertarget{exercise-10}{%
-\subsubsection*{Exercise}\label{exercise-10}}
-\addcontentsline{toc}{subsubsection}{Exercise}
+\textbf{Exercises}
 
 다음 네 학생이 있으며 ``John'',``James'',``Sara'', ``Lilly'' 각 나이는 21, 55, 23, 53 이다. ages 라는 변수를 생성하고 각 나이를 저장한 후 who라는 이름의 함수를 만들어서 50살 이상인 사람의 이름을 출력하는 함수를 만드시오.
 
@@ -1695,7 +1819,7 @@ R에서의 제어문의 사용은 다른 프로그래밍 언어와 거의 유사
 
 특히 \texttt{condition}은 하나의 원소에 대한 조건 판단문으로 \texttt{T} 또는 \texttt{F} 값 하나만을 반환하는 문장이어야 합니다. 위 코드는 만약 \texttt{condition} 조건이 \texttt{True} 이면 expr\_1를 실행하고 \texttt{False}이면 expr\_2를 실행하라는 명령입니다. \texttt{condition} 안에서 사용되는 비교 연산자들은 다음과 같습니다.
 
-\includegraphics{images/04/01.PNG}
+\includegraphics[width=1.5625in,height=\textheight]{images/04/01.PNG}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1730,7 +1854,7 @@ R에서의 제어문의 사용은 다른 프로그래밍 언어와 거의 유사
 \end{Shaded}
 
 \hypertarget{ifelse-statements}{%
-\section{ifelse statements}\label{ifelse-statements}}
+\subsection{ifelse statements}\label{ifelse-statements}}
 
 \texttt{if}는 하나의 조건만 비교하는데 사용할 수 있습니다. 그러나 변수에는 여러 값이 벡터형식으로 들어가고 벡터연산을 수행할 경우의 결과도 벡터형식으로 나오지만 \texttt{if}문은 이들을 한 번에 처리하기 어렵습니다. \texttt{ifelse}는 이러한 단점을 보완하여 여러 값을 한번에 처리할 수 있습니다.
 
@@ -1739,6 +1863,8 @@ R에서의 제어문의 사용은 다른 프로그래밍 언어와 거의 유사
 \FunctionTok{ifelse}\NormalTok{ (condition, True일 때 리턴값, False일 때 리턴값)}
 \end{Highlighting}
 \end{Shaded}
+
+\texttt{ifelse}의 경우 빠르게 원하는 값을 반환할 수 있으나 조건별로 다른 추가적인 명령의 수행은 불가능하다는 단점이 있습니다.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1754,11 +1880,7 @@ R에서의 제어문의 사용은 다른 프로그래밍 언어와 거의 유사
 \end{Highlighting}
 \end{Shaded}
 
-그러나 출력만 가능하며 조건별로 다른 명령 수행은 불가능하다는 단점이 있습니다.
-
-\hypertarget{exercise-11}{%
-\subsubsection*{Exercise}\label{exercise-11}}
-\addcontentsline{toc}{subsubsection}{Exercise}
+\textbf{Exercises}
 
 다음은 median (중간값)을 구하는 공식이며 x의 길이가 (n이) 홀수일 경우와 짝수일 경우에 따라서 다른 공식이 사용된다. 다음 공식과 코드를 이용하여 mymedian 이라는 이름의 함수를 만들고 입력 값들의 중간값을 구해서 반환하는 함수를 만드시오. (\texttt{\%\%} 나머지 연산, \texttt{if}문 사용, 아래 중간값 코드 참고)
 
@@ -1781,7 +1903,7 @@ X[\frac{n+1}{2}] & \mbox{if } n \mbox{ is odd}
 \end{Shaded}
 
 \hypertarget{for-while-repeat}{%
-\section{for, while, repeat}\label{for-while-repeat}}
+\subsection{for, while, repeat}\label{for-while-repeat}}
 
 \texttt{for} 문은 반복적으로 특정 코드를 실행하고자 할 때 사용됩니다. 다음과 같은 형식으로 사용할 수 있습니다.
 
@@ -1860,7 +1982,7 @@ X[\frac{n+1}{2}] & \mbox{if } n \mbox{ is odd}
 \end{Shaded}
 
 \hypertarget{avoiding-loops}{%
-\section{Avoiding Loops}\label{avoiding-loops}}
+\subsection{Avoiding Loops}\label{avoiding-loops}}
 
 R에서는 가능하면 loop문을 사용하지 않는 것이 좋습니다. 이는 다른 언어들 보다 반복문이 느리게 수행된다는 이유 때문이기도 합니다. 그러나 R에서는 반복문을 수행하는 것 보다 훨씬 더 빠르게 반복문을 수행 한 것과 같은 결과를 얻을 수 있는 다양한 방법들이 제공되고 있습니다. 차차 그런 기법들에 대한 학습을 진행하도록 하겠습니다.
 
@@ -1880,10 +2002,441 @@ R에서는 가능하면 loop문을 사용하지 않는 것이 좋습니다. 이�
 \end{Highlighting}
 \end{Shaded}
 
+\textbf{Exercises}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  다음 네 사람의 이름과 나이를 데이터로 갖는 \texttt{users} 변수를 (data.frame) 만드시오
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{user\_score }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{90}\NormalTok{, }\DecValTok{95}\NormalTok{, }\DecValTok{88}\NormalTok{, }\DecValTok{70}\NormalTok{)}
+\NormalTok{user\_names }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"John"}\NormalTok{,}\StringTok{"James"}\NormalTok{,}\StringTok{"Sara"}\NormalTok{, }\StringTok{"Lilly"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  각 사람의 점수가 80보다 작으면 \texttt{이름\ 점수:\ Fail} 크면 \texttt{이름\ 점수:\ Pass}를 출력을 하는 코드를 작성하시오. 예를 들어 John의 점수는 80보다 크므로 \texttt{John\ 90:\ Pass} 출력 (\texttt{for}, \texttt{print} 함수 이용)
+\end{enumerate}
+
 \hypertarget{object-oriented-programming-advanced}{%
 \section{Object Oriented Programming (Advanced)}\label{object-oriented-programming-advanced}}
 
 OOP는 객체지향 프로그래밍 이라고 합니다. OOP를 이용해서 프로그래밍으로 풀고자 하는 문제를 좀 더 명확하게 개념을 수립하고 복잡한 코드를 명료하게 만들 수 있습니다. 그런데 R에서 OOP는 다른 언어보다는 좀 더 어려운 개념적인 이해가 필요합니다. \texttt{S3}, \texttt{S4}, 그리고 \texttt{Reference\ class} 가 있으며 \texttt{S3}, \texttt{S4}는 \texttt{Generic\ function}을 이용하며 다른 언어에서 사용하는 OOP 개념과는 다릅니다. \texttt{Reference\ class}는 다른 언어에서 사용하는 OOP 개념과 유사하며 \texttt{R6} 패키지를 이용해서 사용할 수 있습니다.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+이 저작물은 크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제 라이선스에 따라 이용할 수 있습니다.
+
+\hypertarget{data-transformation}{%
+\chapter{Data transformation}\label{data-transformation}}
+
+일반적인 데이터 분석은 데이터 전처리(변환), 가시화, 모델링(통계분석)의 반복적인 수행으로 진행될 수 있습니다. R에서는 \texttt{data.frame} 형식의 데이터 타입이 주로 사용되며 (최근 \texttt{tibble}형식) 따라서 \texttt{data.frame} 기반의 데이터를 다루기 위한 다양한 함수를 익힐 필요가 있습니다. 이번 강의에서는 \texttt{data.frame} 데이터를 읽거나 쓰는 함수들과 함께 데이터 전처리를 (변환) 위한 함수들을 배워보겠습니다.
+
+앞에서 배웠던 데이터를 저장하는 object의 종류를 먼저 간략히 정리해 봅니다.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Vectors} - 같은 타입의 데이터를 (Numeric, character, factor, \ldots) 저장한 오브젝트로 인덱스는 \texttt{{[}}, \texttt{{]}} 사용.
+\item
+  \textbf{Lists} - 여러개의 \texttt{vector}를 원소로 가질 수 있으며 각 원소 vector들은 문자나 숫자 어떤 데이터 타입도 가능하고 길이가 달라도 됨. list의 인덱싱에서 \texttt{{[}} \texttt{{]}}는 리스트를 반환하고 \texttt{{[}{[}} \texttt{{]}{]}}는 vector를 반환함.
+\item
+  \textbf{Matrices} - 같은 타입의 데이터로 채워진 2차원 행렬이며 인덱스는 \texttt{{[}i,\ j{]}} 형태로 \texttt{i}는 row, \texttt{j}는 column 을 나타냄. 메트릭스의 생성은 \texttt{matrix} 명령어를 사용하며 왼쪽부터 column 값을 모두 채우고 다음 컬럼 값을 채워 나가는 것이 기본 설정임. \texttt{byrow=T} 를 통해 row를 먼저 채울수도 있음. row와 column 이름은 \texttt{rownames}와 \texttt{colnames}로 설정이 가능하며 \texttt{rbind}와 \texttt{cbind}로 두 행렬 또는 행렬과 백터를 연결할 수 있음 ( \texttt{rbind}와 \texttt{cbind}의 경우 행렬이 커지면 컴퓨터 리소스 많이 사용함)
+\item
+  \textbf{data.frame} - \texttt{list}와 \texttt{matrix}의 특성을 모두 갖는 오브젝트 타입으로 \texttt{list}와 같이 다른 타입의 \texttt{vector}형 변수 여러개가 컬럼에 붙어서 \texttt{matrix} 형태로 구성됨. 단, \texttt{list}와는 다르게 각 변수의 길이가 (row의 길이) 같아야 함. \texttt{\$} 기호로 각 변수들을 인덱싱(접근) 할 수 있고 matrix와 같이 \texttt{{[}i,j{]}} 형태의 인덱싱도 가능.
+\end{itemize}
+
+\hypertarget{reading-and-writing}{%
+\section{Reading and writing}\label{reading-and-writing}}
+
+파일에 있는 데이터를 R로 읽어들이거나 쓰는 일은 일반적인 데이터 분석 과정에서 필수적일 수 있습니다. 본 강의에서는 일반적으로 사용하는 텍스트 파일과 엑셀파일을 활용하는 방법을 알아보겠습니다.
+
+\hypertarget{text-file}{%
+\subsection{Text file}\label{text-file}}
+
+편의상 데이터를 쓰는 과정을 먼저 살펴봅니다. \texttt{UsingR} 예제에 있는 데이터 중 \texttt{batting} 데이터는 2002 야구시즌에 선수들의 정보를 모아둔 데이터 입니다. \texttt{str} 함수로 데이터 전체적인 구조를 파악한 일부 데이터만을 (홈런 개수와 스트라이크 아웃) 이용해 추가적인 데이터를 생성한 후 별도로 파일에 저장해 보겠습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(UsingR)}
+\FunctionTok{data}\NormalTok{(batting)}
+\FunctionTok{str}\NormalTok{(batting)}
+
+\NormalTok{mydf }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{id =}\NormalTok{ batting}\SpecialCharTok{$}\NormalTok{playerID, }
+           \AttributeTok{team =}\NormalTok{ batting}\SpecialCharTok{$}\NormalTok{teamID,}
+           \AttributeTok{hr =}\NormalTok{ batting}\SpecialCharTok{$}\NormalTok{HR,}
+           \AttributeTok{so =}\NormalTok{ batting}\SpecialCharTok{$}\NormalTok{SO,}
+           \AttributeTok{soperhr =}\NormalTok{ batting}\SpecialCharTok{$}\NormalTok{SO}\SpecialCharTok{/}\NormalTok{batting}\SpecialCharTok{$}\NormalTok{HR)}
+
+\FunctionTok{head}\NormalTok{(mydf)}
+\end{Highlighting}
+\end{Shaded}
+
+재미삼아 홈런과 삼진아웃간의 관계를 한 번 알아보겠습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(mydf}\SpecialCharTok{$}\NormalTok{hr, mydf}\SpecialCharTok{$}\NormalTok{so)}
+\NormalTok{mycor }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(mydf}\SpecialCharTok{$}\NormalTok{hr, mydf}\SpecialCharTok{$}\NormalTok{so)}
+\NormalTok{fit }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(mydf}\SpecialCharTok{$}\NormalTok{so }\SpecialCharTok{\textasciitilde{}}\NormalTok{ mydf}\SpecialCharTok{$}\NormalTok{hr)}
+\FunctionTok{plot}\NormalTok{(mydf}\SpecialCharTok{$}\NormalTok{hr, mydf}\SpecialCharTok{$}\NormalTok{so); }\FunctionTok{abline}\NormalTok{(fit); }\FunctionTok{text}\NormalTok{(}\DecValTok{50}\NormalTok{, }\DecValTok{170}\NormalTok{, }\FunctionTok{round}\NormalTok{(mycor,}\DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+위 데이터를 파일로 저정하기 위해서는 \texttt{write.table} 또는 \texttt{write.csv} 함수를 사용할 수 있습니다. 패키지에 따라서 다양한 함수들이 제공되고 있지만 위 두 파일은 \texttt{utils}라는 R의 기본 패키지에 들어있는 함수들로서 가장 많이 사용되는 함수들 입니다. \texttt{?write.table} 등으로 도움말을 보시고 특히 함수의 전달값 (Arguments) 들을 (\texttt{quote}, \texttt{row.names}, \texttt{col.names}, \texttt{sep}) 익혀두시기 바랍니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\FunctionTok{write.table}\NormalTok{(mydf, }\AttributeTok{file=}\StringTok{"table\_write.txt"}\NormalTok{)}
+\FunctionTok{write.table}\NormalTok{(mydf, }\AttributeTok{file=}\StringTok{"table\_write.txt"}\NormalTok{, }\AttributeTok{quote=}\NormalTok{F)}
+\FunctionTok{write.table}\NormalTok{(mydf, }\AttributeTok{file=}\StringTok{"table\_write.txt"}\NormalTok{, }\AttributeTok{quote=}\NormalTok{F, }\AttributeTok{row.names=}\NormalTok{F)}
+\FunctionTok{write.table}\NormalTok{(mydf, }\AttributeTok{file=}\StringTok{"table\_write.txt"}\NormalTok{, }\AttributeTok{quote=}\NormalTok{F, }\AttributeTok{row.names=}\NormalTok{F, }\AttributeTok{sep=}\StringTok{","}\NormalTok{)}
+\FunctionTok{write.table}\NormalTok{(mydf, }\AttributeTok{file=}\StringTok{"table\_write.csv"}\NormalTok{, }\AttributeTok{quote=}\NormalTok{F, }\AttributeTok{row.names=}\NormalTok{F, }\AttributeTok{sep=}\StringTok{","}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+대부분의 텍스트 파일은 아래와 같이 \texttt{csv} 또는 \texttt{txt} 파일로 저장하여 메모장으로 열어 확인할 수 있으며 읽어올 때 구분자 (sep 파라메터) 나 header를 (header 파라메터) 읽을지 등을 옵션으로 지정할 수 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"Dataset\_S1\_sub.txt"}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(dat)}
+\end{Highlighting}
+\end{Shaded}
+
+Dataset\_S1\_sub.txt 파일을 열어보면 다음과 같이 header와 ``,''로 구분되어 있는 것을 볼 수 있습니다. \texttt{read.csv} 함수의 도움말을 보면 이 함수의 파라메터 head와 sep이 기본값으로 \texttt{T}와 \texttt{,}로 되어 있는 것을 볼 수 있습니다. \texttt{read.csv} 외에도 \texttt{read.table}, \texttt{read.delim} 등의 함수를 이용해서 택스트 파일을 읽어올 수 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(dat)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Exercises}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  위 \texttt{mydf}에서 가장 홈런을 많이 순서로 데이터를 정렬하시오
+\item
+  위 정렬된 데이터를 \texttt{mydf2} 로 저장한 후 csv 형태의 \texttt{baseball.csv} 파일로 저장하시오
+\end{enumerate}
+
+\hypertarget{excel-file}{%
+\subsection{Excel file}\label{excel-file}}
+
+텍스트 파일 외에 엑셀파일은 \texttt{readxl} 이라는 R 패키지를 활용하여 읽거나 쓸 수 있습니다. 패키지는 다음과 같은 방법으로 설치할 수 있으며 \texttt{read\_excel} 이라는 함수를 사용해서 데이터를 읽어들일 수 있습니다. 참고로 이 후 강의에서 배우게 될 \texttt{tidyverse} 패키지들 중 \texttt{readr} 패키지를 사용하여 엑셀파일 데이터를 다룰 수도 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"readxl"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(readxl)}
+\end{Highlighting}
+\end{Shaded}
+
+실습 파일은 형광 세포를 배양하여 형광리더기를 이용해 얻어진 실제 데이터이며 \url{plate_reader.xls} 에서 다운로드 받을 수 있습니다. \texttt{read\_excel} 함수를 이용하여 파일의 내용을 읽어오면 기본 자료형이 \texttt{tibble} 입니다. \texttt{tibble}은 최근 많이 쓰이는 R object로 \texttt{data.frame}과 유사하나 입력값의 type, name, rowname을 임으로 바꿀 수 없다는 점이 다릅니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"plate\_reader.xls"}\NormalTok{, }\AttributeTok{sheet=}\DecValTok{1}\NormalTok{, }\AttributeTok{skip =} \DecValTok{0}\NormalTok{, }\AttributeTok{col\_names=}\NormalTok{T)}
+\end{Highlighting}
+\end{Shaded}
+
+엑셀파일에는 두 종류의 (\(OD600_{nm}\), Fluorescence) 데이터가 저장되어 있습니다. 첫 번째 sheet에는 다음처럼 wide형 데이터가 저장되어 있습니다.
+
+\includegraphics{images/04/excelfile01.PNG}
+
+프로토콜 상세 내역이 나온 세 번째 시트를 읽을 경우 \texttt{sheet} 옵션을 3로 설정하면 되며 skip=3으로 하고 컬럼 이름을 별도로 사용하지 않으므로 \texttt{col\_names=T}로하여 읽을 수 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"plate\_reader.xls"}\NormalTok{, }\AttributeTok{sheet=}\DecValTok{3}\NormalTok{, }\AttributeTok{skip =} \DecValTok{3}\NormalTok{, }\AttributeTok{col\_names=}\NormalTok{F)}
+\end{Highlighting}
+\end{Shaded}
+
+참고로 엑셀파일로 저장하기 위해서는 csv 파일로 데이터를 writing 한 뒤 \texttt{Excel}로 해당 \texttt{csv} 파일을 열고 \texttt{xlsx} 파일로 저장할 수 있습니다.
+
+\hypertarget{subset}{%
+\section{Subset}\label{subset}}
+
+R에서 데이터 저장은 \texttt{data.frame}이나 \texttt{matrix} 타입을 일반적으로 사용합니다. 이 데이터의 일부 열 또는 행의 데이터만을 가져와서 별도로 저장하거나 분석이 필요할 경우가 있습니다. 이 때 인덱싱을 사용해서 일부 데이터를 선택하고 사용할 수 있으며 \texttt{subset} 함수도 이러한 선별 기능을 제공합니다. \texttt{subset}은 행과 열 모두를 선별할 수 있는 함수입니다. 다음 \texttt{airquality} 데이터는 1973년 날짜별로 뉴욕의 공기질을 측정한 데이터 입니다. \texttt{NA}를 제외한 나머지 데이터만으로 새로운 데이터셋을 만들어 봅시다. \texttt{is.na}함수를 사용하면 해당 데이터가 \texttt{NA}일 경우 \texttt{TRUE}, \texttt{NA}가 아닐 경우 \texttt{FALSE} 를 반환해 줍니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{is.na}\NormalTok{(airquality}\SpecialCharTok{$}\NormalTok{Ozone)}
+\NormalTok{ozone\_complete1 }\OtherTok{\textless{}{-}}\NormalTok{ airquality[}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(airquality}\SpecialCharTok{$}\NormalTok{Ozone),]}
+\NormalTok{ozone\_complete1 }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(airquality, }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(Ozone))}
+\end{Highlighting}
+\end{Shaded}
+
+위 ozone\_complete1와 ozone\_complete2는 같은 결과를 보입니다. 그러나 ozone\_complete1 보다는 ozone\_complete2 코드가 훨씬 직관적이고 가독성이 높습니다. 특히 \texttt{airquality\$ozone} 로 \texttt{\$}를 사용하여 변수에 접근한 것이 아닌 \texttt{Ozone}이라는 변수 이름을 직접 사용해서 접근함으로써 코드의 간결성과 가독성을 유지할 수 있습니다. 또한 \texttt{subset}의 \texttt{select} 옵션을 이용해서 변수를 선택할 수도 있으며 \texttt{\&}(AND)와 \texttt{\textbar{}}(OR) 연산자를 사용해서 조건을 두 개 이상 설정할 수 있습니다. 아래 \texttt{select} 옵션에서 \texttt{-}는 해당 변수를 제외한다는 의미 입니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ozone\_complete3 }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(airquality, }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(ozone), }\AttributeTok{select=}\FunctionTok{c}\NormalTok{(ozone, temp, month, day))}
+\NormalTok{ozone\_complete4 }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(airquality, }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(ozone) }\SpecialCharTok{\&} \SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(solar.r), }\AttributeTok{select=}\FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{month, }\SpecialCharTok{{-}}\NormalTok{day))}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Exercises}
+
+airquality 데이터에서 \texttt{Temp}와 \texttt{Ozone} 변수로 이루어진 df라는 이름의 \texttt{data.frame}을 만드시오 (단 \texttt{NA}가 있는 샘플(열)은 모두 제외하시오)
+
+\hypertarget{merging-and-split}{%
+\section{Merging and Split}\label{merging-and-split}}
+
+\texttt{merge} 함수는 두 개 이상의 데이터셋을 통합하는 기능을 수행하는 함수입니다. 특히 \texttt{rbind}나 \texttt{cbind}와는 다르게, 결합하는 두 데이터에 공통적이거나 한 쪽의 데이터를 기준으로 결합을 수행 합니다. \texttt{?merge}를 참고하면 \texttt{by}, \texttt{by.x}, \texttt{by.y}, \texttt{all}, \texttt{all.x}, \texttt{all.y} 등의 옵션으로 이러한 설정을 수행할 수 있습니다. 간단한 예제를 통해서 이해해 보겠습니다.
+
+10명의 사람이 있고 이 사람들의 나이와 성별을 각각 나타낸 두 데이터셋이 있습니다. 그런데 df1은 나이만을 df2는 성별 정보만을 가지고 있으며 두 정보 모두 제공된 사람은 3명 (인덱스 4,5,6) 뿐입니다. 이제 merge를 이용해서 두 데이터셋을 결합해 보겠습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# merge}
+\NormalTok{df1 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{id=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{), }\AttributeTok{age=}\FunctionTok{c}\NormalTok{(}\DecValTok{30}\NormalTok{, }\DecValTok{41}\NormalTok{, }\DecValTok{33}\NormalTok{, }\DecValTok{56}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{17}\NormalTok{))}
+\NormalTok{df2 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{id=}\FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{), }\AttributeTok{gender=}\FunctionTok{c}\NormalTok{(}\StringTok{"f"}\NormalTok{, }\StringTok{"f"}\NormalTok{, }\StringTok{"m"}\NormalTok{, }\StringTok{"m"}\NormalTok{, }\StringTok{"f"}\NormalTok{, }\StringTok{"m"}\NormalTok{))}
+
+\NormalTok{df\_inner }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(df1, df2, }\AttributeTok{by=}\StringTok{"id"}\NormalTok{, }\AttributeTok{all=}\NormalTok{F)}
+\NormalTok{df\_outer }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(df1, df2, }\AttributeTok{by=}\StringTok{"id"}\NormalTok{, }\AttributeTok{all=}\NormalTok{T)}
+\NormalTok{df\_left\_outer }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(df1, df2, }\AttributeTok{by=}\StringTok{"id"}\NormalTok{, }\AttributeTok{all.x=}\NormalTok{T)}
+\NormalTok{df\_right\_outer }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(df1, df2, }\AttributeTok{by=}\StringTok{"id"}\NormalTok{, }\AttributeTok{all.y=}\NormalTok{T)}
+\end{Highlighting}
+\end{Shaded}
+
+만약 두 데이터셋의 id가 다를 경우나 각각 다른 기준으로 결합해야 하는 경우는 \texttt{by}대신 \texttt{by.x}, \texttt{by.y} 옵션을 사용할 수 있습니다.
+
+\texttt{split} 함수는 데이터를 특정 기준으로 나누는 역할을 하며 해당 기준은 factor 형 벡터 형태로 주어질 수 있습니다. 예를 들어 \texttt{airquality} 데이터의 \texttt{month} 변수를 기준으로 데이터를 분리해 보겠습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(airquality)}
+\NormalTok{g }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(airquality}\SpecialCharTok{$}\NormalTok{Month)}
+\NormalTok{airq\_split }\OtherTok{\textless{}{-}} \FunctionTok{split}\NormalTok{(airquality, g)}
+\FunctionTok{class}\NormalTok{(airq\_split)}
+\FunctionTok{str}\NormalTok{(airq\_split)}
+\end{Highlighting}
+\end{Shaded}
+
+위와 같이 \texttt{airq\_split}은 길이가 5인 (5, 6, 7, 8, 9월) \texttt{list}타입이 되었고 각 요소는 서로 다른 size의 \texttt{data.frame}형으로 구성 된 것을 확인할 수 있습니다.
+
+\hypertarget{transformation}{%
+\section{Transformation}\label{transformation}}
+
+R에서 기존 가지고 있는 데이터의 변경은 새로운 변수의 추가, 삭제, 변형과 샘플의 추가, 삭제, 변형을 생각해 볼 수 있습니다. 이러한 기능은 앞에서 배운 \texttt{merge}, \texttt{split}이나 \texttt{rbind}, \texttt{cbind}, 그리고 인덱싱을 활용한 값 변경 등의 방법을 이용할 수 있습니다. 또한 가장 직관적으로 필요한 변수들을 기존 데이터셋에서 추출한 후 \texttt{data.frame} 명령어를 사용해서 새로운 데이터셋으로 만들어주면 될 것 입니다.
+
+이러한 방법들 외에 \texttt{within}을 사용할 경우 특정 변수의 변형과 이를 반영한 새로운 데이터셋을 어렵지 않게 만들수 있습니다. \texttt{with} 함수의 사용 예와 함께 \texttt{within} 함수를 사용하여 데이터를 변형하는 예를 살펴봅니다. \texttt{with}나 \texttt{within} 함수는 R을 활용하는데 많이 사용되는 함수들은 아닙니다. 또한 이러한 기능들은 \texttt{dplyr} 등의 패키지에서 제공하는 경우가 많아서 필수적으로 익힐 부분은 아닙니다. 그러나 개념적인 이해를 돕기위한 좋은 도구들이며 여전히 고수준의 R 사용자들이 코드에 사용하고 있는 함수들이므로 알아두는 것이 좋습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# without with}
+\NormalTok{ozone\_complete }\OtherTok{\textless{}{-}}\NormalTok{ airquality[}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(airquality}\SpecialCharTok{$}\NormalTok{Ozone),}\StringTok{"Ozone"}\NormalTok{]}
+\NormalTok{temp\_complete }\OtherTok{\textless{}{-}}\NormalTok{ airquality[}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(airquality}\SpecialCharTok{$}\NormalTok{Temp),}\StringTok{"Temp"}\NormalTok{]}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{mean}\NormalTok{(ozone\_complete))}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{mean}\NormalTok{(temp\_complete))}
+
+\DocumentationTok{\#\# with}
+\FunctionTok{with}\NormalTok{(airquality, \{}
+  \FunctionTok{print}\NormalTok{(}\FunctionTok{mean}\NormalTok{(Ozone[}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(Ozone)]))}
+  \FunctionTok{print}\NormalTok{(}\FunctionTok{mean}\NormalTok{(Temp[}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(Temp)]))}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+위 \texttt{with} 함수에서 보는바와 같이 \texttt{\$}를 이용한 변수 접근 대신 \texttt{with}함수 내에서는 (\texttt{\{}, \texttt{\}} 안에서) 해당 \texttt{data.frame}에 있는 변수 이름을 직접 접근할 수 있으며 따라서 코드의 간결함과 가독성이 향상됩니다.
+
+\texttt{within} 함수는 \texttt{with}함수와 같이 \texttt{\{}, \texttt{\}} 안에서 변수의 이름만으로 해당 변수에 접근이 가능하나 입력된 데이터와 변경된 변수(들)을 반환한다는 점이 다릅니다. 아래 예는 \texttt{airquality} 데이터의 화씨 (Fahrenheit) 온도를 섭씨 (Celsius) 온도로 변환해서 새로운 데이터셋을 만드는 코드입니다. \texttt{data.frame}을 이용한 코드와 비교해 보시기 바랍니다. 데이터셋 내에서 참조할 변수들이 많아질 경우 \texttt{airquality\$xxx} 식의 코드를 줄이는 것 만으로도 코드의 가독성과 간결성을 유지할 수 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{newairquality }\OtherTok{\textless{}{-}} \FunctionTok{within}\NormalTok{(airquality, \{}
+\NormalTok{  celsius }\OtherTok{=} \FunctionTok{round}\NormalTok{((}\DecValTok{5}\SpecialCharTok{*}\NormalTok{(Temp}\DecValTok{{-}32}\NormalTok{))}\SpecialCharTok{/}\DecValTok{9}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{\})}
+\FunctionTok{head}\NormalTok{(newairquality)}
+
+\DocumentationTok{\#\# data.frame}
+\NormalTok{celsius }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{((}\DecValTok{5}\SpecialCharTok{*}\NormalTok{(airquality}\SpecialCharTok{$}\NormalTok{Temp}\DecValTok{{-}32}\NormalTok{))}\SpecialCharTok{/}\DecValTok{9}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{newairquality }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(airquality, celsius)}
+\FunctionTok{head}\NormalTok{(newairquality)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Exercises}
+
+다음 df 의 hour, minute, second로 나누어진 값들을 초 단위로 변환하여 seconds라는 변수에 저장한 후 기존 df에 추가한 df2 데이터셋을 만드시오 (\texttt{within} 함수 이용)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{hour=}\FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{8}\NormalTok{),}
+                 \AttributeTok{minute=}\FunctionTok{c}\NormalTok{(}\DecValTok{46}\NormalTok{, }\DecValTok{56}\NormalTok{, }\DecValTok{44}\NormalTok{, }\DecValTok{37}\NormalTok{, }\DecValTok{39}\NormalTok{),}
+                 \AttributeTok{second=}\FunctionTok{c}\NormalTok{(}\DecValTok{19}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{57}\NormalTok{, }\DecValTok{41}\NormalTok{, }\DecValTok{27}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{babies-example}{%
+\section{Babies example}\label{babies-example}}
+
+\texttt{UsingR} 패키지의 \texttt{babies} 데이터를 이용해서 산모의 흡연 여부와 신생아 몸무게의 관계를 알아보는 분석을 수행해 보겠습니다. 본 강의를 통해 배우지 않은 내용들이 있지만 코드를 따라 가면서 참고하시기 바랍니다. 우선 \texttt{UsingR} 패키지를 로딩합니다. 산모의 임신 기간이 (gestation) 999로 표기된 데이터는 명백히 에러이며 이들을 \texttt{NA}로 처리합니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(UsingR)}
+\FunctionTok{head}\NormalTok{(babies)}
+\DocumentationTok{\#\# a simple way to checkout the data}
+\FunctionTok{plot}\NormalTok{(babies}\SpecialCharTok{$}\NormalTok{gestation)  }
+\NormalTok{babies}\SpecialCharTok{$}\NormalTok{gestation[babies}\SpecialCharTok{$}\NormalTok{gestation}\SpecialCharTok{\textgreater{}}\DecValTok{900}\NormalTok{] }\OtherTok{\textless{}{-}} \ConstantTok{NA}
+\FunctionTok{str}\NormalTok{(babies)}
+\end{Highlighting}
+\end{Shaded}
+
+아래와 같이 \texttt{within} 함수를 사용해서 \texttt{babies\$} 를 반복해서 입력해주는 불편함을 줄이고 가독성을 높입니다. 똑같은 방법으로 \texttt{dwt} (아빠의 몸무게) 변수의 에러값들에 대해서도 \texttt{NA} 처리를 할 수 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{new\_babies }\OtherTok{\textless{}{-}} \FunctionTok{within}\NormalTok{(babies, \{}
+\NormalTok{  gestation[gestation}\SpecialCharTok{==}\DecValTok{999}\NormalTok{] }\OtherTok{\textless{}{-}} \ConstantTok{NA}
+\NormalTok{  dwt[dwt}\SpecialCharTok{==}\DecValTok{999}\NormalTok{] }\OtherTok{\textless{}{-}} \ConstantTok{NA}
+\NormalTok{\})}
+\FunctionTok{str}\NormalTok{(new\_babies)}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{smoke} 변수는 흡연 여부를 나타내는 범주형 변수로 0, 1, 2, 3 값은 의미가 없습니다. 사람이 읽을 수 있는 label을 붙인 \texttt{factor} 형 변수로 변환하는 코드도 함께 작성해 보겠습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(babies}\SpecialCharTok{$}\NormalTok{smoke)}
+\NormalTok{new\_babies }\OtherTok{\textless{}{-}} \FunctionTok{within}\NormalTok{(babies, \{}
+\NormalTok{  gestation[gestation}\SpecialCharTok{==}\DecValTok{999}\NormalTok{] }\OtherTok{\textless{}{-}} \ConstantTok{NA}
+\NormalTok{  dwt[dwt}\SpecialCharTok{==}\DecValTok{999}\NormalTok{] }\OtherTok{\textless{}{-}} \ConstantTok{NA}
+\NormalTok{  smoke }\OtherTok{=} \FunctionTok{factor}\NormalTok{(smoke)}
+  \FunctionTok{levels}\NormalTok{(smoke) }\OtherTok{=} \FunctionTok{list}\NormalTok{(}
+    \StringTok{"never"} \OtherTok{=} \DecValTok{0}\NormalTok{, }
+    \StringTok{"smoke now"} \OtherTok{=} \DecValTok{1}\NormalTok{, }
+    \StringTok{"until current pregnancy"} \OtherTok{=} \DecValTok{2}\NormalTok{,}
+    \StringTok{"once did, not now"} \OtherTok{=} \DecValTok{3}\NormalTok{)}
+\NormalTok{  \})}
+\FunctionTok{str}\NormalTok{(new\_babies}\SpecialCharTok{$}\NormalTok{smoke)}
+\end{Highlighting}
+\end{Shaded}
+
+이제 임신기간과 흡연 여부를 분석해 볼 수 있습니다. 흡연 그룹별로 기간에 차이가 있는지를 알아보는 분석은 \texttt{t-test}나 \texttt{ANOVA}를 사용할 수 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(gestation}\SpecialCharTok{\textasciitilde{}}\NormalTok{smoke, new\_babies)}
+\FunctionTok{summary}\NormalTok{(fit) }\DocumentationTok{\#\# t{-}test 결과 }
+\FunctionTok{anova}\NormalTok{(fit)}
+\end{Highlighting}
+\end{Shaded}
+
+간단히 결과를 보면 \texttt{summary(fit)}은 3가지 t-test의 결과를 보여줍니다. never vs.~smoke new 의 경우 t값이 -1.657로 피우지 않은 경우에 비해서 피우는 사람의 임신 기간이 유의하게 줄어들었음을 알 수 있습니다. 그에 비해서 현재 흡연하지 않는 경우 (never vs.~until current pregnancy 또는 never vs.~once did, not now) 차이가 없는 것으로 나옵니다.
+
+이제 smoke now 인 경우 또는 나이가 25세 미만인 경우의 샘플에 대해서 \texttt{newdf}를 만들어 봅니다 (\texttt{subset} 함수 사용, id, gestation, age, wt, smoke 변수 선택). 이 후 \texttt{ggplot}을 이용하여 몸무게와 임신기간의 산점도를 그려보면 크게 다르진 않으나 흡연하는 여성 중 몸무게가 적게 나가는 여성에게서 짧은 임신기간을 갖는 경향을 볼 수 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{newdf }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(new\_babies, (smoke}\SpecialCharTok{==}\StringTok{"smoke now"} \SpecialCharTok{|}\NormalTok{ smoke }\SpecialCharTok{==} \StringTok{"never"}\NormalTok{) }\SpecialCharTok{\&}\NormalTok{ age }\SpecialCharTok{\textless{}} \DecValTok{25}\NormalTok{, }\AttributeTok{select=}\FunctionTok{c}\NormalTok{(id, gestation, age, wt, smoke))}
+\CommentTok{\# ggplot(newdf, aes(x=wt, y=gestation, color=smoke)) +}
+\CommentTok{\#   geom\_point(size=3, alpha=0.5) +}
+\CommentTok{\#   facet\_grid(.\textasciitilde{}smoke) + }
+\CommentTok{\#   theme\_bw()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{useful-functions-1}{%
+\section{Useful functions}\label{useful-functions-1}}
+
+지금까지 배운 여러 R 프로그래밍 기법이나 함수들과 같이 R을 활용한 데이터 분석에서 자주쓰이거나 유용하게 사용되는 함수들을 소개합니다. 먼저 원소들을 비교하여 공통적 또는 유일한 원소들만을 추출해내는 함수들 입니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#match(), \%in\%, intersect()}
+
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}
+\NormalTok{y }\OtherTok{\textless{}{-}} \DecValTok{5}\SpecialCharTok{:}\DecValTok{15}
+\FunctionTok{match}\NormalTok{(x, y)}
+\NormalTok{x }\SpecialCharTok{\%in\%}\NormalTok{ y}
+\FunctionTok{intersect}\NormalTok{(x, y)}
+
+\CommentTok{\#unique()}
+\FunctionTok{unique}\NormalTok{(}\FunctionTok{c}\NormalTok{(x, y))}
+\end{Highlighting}
+\end{Shaded}
+
+다음은 스트링 관련 함수들로서 서열데이터 분석 등에서 유용하게 활용되는 함수들 입니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#substr()}
+\NormalTok{x }\OtherTok{\textless{}{-}} \StringTok{"Factors, raw vectors, and lists, are converted"}
+\FunctionTok{substr}\NormalTok{(x, }\DecValTok{1}\NormalTok{, }\DecValTok{6}\NormalTok{)}
+
+\CommentTok{\#grep()}
+\FunctionTok{grep}\NormalTok{(}\StringTok{"raw"}\NormalTok{, x)}
+
+\CommentTok{\#grepl()}
+\FunctionTok{grepl}\NormalTok{(}\StringTok{"raw"}\NormalTok{, x)}
+\ControlFlowTok{if}\NormalTok{(}\FunctionTok{grepl}\NormalTok{(}\StringTok{"raw"}\NormalTok{, x))\{}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"I found raw!"}\NormalTok{)}
+\NormalTok{\}}
+
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(LETTERS, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{100}\NormalTok{, }\AttributeTok{sep=}\StringTok{""}\NormalTok{)}
+\FunctionTok{grep}\NormalTok{(}\StringTok{"A"}\NormalTok{, x)}
+\NormalTok{x[}\FunctionTok{grep}\NormalTok{(}\StringTok{"A"}\NormalTok{, x)]}
+
+\FunctionTok{grepl}\NormalTok{(}\StringTok{"A"}\NormalTok{, x)}
+\NormalTok{r }\OtherTok{\textless{}{-}} \FunctionTok{grepl}\NormalTok{(}\StringTok{"A"}\NormalTok{, x)}
+\ControlFlowTok{if}\NormalTok{(r)\{}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"Yes, I found A"}\NormalTok{)}
+\NormalTok{\}}\ControlFlowTok{else}\NormalTok{\{}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"No A"}\NormalTok{)}
+\NormalTok{\}}
+
+\CommentTok{\#strsplit()}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Factors, raw vectors, and lists, are converted"}\NormalTok{, }\StringTok{"vectors, or for, strings with"}\NormalTok{)}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{strsplit}\NormalTok{(x, }\AttributeTok{split=}\StringTok{", "}\NormalTok{)}
+
+\CommentTok{\#unlist()}
+\FunctionTok{unlist}\NormalTok{(y)}
+
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{strsplit}\NormalTok{(x, }\AttributeTok{split=}\StringTok{""}\NormalTok{)}
+\NormalTok{ychar }\OtherTok{\textless{}{-}} \FunctionTok{unlist}\NormalTok{(y)}
+\NormalTok{ycount }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(y2)}
+\NormalTok{ycount\_sort }\OtherTok{\textless{}{-}} \FunctionTok{sort}\NormalTok{(ycount)}
+\NormalTok{ycount\_sort }\OtherTok{\textless{}{-}} \FunctionTok{sort}\NormalTok{(ycount, }\AttributeTok{decreasing =}\NormalTok{ T)}
+\NormalTok{ycount\_top }\OtherTok{\textless{}{-}}\NormalTok{ ycount\_sort[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{]}
+\NormalTok{ycount\_top\_char }\OtherTok{\textless{}{-}} \FunctionTok{names}\NormalTok{(ycount\_top)}
+
+\CommentTok{\#toupper(), tolower()}
+\FunctionTok{toupper}\NormalTok{(ycount\_top\_char)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Exercises}
+
+built-in 데이터셋 중 \texttt{state.abb} 은 미국의 50개 주에대한 축약어임.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  이 중 문자 A 가 들어가는 주를 뽑아 x에 저장 하시오 (\texttt{grep} 또는 \texttt{grepl} 사용)
+\item
+  state.abb 중 위 x에 저장된 이름들을 빼고 y에 저장 하시오 (\texttt{match()} 또는 \texttt{\%in\%}사용)
+\item
+  state.abb에 사용된 알파벳의 갯수를 구하고 가장 많이 쓰인 알파벳을 구하시오 (\texttt{strsplit()}, \texttt{table()} 등 사용)
+\end{enumerate}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 

@@ -16,7 +16,7 @@ $$ ((2 - 1)^2 + (1 - 3)^2)^{1/2} $$
 
 
 ::: rmdnote
-### Exercise {-}
+**Exercises**
 
 다음 공식들을 계산하는 R 코드를 작성하시오
 
@@ -30,8 +30,9 @@ $$ \frac{0.25 - 0.2}{\sqrt{0.2 (1-0.2)/100}}$$
 
 ## What is a programming language 
 
-![](images/01/24.PNG){width=600px} 
-![](images/01/25.PNG){width=620px} 
+![](images/01/24.PNG){width=400px} 
+
+![](images/01/25.PNG){width=420px} 
 
 R은 programming language로서 다른 프로그래밍 언어와 같이 몇 가지 공통적 개념을 가집니다 (`변수`, `자료형`, `함수`, `조건문`, `반복문`)
 
@@ -89,7 +90,7 @@ exec.pay
   + 구간형 (Interval) – 선수1, 선수2 종점통과 시간
   + 비율형 (Ratio) – 출발시간 기준 종점 통과 시간
 
-![](images/02/01.png){width=400px} 
+![](images/02/01.png){width=300px} 
 
 - Data type in R
   + Numeric (수치형)
@@ -172,20 +173,61 @@ rep(1:3, each=3)
 
 
 ::: rmdnote
-#### Exercise {-}
+**Exercises**
+
+
 odds라는 이름의 변수에 1부터 100까지의 홀수만을 저장하시오 (`seq()` 함수 사용) 
 :::
 
-#### logical
-
-Logical 벡터는 `True` 또는 `False`를 원소로 갖는 벡터 입니다. 앞글자가 대분자로 시작하는 것을 기억하시고 `T` 또는 `F`와 같이 한 문자로 표현할 수도 있습니다. 특정 조건에 대한 판단 결과를 반환할 경우에도 논리값을 사용합니다. 이 경우 조건을 판단 후 인덱싱 방법으로 해당 값들을 뽑아내기도 합니다. 
+인덱싱은 배열형 (vector, matrix 등) 데이터의 일부 데이터를 참조할 때 사용하는 방법입니다. `[`와 `]`를 사용하며 위치를 나타내는 수로 참조합니다. 
 
 
 ```r
-is.na(1)
-is.numeric(1)
-is.logical(TRUE)
+x[1]
+x[1:3]
+i <- 1:3
+x[i]
+x[c(1,2,4)]
+y[3]
+```
 
+또한 해당 위치의 이름으로 참조하기도 합니다. 
+
+
+```r
+head(precip)
+precip[1]
+precip[2:10]
+precip[c(1,3,5)]
+precip[-1]
+precip["Seattle Tacoma"]
+precip[c("Seattle Tacoma", "Portland")]
+precip[2] <- 10
+```
+
+참고로 vector 들은 다음과 같은 builtin 함수들을 사용해서 해당 변수의 attribute를 알아낼 수 있습니다. attribute에는 원소 이름, 타입, 길이 등 vector형 변수가 가질 수 있는 특성을 말합니다. 
+
+
+```r
+head(precip)
+class(precip)
+length(precip)
+names(precip)
+
+test_scores <- c(100, 90, 80)
+names(test_scores) <- c("Alice", "Bob", "Shirley")
+test_scores
+```
+
+
+
+
+#### logical
+
+Logical 벡터는 `True` 또는 `False`를 원소로 갖는 벡터 입니다. 앞글자가 대분자로 시작하는 것을 기억하시고 `T` 또는 `F`와 같이 한 문자로 표현할 수도 있습니다. 특정 조건에 대한 판단 결과를 반환할 경우에도 논리값을 사용합니다. 이 경우 조건을 판단 후 인덱싱 방법으로 (`which`, `any`, `all` 등 사용) 해당 값들을 뽑아내기도 합니다. 또한 활용이 많은 `sample` 함수의 사용법을 익혀둡니다.  
+
+
+```r
 x <- 1:20
 x > 13
 temp <- x > 13
@@ -198,17 +240,23 @@ i <- which(ages < 30)
 ages[i]
 any(ages < 30)
 all(ages < 30)
+
+random_number <- sample(c(1:10), 2)
 ```
 
 ::: rmdnote
-#### Exercise {-}
-1부터 100까지의 수를 n이라는 이름의 변수에 저장하고 이 중 짝수만을 뽑아내서 출력하시오 (`which()`함수 사용) 
+**Exercises**
+1. 1부터 100까지의 수를 evens이라는 이름의 변수에 저장하고 이 중 짝수만을 뽑아내서 출력하시오 (`which()`함수 사용) 
+
+2. `sample` 함수를 사용하여 앞서 odds와 evens 변수에서 랜덤하게 1개씩의 샘플을 뽑아서 `mynumbers`에 저장하시오
+
+3. 어떤 짝수가 뽑혔는지 찾아서 출력하시오 (`which`와 인덱싱 사용)
 :::
 
 
 #### character
 
-Character(문자형) 벡터의 경우 문자열을 다루는데 자주 쓰이는 `paste()` 함수의 사용법을 알아두면 편리합니다. `paste()` 함수는 서로 다른 문자열을 붙이는데 주로 사용됩니다. 참고로 문자열을 나누는 함수는 `strsplit()` 입니다. `paste()`에서 붙이는 문자 사이에 들어가는 문자를 지정하는 파라메터는 `sep` 이고 `strsplit()`함수에서 자르는 기준이 되는 문자는`split` 파라메터로 지정해 줍니다 (`?split` 또는 `?paste` 확인).
+Character(문자형) 벡터의 경우 문자열을 다루는데 자주 쓰이는 `paste()` 함수의 사용법을 알아두면 편리합니다. `paste()` 함수는 서로 다른 문자열을 붙이는데 주로 사용됩니다. 참고로 문자열을 나누는 함수는 `strsplit()` 입니다. `paste()`에서 붙이는 문자 사이에 들어가는 문자를 지정하는 파라메터는 `sep` 이고 `strsplit()`함수에서 자르는 기준이 되는 문자는`split` 파라미터로 지정해 줍니다 (`?split` 또는 `?paste` 확인).
 
 
 
@@ -224,23 +272,30 @@ paste(x[1], x[2], sep="")
 paste(x, collapse="_")
 
 strsplit("XYZ", split="")
+sort(c("B", "C", "A", "D"))
 ```
 
 
 ::: rmdnote
-#### Exercise {-}
+**Exercises**
 
-`m`이라는 변수에 "Capital of South Korea is Seoul" 문자열을 저장하고 "Capital of South Korea"를 따로 뽑아내 `m2`에 저장하시오 (`substr()` 사용)
+1. `m`이라는 변수에 "Capital of South Korea is Seoul" 문자열을 저장하고 "Capital of South Korea"를 따로 뽑아내 `m2`에 저장하시오 (`substr()` 사용)
+
+2. `LETTERS` 내장함수에서 랜덤하게 10개의 문자를 뽑아내 myletters 변수에 저장하고 이들을 연결하여 (`paste` 사용) 하나의 문장(String)을 만드시오
+
+3. myletters 변수의 문자들을 알파벳 순서대로 정렬하고 (`sort` 사용) 이들을 연결하여 하나의 문장 (String)을 만드시오 
+
 :::
 
 #### factor
 
-Factor형은 범주형데이터를 저장하기 위한 object 이며 R 언어에서 특별히 만들어져 사용되고 있습니다. `factor()` 함수를 이용해 생성하며 생성된 객체는 다음과 같이 `level`이라는 범주를 나타내는 특성값을 가지고 있습니다.   
+Factor형은 범주형데이터를 저장하기 위한 object 이며 R 언어에서 특별히 만들어져 사용되고 있습니다. `factor()` 함수를 이용해 생성하며 생성된 객체는 다음과 같이 `level`이라는 범주를 나타내는 특성값을 가지고 있습니다. 
 
+예를 들어 어린이 5명이 각각 빨강, 파랑, 노랑, 빨강, 파랑 색종이를 들고 있을때 색의 종류를 나타내는 값들은 빨강, 파랑, 노랑 입니다. 다섯 명의 아이들이 어떤 색의 색종이를 들고 있는지와는 상관없이 세 가지 범주의 값을 가지는 것 입니다.   
 
 
 ```r
-x <- c("Red", "Blue", "Yellow", "Green", "Blue", "Green")
+x <- c("Red", "Blue", "Yellow", "Red", "Blue")
 y <- factor(x)
 y
 ```
@@ -265,7 +320,7 @@ y
  
 
 ```r
-#library(UsingR)
+library(MASS)
 str(Cars93)
 x <- Cars93$Origin
 plot(x)
@@ -274,45 +329,15 @@ levels(x)
 plot(x)
 ```
  
-#### Attribute
+ 
+ ::: rmdnote
+**Exercises**
 
-vector 들은 다음과 같은 builtin 함수들을 사용해서 해당 변수의 attribute를 알아낼 수 있습니다. attribute에는 원소 이름, 타입, 길이 등 vector형 변수가 가질 수 있는 특성을 말합니다. 
+![](images/03/codon_table.png){width=350}
+1. 아미노산 Phe, Leu, Ser 를 값으로 갖는 범주형 변수 (factor)를 생성하시오
+2. 각 아미노산과 해당 아미노산을 코딩하는 nucleotide triplets (codon)을 어떤 형태의 변수로 저장할 수 있을지 고민해 보시오 
 
-
-```r
-head(precip)
-class(precip)
-length(precip)
-names(precip)
-
-test_scores <- c(100, 90, 80)
-names(test_scores) <- c("Alice", "Bob", "Shirley")
-test_scores
-```
-
-
-#### indexing
-
-인덱싱은 vector 데이터의 일부 데이터를 참조할 때 사용하는 방법입니다. 
-
-
-```r
-x[1]
-x[1:3]
-i <- 1:3
-x[i]
-x[c(1,2,4)]
-y[3]
-
-head(precip)
-precip[1]
-precip[2:10]
-precip[c(1,3,5)]
-precip[-1]
-precip["Seattle Tacoma"]
-precip[c("Seattle Tacoma", "Portland")]
-precip[2] <- 10
-```
+:::
 
 #### Missing values
 
@@ -345,10 +370,33 @@ order(z)
 table(z)
 p <- z/sum(z)
 round(p, digits=1)
-digits <- as.character(z)
-n <- as.numeric(digits)
-d <- as.integer(digits)
 ```
+
+`is` 함수를 사용하여 데이터 타입이 사용자가 의도한 타입과 맞는지 검사할 수 있습니다. 콘솔창에서 `is.`를 타이핑한 후 잠시 기다리면 다양한 is 합수를 볼 수 있습니다. 
+
+
+```r
+is.na(1)
+is.numeric(1)
+is.logical(TRUE)
+is.data.frame("A")
+is.character("A")
+```
+
+`as` 함수는 데이터 타입을 변환해주는 함수입니다. 
+
+
+```r
+digits <- runif(10)*10
+class(digits)
+digits_int <- as.integer(digits)
+class(digits_int)
+digits_char <- as.character(digits_int)
+class(digits_char)
+digits_num <- as.numeric(digits_char)
+class(digits_num)
+```
+
 
 
 ### matrix
@@ -390,20 +438,20 @@ sum(mysub^2) #8
 
 
 ::: rmdnote
-#### Exercise {-}
+**Exercises**
 
-* score 라는 변수에 1부터 100까지 중 랜덤하게 선택된 20개의 수로 10 x 2 matrix를 만드시오 (`sample()` 사용)
-* score의 row 이름을 문자형으로 Name1, Name2, ..., Name10으로 지정하시오 (`paste()` 사용)
-* score의 column 이름을 문자형으로 math와 eng로 지정하시오
-* 이 matrix의 첫번째 컬럼과 두 번째 컬럼의 수를 각각 더한 후 `total_score`라는 변수에 저장하시오
-* `total_score`의의 오름차순 순서를 나타내는 인덱스 (`order()`함수 사용)를 `o`라는 변수에 저장하시오 
-* score를 `o`순서로 재배치하고 score_ordered 변수에 저장하시오 
+1. score 라는 변수에 1부터 100까지 중 랜덤하게 선택된 20개의 수로 10 x 2 matrix를 만드시오 (`sample()` 사용)
+2. score의 row 이름을 문자형으로 Name1, Name2, ..., Name10으로 지정하시오 (`paste()` 사용)
+3. score의 column 이름을 문자형으로 math와 eng로 지정하시오
+4. 이 matrix의 첫번째 컬럼과 두 번째 컬럼의 수를 각각 더한 후 `total_score`라는 변수에 저장하시오
+5. `total_score`의의 오름차순 순서를 나타내는 인덱스 (`order()`함수 사용)를 `o`라는 변수에 저장하시오 
+6. score를 `o`순서로 재배치하고 score_ordered 변수에 저장하시오 
 :::
 
 
 ### data.frame
 
-데이터프레임은 형태는 매트릭스와 같으나 컬럼 하나가 하나의 변수로서 각 변수들이 다른 모드의 값을 저장할 수 있다는 차이가 있습니다. `$` 기호를 이용하여 각 구성 변수를 참조할 수 있습니다. 컬럼 한 줄이 하나의 변수 이므로 새로운 변수도 컬럼 형태로 붙여 넣을 수 있습니다. 즉, 각 row는 샘플을 나타내고 각 column은 변수를 나타내며 각 변수들이 갖는 샘플의 개수 (row의 길이, vector 의 길이)는 같아야 합니다. R 기반의 데이터 분석에서는 가장 선호되는 데이터 타입이라고 볼 수 있습니다.
+데이터프레임은 형태는 매트릭스와 같으나 컬럼 하나가 하나의 vector형 변수로서 각 변수들이 다른 모드의 값을 저장할 수 있다는 차이가 있습니다. `$` 기호를 이용하여 각 구성 변수를 참조할 수 있습니다. 컬럼 한 줄이 하나의 변수 이므로 새로운 변수도 컬럼 형태로 붙여 넣을 수 있습니다. 즉, 각 row는 샘플을 나타내고 각 column은 변수를 나타내며 각 변수들이 갖는 샘플의 개수 (row의 길이, vector 의 길이)는 같아야 합니다. R 기반의 데이터 분석에서는 가장 선호되는 데이터 타입이라고 볼 수 있습니다.
 
 
 ```r
@@ -426,7 +474,7 @@ students[1,]
 str(students)
 ```
 
-데이터프레임에서도 변수 이름으로 인덱싱이 가능합니다.  
+데이터프레임에서는 `$`를 사용하여 변수 이름으로 인덱싱이 가능합니다.  
 
 
 ```r
@@ -437,15 +485,15 @@ students[,"ids"]
 ```
 
 ::: rmdnote
-#### Exercise {-}
+**Exercises**
 
-* `math`라는 변수에 1부터 100까지 중 랜덤하게 선택된 10개의 수를 넣으시오
-* `eng`라는 변수에 1부터 100까지 중 랜덤하게 선택된 10개의 수를 넣으시오 
-* `students`라는 변수에 문자형으로 Name1, Name2, ..., Name10으로 지정하시오 (`paste()` 사용)
-* `math`와 `eng`라는 벡터에 저장된 값들의 이름을 `students` 변수에 저장된 이름으로 지정하시오 
-* `math`와 `eng` 벡터를 갖는 `score` 라는 `data.frame`을 만드시오 
-* `math`와 `eng` 변수를 지우시오 (`rm()`사용)
-* `score` data frame의 `math`와 `eng`를 각각 더한 후 `total_score`라는 변수에 저장 하시오
+1. `math`라는 변수에 1부터 100까지 중 랜덤하게 선택된 10개의 수를 넣으시오
+2. `eng`라는 변수에 1부터 100까지 중 랜덤하게 선택된 10개의 수를 넣으시오 
+3. `students`라는 변수에 문자형으로 Name1, Name2, ..., Name10으로 지정하시오 (`paste()` 사용)
+4. `math`와 `eng`라는 벡터에 저장된 값들의 이름을 `students` 변수에 저장된 이름으로 지정하시오 
+5. `math`와 `eng` 벡터를 갖는 `score` 라는 `data.frame`을 만드시오 
+6. `math`와 `eng` 변수를 지우시오 (`rm()`사용)
+7. `score` data frame의 `math`와 `eng`를 각각 더한 후 `total_score`라는 변수에 저장 하시오
 :::
 
 ### list
@@ -453,7 +501,7 @@ students[,"ids"]
 리스트는 변수들의 모임이라는 점에서 데이터프레임과 같으나 구성 변수들의 길이가 모두 같아야 하는 데이터프레임과는 달리 다른 길이의 변수를 모아둘 수 있는 점이 다릅니다. 즉, R언어에서 두 변수를 담을 수 있는 데이터 타입은 `list`와 `data frame` 두 종류가 있는데 `list` 변수 타입은 `vector` 형태의 여러개의 element를 가질 수 있으며 각 `vector의` 길이가 모두 달라도 됩니다. list의 인덱싱에서 `[` `]`는 리스트를 반환하고 `[[` `]]`는 vector element들을 반환합니다. 
 
 
-![](images/03/05.PNG){width=400px} 
+![](images/03/05.PNG){width=300px} 
 
 
 
@@ -472,12 +520,26 @@ lst[[1]][1]
 lst[[1]][c(1,2)]
 ```
 
-![](images/03/06.PNG){width=500px} 
+![](images/03/06.PNG){width=250px} 
 
 
-## A script in R
+::: rmdnote
+**Exercises**
 
-R 프로그래밍을 통해서 사용자가 원하는 기능을 수행하는 방법은 다음과 같이 스크립트를 만들어서 실행하는 것 입니다. 일반적으로 R을 이용한 스크립트 명령을 어떻게 실행하는지 알아보겠습니다. 다음 예제는 입력 값들의 평균을 계산해서 출력해 주는 스크립트 명령입니다. R base 패키지에서 기본으로 제공되는 `mean()`이라는 함수가 있지만 사용하지 않고 `sum()`과 `length()` 함수를 사용했습니다.
+1. 위 아미노산 예제에서 Phe, Leu, Ser 각각의 코돈을 원소로 갖는 세 개의 vector 변수들을 만들고 이를 `aalist` 라는 이름의 하나의 리스트 변수로 만드시오 
+
+2. `aalist` 리스트를 data.frame 형식의 `aadf` 변수로 만드시오 (데이터 구조를 바꾸어 저장 가능)
+
+:::
+
+
+## Functions
+
+함수(Function)란 사용자가 원하는 기능을 수행하는 코드의 모음으로서 반복적으로 쉽게 사용할 수 있도록 만들어 놓은 코드 입니다.
+
+### A script in R
+
+함수의 개념을 배우기 전에 스크립트를 활용한 명령어 수행을 알아보겠습니다. R 프로그래밍을 통해서 사용자가 원하는 기능을 수행하는 방법은 다음과 같이 스크립트를 만들어서 실행하는 것 입니다. 일반적으로 R을 이용한 스크립트 명령을 어떻게 실행하는지 알아보겠습니다. 다음 예제는 입력 값들의 평균을 계산해서 출력해 주는 스크립트 명령입니다. R base 패키지에서 기본으로 제공되는 `mean()`이라는 함수가 있지만 사용하지 않고 `sum()`과 `length()` 함수를 사용했습니다.
 
 
 ```r
@@ -499,10 +561,9 @@ source("myscript.R")
 
 그러나 위와 같은 식으로 실행할 경우 다음 몇 가지 문제가 있습니다. 하나는 입력 값이 바뀔 때마나 파일을 열어 바뀐 값을 저장해 줄 필요가 있습니다. 결과 값에 대해서 다른 처리를 하고 싶을 경우 또한 파일을 직접 수정해 주어야 합니다. 또한 모든 변수들이 전역변수로 사용되어 코드가 복잡해질 경우 변수간 간섭이 생길 가능성이 높습니다.
 
+### Build a function
 
-## Functions
-
-함수(Function)란 사용자가 원하는 기능을 수행하는 코드의 모음으로서 반복적으로 쉽게 사용할 수 있도록 만들어 놓은 코드 입니다. 특정 데이터를 입력으로 받아 원하는 기능을 수행한 후 결과 데이터를 반환하는 구조를 가집니다. 함수는 일반적으로 다음과 같은 포멧으로 구현할 수 있습니다.
+함수는 특정 데이터를 입력으로 받아 원하는 기능을 수행한 후 결과 데이터를 반환하는 구조를 가집니다. 함수는 일반적으로 다음과 같은 포멧으로 구현할 수 있습니다.
 
 
 ```r
@@ -522,7 +583,7 @@ my_sine <- function(x){
 }
 ```
 
-만들어진 함수는 다음과 같이 사용할 수 있습니다. 만들어진 함수는 처음에 한 번 실행해 주어 실행중인 R session에 등록한 후 사용할 수 있습니다. 여기서 함수로 전달되는 값 `pi`는 argument (전달인자) 라고 합니다. 전달인자는 함수에서 정의된 매개변수의 갯수와 같은 수의 전달인자를 입력해 주어야 합니다.
+만들어진 함수는 다음과 같이 사용할 수 있습니다. 만들어진 함수는 처음에 한 번 실행해 주어 실행중인 R session에 등록한 후 사용할 수 있습니다. 여기서 함수로 전달되는 값 `pi`는 argument (전달인자) 라고 합니다. 전달인자는 함수에서 정의된 매개변수의 갯수와 같은 수의 전달인자를 입력해 주어야 합니다. 참고로 parameter와 argument는 많은 사람들이 혼동하는 단어입니다. 본 예에서 `my_sine`함수의 괄호 안에 있는 변수 `x`는 parameter이고 `x`에 들어가는 값인 `pi` 나 `90`은 argument 입니다.  
 
 
 ```r
@@ -538,7 +599,7 @@ sin(90)
     -   argument: `pi`
     -   return value: `y`
 
-이제 위 스크립트 ('myscript.R') 에서 사용된 코드를 함수로 바꿔봅니다. numbers (전달인자)를 받는 매개변수를 x로 하고 함수 이름은 `mymean` 이고 평균값 (numbers_mean)을 반환하는 합수입니다.
+이제 위 스크립트 (`myscript.R`) 에서 사용된 코드를 함수로 바꿔봅니다. numbers (전달인자)를 받는 매개변수를 x로 하고 함수 이름은 `mymean` 이고 평균값 (numbers_mean)을 반환하는 합수입니다.
 
 
 ```r
@@ -568,7 +629,7 @@ retval
 
 
 ::: rmdnote
-#### Exercise {-}
+**Exercises**
 
 1.  변수 `x`에 1, 3, 5, 7, 9를, 변수 `y`에 2, 4, 6, 8, 10을 저장하는 코드를 작성하시오
 
@@ -582,7 +643,7 @@ retval
 
 
 ::: rmdnote
-#### Exercise {-}
+**Exercises**
 
 1)  `mysd`라는 이름의 (표본)표준편차를 구하는 함수를 `myscript.R` 파일에 구현하시오 (`sd()`함수 사용하지 않고, 다음 표준편차 공식 이용)
 
@@ -604,10 +665,6 @@ mysd <- function(x){
 2)  1부터 100까지의 값을 `x`에 저장하고 mysd 함수를 사용해서 표준편차를 구하시오
 
 
-```r
-x <- 1:100
-mysd(x)
-```
 
 
 3)  앞서 작성한 `mymean` 함수와 `mysd` 함수를 같이 사용하여 `x`를 표준화 하고 `z`로 저장하시오. 표준화 공식은 다음과 같음
@@ -618,19 +675,16 @@ $$
 
 
 
-```r
-z <- (x - mymean(x))/mysd(x)
-```
 
 
-4)  `x` 와 `z`를 갖는 `y`라는 이름의 `data.frame`을 생성하시오
+4)  `x` 와 `z` 변수를 원소로 갖는 `y`라는 이름의 `data.frame`을 생성하시오
 
 :::
 
 
 ### local and global variables
 
-다음 코드를 보면 전역변수 `x`, `y`는 지역변수 `x`, `y`와 독립적으로 사용됨을 알 수 있습니다.
+함수를 사용함에 따라서 함수 안에서 사용되는 변수와 함수 밖에서 사용되는 변수들의 경우를 명확히 이해할 필요가 있습니다. 다음 코드를 보면 전역변수 `x`, `y`는 지역변수 `x`, `y`와 독립적으로 사용되고 있습니다. 
 
 
 ```r
@@ -695,7 +749,7 @@ names(test_scores)
 ```
 
 ::: rmdnote
-#### Exercise {-}
+**Exercises**
 
 다음은 한 다이어트 프로그램의 수행 전 후의 다섯 명의 몸무게이다.
 
@@ -711,7 +765,7 @@ names(test_scores)
 
 
 ::: rmdnote
-#### Exercise {-}
+**Exercises**
 
 다음 네 학생이 있으며 "John","James","Sara", "Lilly" 각 나이는 21, 55, 23, 53 이다. ages 라는 변수를 생성하고 각 나이를 저장한 후 who라는 이름의 함수를 만들어서 50살 이상인 사람의 이름을 출력하는 함수를 만드시오.
 
@@ -744,7 +798,7 @@ if(condition){
 
 특히 `condition`은 하나의 원소에 대한 조건 판단문으로 `T` 또는 `F` 값 하나만을 반환하는 문장이어야 합니다. 위 코드는 만약 `condition` 조건이 `True` 이면 expr_1를 실행하고 `False`이면 expr_2를 실행하라는 명령입니다. `condition` 안에서 사용되는 비교 연산자들은 다음과 같습니다. 
 
-![](images/04/01.PNG)
+![](images/04/01.PNG){width=150}
 
 
 
@@ -779,7 +833,7 @@ else
 
 ```
 
-## ifelse statements
+### ifelse statements
 
 `if`는 하나의 조건만 비교하는데 사용할 수 있습니다. 그러나 변수에는 여러 값이 벡터형식으로 들어가고 벡터연산을 수행할 경우의 결과도 벡터형식으로 나오지만 `if`문은 이들을 한 번에 처리하기 어렵습니다. `ifelse`는 이러한 단점을 보완하여 여러 값을 한번에 처리할 수 있습니다. 
 
@@ -787,7 +841,7 @@ else
 ifelse (condition, True일 때 리턴값, False일 때 리턴값)
 ```
 
-
+`ifelse`의 경우 빠르게 원하는 값을 반환할 수 있으나 조건별로 다른 추가적인 명령의 수행은 불가능하다는 단점이 있습니다. 
 
 
 ```r
@@ -803,12 +857,10 @@ ifelse(x>10, "Big", "Small")
 
 ```
 
-그러나 출력만 가능하며 조건별로 다른 명령 수행은 불가능하다는 단점이 있습니다. 
-
 
 
 ::: rmdnote
-#### Exercise {-}
+**Exercises**
 
 다음은 median (중간값)을 구하는 공식이며 x의 길이가 (n이) 홀수일 경우와 짝수일 경우에 따라서 다른 공식이 사용된다. 다음 공식과 코드를 이용하여 mymedian 이라는 이름의 함수를 만들고 입력 값들의 중간값을 구해서 반환하는 함수를 만드시오. (`%%` 나머지 연산, `if`문 사용, 아래 중간값 코드 참고)
 
@@ -830,7 +882,7 @@ retval <- sort_x[(n+1)/2]
 :::
 
 
-## for, while, repeat
+### for, while, repeat
 
 `for` 문은 반복적으로 특정 코드를 실행하고자 할 때 사용됩니다. 다음과 같은 형식으로 사용할 수 있습니다. 
 
@@ -904,7 +956,7 @@ factorial(10)
 
 ```
 
-## Avoiding Loops
+### Avoiding Loops
 
 R에서는 가능하면 loop문을 사용하지 않는 것이 좋습니다. 이는 다른 언어들 보다 반복문이 느리게 수행된다는 이유 때문이기도 합니다. 그러나 R에서는 반복문을 수행하는 것 보다 훨씬 더 빠르게 반복문을 수행 한 것과 같은 결과를 얻을 수 있는 다양한 방법들이 제공되고 있습니다. 차차 그런 기법들에 대한 학습을 진행하도록 하겠습니다.
 
@@ -924,6 +976,24 @@ ed-st
 
 ```
 
+
+
+::: rmdnote
+**Exercises**
+
+1. 다음 네 사람의 이름과 나이를 데이터로 갖는 `users` 변수를 (data.frame) 만드시오
+
+
+```r
+user_score <- c(90, 95, 88, 70)
+user_names <- c("John","James","Sara", "Lilly")
+
+```
+
+2. 각 사람의 점수가 80보다 작으면 `이름 점수: Fail` 크면 `이름 점수: Pass`를 출력을 하는 코드를 작성하시오. 예를 들어 John의 점수는 80보다 크므로 `John 90: Pass` 출력 (`for`, `print` 함수 이용)
+
+
+:::
 
 
 ## Object Oriented Programming (Advanced)

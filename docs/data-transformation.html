@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 5 Data transformation | 2022년 한국생명공학연구원 연구데이터 분석과정 R</title>
+<meta name="author" content="합성생물학전문연구단 김하성">
+<meta name="description" content="일반적인 데이터 분석은 데이터 전처리(변환), 가시화, 모델링(통계분석)의 반복적인 수행으로 진행될 수 있습니다. R에서는 data.frame 형식의 데이터 타입이 주로 사용되며 (최근 tibble형식) 따라서 data.frame 기반의 데이터를 다루기 위한 다양한 함수를 익힐 필요가 있습니다. 이번 강의에서는 data.frame 데이터를 읽거나...">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta property="og:title" content="Chapter 5 Data transformation | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
+<meta property="og:type" content="book">
+<meta property="og:description" content="일반적인 데이터 분석은 데이터 전처리(변환), 가시화, 모델링(통계분석)의 반복적인 수행으로 진행될 수 있습니다. R에서는 data.frame 형식의 데이터 타입이 주로 사용되며 (최근 tibble형식) 따라서 data.frame 기반의 데이터를 다루기 위한 다양한 함수를 익힐 필요가 있습니다. 이번 강의에서는 data.frame 데이터를 읽거나...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 5 Data transformation | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
+<meta name="twitter:description" content="일반적인 데이터 분석은 데이터 전처리(변환), 가시화, 모델링(통계분석)의 반복적인 수행으로 진행될 수 있습니다. R에서는 data.frame 형식의 데이터 타입이 주로 사용되며 (최근 tibble형식) 따라서 data.frame 기반의 데이터를 다루기 위한 다양한 함수를 익힐 필요가 있습니다. 이번 강의에서는 data.frame 데이터를 읽거나...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">2022년 한국생명공학연구원 연구데이터 분석과정 R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="rrstudio-basics.html"><span class="header-section-number">2</span> R/Rstudio basics</a></li>
+<li><a class="" href="rmarkdown.html"><span class="header-section-number">3</span> Rmarkdown</a></li>
+<li><a class="" href="r-programming.html"><span class="header-section-number">4</span> R programming</a></li>
+<li><a class="active" href="data-transformation.html"><span class="header-section-number">5</span> Data transformation</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="data-transformation" class="section level1" number="5">
+<h1>
+<span class="header-section-number">5</span> Data transformation<a class="anchor" aria-label="anchor" href="#data-transformation"><i class="fas fa-link"></i></a>
+</h1>
+<p>일반적인 데이터 분석은 데이터 전처리(변환), 가시화, 모델링(통계분석)의 반복적인 수행으로 진행될 수 있습니다. R에서는 <code>data.frame</code> 형식의 데이터 타입이 주로 사용되며 (최근 <code>tibble</code>형식) 따라서 <code>data.frame</code> 기반의 데이터를 다루기 위한 다양한 함수를 익힐 필요가 있습니다. 이번 강의에서는 <code>data.frame</code> 데이터를 읽거나 쓰는 함수들과 함께 데이터 전처리를 (변환) 위한 함수들을 배워보겠습니다.</p>
+<p>앞에서 배웠던 데이터를 저장하는 object의 종류를 먼저 간략히 정리해 봅니다.</p>
+<ul>
+<li>
+<strong>Vectors</strong> - 같은 타입의 데이터를 (Numeric, character, factor, …) 저장한 오브젝트로 인덱스는 <code>[</code>, <code>]</code> 사용.</li>
+<li>
+<strong>Lists</strong> - 여러개의 <code>vector</code>를 원소로 가질 수 있으며 각 원소 vector들은 문자나 숫자 어떤 데이터 타입도 가능하고 길이가 달라도 됨. list의 인덱싱에서 <code>[</code> <code>]</code>는 리스트를 반환하고 <code>[[</code> <code>]]</code>는 vector를 반환함.</li>
+<li>
+<strong>Matrices</strong> - 같은 타입의 데이터로 채워진 2차원 행렬이며 인덱스는 <code>[i, j]</code> 형태로 <code>i</code>는 row, <code>j</code>는 column 을 나타냄. 메트릭스의 생성은 <code>matrix</code> 명령어를 사용하며 왼쪽부터 column 값을 모두 채우고 다음 컬럼 값을 채워 나가는 것이 기본 설정임. <code>byrow=T</code> 를 통해 row를 먼저 채울수도 있음. row와 column 이름은 <code>rownames</code>와 <code>colnames</code>로 설정이 가능하며 <code>rbind</code>와 <code>cbind</code>로 두 행렬 또는 행렬과 백터를 연결할 수 있음 ( <code>rbind</code>와 <code>cbind</code>의 경우 행렬이 커지면 컴퓨터 리소스 많이 사용함)</li>
+<li>
+<strong>data.frame</strong> - <code>list</code>와 <code>matrix</code>의 특성을 모두 갖는 오브젝트 타입으로 <code>list</code>와 같이 다른 타입의 <code>vector</code>형 변수 여러개가 컬럼에 붙어서 <code>matrix</code> 형태로 구성됨. 단, <code>list</code>와는 다르게 각 변수의 길이가 (row의 길이) 같아야 함. <code>$</code> 기호로 각 변수들을 인덱싱(접근) 할 수 있고 matrix와 같이 <code>[i,j]</code> 형태의 인덱싱도 가능.</li>
+</ul>
+<div id="reading-and-writing" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> Reading and writing<a class="anchor" aria-label="anchor" href="#reading-and-writing"><i class="fas fa-link"></i></a>
+</h2>
+<p>파일에 있는 데이터를 R로 읽어들이거나 쓰는 일은 일반적인 데이터 분석 과정에서 필수적일 수 있습니다. 본 강의에서는 일반적으로 사용하는 텍스트 파일과 엑셀파일을 활용하는 방법을 알아보겠습니다.</p>
+<div id="text-file" class="section level3" number="5.1.1">
+<h3>
+<span class="header-section-number">5.1.1</span> Text file<a class="anchor" aria-label="anchor" href="#text-file"><i class="fas fa-link"></i></a>
+</h3>
+<p>편의상 데이터를 쓰는 과정을 먼저 살펴봅니다. <code>UsingR</code> 예제에 있는 데이터 중 <code>batting</code> 데이터는 2002 야구시즌에 선수들의 정보를 모아둔 데이터 입니다. <code>str</code> 함수로 데이터 전체적인 구조를 파악한 일부 데이터만을 (홈런 개수와 스트라이크 아웃) 이용해 추가적인 데이터를 생성한 후 별도로 파일에 저장해 보겠습니다.</p>
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">UsingR</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">batting</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">batting</span><span class="op">)</span>
+
+<span class="va">mydf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>id <span class="op">=</span> <span class="va">batting</span><span class="op">$</span><span class="va">playerID</span>, 
+           team <span class="op">=</span> <span class="va">batting</span><span class="op">$</span><span class="va">teamID</span>,
+           hr <span class="op">=</span> <span class="va">batting</span><span class="op">$</span><span class="va">HR</span>,
+           so <span class="op">=</span> <span class="va">batting</span><span class="op">$</span><span class="va">SO</span>,
+           soperhr <span class="op">=</span> <span class="va">batting</span><span class="op">$</span><span class="va">SO</span><span class="op">/</span><span class="va">batting</span><span class="op">$</span><span class="va">HR</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mydf</span><span class="op">)</span></code></pre></div>
+<p>재미삼아 홈런과 삼진아웃간의 관계를 한 번 알아보겠습니다.</p>
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">mydf</span><span class="op">$</span><span class="va">hr</span>, <span class="va">mydf</span><span class="op">$</span><span class="va">so</span><span class="op">)</span>
+<span class="va">mycor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">mydf</span><span class="op">$</span><span class="va">hr</span>, <span class="va">mydf</span><span class="op">$</span><span class="va">so</span><span class="op">)</span>
+<span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mydf</span><span class="op">$</span><span class="va">so</span> <span class="op">~</span> <span class="va">mydf</span><span class="op">$</span><span class="va">hr</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">mydf</span><span class="op">$</span><span class="va">hr</span>, <span class="va">mydf</span><span class="op">$</span><span class="va">so</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">170</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">mycor</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>위 데이터를 파일로 저정하기 위해서는 <code>write.table</code> 또는 <code>write.csv</code> 함수를 사용할 수 있습니다. 패키지에 따라서 다양한 함수들이 제공되고 있지만 위 두 파일은 <code>utils</code>라는 R의 기본 패키지에 들어있는 함수들로서 가장 많이 사용되는 함수들 입니다. <code><a href="https://rdrr.io/r/utils/write.table.html">?write.table</a></code> 등으로 도움말을 보시고 특히 함수의 전달값 (Arguments) 들을 (<code>quote</code>, <code>row.names</code>, <code>col.names</code>, <code>sep</code>) 익혀두시기 바랍니다.</p>
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="va">mydf</span>, file<span class="op">=</span><span class="st">"table_write.txt"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="va">mydf</span>, file<span class="op">=</span><span class="st">"table_write.txt"</span>, quote<span class="op">=</span><span class="cn">F</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="va">mydf</span>, file<span class="op">=</span><span class="st">"table_write.txt"</span>, quote<span class="op">=</span><span class="cn">F</span>, row.names<span class="op">=</span><span class="cn">F</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="va">mydf</span>, file<span class="op">=</span><span class="st">"table_write.txt"</span>, quote<span class="op">=</span><span class="cn">F</span>, row.names<span class="op">=</span><span class="cn">F</span>, sep<span class="op">=</span><span class="st">","</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="va">mydf</span>, file<span class="op">=</span><span class="st">"table_write.csv"</span>, quote<span class="op">=</span><span class="cn">F</span>, row.names<span class="op">=</span><span class="cn">F</span>, sep<span class="op">=</span><span class="st">","</span><span class="op">)</span></code></pre></div>
+<p>대부분의 텍스트 파일은 아래와 같이 <code>csv</code> 또는 <code>txt</code> 파일로 저장하여 메모장으로 열어 확인할 수 있으며 읽어올 때 구분자 (sep 파라메터) 나 header를 (header 파라메터) 읽을지 등을 옵션으로 지정할 수 있습니다.</p>
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"Dataset_S1_sub.txt"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></code></pre></div>
+<p>Dataset_S1_sub.txt 파일을 열어보면 다음과 같이 header와 “,”로 구분되어 있는 것을 볼 수 있습니다. <code>read.csv</code> 함수의 도움말을 보면 이 함수의 파라메터 head와 sep이 기본값으로 <code>T</code>와 <code>,</code>로 되어 있는 것을 볼 수 있습니다. <code>read.csv</code> 외에도 <code>read.table</code>, <code>read.delim</code> 등의 함수를 이용해서 택스트 파일을 읽어올 수 있습니다.</p>
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></code></pre></div>
+<div class="rmdnote">
+<p><strong>Exercises</strong></p>
+<ol style="list-style-type: decimal">
+<li>위 <code>mydf</code>에서 가장 홈런을 많이 순서로 데이터를 정렬하시오</li>
+<li>위 정렬된 데이터를 <code>mydf2</code> 로 저장한 후 csv 형태의 <code>baseball.csv</code> 파일로 저장하시오</li>
+</ol>
+</div>
+</div>
+<div id="excel-file" class="section level3" number="5.1.2">
+<h3>
+<span class="header-section-number">5.1.2</span> Excel file<a class="anchor" aria-label="anchor" href="#excel-file"><i class="fas fa-link"></i></a>
+</h3>
+<p>텍스트 파일 외에 엑셀파일은 <code>readxl</code> 이라는 R 패키지를 활용하여 읽거나 쓸 수 있습니다. 패키지는 다음과 같은 방법으로 설치할 수 있으며 <code>read_excel</code> 이라는 함수를 사용해서 데이터를 읽어들일 수 있습니다. 참고로 이 후 강의에서 배우게 될 <code>tidyverse</code> 패키지들 중 <code>readr</code> 패키지를 사용하여 엑셀파일 데이터를 다룰 수도 있습니다.</p>
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"readxl"</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></code></pre></div>
+<p>실습 파일은 형광 세포를 배양하여 형광리더기를 이용해 얻어진 실제 데이터이며 <a href="plate_reader.xls">plate_reader.xls</a> 에서 다운로드 받을 수 있습니다. <code>read_excel</code> 함수를 이용하여 파일의 내용을 읽어오면 기본 자료형이 <code>tibble</code> 입니다. <code>tibble</code>은 최근 많이 쓰이는 R object로 <code>data.frame</code>과 유사하나 입력값의 type, name, rowname을 임으로 바꿀 수 없다는 점이 다릅니다.</p>
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"plate_reader.xls"</span>, sheet<span class="op">=</span><span class="fl">1</span>, skip <span class="op">=</span> <span class="fl">0</span>, col_names<span class="op">=</span><span class="cn">T</span><span class="op">)</span></code></pre></div>
+<p>엑셀파일에는 두 종류의 (<span class="math inline">\(OD600_{nm}\)</span>, Fluorescence) 데이터가 저장되어 있습니다. 첫 번째 sheet에는 다음처럼 wide형 데이터가 저장되어 있습니다.</p>
+<div class="inline-figure"><img src="images/04/excelfile01.PNG"></div>
+<p>프로토콜 상세 내역이 나온 세 번째 시트를 읽을 경우 <code>sheet</code> 옵션을 3로 설정하면 되며 skip=3으로 하고 컬럼 이름을 별도로 사용하지 않으므로 <code>col_names=T</code>로하여 읽을 수 있습니다.</p>
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"plate_reader.xls"</span>, sheet<span class="op">=</span><span class="fl">3</span>, skip <span class="op">=</span> <span class="fl">3</span>, col_names<span class="op">=</span><span class="cn">F</span><span class="op">)</span></code></pre></div>
+<p>참고로 엑셀파일로 저장하기 위해서는 csv 파일로 데이터를 writing 한 뒤 <code>Excel</code>로 해당 <code>csv</code> 파일을 열고 <code>xlsx</code> 파일로 저장할 수 있습니다.</p>
+</div>
+</div>
+<div id="subset" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> Subset<a class="anchor" aria-label="anchor" href="#subset"><i class="fas fa-link"></i></a>
+</h2>
+<p>R에서 데이터 저장은 <code>data.frame</code>이나 <code>matrix</code> 타입을 일반적으로 사용합니다. 이 데이터의 일부 열 또는 행의 데이터만을 가져와서 별도로 저장하거나 분석이 필요할 경우가 있습니다. 이 때 인덱싱을 사용해서 일부 데이터를 선택하고 사용할 수 있으며 <code>subset</code> 함수도 이러한 선별 기능을 제공합니다. <code>subset</code>은 행과 열 모두를 선별할 수 있는 함수입니다. 다음 <code>airquality</code> 데이터는 1973년 날짜별로 뉴욕의 공기질을 측정한 데이터 입니다. <code>NA</code>를 제외한 나머지 데이터만으로 새로운 데이터셋을 만들어 봅시다. <code>is.na</code>함수를 사용하면 해당 데이터가 <code>NA</code>일 경우 <code>TRUE</code>, <code>NA</code>가 아닐 경우 <code>FALSE</code> 를 반환해 줍니다.</p>
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">airquality</span><span class="op">$</span><span class="va">Ozone</span><span class="op">)</span>
+<span class="va">ozone_complete1</span> <span class="op">&lt;-</span> <span class="va">airquality</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">airquality</span><span class="op">$</span><span class="va">Ozone</span><span class="op">)</span>,<span class="op">]</span>
+<span class="va">ozone_complete1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">airquality</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">Ozone</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>위 ozone_complete1와 ozone_complete2는 같은 결과를 보입니다. 그러나 ozone_complete1 보다는 ozone_complete2 코드가 훨씬 직관적이고 가독성이 높습니다. 특히 <code>airquality$ozone</code> 로 <code>$</code>를 사용하여 변수에 접근한 것이 아닌 <code>Ozone</code>이라는 변수 이름을 직접 사용해서 접근함으로써 코드의 간결성과 가독성을 유지할 수 있습니다. 또한 <code>subset</code>의 <code>select</code> 옵션을 이용해서 변수를 선택할 수도 있으며 <code>&amp;</code>(AND)와 <code>|</code>(OR) 연산자를 사용해서 조건을 두 개 이상 설정할 수 있습니다. 아래 <code>select</code> 옵션에서 <code>-</code>는 해당 변수를 제외한다는 의미 입니다.</p>
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ozone_complete3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">airquality</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">ozone</span><span class="op">)</span>, select<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">ozone</span>, <span class="va">temp</span>, <span class="va">month</span>, <span class="va">day</span><span class="op">)</span><span class="op">)</span>
+<span class="va">ozone_complete4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">airquality</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">ozone</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">solar.r</span><span class="op">)</span>, select<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="va">month</span>, <span class="op">-</span><span class="va">day</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="rmdnote">
+<p><strong>Exercises</strong></p>
+<p>airquality 데이터에서 <code>Temp</code>와 <code>Ozone</code> 변수로 이루어진 df라는 이름의 <code>data.frame</code>을 만드시오 (단 <code>NA</code>가 있는 샘플(열)은 모두 제외하시오)</p>
+</div>
+</div>
+<div id="merging-and-split" class="section level2" number="5.3">
+<h2>
+<span class="header-section-number">5.3</span> Merging and Split<a class="anchor" aria-label="anchor" href="#merging-and-split"><i class="fas fa-link"></i></a>
+</h2>
+<p><code>merge</code> 함수는 두 개 이상의 데이터셋을 통합하는 기능을 수행하는 함수입니다. 특히 <code>rbind</code>나 <code>cbind</code>와는 다르게, 결합하는 두 데이터에 공통적이거나 한 쪽의 데이터를 기준으로 결합을 수행 합니다. <code><a href="https://rdrr.io/r/base/merge.html">?merge</a></code>를 참고하면 <code>by</code>, <code>by.x</code>, <code>by.y</code>, <code>all</code>, <code>all.x</code>, <code>all.y</code> 등의 옵션으로 이러한 설정을 수행할 수 있습니다. 간단한 예제를 통해서 이해해 보겠습니다.</p>
+<p>10명의 사람이 있고 이 사람들의 나이와 성별을 각각 나타낸 두 데이터셋이 있습니다. 그런데 df1은 나이만을 df2는 성별 정보만을 가지고 있으며 두 정보 모두 제공된 사람은 3명 (인덱스 4,5,6) 뿐입니다. 이제 merge를 이용해서 두 데이터셋을 결합해 보겠습니다.</p>
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## merge</span>
+<span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>id<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span>, age<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">41</span>, <span class="fl">33</span>, <span class="fl">56</span>, <span class="fl">20</span>, <span class="fl">17</span><span class="op">)</span><span class="op">)</span>
+<span class="va">df2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>id<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">8</span>,<span class="fl">9</span><span class="op">)</span>, gender<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"f"</span>, <span class="st">"f"</span>, <span class="st">"m"</span>, <span class="st">"m"</span>, <span class="st">"f"</span>, <span class="st">"m"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">df_inner</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span><span class="va">df1</span>, <span class="va">df2</span>, by<span class="op">=</span><span class="st">"id"</span>, all<span class="op">=</span><span class="cn">F</span><span class="op">)</span>
+<span class="va">df_outer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span><span class="va">df1</span>, <span class="va">df2</span>, by<span class="op">=</span><span class="st">"id"</span>, all<span class="op">=</span><span class="cn">T</span><span class="op">)</span>
+<span class="va">df_left_outer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span><span class="va">df1</span>, <span class="va">df2</span>, by<span class="op">=</span><span class="st">"id"</span>, all.x<span class="op">=</span><span class="cn">T</span><span class="op">)</span>
+<span class="va">df_right_outer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span><span class="va">df1</span>, <span class="va">df2</span>, by<span class="op">=</span><span class="st">"id"</span>, all.y<span class="op">=</span><span class="cn">T</span><span class="op">)</span></code></pre></div>
+<p>만약 두 데이터셋의 id가 다를 경우나 각각 다른 기준으로 결합해야 하는 경우는 <code>by</code>대신 <code>by.x</code>, <code>by.y</code> 옵션을 사용할 수 있습니다.</p>
+<p><code>split</code> 함수는 데이터를 특정 기준으로 나누는 역할을 하며 해당 기준은 factor 형 벡터 형태로 주어질 수 있습니다. 예를 들어 <code>airquality</code> 데이터의 <code>month</code> 변수를 기준으로 데이터를 분리해 보겠습니다.</p>
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">airquality</span><span class="op">)</span>
+<span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">airquality</span><span class="op">$</span><span class="va">Month</span><span class="op">)</span>
+<span class="va">airq_split</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/split.html">split</a></span><span class="op">(</span><span class="va">airquality</span>, <span class="va">g</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">airq_split</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">airq_split</span><span class="op">)</span></code></pre></div>
+<p>위와 같이 <code>airq_split</code>은 길이가 5인 (5, 6, 7, 8, 9월) <code>list</code>타입이 되었고 각 요소는 서로 다른 size의 <code>data.frame</code>형으로 구성 된 것을 확인할 수 있습니다.</p>
+</div>
+<div id="transformation" class="section level2" number="5.4">
+<h2>
+<span class="header-section-number">5.4</span> Transformation<a class="anchor" aria-label="anchor" href="#transformation"><i class="fas fa-link"></i></a>
+</h2>
+<p>R에서 기존 가지고 있는 데이터의 변경은 새로운 변수의 추가, 삭제, 변형과 샘플의 추가, 삭제, 변형을 생각해 볼 수 있습니다. 이러한 기능은 앞에서 배운 <code>merge</code>, <code>split</code>이나 <code>rbind</code>, <code>cbind</code>, 그리고 인덱싱을 활용한 값 변경 등의 방법을 이용할 수 있습니다. 또한 가장 직관적으로 필요한 변수들을 기존 데이터셋에서 추출한 후 <code>data.frame</code> 명령어를 사용해서 새로운 데이터셋으로 만들어주면 될 것 입니다.</p>
+<p>이러한 방법들 외에 <code>within</code>을 사용할 경우 특정 변수의 변형과 이를 반영한 새로운 데이터셋을 어렵지 않게 만들수 있습니다. <code>with</code> 함수의 사용 예와 함께 <code>within</code> 함수를 사용하여 데이터를 변형하는 예를 살펴봅니다. <code>with</code>나 <code>within</code> 함수는 R을 활용하는데 많이 사용되는 함수들은 아닙니다. 또한 이러한 기능들은 <code>dplyr</code> 등의 패키지에서 제공하는 경우가 많아서 필수적으로 익힐 부분은 아닙니다. 그러나 개념적인 이해를 돕기위한 좋은 도구들이며 여전히 고수준의 R 사용자들이 코드에 사용하고 있는 함수들이므로 알아두는 것이 좋습니다.</p>
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## without with</span>
+<span class="va">ozone_complete</span> <span class="op">&lt;-</span> <span class="va">airquality</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">airquality</span><span class="op">$</span><span class="va">Ozone</span><span class="op">)</span>,<span class="st">"Ozone"</span><span class="op">]</span>
+<span class="va">temp_complete</span> <span class="op">&lt;-</span> <span class="va">airquality</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">airquality</span><span class="op">$</span><span class="va">Temp</span><span class="op">)</span>,<span class="st">"Temp"</span><span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">ozone_complete</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">temp_complete</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co">## with</span>
+<span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">airquality</span>, <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Ozone</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">Ozone</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Temp</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">Temp</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span></code></pre></div>
+<p>위 <code>with</code> 함수에서 보는바와 같이 <code>$</code>를 이용한 변수 접근 대신 <code>with</code>함수 내에서는 (<code>{</code>, <code>}</code> 안에서) 해당 <code>data.frame</code>에 있는 변수 이름을 직접 접근할 수 있으며 따라서 코드의 간결함과 가독성이 향상됩니다.</p>
+<p><code>within</code> 함수는 <code>with</code>함수와 같이 <code>{</code>, <code>}</code> 안에서 변수의 이름만으로 해당 변수에 접근이 가능하나 입력된 데이터와 변경된 변수(들)을 반환한다는 점이 다릅니다. 아래 예는 <code>airquality</code> 데이터의 화씨 (Fahrenheit) 온도를 섭씨 (Celsius) 온도로 변환해서 새로운 데이터셋을 만드는 코드입니다. <code>data.frame</code>을 이용한 코드와 비교해 보시기 바랍니다. 데이터셋 내에서 참조할 변수들이 많아질 경우 <code>airquality$xxx</code> 식의 코드를 줄이는 것 만으로도 코드의 가독성과 간결성을 유지할 수 있습니다.</p>
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">newairquality</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">within</a></span><span class="op">(</span><span class="va">airquality</span>, <span class="op">{</span>
+  <span class="va">celsius</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="op">(</span><span class="fl">5</span><span class="op">*</span><span class="op">(</span><span class="va">Temp</span><span class="op">-</span><span class="fl">32</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">9</span>, <span class="fl">2</span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">newairquality</span><span class="op">)</span>
+
+<span class="co">## data.frame</span>
+<span class="va">celsius</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="op">(</span><span class="fl">5</span><span class="op">*</span><span class="op">(</span><span class="va">airquality</span><span class="op">$</span><span class="va">Temp</span><span class="op">-</span><span class="fl">32</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">9</span>, <span class="fl">2</span><span class="op">)</span>
+<span class="va">newairquality</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">airquality</span>, <span class="va">celsius</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">newairquality</span><span class="op">)</span></code></pre></div>
+<div class="rmdnote">
+<p><strong>Exercises</strong></p>
+<p>다음 df 의 hour, minute, second로 나누어진 값들을 초 단위로 변환하여 seconds라는 변수에 저장한 후 기존 df에 추가한 df2 데이터셋을 만드시오 (<code>within</code> 함수 이용)</p>
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>hour<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">7</span>, <span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">8</span><span class="op">)</span>,
+                 minute<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">46</span>, <span class="fl">56</span>, <span class="fl">44</span>, <span class="fl">37</span>, <span class="fl">39</span><span class="op">)</span>,
+                 second<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">19</span>, <span class="fl">45</span>, <span class="fl">57</span>, <span class="fl">41</span>, <span class="fl">27</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</div>
+</div>
+<div id="babies-example" class="section level2" number="5.5">
+<h2>
+<span class="header-section-number">5.5</span> Babies example<a class="anchor" aria-label="anchor" href="#babies-example"><i class="fas fa-link"></i></a>
+</h2>
+<p><code>UsingR</code> 패키지의 <code>babies</code> 데이터를 이용해서 산모의 흡연 여부와 신생아 몸무게의 관계를 알아보는 분석을 수행해 보겠습니다. 본 강의를 통해 배우지 않은 내용들이 있지만 코드를 따라 가면서 참고하시기 바랍니다. 우선 <code>UsingR</code> 패키지를 로딩합니다. 산모의 임신 기간이 (gestation) 999로 표기된 데이터는 명백히 에러이며 이들을 <code>NA</code>로 처리합니다.</p>
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">UsingR</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">babies</span><span class="op">)</span>
+<span class="co">## a simple way to checkout the data</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">babies</span><span class="op">$</span><span class="va">gestation</span><span class="op">)</span>  
+<span class="va">babies</span><span class="op">$</span><span class="va">gestation</span><span class="op">[</span><span class="va">babies</span><span class="op">$</span><span class="va">gestation</span><span class="op">&gt;</span><span class="fl">900</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">babies</span><span class="op">)</span></code></pre></div>
+<p>아래와 같이 <code>within</code> 함수를 사용해서 <code>babies$</code> 를 반복해서 입력해주는 불편함을 줄이고 가독성을 높입니다. 똑같은 방법으로 <code>dwt</code> (아빠의 몸무게) 변수의 에러값들에 대해서도 <code>NA</code> 처리를 할 수 있습니다.</p>
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">new_babies</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">within</a></span><span class="op">(</span><span class="va">babies</span>, <span class="op">{</span>
+  <span class="va">gestation</span><span class="op">[</span><span class="va">gestation</span><span class="op">==</span><span class="fl">999</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span>
+  <span class="va">dwt</span><span class="op">[</span><span class="va">dwt</span><span class="op">==</span><span class="fl">999</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span>
+<span class="op">}</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">new_babies</span><span class="op">)</span></code></pre></div>
+<p><code>smoke</code> 변수는 흡연 여부를 나타내는 범주형 변수로 0, 1, 2, 3 값은 의미가 없습니다. 사람이 읽을 수 있는 label을 붙인 <code>factor</code> 형 변수로 변환하는 코드도 함께 작성해 보겠습니다.</p>
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">babies</span><span class="op">$</span><span class="va">smoke</span><span class="op">)</span>
+<span class="va">new_babies</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">within</a></span><span class="op">(</span><span class="va">babies</span>, <span class="op">{</span>
+  <span class="va">gestation</span><span class="op">[</span><span class="va">gestation</span><span class="op">==</span><span class="fl">999</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span>
+  <span class="va">dwt</span><span class="op">[</span><span class="va">dwt</span><span class="op">==</span><span class="fl">999</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span>
+  <span class="va">smoke</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">smoke</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">smoke</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+    <span class="st">"never"</span> <span class="op">=</span> <span class="fl">0</span>, 
+    <span class="st">"smoke now"</span> <span class="op">=</span> <span class="fl">1</span>, 
+    <span class="st">"until current pregnancy"</span> <span class="op">=</span> <span class="fl">2</span>,
+    <span class="st">"once did, not now"</span> <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
+  <span class="op">}</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">new_babies</span><span class="op">$</span><span class="va">smoke</span><span class="op">)</span></code></pre></div>
+<p>이제 임신기간과 흡연 여부를 분석해 볼 수 있습니다. 흡연 그룹별로 기간에 차이가 있는지를 알아보는 분석은 <code>t-test</code>나 <code>ANOVA</code>를 사용할 수 있습니다.</p>
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">gestation</span><span class="op">~</span><span class="va">smoke</span>, <span class="va">new_babies</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span> <span class="co">## t-test 결과 </span>
+<span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></code></pre></div>
+<p>간단히 결과를 보면 <code>summary(fit)</code>은 3가지 t-test의 결과를 보여줍니다. never vs. smoke new 의 경우 t값이 -1.657로 피우지 않은 경우에 비해서 피우는 사람의 임신 기간이 유의하게 줄어들었음을 알 수 있습니다. 그에 비해서 현재 흡연하지 않는 경우 (never vs. until current pregnancy 또는 never vs. once did, not now) 차이가 없는 것으로 나옵니다.</p>
+<p>이제 smoke now 인 경우 또는 나이가 25세 미만인 경우의 샘플에 대해서 <code>newdf</code>를 만들어 봅니다 (<code>subset</code> 함수 사용, id, gestation, age, wt, smoke 변수 선택). 이 후 <code>ggplot</code>을 이용하여 몸무게와 임신기간의 산점도를 그려보면 크게 다르진 않으나 흡연하는 여성 중 몸무게가 적게 나가는 여성에게서 짧은 임신기간을 갖는 경향을 볼 수 있습니다.</p>
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">newdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">new_babies</span>, <span class="op">(</span><span class="va">smoke</span><span class="op">==</span><span class="st">"smoke now"</span> <span class="op">|</span> <span class="va">smoke</span> <span class="op">==</span> <span class="st">"never"</span><span class="op">)</span> <span class="op">&amp;</span> <span class="va">age</span> <span class="op">&lt;</span> <span class="fl">25</span>, select<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">gestation</span>, <span class="va">age</span>, <span class="va">wt</span>, <span class="va">smoke</span><span class="op">)</span><span class="op">)</span>
+<span class="co"># ggplot(newdf, aes(x=wt, y=gestation, color=smoke)) +</span>
+<span class="co">#   geom_point(size=3, alpha=0.5) +</span>
+<span class="co">#   facet_grid(.~smoke) + </span>
+<span class="co">#   theme_bw()</span></code></pre></div>
+</div>
+<div id="useful-functions-1" class="section level2" number="5.6">
+<h2>
+<span class="header-section-number">5.6</span> Useful functions<a class="anchor" aria-label="anchor" href="#useful-functions-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>지금까지 배운 여러 R 프로그래밍 기법이나 함수들과 같이 R을 활용한 데이터 분석에서 자주쓰이거나 유용하게 사용되는 함수들을 소개합니다. 먼저 원소들을 비교하여 공통적 또는 유일한 원소들만을 추출해내는 함수들 입니다.</p>
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#match(), %in%, intersect()</span>
+
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fl">5</span><span class="op">:</span><span class="fl">15</span>
+<span class="fu"><a href="https://rdrr.io/r/base/match.html">match</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>
+<span class="va">x</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">y</span>
+<span class="fu"><a href="https://rdrr.io/r/base/sets.html">intersect</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>
+
+<span class="co">#unique()</span>
+<span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>다음은 스트링 관련 함수들로서 서열데이터 분석 등에서 유용하게 활용되는 함수들 입니다.</p>
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#substr()</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="st">"Factors, raw vectors, and lists, are converted"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">1</span>, <span class="fl">6</span><span class="op">)</span>
+
+<span class="co">#grep()</span>
+<span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"raw"</span>, <span class="va">x</span><span class="op">)</span>
+
+<span class="co">#grepl()</span>
+<span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"raw"</span>, <span class="va">x</span><span class="op">)</span>
+<span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"raw"</span>, <span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"I found raw!"</span><span class="op">)</span>
+<span class="op">}</span>
+
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">LETTERS</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">100</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="va">x</span><span class="op">)</span>
+<span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="va">x</span><span class="op">)</span><span class="op">]</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="va">x</span><span class="op">)</span>
+<span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="va">x</span><span class="op">)</span>
+<span class="kw">if</span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Yes, I found A"</span><span class="op">)</span>
+<span class="op">}</span><span class="kw">else</span><span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"No A"</span><span class="op">)</span>
+<span class="op">}</span>
+
+<span class="co">#strsplit()</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Factors, raw vectors, and lists, are converted"</span>, <span class="st">"vectors, or for, strings with"</span><span class="op">)</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="va">x</span>, split<span class="op">=</span><span class="st">", "</span><span class="op">)</span>
+
+<span class="co">#unlist()</span>
+<span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>
+
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="va">x</span>, split<span class="op">=</span><span class="st">""</span><span class="op">)</span>
+<span class="va">ychar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>
+<span class="va">ycount</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">y2</span><span class="op">)</span>
+<span class="va">ycount_sort</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">ycount</span><span class="op">)</span>
+<span class="va">ycount_sort</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">ycount</span>, decreasing <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+<span class="va">ycount_top</span> <span class="op">&lt;-</span> <span class="va">ycount_sort</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>
+<span class="va">ycount_top_char</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">ycount_top</span><span class="op">)</span>
+
+<span class="co">#toupper(), tolower()</span>
+<span class="fu"><a href="https://rdrr.io/r/base/chartr.html">toupper</a></span><span class="op">(</span><span class="va">ycount_top_char</span><span class="op">)</span></code></pre></div>
+<div class="rmdnote">
+<p><strong>Exercises</strong></p>
+<p>built-in 데이터셋 중 <code>state.abb</code> 은 미국의 50개 주에대한 축약어임.</p>
+<ol style="list-style-type: decimal">
+<li><p>이 중 문자 A 가 들어가는 주를 뽑아 x에 저장 하시오 (<code>grep</code> 또는 <code>grepl</code> 사용)</p></li>
+<li><p>state.abb 중 위 x에 저장된 이름들을 빼고 y에 저장 하시오 (<code><a href="https://rdrr.io/r/base/match.html">match()</a></code> 또는 <code>%in%</code>사용)</p></li>
+<li><p>state.abb에 사용된 알파벳의 갯수를 구하고 가장 많이 쓰인 알파벳을 구하시오 (<code><a href="https://rdrr.io/r/base/strsplit.html">strsplit()</a></code>, <code><a href="https://rdrr.io/r/base/table.html">table()</a></code> 등 사용)</p></li>
+</ol>
+</div>
+<hr>
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="크리에이티브 커먼즈 라이선스" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png"></a><br>이 저작물은 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제 라이선스</a>에 따라 이용할 수 있습니다.</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="r-programming.html"><span class="header-section-number">4</span> R programming</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#data-transformation"><span class="header-section-number">5</span> Data transformation</a></li>
+<li>
+<a class="nav-link" href="#reading-and-writing"><span class="header-section-number">5.1</span> Reading and writing</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#text-file"><span class="header-section-number">5.1.1</span> Text file</a></li>
+<li><a class="nav-link" href="#excel-file"><span class="header-section-number">5.1.2</span> Excel file</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#subset"><span class="header-section-number">5.2</span> Subset</a></li>
+<li><a class="nav-link" href="#merging-and-split"><span class="header-section-number">5.3</span> Merging and Split</a></li>
+<li><a class="nav-link" href="#transformation"><span class="header-section-number">5.4</span> Transformation</a></li>
+<li><a class="nav-link" href="#babies-example"><span class="header-section-number">5.5</span> Babies example</a></li>
+<li><a class="nav-link" href="#useful-functions-1"><span class="header-section-number">5.6</span> Useful functions</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/04-Rdatatrans.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/04-Rdatatrans.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>2022년 한국생명공학연구원 연구데이터 분석과정 R</strong>" was written by 합성생물학전문연구단 김하성. It was last built on 2022-05-22.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

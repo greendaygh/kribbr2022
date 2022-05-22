@@ -2,9 +2,10 @@ rmd_files: ["index.Rmd",
             "01-Rintro.Rmd",
             "02-Rmarkdown.Rmd",
             "03-Rprogramming.Rmd",
+            "04-Rdatatrans.Rmd",
             ]
 book_filename: "kribbr2022"
-repo: https://github.com/greendaygh/Rprog2021/
+repo: https://github.com/greendaygh/kribbr2022/
 output_dir: docs
 new_session: true
 before_chapter_script: _common.R

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 5 Data I/O | 2022년 한국생명공학연구원 연구데이터 분석과정 R</title>
+<meta name="author" content="합성생물학전문연구단 김하성">
+<meta name="description" content="일반적인 데이터 분석은 데이터 전처리(변환), 가시화, 모델링(통계분석)의 반복적인 수행으로 진행될 수 있습니다. R에서는 data.frame 형식의 데이터 타입이 주로 사용되며 (최근 tibble형식) 따라서 data.frame 기반의 데이터를 다루기 위한 다양한 함수를 익힐 필요가 있습니다. 이번 강의에서는 data.frame 데이터를 읽거나...">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta property="og:title" content="Chapter 5 Data I/O | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
+<meta property="og:type" content="book">
+<meta property="og:description" content="일반적인 데이터 분석은 데이터 전처리(변환), 가시화, 모델링(통계분석)의 반복적인 수행으로 진행될 수 있습니다. R에서는 data.frame 형식의 데이터 타입이 주로 사용되며 (최근 tibble형식) 따라서 data.frame 기반의 데이터를 다루기 위한 다양한 함수를 익힐 필요가 있습니다. 이번 강의에서는 data.frame 데이터를 읽거나...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 5 Data I/O | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
+<meta name="twitter:description" content="일반적인 데이터 분석은 데이터 전처리(변환), 가시화, 모델링(통계분석)의 반복적인 수행으로 진행될 수 있습니다. R에서는 data.frame 형식의 데이터 타입이 주로 사용되며 (최근 tibble형식) 따라서 data.frame 기반의 데이터를 다루기 위한 다양한 함수를 익힐 필요가 있습니다. 이번 강의에서는 data.frame 데이터를 읽거나...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">2022년 한국생명공학연구원 연구데이터 분석과정 R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="rrstudio-basics.html"><span class="header-section-number">2</span> R/Rstudio basics</a></li>
+<li><a class="" href="rmarkdown.html"><span class="header-section-number">3</span> Rmarkdown</a></li>
+<li><a class="" href="r-programming.html"><span class="header-section-number">4</span> R programming</a></li>
+<li><a class="active" href="rdataio.html"><span class="header-section-number">5</span> Data I/O</a></li>
+<li><a class="" href="data-transformation.html"><span class="header-section-number">6</span> Data transformation</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="rdataio" class="section level1" number="5">
+<h1>
+<span class="header-section-number">5</span> Data I/O<a class="anchor" aria-label="anchor" href="#rdataio"><i class="fas fa-link"></i></a>
+</h1>
+<p>일반적인 데이터 분석은 데이터 전처리(변환), 가시화, 모델링(통계분석)의 반복적인 수행으로 진행될 수 있습니다. R에서는 <code>data.frame</code> 형식의 데이터 타입이 주로 사용되며 (최근 <code>tibble</code>형식) 따라서 <code>data.frame</code> 기반의 데이터를 다루기 위한 다양한 함수를 익힐 필요가 있습니다. 이번 강의에서는 <code>data.frame</code> 데이터를 읽거나 쓰는 함수들과 함께 데이터 전처리를 (변환) 위한 함수들을 배워보겠습니다.</p>
+<p>앞에서 배웠던 데이터를 저장하는 object의 종류를 먼저 간략히 정리해 봅니다.</p>
+<ul>
+<li>Vectors - 같은 타입의 데이터를 (Numeric, character, factor, …) 저장한 오브젝트 타입으로 인덱스는 <code>[</code>, <code>]</code> 사용.</li>
+<li>Lists - 여러개의 <code>vector</code>를 원소로 가질 수 있으며 이 원소들은 문자나 숫자 어떤 데이터 타입도 가능하고 길이가 달라도 됨. list의 인덱싱에서 <code>[</code> <code>]</code>는 리스트를 반환하고 <code>[[</code> <code>]]</code>는 vector를 반환함.</li>
+<li>Matrices - 같은 타입의 데이터로 채워진 2차원 행렬이며 인덱스는 <code>[i, j]</code> 형태로 i는 row, j는 column 을 나타냄. 메트릭스의 생성은 <code>matrix</code> 명령어를 사용하며 왼쪽부터 column 값을 모두 채우고 다음 컬럼 값을 채워 나가는 것이 기본 설정이며 <code>byrow=T</code> 를 통해 row를 먼저 채울수도 있음. row와 column 이름은 <code>rownames</code>와 <code>colnames</code>로 설정이 가능하며 <code>rbind</code>와 <code>cbind</code>로 두 행렬 또는 행렬과 백터를 연결할 수 있음 ( <code>rbind</code>와 <code>cbind</code>의 경우 행렬이 커지면 컴퓨터 리소스 많이 사용함)</li>
+<li>data.frame - <code>list</code>와 <code>matrix</code>의 특성을 모두 갖는 오브젝트 타입으로 <code>list</code>와 같이 다른 타입의 <code>vector</code>형 변수 여러개가 컬럼에 붙어서 <code>matrix</code> 형태로 구성됨. 단, <code>list</code>와는 다르게 각 변수의 길이가 (row의 길이) 같아야 함. <code>$</code> 기호로 각 변수들을 인덱싱(접근) 할 수 있고 matrix와 같이 <code>[i,j]</code> 형태의 인덱싱도 가능.</li>
+</ul>
+<div id="loading-data-into-r" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> Loading data into R<a class="anchor" aria-label="anchor" href="#loading-data-into-r"><i class="fas fa-link"></i></a>
+</h2>
+<p>데이터 분석을 위해서 가장 먼저 할 일은 데이터를 R로 읽어들이는 것 입니다. <a href="http://2.droppdf.com/files/5aTvl/bioinformatics-data-skills.pdf">Bioinformatics Data Skills by Vince Buffalo</a>의 Chapter 8에서 소개한 데이터 중 일부인 <a href="Dataset_S1_sub.txt">Dataset_S1_sub.txt</a>를 이용하겠습니다. 대부분의 텍스트 파일은 아래와 같이 <code>csv</code> 또는 <code>txt</code> 파일로 저장하여 메모장으로 열어 확인할 수 있으며 읽어올 때 구분자 (sep 파라메터) 나 header를 (header 파라메터) 읽을지 등을 옵션으로 지정할 수 있습니다.</p>
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"Dataset_S1_sub.txt"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></code></pre></div>
+<p>Dataset_S1_sub.txt 파일을 열어보면 다음과 같이 header와 “,”로 구분되어 있는 것을 볼 수 있습니다. <code>read.csv</code> 함수의 도움말을 보면 이 함수의 파라메터 head와 sep이 기본값으로 <code>T</code>와 <code>,</code>로 되어 있는 것을 볼 수 있습니다. <code>read.csv</code> 외에도 <code>read.table</code>, <code>read.delim</code> 등의 함수를 이용해서 택스트 파일을 읽어올 수 있습니다.</p>
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></code></pre></div>
+<p>참고로 위 데이터는 wide형 데이터 입니다. wide형 데이터는 일반적인 excel에서의 데이터 형태로 column은 변수, row는 샘플이 저장됩니다. 만약 새로운 변수가 추가 되면 column 오른쪽에 붙어 wide하게 확장되고 데이터(샘플)이 추가되면 아래에 붙어서 row가 추가 됩니다.</p>
+<div class="figure">
+<img src="images/04/wide.JPG" width="548" alt=""><p class="caption">출처: Bioinformatics Data Skills by Vince Buffalo</p>
+</div>
+<p>반면 long 형 데이터는 아래와 같이 일반적으로 3개의 컬럼을 갖습니다. 이 경우 변수든 샘플이든 새로운 데이터가 추가될 경우 아래로 확장됩니다. wide형과 long형에 대한 추가 설명은 다음 강의에서 진행하도록 하겠습니다.</p>
+<div class="figure">
+<img src="images/04/long.JPG" width="552" alt=""><p class="caption">출처: Bioinformatics Data Skills by Vince Buffalo</p>
+</div>
+</div>
+<div id="writing-data-into-a-text-file" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> writing data into a text file<a class="anchor" aria-label="anchor" href="#writing-data-into-a-text-file"><i class="fas fa-link"></i></a>
+</h2>
+<p>읽어들이거나 분석한 결과에 대한 데이터는 <code>write.table</code> 또는 <code>write.csv</code> 함수를 사용하여 텍스트 파일의 형태로 저장할 수 있습니다. 이 경우 알아둘 파라메터는 <code>quote</code>, <code>row.names</code>, <code>col.names</code>, <code>sep</code> 등이 있습니다.</p>
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="va">dat</span>, file<span class="op">=</span><span class="st">"table_write.txt"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="va">dat</span>, file<span class="op">=</span><span class="st">"table_write.txt"</span>, quote<span class="op">=</span><span class="cn">F</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="va">dat</span>, file<span class="op">=</span><span class="st">"table_write.txt"</span>, quote<span class="op">=</span><span class="cn">F</span>, row.names<span class="op">=</span><span class="cn">F</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="va">dat</span>, file<span class="op">=</span><span class="st">"table_write.txt"</span>, quote<span class="op">=</span><span class="cn">F</span>, row.names<span class="op">=</span><span class="cn">F</span>, sep<span class="op">=</span><span class="st">","</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="va">dat</span>, file<span class="op">=</span><span class="st">"table_write.csv"</span>, quote<span class="op">=</span><span class="cn">F</span>, row.names<span class="op">=</span><span class="cn">F</span>, sep<span class="op">=</span><span class="st">","</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="excel-file-read" class="section level2" number="5.3">
+<h2>
+<span class="header-section-number">5.3</span> Excel file read<a class="anchor" aria-label="anchor" href="#excel-file-read"><i class="fas fa-link"></i></a>
+</h2>
+<p>텍스트 파일 외에 엑셀파일은 <code>readxl</code> 이라는 R 패키지를 활용하여 읽거나 쓸 수 있습니다. 패키지는 다음과 같은 방법으로 설치할 수 있으며 <code>read_excel</code> 이라는 함수를 사용해서 데이터를 읽어들일 수 있습니다.</p>
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"readxl"</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></code></pre></div>
+<p>실습 파일은 형광 세포를 배양하여 형광리더기를 이용해 얻어진 실제 데이터이며 <a href="Exp_data.xls">Exp_data.xls</a> 에서 다운로드 받을 수 있습니다. <code>read_excel</code> 함수를 이용하여 파일의 내용을 읽어오면 기본 자료형이 tibble 입니다. tibble은 최근 많이 쓰이는 R object로 data.frame과 유사하나 입력값의 type, name, rowname을 임으로 바꿀 수 없다는 점이 다릅니다.</p>
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"Exp_data.xls"</span>, sheet<span class="op">=</span><span class="fl">1</span>, skip <span class="op">=</span> <span class="fl">0</span>, col_names<span class="op">=</span><span class="cn">T</span><span class="op">)</span></code></pre></div>
+<p>엑셀파일에는 두 종류의 (<span class="math inline">\(OD600_{nm}\)</span>, Fluorescence) 데이터가 저장되어 있습니다. 첫 번째 sheet에는 다음처럼 wide형 데이터가 저장되어 있습니다.</p>
+<div class="inline-figure"><img src="images/04/excelfile01.PNG"></div>
+<hr>
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" alt="크리에이티브 커먼즈 라이선스" style="border-width:0"></a><br>이 저작물은 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제 라이선스</a>에 따라 이용할 수 있습니다.</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="r-programming.html"><span class="header-section-number">4</span> R programming</a></div>
+<div class="next"><a href="data-transformation.html"><span class="header-section-number">6</span> Data transformation</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#rdataio"><span class="header-section-number">5</span> Data I/O</a></li>
+<li><a class="nav-link" href="#loading-data-into-r"><span class="header-section-number">5.1</span> Loading data into R</a></li>
+<li><a class="nav-link" href="#writing-data-into-a-text-file"><span class="header-section-number">5.2</span> writing data into a text file</a></li>
+<li><a class="nav-link" href="#excel-file-read"><span class="header-section-number">5.3</span> Excel file read</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/04-RdataIO.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/04-RdataIO.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>2022년 한국생명공학연구원 연구데이터 분석과정 R</strong>" was written by 합성생물학전문연구단 김하성. It was last built on 2022-05-21.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

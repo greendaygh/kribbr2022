@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 3 Rmarkdown | 2022년 한국생명공학연구원 연구데이터 분석과정 R</title>
 <meta name="author" content="합성생물학전문연구단 김하성">
-<meta name="description" content="R markdown은 데이터를 분석하는 코드와 리포트를 동시에 수행할 수 있는 일종의 통합 문서입니다. 워드나 아래한글에서 프로그래밍과 데이터분석을 위한 코드를 작성할 수 있는 경우라고 생각해도 됩니다. Plain-text 기반의 markdown 문법을 사용하며 R markdown으로 작성된 문서는 HTML, PDF, MS word, Beamer,...">
+<meta name="description" content="Rmarkdown은 데이터를 분석하는 코드와 리포트를 동시에 수행할 수 있는 일종의 통합 문서입니다. 워드나 아래한글에서 프로그래밍과 데이터분석을 위한 코드를 작성할 수 있는 경우라고 생각해도 됩니다. Plain-text 기반의 markdown 문법을 사용하며 Rmarkdown으로 작성된 문서는 HTML, PDF, MS word, Beamer,...">
 <meta name="generator" content="bookdown 0.26 with bs4_book()">
 <meta property="og:title" content="Chapter 3 Rmarkdown | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="R markdown은 데이터를 분석하는 코드와 리포트를 동시에 수행할 수 있는 일종의 통합 문서입니다. 워드나 아래한글에서 프로그래밍과 데이터분석을 위한 코드를 작성할 수 있는 경우라고 생각해도 됩니다. Plain-text 기반의 markdown 문법을 사용하며 R markdown으로 작성된 문서는 HTML, PDF, MS word, Beamer,...">
+<meta property="og:description" content="Rmarkdown은 데이터를 분석하는 코드와 리포트를 동시에 수행할 수 있는 일종의 통합 문서입니다. 워드나 아래한글에서 프로그래밍과 데이터분석을 위한 코드를 작성할 수 있는 경우라고 생각해도 됩니다. Plain-text 기반의 markdown 문법을 사용하며 Rmarkdown으로 작성된 문서는 HTML, PDF, MS word, Beamer,...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 3 Rmarkdown | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
-<meta name="twitter:description" content="R markdown은 데이터를 분석하는 코드와 리포트를 동시에 수행할 수 있는 일종의 통합 문서입니다. 워드나 아래한글에서 프로그래밍과 데이터분석을 위한 코드를 작성할 수 있는 경우라고 생각해도 됩니다. Plain-text 기반의 markdown 문법을 사용하며 R markdown으로 작성된 문서는 HTML, PDF, MS word, Beamer,...">
+<meta name="twitter:description" content="Rmarkdown은 데이터를 분석하는 코드와 리포트를 동시에 수행할 수 있는 일종의 통합 문서입니다. 워드나 아래한글에서 프로그래밍과 데이터분석을 위한 코드를 작성할 수 있는 경우라고 생각해도 됩니다. Plain-text 기반의 markdown 문법을 사용하며 Rmarkdown으로 작성된 문서는 HTML, PDF, MS word, Beamer,...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -47,6 +47,7 @@
 <li><a class="" href="rrstudio-basics.html"><span class="header-section-number">2</span> R/Rstudio basics</a></li>
 <li><a class="active" href="rmarkdown.html"><span class="header-section-number">3</span> Rmarkdown</a></li>
 <li><a class="" href="r-programming.html"><span class="header-section-number">4</span> R programming</a></li>
+<li><a class="" href="data-transformation.html"><span class="header-section-number">5</span> Data transformation</a></li>
 </ul>
 
         <div class="book-extra">
@@ -58,30 +59,30 @@
 <h1>
 <span class="header-section-number">3</span> Rmarkdown<a class="anchor" aria-label="anchor" href="#rmarkdown"><i class="fas fa-link"></i></a>
 </h1>
-<p>R markdown은 데이터를 분석하는 코드와 리포트를 동시에 수행할 수 있는 일종의 통합 문서입니다. 워드나 아래한글에서 프로그래밍과 데이터분석을 위한 코드를 작성할 수 있는 경우라고 생각해도 됩니다. Plain-text 기반의 markdown 문법을 사용하며 R markdown으로 작성된 문서는 HTML, PDF, MS word, Beamer, HTML5 slides, books, website 등 다양한 포멧의 출력물로 변환할 수 있습니다.</p>
+<p>Rmarkdown은 데이터를 분석하는 코드와 리포트를 동시에 수행할 수 있는 일종의 통합 문서입니다. 워드나 아래한글에서 프로그래밍과 데이터분석을 위한 코드를 작성할 수 있는 경우라고 생각해도 됩니다. Plain-text 기반의 markdown 문법을 사용하며 Rmarkdown으로 작성된 문서는 HTML, PDF, MS word, Beamer, HTML5 slides, books, website 등 다양한 포멧의 출력물로 변환할 수 있습니다.</p>
 <div class="figure">
-<img src="images/rmarkdown/rmarkdown-01.PNG" alt=""><p class="caption">Image from rmarkdown.rstudio.com</p>
+<img src="images/rmarkdown/rmarkdown-01.PNG" width="500" alt=""><p class="caption">Image from rmarkdown.rstudio.com</p>
 </div>
-<p>Rmarkdown 웹사이트에 R markdown 소개 동영상과 <a href="https://rmarkdown.rstudio.com/lesson-1.html">R markdown 공식 사이트 메뉴얼</a> 관련 서적 <a href="https://bookdown.org/yihui/rmarkdown/">R markdown: The Definitive Guide</a>를 참고하세요. 또한 R markdown을 사용할 때 <a href="https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf">cheatsheet</a>를 옆에 두고 수시로 보면서 사용하시면 많은 도움이 될 수 있습니다.</p>
-<div id="r-markdown의-기본-작동-원리" class="section level2" number="3.1">
+<p>Rmarkdown 웹사이트에 Rmarkdown 소개 동영상과 <a href="https://rmarkdown.rstudio.com/lesson-1.html">Rmarkdown 공식 사이트 메뉴얼</a> 관련 서적 <a href="https://bookdown.org/yihui/rmarkdown/">Rmarkdown: The Definitive Guide</a>를 참고하세요. 또한 Rmarkdown을 사용할 때 <a href="https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf">cheatsheet</a>를 옆에 두고 수시로 보면서 사용하시면 많은 도움이 될 수 있습니다.</p>
+<div id="rmarkdown의-기본-작동-원리" class="section level2" number="3.1">
 <h2>
-<span class="header-section-number">3.1</span> R markdown의 기본 작동 원리<a class="anchor" aria-label="anchor" href="#r-markdown%EC%9D%98-%EA%B8%B0%EB%B3%B8-%EC%9E%91%EB%8F%99-%EC%9B%90%EB%A6%AC"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.1</span> Rmarkdown의 기본 작동 원리<a class="anchor" aria-label="anchor" href="#rmarkdown%EC%9D%98-%EA%B8%B0%EB%B3%B8-%EC%9E%91%EB%8F%99-%EC%9B%90%EB%A6%AC"><i class="fas fa-link"></i></a>
 </h2>
-<p>R markdown은 plain text 기반으로 작성되며 Rmd 라는 확장자를 갖는 파일로 저장됩니다. 다음과 같은 텍스트 파일이 Rmd 파일의 전형적인 예 입니다.</p>
-<div class="inline-figure"><img src="images/rmarkdown/how-1-file.png" width="550"></div>
+<p>Rmarkdown은 plain text 기반으로 작성되며 Rmd 라는 확장자를 갖는 파일로 저장됩니다. 다음과 같은 텍스트 파일이 Rmd 파일의 전형적인 예 입니다.</p>
+<div class="inline-figure"><img src="images/rmarkdown/how-1-file.png" width="500"></div>
 <p>위 예제에서 네 가지 다른 종류의 컨텐츠를 볼 수 있습니다. 하나는 - - - 으로 둘러쌓인 내용으로 YAML 이라고 하며 JSON과 같은 데이터 직렬화를 수행하는 하나의 데이터 저장 포멧입니다. 백틱(`) 으로 둘러쌓인 코드청그(Code Chunks)라고 하는 부분에는 R이나 python 등의 다양한 코드(실재 작동하는)를 넣어서 사용합니다. 그리고 ### 으로 표시된 글은 제목 글을 나타내며 나머지는 일반적인 텍스트를 나타냅니다.</p>
-<p>이러한 R markdown 파일은 <code>render</code>라는 명령어로 원하는 포맷의 문서로 변환할 수 있습니다. 다음 예의 파일을 pdf 형식으로 rendering 하기 위해서는 YAML에 pdf 임을 명시하고 아래와 같이 <code>render</code>함수를 사용하면 됩니다. 또는 Rstudio 코드 입력창 상단의 Knit 버튼으로 pdf나 html 문서를 생성할 수 있습니다.</p>
-<div class="inline-figure"><img src="images/rmarkdown/example2.PNG" width="550"></div>
+<p>이러한 Rmarkdown 파일은 <code>render</code>라는 명령어로 원하는 포맷의 문서로 변환할 수 있습니다. 다음 예의 파일을 pdf 형식으로 rendering 하기 위해서는 YAML에 pdf 임을 명시하고 아래와 같이 <code>render</code>함수를 사용하면 됩니다. 또는 Rstudio 코드 입력창 상단의 Knit 버튼으로 pdf나 html 문서를 생성할 수 있습니다.</p>
+<div class="inline-figure"><img src="images/rmarkdown/example2.PNG" width="500"></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">render</span><span class="op">(</span><span class="st">"examples/test.Rmd"</span>, output_format <span class="op">=</span> <span class="st">"pdf_document"</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="images/rmarkdown/ex_pdf.PNG" width="550"></div>
-<p>R markdown의 작동 원리는 Rmd 파일을 만든 후 <code>render</code> 함수를 부르면 <a href="https://yihui.org/knitr/">knitr</a> 소프트웨어가 R 코드를 실행시킨 후 markdown (.md) 파일을 생성합니다. 이 후 .md 파일을 <a href="https://pandoc.org/">pandoc</a> 이라는 문서변환기가 원하는 문서 형태로 전환해 줍니다.</p>
+<div class="inline-figure"><img src="images/rmarkdown/ex_pdf.PNG" width="450"></div>
+<p>Rmarkdown의 작동 원리는 Rmd 파일을 만든 후 <code>render</code> 함수를 부르면 <a href="https://yihui.org/knitr/">knitr</a> 소프트웨어가 R 코드를 실행시킨 후 markdown (.md) 파일을 생성합니다. 이 후 .md 파일을 <a href="https://pandoc.org/">pandoc</a> 이라는 문서변환기가 원하는 문서 형태로 전환해 줍니다.</p>
 </div>
 <div id="코드-입력" class="section level2" number="3.2">
 <h2>
 <span class="header-section-number">3.2</span> 코드 입력<a class="anchor" aria-label="anchor" href="#%EC%BD%94%EB%93%9C-%EC%9E%85%EB%A0%A5"><i class="fas fa-link"></i></a>
 </h2>
-<p>R markdown에서 사용하는 코드청크는 CTRL+ALT+I 단축키를 사용해서 넣을 수 있으며 다음과 같은 몇 가지 옵션으로 코드 스니펫들의 실행/숨김 여부를 결정할 수 있습니다.</p>
+<p>Rmarkdown에서 사용하는 코드청크는 <code>CTRL+ALT+i</code> 단축키를 사용해서 넣을 수 있으며 다음과 같은 몇 가지 옵션으로 코드 스니펫들의 실행/숨김 여부를 결정할 수 있습니다.</p>
 <ul>
 <li>
 <code>include = FALSE</code> : 코드는 실행되지만 보고서에 결과와 코드가 보여지지 않음</li>
@@ -95,8 +96,9 @@
 <code>fig.cap = "..."</code> : 코드로 그려지는 그래프에 캡션을 붙일 수 있음</li>
 </ul>
 <div class="figure">
-<img src="images/rmarkdown/codechunk1.PNG" width="300" alt=""><p class="caption">코드청크 옵션 예시</p>
+<img src="images/rmarkdown/codechunk1.PNG" width="250" alt=""><p class="caption">코드청크 옵션 예시</p>
 </div>
+<p>실행 결과는 아래와 같습니다.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># default</span>
 <span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>
@@ -107,35 +109,43 @@
 <span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; [1] 2</code></pre>
-<p>R markdown에서는 <code>r</code> 을 사용해서 코드청크가 아닌 곳에 R 코드를 넣을 수 있습니다. 예를 들어 n은 1, 2, 3 값을 가지는 벡터 입니다. 또한 R 언어 외에도 <code>Python</code>, <code>SQL</code>, <code>Bash</code>, <code>Rcpp</code>, <code>Stan</code>, <code>JavaScript</code>, <code>CSS</code> 등의 다양한 프로그래밍 언어에 대해서도 지원합니다. 그런데 이러한 언어들이 사용 가능해지기 위해서는 해당 언어들을 실행해주는 엔진이 있어야 하며 python의 경우 <code>reticulate</code> 라는 패키지가 이러한 기능을 담당합니다. 이 패키지를 설치할 경우 miniconda라는 가상환경 및 데이터 분석을 위한 오픈소스 패키지가 자동으로 설치됩니다.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="rmarkdown.html#cb11-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="st">"hello, python in R"</span></span>
-<span id="cb11-2"><a href="rmarkdown.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x.split(<span class="st">' '</span>))</span></code></pre></div>
+<p>Rmarkdown에서는 ` r`을 사용해서 코드청크가 아닌 곳에 R 코드를 넣을 수 있습니다. 또한 R 언어 외에도 <code>Python</code>, <code>SQL</code>, <code>Bash</code>, <code>Rcpp</code>, <code>Stan</code>, <code>JavaScript</code>, <code>CSS</code> 등의 다양한 프로그래밍 언어에 대해서도 코드청크 기능을 사용할 수 있습니다. 그런데 이러한 언어들이 사용 가능해지기 위해서는 해당 언어들을 실행해주는 엔진이 있어야 하며 python의 경우 <code>reticulate</code> 라는 패키지가 이러한 기능을 담당합니다. 이 패키지를 설치할 경우 miniconda라는 가상환경 및 데이터 분석을 위한 오픈소스 패키지가 자동으로 설치됩니다.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/reticulate/">reticulate</a></span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="rmarkdown.html#cb12-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="st">"hello, python in R"</span></span>
+<span id="cb12-2"><a href="rmarkdown.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x.split(<span class="st">' '</span>))</span></code></pre></div>
+<p>아래는 위에 해당하는 소스코드 입니다.</p>
+<div class="inline-figure"><img src="images/02/lecticulate.png" width="250"></div>
 </div>
 <div id="markdown-문법" class="section level2" number="3.3">
 <h2>
 <span class="header-section-number">3.3</span> Markdown 문법<a class="anchor" aria-label="anchor" href="#markdown-%EB%AC%B8%EB%B2%95"><i class="fas fa-link"></i></a>
 </h2>
 <p>마크다운은 plain text 기반의 마크업 언어로서 마크업 언어는 태그 등을 이용해서 문서의 데이터 구조를 명시하는데 이러한 태그를 사용하는 방법 체계를 마크업 언어라고 합니다. 가장 대표적으로 html 이 있습니다.</p>
-<pre><code>&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt; Hello HTML &lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-  Hello markup world!
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<p>마크다운도 몇 가지 태그를 이용해서 문서의 구조를 정의하고 있으며 상세한 내용은 <a href="https://rmarkdown.rstudio.com/authoring_pandoc_markdown.html">Pandoc 마크다운 문서</a>를 참고하시기 바랍니다. 마크다운언어의 철학은 쉽게 읽고 쓸 수 있는 문서입니다. plain text 기반으로 작성되어 쓰기 쉬우며 (아직도 사람들이 메모장 많이 사용하는 이유와 같습니다) 태그가 포함되어 있어도 읽는데 어려움이 없습니다. html 언어와 rmd 파일의 예를 보시면 그 철학을 어렵지 않게 알 수 있습니다.</p>
+<pre><code>    &lt;html&gt;
+      &lt;head&gt;
+        &lt;title&gt; Hello HTML &lt;/title&gt;
+      &lt;/head&gt;
+      &lt;body&gt;
+      Hello markup world!
+      &lt;/body&gt;
+    &lt;/html&gt;</code></pre>
+<p>마크다운도 몇 가지 태그를 이용해서 문서의 구조를 정의하고 있으며 상세한 내용은 <a href="https://rmarkdown.rstudio.com/authoring_pandoc_markdown.html">Pandoc 마크다운 문서</a>를 참고하시기 바랍니다. 마크다운언어의 철학은 쉽게 읽고 쓸 수 있는 문서입니다. plain text 기반으로 작성되어 쓰기 쉬우며 (아직도 사람들이 메모장 많이 사용하는 이유와 같습니다) 태그가 포함되어 있어도 읽는데 어려움이 없습니다. 위 html 언어와 아래 markdown 파일의 예들을 보시면 그 차이를 어렵지 않게 이해할 수 있습니다.</p>
 <p>마크다운에서는 Enter를 한 번 입력해서 줄바꿈이 되지 않습니다. <code>&lt;br&gt;</code> 또는 문장 마지막에 공백을 두 개 입력하면 되겠습니다.</p>
+<pre><code>이 문장은 줄바꿈이 
+되지 않습니다</code></pre>
 <p>이 문장은 줄바꿈이
 되지 않습니다</p>
+<pre><code>이 분장은 줄바꿈이&lt;br&gt;
+됩니다</code></pre>
 <p>이 분장은 줄바꿈이<br>
 됩니다</p>
 <p>마크다운 테그를 몇 가지 살펴보면 먼저 # 을 붙여서 만드는 header 가 있습니다.</p>
 <pre><code># A level-one header
 ## A level-two header
-### A level-three header</code></pre>
-<pre><code># A level-one header {#l1-1}
+### A level-three header
+
+# A level-one header {#l1-1}
 ## A level-two header {#l2-1}
 ### A level-three header {#l3-1}
 
@@ -144,31 +154,33 @@
 ### A level-three header {#l3-2}</code></pre>
 <p>Block quotations</p>
 <blockquote>
-<p>This is block quote. This
-paragraph has two lines</p>
+<p>This is block quote. This paragraph has two lines</p>
 </blockquote>
-<blockquote>
-<p>This is a block quote. This
-paragraph has two lines.</p>
-</blockquote>
+<pre><code>&gt; This is block quote. This paragraph has two lines</code></pre>
 <blockquote>
 <p>This is a block quote.</p>
 <blockquote>
 <p>A block quote within a block quote.</p>
 </blockquote>
 </blockquote>
-<blockquote>
-<pre><code> code with five spaces</code></pre>
-</blockquote>
+<pre><code>&gt; This is a block quote.
+&gt;
+&gt; &gt; A block quote within a block quote.</code></pre>
 <p><em>Italic</em></p>
+<pre><code>*Italic*</code></pre>
 <p><strong>Bold</strong></p>
+<pre><code>**Bold**</code></pre>
 <p><a href="https://www.naver.com/">Naver link</a></p>
+<pre><code>[Naver link](https://www.naver.com/)</code></pre>
 <p>이미지를 직접 삽입하고 가운데 정렬합니다.</p>
 <center>
 <div class="figure">
-<img src="images/rmarkdown/000002.png" width="300" alt=""><p class="caption">자동차 모델에 따른 고속도로 연비 분포</p>
+<img src="images/rmarkdown/000002.png" width="200" alt=""><p class="caption">자동차 모델에 따른 고속도로 연비 분포</p>
 </div>
 </center>
+<pre><code>&lt;center&gt;
+![자동차 모델에 따른 고속도로 연비 분포](images/rmarkdown/000002.png){width="200"}
+&lt;/center&gt;</code></pre>
 <ol style="list-style-type: decimal">
 <li>첫 번째</li>
 <li>두 번째</li>
@@ -184,20 +196,159 @@ paragraph has two lines.</p>
 </ul>
 </li>
 </ul>
-<p>소스코드 그대로 표현하기 위해서는 <code>~~~</code> 를 사용합니다.</p>
-<pre><code>&lt;div&gt;
-  소스코드 
+<pre><code>1.  첫 번째
+2.  두 번째
+3.  세 번째
+
+-   아이템 1
+-   아이템 2
+-   아이템 3
+    -   아이템 3-1
+    -   아이템 3-2</code></pre>
+<p>참고로 소스코드 그대로 표현하기 위해서는 <code>~~~</code> 를 사용합니다.</p>
+</div>
+<div id="스타일" class="section level2" number="3.4">
+<h2>
+<span class="header-section-number">3.4</span> 스타일<a class="anchor" aria-label="anchor" href="#%EC%8A%A4%ED%83%80%EC%9D%BC"><i class="fas fa-link"></i></a>
+</h2>
+<p>아래와 같이 코드청크를 이용해서 css 코드를 삽입하고 해당되는 class 또는 id에 해당하는 내용에 스타일을 적용할 수 있습니다.</p>
+<div class="inline-figure"><img src="images/02/style.png" width="150"></div>
+<style type="text/css">
+#header1 {
+color: red;
+}
+</style>
+<div id="header1">
+<p>소스코드</p>
+</div>
+<pre><code>&lt;div id='header1'&gt;
+소스코드 
 &lt;/div&gt;</code></pre>
 </div>
-<div id="yaml-헤더" class="section level2" number="3.4">
+<div id="테이블" class="section level2" number="3.5">
 <h2>
-<span class="header-section-number">3.4</span> YAML 헤더<a class="anchor" aria-label="anchor" href="#yaml-%ED%97%A4%EB%8D%94"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.5</span> 테이블<a class="anchor" aria-label="anchor" href="#%ED%85%8C%EC%9D%B4%EB%B8%94"><i class="fas fa-link"></i></a>
 </h2>
-<p>R markdown 파일에서 YAML의 가장 중요한 기능은 output 포멧을 지정하는 것이며 title, author, date, 등을 설정할수도 있습니다.</p>
+<p><code>kable</code> 함수를 이용하여 Rmarkdown 문서에 포함되는 표를 원하는 방향으로 작성할 수 있습니다. <code>mtcars</code>는 데이터프레임 형식의 데이터입니다.</p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>
+  <span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span>, 
+  caption <span class="op">=</span> <span class="st">"A knitr kable."</span>
+<span class="op">)</span></code></pre></div>
+<div class="inline-table"><table style="width:100%;" class="table table-sm">
+<caption>
+<span id="tab:unnamed-chunk-8">TABLE3.1: </span>A knitr kable.</caption>
+<colgroup>
+<col width="26%">
+<col width="7%">
+<col width="5%">
+<col width="7%">
+<col width="5%">
+<col width="7%">
+<col width="8%">
+<col width="8%">
+<col width="4%">
+<col width="4%">
+<col width="7%">
+<col width="7%">
+</colgroup>
+<thead><tr class="header">
+<th align="left"></th>
+<th align="right">mpg</th>
+<th align="right">cyl</th>
+<th align="right">disp</th>
+<th align="right">hp</th>
+<th align="right">drat</th>
+<th align="right">wt</th>
+<th align="right">qsec</th>
+<th align="right">vs</th>
+<th align="right">am</th>
+<th align="right">gear</th>
+<th align="right">carb</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Mazda RX4</td>
+<td align="right">21.0</td>
+<td align="right">6</td>
+<td align="right">160</td>
+<td align="right">110</td>
+<td align="right">3.90</td>
+<td align="right">2.620</td>
+<td align="right">16.46</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="left">Mazda RX4 Wag</td>
+<td align="right">21.0</td>
+<td align="right">6</td>
+<td align="right">160</td>
+<td align="right">110</td>
+<td align="right">3.90</td>
+<td align="right">2.875</td>
+<td align="right">17.02</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="left">Datsun 710</td>
+<td align="right">22.8</td>
+<td align="right">4</td>
+<td align="right">108</td>
+<td align="right">93</td>
+<td align="right">3.85</td>
+<td align="right">2.320</td>
+<td align="right">18.61</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">Hornet 4 Drive</td>
+<td align="right">21.4</td>
+<td align="right">6</td>
+<td align="right">258</td>
+<td align="right">110</td>
+<td align="right">3.08</td>
+<td align="right">3.215</td>
+<td align="right">19.44</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">Hornet Sportabout</td>
+<td align="right">18.7</td>
+<td align="right">8</td>
+<td align="right">360</td>
+<td align="right">175</td>
+<td align="right">3.15</td>
+<td align="right">3.440</td>
+<td align="right">17.02</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">2</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div id="yaml-헤더" class="section level2" number="3.6">
+<h2>
+<span class="header-section-number">3.6</span> YAML 헤더<a class="anchor" aria-label="anchor" href="#yaml-%ED%97%A4%EB%8D%94"><i class="fas fa-link"></i></a>
+</h2>
+<p>Rmarkdown 파일에서 YAML의 가장 중요한 기능은 output 포멧을 지정하는 것이며 title, author, date, 등을 설정할수도 있습니다.</p>
 <pre><code>---
 layout: page
 title: "R프로그래밍"
-subtitle: "R markdown 활용법"
+subtitle: "Rmarkdown 활용법"
 output:
   html_document:
     css: style.css
@@ -213,9 +364,9 @@ output:
 mainfont: NanumGothic
 ---</code></pre>
 </div>
-<div id="output-format" class="section level2" number="3.5">
+<div id="output-format" class="section level2" number="3.7">
 <h2>
-<span class="header-section-number">3.5</span> Output format<a class="anchor" aria-label="anchor" href="#output-format"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.7</span> Output format<a class="anchor" aria-label="anchor" href="#output-format"><i class="fas fa-link"></i></a>
 </h2>
 <p>주요 문서 포멧으로 다음과 같은 몇 가지가 있습니다. 상세한 내용은 <a href="https://rmarkdown.rstudio.com/lesson-9.html">Rmarkdown output format</a>을 참고하시기 바랍니다.</p>
 <ul>
@@ -226,6 +377,10 @@ mainfont: NanumGothic
 <li>beamer_presentation - PDF presentation with LaTeX Beamer</li>
 <li>powerpoint_presentation: PowerPoint presentation</li>
 </ul>
+<div class="rmdnote">
+<p><strong>Exercises</strong></p>
+<p>“KRIBBR2022-Lecture2” 라는 이름의 다음과 같은 형태의 Rmarkdown 문서를 만들고 이 번 강의의 실습 코드 및 설명, 질문, 코멘트 등을 적어 보시기 바랍니다.</p>
+</div>
 <hr>
 <p><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" alt="크리에이티브 커먼즈 라이선스" style="border-width:0"></a><br>이 저작물은 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제 라이선스</a>에 따라 이용할 수 있습니다.</p>
 
@@ -238,11 +393,13 @@ mainfont: NanumGothic
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#rmarkdown"><span class="header-section-number">3</span> Rmarkdown</a></li>
-<li><a class="nav-link" href="#r-markdown%EC%9D%98-%EA%B8%B0%EB%B3%B8-%EC%9E%91%EB%8F%99-%EC%9B%90%EB%A6%AC"><span class="header-section-number">3.1</span> R markdown의 기본 작동 원리</a></li>
+<li><a class="nav-link" href="#rmarkdown%EC%9D%98-%EA%B8%B0%EB%B3%B8-%EC%9E%91%EB%8F%99-%EC%9B%90%EB%A6%AC"><span class="header-section-number">3.1</span> Rmarkdown의 기본 작동 원리</a></li>
 <li><a class="nav-link" href="#%EC%BD%94%EB%93%9C-%EC%9E%85%EB%A0%A5"><span class="header-section-number">3.2</span> 코드 입력</a></li>
 <li><a class="nav-link" href="#markdown-%EB%AC%B8%EB%B2%95"><span class="header-section-number">3.3</span> Markdown 문법</a></li>
-<li><a class="nav-link" href="#yaml-%ED%97%A4%EB%8D%94"><span class="header-section-number">3.4</span> YAML 헤더</a></li>
-<li><a class="nav-link" href="#output-format"><span class="header-section-number">3.5</span> Output format</a></li>
+<li><a class="nav-link" href="#%EC%8A%A4%ED%83%80%EC%9D%BC"><span class="header-section-number">3.4</span> 스타일</a></li>
+<li><a class="nav-link" href="#%ED%85%8C%EC%9D%B4%EB%B8%94"><span class="header-section-number">3.5</span> 테이블</a></li>
+<li><a class="nav-link" href="#yaml-%ED%97%A4%EB%8D%94"><span class="header-section-number">3.6</span> YAML 헤더</a></li>
+<li><a class="nav-link" href="#output-format"><span class="header-section-number">3.7</span> Output format</a></li>
 </ul>
 
       <div class="book-extra">
@@ -260,7 +417,7 @@ mainfont: NanumGothic
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>2022년 한국생명공학연구원 연구데이터 분석과정 R</strong>" was written by 합성생물학전문연구단 김하성. It was last built on 2022-05-19.</p>
+    <p>"<strong>2022년 한국생명공학연구원 연구데이터 분석과정 R</strong>" was written by 합성생물학전문연구단 김하성. It was last built on 2022-05-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

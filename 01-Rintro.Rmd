@@ -2,15 +2,15 @@
 
 ## What is R / Rstudio
 
-![](images/01/r.jpg)
+![](images/01/r.jpg){width=100}
 
 R은 통계나 생물통계, 유전학을 연구하는 사람들 사이에서 널리 사용되는 오픈소스 프로그래밍 언어 입니다. Bell Lab에서 개발한 S 언어에서 유래했으며 많은 라이브러리 (다른 사람들이 만들어 놓은 코드)가 있어서 쉽게 가져다 사용할 수 있습니다. R은 복잡한 수식이나 통계 알고리즘을 간단히 구현하고 사용할 수 있으며 C, C++, Python 등 다른 언어들과의 병행 사용도 가능합니다. R은 IEEE에서 조사하는 Top programming languages에서 2018년 7위, 2019년 5위, 2020년 6위, 2021년 7위로 꾸준히 높은 사용자를 확보하며 빅데이터, AI 시대의 주요한 프로그래밍 언어로 사용되고 있습니다.
 
-![<https://spectrum.ieee.org/top-programming-languages/>](images/01/toplanguage2021.png){width="450px"}
+![<https://spectrum.ieee.org/top-programming-languages/>](images/01/toplanguage2021.png){width=250px}
 
 R은 데이터를 통계분석에 널리 사용되는데 이는 데이터를 눈으로 확인하기 위한 visualization 이나 벡터 연산 등의 강력한 기능 때문에 점점 더 많은 사람들이 사용하고 있습니다. 기존에는 속도나 확장성이 다른 언어들에 비해 단점으로 지적되었으나 R 언어의 계속적인 개발과 업데이트로 이러한 단점들이 빠르게 보완되고 있습니다. R 사용을 위해서는 R 언어의 코어 프로그램을 먼저 설치하고 그 다음 R 언어용 IDE(Integrated Development Environment)인 RStudio 설치가 필요합니다.
 
-![](images/01/rstudio.png){width="250px"}
+![](images/01/rstudio.png){width=150px}
 
 Rstudio는 R 언어를 위한 오픈소스 기반 통합개발환경(IDE)으로 R 프로그래밍을 위한 편리한 기능들을 제공해 줍니다. R언어가 주목을 받고 두터운 사용자 층을 확보할 수 있게된 핵심 동력이 Rstudio 입니다. 자체적으로 최고수준의 오픈소스 개발팀이 있으며 `tidyverse`, \``,`shiny\` 등의 데이터 분석 관련 주요 패키지를 개발하였고 정기적으로 conference 개최를 하면서 기술 보급의 핵심 역할을 하고 있습니다.
 
@@ -39,7 +39,7 @@ Rstudio는 R 언어를 위한 오픈소스 기반 통합개발환경(IDE)으로 
 
 ## Rstudio interface
 
-![](images/01/01-11.PNG){width="600px"}
+![](images/01/01-11.PNG){width="500px"}
 
 -   기본 화면에서 좌측 상단의 공간은 코드편집창, 좌측 하단은 콘솔창
 -   각 위치를 기호에 따라서 바꿀 수 있음 (View --\> Pane)
@@ -60,7 +60,7 @@ Rstudio는 R 언어를 위한 오픈소스 기반 통합개발환경(IDE)으로 
 -   자동 완성 기능 (Tab completion) in RStudio
 
 ::: rmdnote
-### Exercise
+**Exercises**
 
 1.  코드편집창에서 다음을 입력/실행하고 단축키를 사용하여 주석을 넣으시오
 
@@ -80,9 +80,9 @@ Rstudio는 R 언어를 위한 오픈소스 기반 통합개발환경(IDE)으로 
 
 ### Environment and Files
 
-![](images/01/envandhist.png)
+![](images/01/envandhist.png){width=400}
 
-![](images/01/fileandpackages.png)
+![](images/01/fileandpackages.png){width=400}
 
 ## Start a project
 
@@ -122,7 +122,7 @@ help(package="MASS")
 또한 <https://www.rstudio.com/resources/cheatsheets/> 에서는 다양한 R언어의 기능을 한 눈에 알아볼 수 있게 만든 cheatsheet 형태의 문서를 참고할 수 있습니다. 
 
 ![](images/01/base-r_1.png){width="550px"} 
-![](images/01/base-r_2.png){width="5450px"}
+![](images/01/base-r_2.png){width="550px"}
 
 ## R packages and Dataset
 
@@ -131,7 +131,7 @@ R 패키지는 함수와 데이터셋의 묶음으로 다른 사람들이 만들
 이러한 패키지는 인터넷의 `repository`에서 구할 수 있으며 대표적인 `repository`는 The Comprehensive R Archive Network (CRAN) (http://cran.r-project.org/web/views/) 와 생물학자를 위한 Bioconductor (http://www.bioconductor.org/) 가 있습니다. 이러한 패키지의 설치는 아래와 같이 RStudio를 이용하거나 콘솔창에서 `install.packages()` 함수를 이용할 수 있습니다. 
 
 
-![](images/01/01-18.PNG){width=550px} 
+![](images/01/01-18.PNG){width=450px} 
 
 
 패키지를 설치하고 사용하기 위해서는 `library()` 함수를 사용해서 관련 명령어를 사용하기 전에 미리 loading 해 두어야 합니다. 한 번 로딩으로 작업 세션이 끝날때까지 관련된 함수를 사용할 수 있으나 R 세션이나 RStudio를 재시작 할 경우 다시 로딩해야 사용할 수 있습니다. 
@@ -151,7 +151,7 @@ path.package()
 
 
 
-![](images/01/01-19.PNG){width=600px}
+![](images/01/01-19.PNG){width=450px}
 
 
 일반적으로 패키지 안에 관련된 데이터도 같이 저장되어 있으며 `data()` 함수를 이용해서 패키지 데이터를 사용자 작업공간에 복사해서 사용 가능합니다. 

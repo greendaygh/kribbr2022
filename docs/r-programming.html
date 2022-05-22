@@ -47,6 +47,7 @@
 <li><a class="" href="rrstudio-basics.html"><span class="header-section-number">2</span> R/Rstudio basics</a></li>
 <li><a class="" href="rmarkdown.html"><span class="header-section-number">3</span> Rmarkdown</a></li>
 <li><a class="active" href="r-programming.html"><span class="header-section-number">4</span> R programming</a></li>
+<li><a class="" href="data-transformation.html"><span class="header-section-number">5</span> Data transformation</a></li>
 </ul>
 
         <div class="book-extra">
@@ -65,12 +66,11 @@
 <p>콘솔에서 바로 계산을 수행할 수 있습니다. 참고로 이전에 수행한 명령은 콘솔에 커서가 있는 상태에서 위 아래 화살표를 누르면 볼 수 있고 엔터를 눌러 재사용 할 수 있습니다. <code>;</code>을 사용하면 두 개의 명령을 동시에 수행할 수 있습니다.</p>
 <p><span class="math display">\[ 2 + 2 \]</span>
 <span class="math display">\[ ((2 - 1)^2 + (1 - 3)^2)^{1/2} \]</span></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="r-programming.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span></span>
-<span id="cb18-2"><a href="r-programming.html#cb18-2" aria-hidden="true" tabindex="-1"></a>((<span class="dv">2</span> – <span class="dv">1</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (<span class="dv">1</span> – <span class="dv">3</span>)<span class="sc">^</span><span class="dv">2</span> )<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>)</span>
-<span id="cb18-3"><a href="r-programming.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>; <span class="dv">2</span> <span class="sc">-</span> <span class="dv">2</span></span></code></pre></div>
-<div id="exercise-1" class="section level3 unnumbered rmdnote">
-<h3>Exercise<a class="anchor" aria-label="anchor" href="#exercise-1"><i class="fas fa-link"></i></a>
-</h3>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="r-programming.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span></span>
+<span id="cb27-2"><a href="r-programming.html#cb27-2" aria-hidden="true" tabindex="-1"></a>((<span class="dv">2</span> – <span class="dv">1</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (<span class="dv">1</span> – <span class="dv">3</span>)<span class="sc">^</span><span class="dv">2</span> )<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb27-3"><a href="r-programming.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>; <span class="dv">2</span> <span class="sc">-</span> <span class="dv">2</span></span></code></pre></div>
+<div class="rmdnote">
+<p><strong>Exercises</strong></p>
 <p>다음 공식들을 계산하는 R 코드를 작성하시오</p>
 <p><span class="math display">\[ \sqrt{(4+3)(2+1)} \]</span></p>
 <p><span class="math display">\[ 2^3 + 3^2 \]</span></p>
@@ -81,7 +81,8 @@
 <h2>
 <span class="header-section-number">4.2</span> What is a programming language<a class="anchor" aria-label="anchor" href="#what-is-a-programming-language"><i class="fas fa-link"></i></a>
 </h2>
-<p><img src="images/01/24.PNG" width="600"><img src="images/01/25.PNG" width="620"></p>
+<div class="inline-figure"><img src="images/01/24.PNG" width="400"></div>
+<div class="inline-figure"><img src="images/01/25.PNG" width="420"></div>
 <p>R은 programming language로서 다른 프로그래밍 언어와 같이 몇 가지 공통적 개념을 가집니다 (<code>변수</code>, <code>자료형</code>, <code>함수</code>, <code>조건문</code>, <code>반복문</code>)</p>
 <div id="terminology" class="section level3" number="4.2.1">
 <h3>
@@ -141,7 +142,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">UsingR</span><span class="op">)</span>
 <span class="va">exec.pay</span>
 <span class="op">?</span><span class="va">exec.pay</span></code></pre></div>
@@ -160,7 +161,7 @@
 </ul>
 </li>
 </ul>
-<div class="inline-figure"><img src="images/02/01.png" width="400"></div>
+<div class="inline-figure"><img src="images/02/01.png" width="300"></div>
 <ul>
 <li>Data type in R
 <ul>
@@ -195,12 +196,12 @@
 </li>
 <li>내장 변수 Built-in variables</li>
 </ul>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="r-programming.html#cb20-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb20-2"><a href="r-programming.html#cb20-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span> – <span class="dv">2</span><span class="sc">*</span>x <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb20-3"><a href="r-programming.html#cb20-3" aria-hidden="true" tabindex="-1"></a>y</span>
-<span id="cb20-4"><a href="r-programming.html#cb20-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="st">"two"</span>  </span>
-<span id="cb20-5"><a href="r-programming.html#cb20-5" aria-hidden="true" tabindex="-1"></a>some_data <span class="ot">&lt;-</span> <span class="fl">9.8</span></span>
-<span id="cb20-6"><a href="r-programming.html#cb20-6" aria-hidden="true" tabindex="-1"></a>pi</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="r-programming.html#cb29-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb29-2"><a href="r-programming.html#cb29-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span> – <span class="dv">2</span><span class="sc">*</span>x <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb29-3"><a href="r-programming.html#cb29-3" aria-hidden="true" tabindex="-1"></a>y</span>
+<span id="cb29-4"><a href="r-programming.html#cb29-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="st">"two"</span>  </span>
+<span id="cb29-5"><a href="r-programming.html#cb29-5" aria-hidden="true" tabindex="-1"></a>some_data <span class="ot">&lt;-</span> <span class="fl">9.8</span></span>
+<span id="cb29-6"><a href="r-programming.html#cb29-6" aria-hidden="true" tabindex="-1"></a>pi</span></code></pre></div>
 <ul>
 <li>변수이름 작명법
 <ul>
@@ -210,7 +211,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">i_use_snake_case</span> <span class="op">&lt;-</span> <span class="fl">1</span>
 <span class="va">otherPeopleUseCamelCase</span> <span class="op">&lt;-</span> <span class="fl">2</span>
 <span class="va">some.people.use.periods</span> <span class="op">&lt;-</span> <span class="fl">3</span>
@@ -228,7 +229,7 @@
 </h3>
 <p><code>vector</code>는 R의 기본 데이터 구조입니다. numeric vector, logical vector, character vector 등 저장되는 값의 타입에 따라 크게 세가지로 나눌 수 있습니다. <code><a href="https://rdrr.io/r/base/class.html">class()</a></code> 함수를 이용해서 값의 타입을 알아낼 수 있습니다. Combine function인 <code><a href="https://rdrr.io/r/base/c.html">c()</a></code>를 활용하여 만들며 값을 순차적으로 붙여갈 수 있습니다. 다음과 같은 Univariate (단변량, Single variable)을 표현할 때 사용됩니다.</p>
 <p><span class="math display">\[ x_1, x_2, ..., x_n \]</span></p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10.4</span>, <span class="fl">5.6</span>, <span class="fl">3.1</span>, <span class="fl">6.4</span>, <span class="fl">21.7</span><span class="op">)</span> 
 <span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"X1"</span>, <span class="st">"Y2"</span>,  <span class="st">"X3"</span>,  <span class="st">"Y4"</span><span class="op">)</span>
@@ -240,7 +241,7 @@
 <span class="header-section-number">4.4.1.1</span> numeric<a class="anchor" aria-label="anchor" href="#numeric"><i class="fas fa-link"></i></a>
 </h4>
 <p>numeric 형식의 벡터는 다음과 같은 다양한 편의 함수들을 사용해서 만들수 있습니다.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>
 <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">5</span>, by<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100</span>, by<span class="op">=</span><span class="fl">10</span><span class="op">)</span>
@@ -250,23 +251,46 @@
 <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">5</span>, times<span class="op">=</span><span class="fl">10</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, times<span class="op">=</span><span class="fl">4</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, each<span class="op">=</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
-</div>
-<div id="exercise-2" class="section level4 unnumbered rmdnote">
-<h4>Exercise<a class="anchor" aria-label="anchor" href="#exercise-2"><i class="fas fa-link"></i></a>
-</h4>
+<div class="rmdnote">
+<p><strong>Exercises</strong></p>
 <p>odds라는 이름의 변수에 1부터 100까지의 홀수만을 저장하시오 (<code><a href="https://rdrr.io/r/base/seq.html">seq()</a></code> 함수 사용)</p>
+</div>
+<p>인덱싱은 배열형 (vector, matrix 등) 데이터의 일부 데이터를 참조할 때 사용하는 방법입니다. <code>[</code>와 <code>]</code>를 사용하며 위치를 나타내는 수로 참조합니다.</p>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
+<span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>
+<span class="va">i</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>
+<span class="va">x</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>
+<span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">4</span><span class="op">)</span><span class="op">]</span>
+<span class="va">y</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span></code></pre></div>
+<p>또한 해당 위치의 이름으로 참조하기도 합니다.</p>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">precip</span><span class="op">)</span>
+<span class="va">precip</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
+<span class="va">precip</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>
+<span class="va">precip</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">5</span><span class="op">)</span><span class="op">]</span>
+<span class="va">precip</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>
+<span class="va">precip</span><span class="op">[</span><span class="st">"Seattle Tacoma"</span><span class="op">]</span>
+<span class="va">precip</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Seattle Tacoma"</span>, <span class="st">"Portland"</span><span class="op">)</span><span class="op">]</span>
+<span class="va">precip</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">10</span></code></pre></div>
+<p>참고로 vector 들은 다음과 같은 builtin 함수들을 사용해서 해당 변수의 attribute를 알아낼 수 있습니다. attribute에는 원소 이름, 타입, 길이 등 vector형 변수가 가질 수 있는 특성을 말합니다.</p>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">precip</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">precip</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">precip</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">precip</span><span class="op">)</span>
+
+<span class="va">test_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">90</span>, <span class="fl">80</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">test_scores</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Shirley"</span><span class="op">)</span>
+<span class="va">test_scores</span></code></pre></div>
 </div>
 <div id="logical" class="section level4" number="4.4.1.2">
 <h4>
 <span class="header-section-number">4.4.1.2</span> logical<a class="anchor" aria-label="anchor" href="#logical"><i class="fas fa-link"></i></a>
 </h4>
-<p>Logical 벡터는 <code>True</code> 또는 <code>False</code>를 원소로 갖는 벡터 입니다. 앞글자가 대분자로 시작하는 것을 기억하시고 <code>T</code> 또는 <code>F</code>와 같이 한 문자로 표현할 수도 있습니다. 특정 조건에 대한 판단 결과를 반환할 경우에도 논리값을 사용합니다. 이 경우 조건을 판단 후 인덱싱 방법으로 해당 값들을 뽑아내기도 합니다.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/logical.html">is.logical</a></span><span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">20</span>
+<p>Logical 벡터는 <code>True</code> 또는 <code>False</code>를 원소로 갖는 벡터 입니다. 앞글자가 대분자로 시작하는 것을 기억하시고 <code>T</code> 또는 <code>F</code>와 같이 한 문자로 표현할 수도 있습니다. 특정 조건에 대한 판단 결과를 반환할 경우에도 논리값을 사용합니다. 이 경우 조건을 판단 후 인덱싱 방법으로 (<code>which</code>, <code>any</code>, <code>all</code> 등 사용) 해당 값들을 뽑아내기도 합니다. 또한 활용이 많은 <code>sample</code> 함수의 사용법을 익혀둡니다.</p>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">20</span>
 <span class="va">x</span> <span class="op">&gt;</span> <span class="fl">13</span>
 <span class="va">temp</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">&gt;</span> <span class="fl">13</span>
 <span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span>
@@ -277,19 +301,24 @@
 <span class="va">i</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">ages</span> <span class="op">&lt;</span> <span class="fl">30</span><span class="op">)</span>
 <span class="va">ages</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>
 <span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="va">ages</span> <span class="op">&lt;</span> <span class="fl">30</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/all.html">all</a></span><span class="op">(</span><span class="va">ages</span> <span class="op">&lt;</span> <span class="fl">30</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/all.html">all</a></span><span class="op">(</span><span class="va">ages</span> <span class="op">&lt;</span> <span class="fl">30</span><span class="op">)</span>
+
+<span class="va">random_number</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span></code></pre></div>
+<div class="rmdnote">
+<p><strong>Exercises</strong>
+1. 1부터 100까지의 수를 evens이라는 이름의 변수에 저장하고 이 중 짝수만을 뽑아내서 출력하시오 (<code><a href="https://rdrr.io/r/base/which.html">which()</a></code>함수 사용)</p>
+<ol start="2" style="list-style-type: decimal">
+<li><p><code>sample</code> 함수를 사용하여 앞서 odds와 evens 변수에서 랜덤하게 1개씩의 샘플을 뽑아서 <code>mynumbers</code>에 저장하시오</p></li>
+<li><p>어떤 짝수가 뽑혔는지 찾아서 출력하시오 (<code>which</code>와 인덱싱 사용)</p></li>
+</ol>
 </div>
-<div id="exercise-3" class="section level4 unnumbered rmdnote">
-<h4>Exercise<a class="anchor" aria-label="anchor" href="#exercise-3"><i class="fas fa-link"></i></a>
-</h4>
-<p>1부터 100까지의 수를 n이라는 이름의 변수에 저장하고 이 중 짝수만을 뽑아내서 출력하시오 (<code><a href="https://rdrr.io/r/base/which.html">which()</a></code>함수 사용)</p>
 </div>
 <div id="character" class="section level4" number="4.4.1.3">
 <h4>
 <span class="header-section-number">4.4.1.3</span> character<a class="anchor" aria-label="anchor" href="#character"><i class="fas fa-link"></i></a>
 </h4>
-<p>Character(문자형) 벡터의 경우 문자열을 다루는데 자주 쓰이는 <code><a href="https://rdrr.io/r/base/paste.html">paste()</a></code> 함수의 사용법을 알아두면 편리합니다. <code><a href="https://rdrr.io/r/base/paste.html">paste()</a></code> 함수는 서로 다른 문자열을 붙이는데 주로 사용됩니다. 참고로 문자열을 나누는 함수는 <code><a href="https://rdrr.io/r/base/strsplit.html">strsplit()</a></code> 입니다. <code><a href="https://rdrr.io/r/base/paste.html">paste()</a></code>에서 붙이는 문자 사이에 들어가는 문자를 지정하는 파라메터는 <code>sep</code> 이고 <code><a href="https://rdrr.io/r/base/strsplit.html">strsplit()</a></code>함수에서 자르는 기준이 되는 문자는<code>split</code> 파라메터로 지정해 줍니다 (<code><a href="https://rdrr.io/r/base/split.html">?split</a></code> 또는 <code><a href="https://rdrr.io/r/base/paste.html">?paste</a></code> 확인).</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<p>Character(문자형) 벡터의 경우 문자열을 다루는데 자주 쓰이는 <code><a href="https://rdrr.io/r/base/paste.html">paste()</a></code> 함수의 사용법을 알아두면 편리합니다. <code><a href="https://rdrr.io/r/base/paste.html">paste()</a></code> 함수는 서로 다른 문자열을 붙이는데 주로 사용됩니다. 참고로 문자열을 나누는 함수는 <code><a href="https://rdrr.io/r/base/strsplit.html">strsplit()</a></code> 입니다. <code><a href="https://rdrr.io/r/base/paste.html">paste()</a></code>에서 붙이는 문자 사이에 들어가는 문자를 지정하는 파라메터는 <code>sep</code> 이고 <code><a href="https://rdrr.io/r/base/strsplit.html">strsplit()</a></code>함수에서 자르는 기준이 되는 문자는<code>split</code> 파라미터로 지정해 줍니다 (<code><a href="https://rdrr.io/r/base/split.html">?split</a></code> 또는 <code><a href="https://rdrr.io/r/base/paste.html">?paste</a></code> 확인).</p>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"X"</span>, <span class="st">"Y"</span>, <span class="st">"Z"</span>, sep<span class="op">=</span><span class="st">"_"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Four"</span>,<span class="st">"The"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Score"</span>,<span class="st">"quick"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"and"</span>,<span class="st">"fox"</span><span class="op">)</span>, sep<span class="op">=</span><span class="st">"_"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"X"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>
@@ -300,24 +329,29 @@
 <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">x</span>, collapse<span class="op">=</span><span class="st">"_"</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="st">"XYZ"</span>, split<span class="op">=</span><span class="st">""</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="st">"XYZ"</span>, split<span class="op">=</span><span class="st">""</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"A"</span>, <span class="st">"D"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="rmdnote">
+<p><strong>Exercises</strong></p>
+<ol style="list-style-type: decimal">
+<li><p><code>m</code>이라는 변수에 “Capital of South Korea is Seoul” 문자열을 저장하고 “Capital of South Korea”를 따로 뽑아내 <code>m2</code>에 저장하시오 (<code><a href="https://rdrr.io/r/base/substr.html">substr()</a></code> 사용)</p></li>
+<li><p><code>LETTERS</code> 내장함수에서 랜덤하게 10개의 문자를 뽑아내 myletters 변수에 저장하고 이들을 연결하여 (<code>paste</code> 사용) 하나의 문장(String)을 만드시오</p></li>
+<li><p>myletters 변수의 문자들을 알파벳 순서대로 정렬하고 (<code>sort</code> 사용) 이들을 연결하여 하나의 문장 (String)을 만드시오</p></li>
+</ol>
 </div>
-<div id="exercise-4" class="section level4 unnumbered rmdnote">
-<h4>Exercise<a class="anchor" aria-label="anchor" href="#exercise-4"><i class="fas fa-link"></i></a>
-</h4>
-<p><code>m</code>이라는 변수에 “Capital of South Korea is Seoul” 문자열을 저장하고 “Capital of South Korea”를 따로 뽑아내 <code>m2</code>에 저장하시오 (<code><a href="https://rdrr.io/r/base/substr.html">substr()</a></code> 사용)</p>
 </div>
 <div id="factor" class="section level4" number="4.4.1.4">
 <h4>
 <span class="header-section-number">4.4.1.4</span> factor<a class="anchor" aria-label="anchor" href="#factor"><i class="fas fa-link"></i></a>
 </h4>
 <p>Factor형은 범주형데이터를 저장하기 위한 object 이며 R 언어에서 특별히 만들어져 사용되고 있습니다. <code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code> 함수를 이용해 생성하며 생성된 객체는 다음과 같이 <code>level</code>이라는 범주를 나타내는 특성값을 가지고 있습니다.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Red"</span>, <span class="st">"Blue"</span>, <span class="st">"Yellow"</span>, <span class="st">"Green"</span>, <span class="st">"Blue"</span>, <span class="st">"Green"</span><span class="op">)</span>
+<p>예를 들어 어린이 5명이 각각 빨강, 파랑, 노랑, 빨강, 파랑 색종이를 들고 있을때 색의 종류를 나타내는 값들은 빨강, 파랑, 노랑 입니다. 다섯 명의 아이들이 어떤 색의 색종이를 들고 있는지와는 상관없이 세 가지 범주의 값을 가지는 것 입니다.</p>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Red"</span>, <span class="st">"Blue"</span>, <span class="st">"Yellow"</span>, <span class="st">"Red"</span>, <span class="st">"Blue"</span><span class="op">)</span>
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 <span class="va">y</span></code></pre></div>
 <p>새로운 범주의 데이터를 추가할 경우 다음과 같이 해당되는 level을 먼저 추가하고 값을 저장해야 합니다.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>
 <span class="va">y</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"Gold"</span>
 <span class="va">y</span>
@@ -328,55 +362,25 @@
 <span class="va">y</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"Gold"</span>
 <span class="va">y</span></code></pre></div>
 <p><code>factor</code>는 기본적으로 <code>level</code>에 표시된 순서가 위치 (정렬) 순서입니다. 이를 바꾸기 위해서는 다음과 같이 <code>levels</code> 함수를 이용해서 순서를 바꿀 수 있습니다.</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#library(UsingR)</span>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/">MASS</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">Cars93</span><span class="op">)</span>
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">Cars93</span><span class="op">$</span><span class="va">Origin</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"non-USA"</span>, <span class="st">"USA"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
+<p>::: rmdnote
+<strong>Exercises</strong></p>
+<div class="inline-figure">
+<img src="images/03/codon_table.png" width="350">
+1. 아미노산 Phe, Leu, Ser 를 값으로 갖는 범주형 변수 (factor)를 생성하시오
+2. 각 아미노산과 해당 아미노산을 코딩하는 nucleotide triplets (codon)을 어떤 형태의 변수로 저장할 수 있을지 고민해 보시오</div>
+<p>:::</p>
 </div>
-<div id="attribute" class="section level4" number="4.4.1.5">
+<div id="missing-values" class="section level4" number="4.4.1.5">
 <h4>
-<span class="header-section-number">4.4.1.5</span> Attribute<a class="anchor" aria-label="anchor" href="#attribute"><i class="fas fa-link"></i></a>
-</h4>
-<p>vector 들은 다음과 같은 builtin 함수들을 사용해서 해당 변수의 attribute를 알아낼 수 있습니다. attribute에는 원소 이름, 타입, 길이 등 vector형 변수가 가질 수 있는 특성을 말합니다.</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">precip</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">precip</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">precip</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">precip</span><span class="op">)</span>
-
-<span class="va">test_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">90</span>, <span class="fl">80</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">test_scores</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Shirley"</span><span class="op">)</span>
-<span class="va">test_scores</span></code></pre></div>
-</div>
-<div id="indexing" class="section level4" number="4.4.1.6">
-<h4>
-<span class="header-section-number">4.4.1.6</span> indexing<a class="anchor" aria-label="anchor" href="#indexing"><i class="fas fa-link"></i></a>
-</h4>
-<p>인덱싱은 vector 데이터의 일부 데이터를 참조할 때 사용하는 방법입니다.</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
-<span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>
-<span class="va">i</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>
-<span class="va">x</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>
-<span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">4</span><span class="op">)</span><span class="op">]</span>
-<span class="va">y</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>
-
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">precip</span><span class="op">)</span>
-<span class="va">precip</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
-<span class="va">precip</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>
-<span class="va">precip</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">5</span><span class="op">)</span><span class="op">]</span>
-<span class="va">precip</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>
-<span class="va">precip</span><span class="op">[</span><span class="st">"Seattle Tacoma"</span><span class="op">]</span>
-<span class="va">precip</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Seattle Tacoma"</span>, <span class="st">"Portland"</span><span class="op">)</span><span class="op">]</span>
-<span class="va">precip</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">10</span></code></pre></div>
-</div>
-<div id="missing-values" class="section level4" number="4.4.1.7">
-<h4>
-<span class="header-section-number">4.4.1.7</span> Missing values<a class="anchor" aria-label="anchor" href="#missing-values"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4.1.5</span> Missing values<a class="anchor" aria-label="anchor" href="#missing-values"><i class="fas fa-link"></i></a>
 </h4>
 <p>특정 값이 “Not available” 이거나 “Missing value” 일 경우 벡터의 해당 원소 자리에 데이터의 이상을 알리기 위해 <code>NA</code>를 사용합니다. 따라서 일반적인 연산에서 <code>NA</code>가 포함되어 있는 경우 데이터의 불완전성을 알리기 위해 연산의 결과는 <code>NA</code>가 됩니다. <code><a href="https://rdrr.io/r/base/NA.html">is.na()</a></code> 함수는 해당 변수에 <code>NA</code> 값이 있는지를 검사해주는 함수이며 R에는 이 외에도 다음과 같은 특수 값들이 사용되고 있습니다.</p>
 <ul>
@@ -385,28 +389,42 @@
 <li>NaN: Not a number (0/0)</li>
 <li>Inf: (1/0)</li>
 </ul>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">hip_cost</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10500</span>, <span class="fl">45000</span>, <span class="fl">74100</span>, <span class="cn">NA</span>, <span class="fl">83500</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">hip_cost</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">hip_cost</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
 <span class="op">?</span><span class="va">sum</span></code></pre></div>
 </div>
-<div id="useful-functions" class="section level4" number="4.4.1.8">
+<div id="useful-functions" class="section level4" number="4.4.1.6">
 <h4>
-<span class="header-section-number">4.4.1.8</span> Useful functions<a class="anchor" aria-label="anchor" href="#useful-functions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4.1.6</span> Useful functions<a class="anchor" aria-label="anchor" href="#useful-functions"><i class="fas fa-link"></i></a>
 </h4>
 <p>다음은 벡터형 변수와 같이 쓰이는 유용한 함수들입니다.</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">100</span>, <span class="cn">T</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span>
 <span class="va">p</span> <span class="op">&lt;-</span> <span class="va">z</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">p</span>, digits<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
-<span class="va">digits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span>
-<span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">digits</span><span class="op">)</span>
-<span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">digits</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">p</span>, digits<span class="op">=</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
+<p><code>is</code> 함수를 사용하여 데이터 타입이 사용자가 의도한 타입과 맞는지 검사할 수 있습니다. 콘솔창에서 <code>is.</code>를 타이핑한 후 잠시 기다리면 다양한 is 합수를 볼 수 있습니다.</p>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/logical.html">is.logical</a></span><span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">is.data.frame</a></span><span class="op">(</span><span class="st">"A"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="st">"A"</span><span class="op">)</span></code></pre></div>
+<p><code>as</code> 함수는 데이터 타입을 변환해주는 함수입니다.</p>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">digits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">*</span><span class="fl">10</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">digits</span><span class="op">)</span>
+<span class="va">digits_int</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">digits</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">digits_int</span><span class="op">)</span>
+<span class="va">digits_char</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">digits_int</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">digits_char</span><span class="op">)</span>
+<span class="va">digits_num</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">digits_char</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">digits_num</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="matrix" class="section level3" number="4.4.2">
@@ -414,13 +432,13 @@
 <span class="header-section-number">4.4.2</span> matrix<a class="anchor" aria-label="anchor" href="#matrix"><i class="fas fa-link"></i></a>
 </h3>
 <p>매트릭스는 2차원 행렬로 같은 형식의 데이터 값 (numberic, character, logical) 으로만 채워진 행렬을 말합니다. 메트릭스를 만드는 방법은 아래와 같으며 <code>nrow</code> 와 <code>ncol</code> 파라메터에 행과 열의 수를 넣고 각 셀에 들어갈 값은 가장 앞에 위치한 data 파라메터에 넣어 줍니다 (<code><a href="https://rdrr.io/r/base/matrix.html">?matrix</a></code>로 파라메터 이름 확인). 메트릭스 인덱싱은 메트릭스 안의 값을 저장하거나 참조할때 (빼올때) 사용하는 방법입니다. 메트릭스 변수이름 바로 뒤에 대괄호를 이용해서 제어를 하며 대괄호 안에 콤마로 구분된 앞쪽은 row, 뒷쪽은 column 인덱스를 나타냅니다.</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mymat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">0</span>, nrow<span class="op">=</span><span class="fl">100</span>, ncol<span class="op">=</span><span class="fl">3</span><span class="op">)</span> <span class="co"># 1</span>
 <span class="va">mymat</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span> <span class="co"># 2</span>
 <span class="va">mymat</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">200</span>,<span class="fl">2</span><span class="op">)</span> <span class="co"># 3</span>
 <span class="va">mymat</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">200</span>,<span class="fl">2</span><span class="op">)</span> <span class="co"># 4</span></code></pre></div>
 <p>매트릭스의 row나 column에 이름이 주어져 있을 경우 이름을 따옴표(“)로 묶은 후 참조가 가능합니다. row나 column의 이름은 <code><a href="https://rdrr.io/r/base/colnames.html">rownames()</a></code> 또는 <code><a href="https://rdrr.io/r/base/colnames.html">colnames()</a></code>로 생성하거나 변경할 수 있습니다. row나 column의 개수는 <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code> 또는 <code><a href="https://rdrr.io/r/base/nrow.html">ncol()</a></code> 함수를 사용합니다.</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">mymat</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">mymat</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">mymat</span><span class="op">)</span>
@@ -429,16 +447,15 @@
 <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">mymat</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"No"</span>, <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">mymat</span><span class="op">)</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">mymat</span><span class="op">)</span></code></pre></div>
 <p>여러 row나 column을 참조할 경우 아래와 같이 combine 함수를 사용하여 묶어줘야 하며 스칼라값을 (임의의 숫자 하나) 더하거나 뺄 경우 vector / matrix 연산을 기본으로 수행합니다.</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mymat</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span>,<span class="fl">2</span><span class="op">]</span> <span class="co"># 5</span>
 <span class="va">mymat</span><span class="op">-</span><span class="fl">1</span> <span class="co"># 6</span>
 <span class="va">mysub</span> <span class="op">&lt;-</span> <span class="va">mymat</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="va">mymat</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="co">#7</span>
 <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">mysub</span><span class="op">)</span> <span class="co">#8</span>
 <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">mysub</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="co">#8</span></code></pre></div>
-<div id="exercise-5" class="section level4 unnumbered rmdnote">
-<h4>Exercise<a class="anchor" aria-label="anchor" href="#exercise-5"><i class="fas fa-link"></i></a>
-</h4>
-<ul>
+<div class="rmdnote">
+<p><strong>Exercises</strong></p>
+<ol style="list-style-type: decimal">
 <li>score 라는 변수에 1부터 100까지 중 랜덤하게 선택된 20개의 수로 10 x 2 matrix를 만드시오 (<code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code> 사용)</li>
 <li>score의 row 이름을 문자형으로 Name1, Name2, …, Name10으로 지정하시오 (<code><a href="https://rdrr.io/r/base/paste.html">paste()</a></code> 사용)</li>
 <li>score의 column 이름을 문자형으로 math와 eng로 지정하시오</li>
@@ -446,15 +463,15 @@
 <li>
 <code>total_score</code>의의 오름차순 순서를 나타내는 인덱스 (<code><a href="https://rdrr.io/r/base/order.html">order()</a></code>함수 사용)를 <code>o</code>라는 변수에 저장하시오</li>
 <li>score를 <code>o</code>순서로 재배치하고 score_ordered 변수에 저장하시오</li>
-</ul>
+</ol>
 </div>
 </div>
 <div id="data.frame" class="section level3" number="4.4.3">
 <h3>
 <span class="header-section-number">4.4.3</span> data.frame<a class="anchor" aria-label="anchor" href="#data.frame"><i class="fas fa-link"></i></a>
 </h3>
-<p>데이터프레임은 형태는 매트릭스와 같으나 컬럼 하나가 하나의 변수로서 각 변수들이 다른 모드의 값을 저장할 수 있다는 차이가 있습니다. <code>$</code> 기호를 이용하여 각 구성 변수를 참조할 수 있습니다. 컬럼 한 줄이 하나의 변수 이므로 새로운 변수도 컬럼 형태로 붙여 넣을 수 있습니다. 즉, 각 row는 샘플을 나타내고 각 column은 변수를 나타내며 각 변수들이 갖는 샘플의 개수 (row의 길이, vector 의 길이)는 같아야 합니다. R 기반의 데이터 분석에서는 가장 선호되는 데이터 타입이라고 볼 수 있습니다.</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<p>데이터프레임은 형태는 매트릭스와 같으나 컬럼 하나가 하나의 vector형 변수로서 각 변수들이 다른 모드의 값을 저장할 수 있다는 차이가 있습니다. <code>$</code> 기호를 이용하여 각 구성 변수를 참조할 수 있습니다. 컬럼 한 줄이 하나의 변수 이므로 새로운 변수도 컬럼 형태로 붙여 넣을 수 있습니다. 즉, 각 row는 샘플을 나타내고 각 column은 변수를 나타내며 각 변수들이 갖는 샘플의 개수 (row의 길이, vector 의 길이)는 같아야 합니다. R 기반의 데이터 분석에서는 가장 선호되는 데이터 타입이라고 볼 수 있습니다.</p>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## data.frame</span>
 <span class="va">ids</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>
 <span class="va">ids</span>
@@ -472,16 +489,15 @@
 <span class="va">students</span><span class="op">$</span><span class="va">idnames</span>
 <span class="va">students</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">students</span><span class="op">)</span></code></pre></div>
-<p>데이터프레임에서도 변수 이름으로 인덱싱이 가능합니다.</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<p>데이터프레임에서는 <code>$</code>를 사용하여 변수 이름으로 인덱싱이 가능합니다.</p>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## data frame indexing </span>
 <span class="va">students</span><span class="op">$</span><span class="va">ids</span>
 <span class="va">students</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>
 <span class="va">students</span><span class="op">[</span>,<span class="st">"ids"</span><span class="op">]</span></code></pre></div>
-<div id="exercise-6" class="section level4 unnumbered rmdnote">
-<h4>Exercise<a class="anchor" aria-label="anchor" href="#exercise-6"><i class="fas fa-link"></i></a>
-</h4>
-<ul>
+<div class="rmdnote">
+<p><strong>Exercises</strong></p>
+<ol style="list-style-type: decimal">
 <li>
 <code>math</code>라는 변수에 1부터 100까지 중 랜덤하게 선택된 10개의 수를 넣으시오</li>
 <li>
@@ -496,7 +512,7 @@
 <code>math</code>와 <code>eng</code> 변수를 지우시오 (<code><a href="https://rdrr.io/r/base/rm.html">rm()</a></code>사용)</li>
 <li>
 <code>score</code> data frame의 <code>math</code>와 <code>eng</code>를 각각 더한 후 <code>total_score</code>라는 변수에 저장 하시오</li>
-</ul>
+</ol>
 </div>
 </div>
 <div id="list" class="section level3" number="4.4.4">
@@ -504,8 +520,8 @@
 <span class="header-section-number">4.4.4</span> list<a class="anchor" aria-label="anchor" href="#list"><i class="fas fa-link"></i></a>
 </h3>
 <p>리스트는 변수들의 모임이라는 점에서 데이터프레임과 같으나 구성 변수들의 길이가 모두 같아야 하는 데이터프레임과는 달리 다른 길이의 변수를 모아둘 수 있는 점이 다릅니다. 즉, R언어에서 두 변수를 담을 수 있는 데이터 타입은 <code>list</code>와 <code>data frame</code> 두 종류가 있는데 <code>list</code> 변수 타입은 <code>vector</code> 형태의 여러개의 element를 가질 수 있으며 각 <code>vector의</code> 길이가 모두 달라도 됩니다. list의 인덱싱에서 <code>[</code> <code>]</code>는 리스트를 반환하고 <code>[[</code> <code>]]</code>는 vector element들을 반환합니다.</p>
-<div class="inline-figure"><img src="images/03/05.PNG" width="400"></div>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="images/03/05.PNG" width="300"></div>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## list</span>
 <span class="va">parent_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Fred"</span>, <span class="st">"Mary"</span><span class="op">)</span>
 <span class="va">number_of_children</span> <span class="op">&lt;-</span> <span class="fl">2</span>
@@ -518,15 +534,27 @@
 <span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">lst</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
 <span class="va">lst</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
 <span class="va">lst</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">]</span></code></pre></div>
-<div class="inline-figure"><img src="images/03/06.PNG" width="500"></div>
+<div class="inline-figure"><img src="images/03/06.PNG" width="250"></div>
+<div class="rmdnote">
+<p><strong>Exercises</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>위 아미노산 예제에서 Phe, Leu, Ser 각각의 코돈을 원소로 갖는 세 개의 vector 변수들을 만들고 이를 <code>aalist</code> 라는 이름의 하나의 리스트 변수로 만드시오</p></li>
+<li><p><code>aalist</code> 리스트를 data.frame 형식의 <code>aadf</code> 변수로 만드시오 (데이터 구조를 바꾸어 저장 가능)</p></li>
+</ol>
 </div>
 </div>
-<div id="a-script-in-r" class="section level2" number="4.5">
+</div>
+<div id="functions" class="section level2" number="4.5">
 <h2>
-<span class="header-section-number">4.5</span> A script in R<a class="anchor" aria-label="anchor" href="#a-script-in-r"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.5</span> Functions<a class="anchor" aria-label="anchor" href="#functions"><i class="fas fa-link"></i></a>
 </h2>
-<p>R 프로그래밍을 통해서 사용자가 원하는 기능을 수행하는 방법은 다음과 같이 스크립트를 만들어서 실행하는 것 입니다. 일반적으로 R을 이용한 스크립트 명령을 어떻게 실행하는지 알아보겠습니다. 다음 예제는 입력 값들의 평균을 계산해서 출력해 주는 스크립트 명령입니다. R base 패키지에서 기본으로 제공되는 <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>이라는 함수가 있지만 사용하지 않고 <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code>과 <code><a href="https://rdrr.io/r/base/length.html">length()</a></code> 함수를 사용했습니다.</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<p>함수(Function)란 사용자가 원하는 기능을 수행하는 코드의 모음으로서 반복적으로 쉽게 사용할 수 있도록 만들어 놓은 코드 입니다.</p>
+<div id="a-script-in-r" class="section level3" number="4.5.1">
+<h3>
+<span class="header-section-number">4.5.1</span> A script in R<a class="anchor" aria-label="anchor" href="#a-script-in-r"><i class="fas fa-link"></i></a>
+</h3>
+<p>함수의 개념을 배우기 전에 스크립트를 활용한 명령어 수행을 알아보겠습니다. R 프로그래밍을 통해서 사용자가 원하는 기능을 수행하는 방법은 다음과 같이 스크립트를 만들어서 실행하는 것 입니다. 일반적으로 R을 이용한 스크립트 명령을 어떻게 실행하는지 알아보겠습니다. 다음 예제는 입력 값들의 평균을 계산해서 출력해 주는 스크립트 명령입니다. R base 패키지에서 기본으로 제공되는 <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>이라는 함수가 있지만 사용하지 않고 <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code>과 <code><a href="https://rdrr.io/r/base/length.html">length()</a></code> 함수를 사용했습니다.</p>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">numbers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.452</span>, <span class="fl">1.474</span>, <span class="fl">0.22</span>, <span class="fl">0.545</span>, <span class="fl">1.205</span>, <span class="fl">3.55</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Input numbers are"</span>, <span class="va">numbers</span>, <span class="st">"\n"</span><span class="op">)</span>
@@ -534,28 +562,28 @@
 <span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"The average is "</span>, <span class="va">numbers_mean</span>, <span class="st">".\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="va">out</span><span class="op">)</span></code></pre></div>
 <p>상황에 따라 다르긴 하지만 보통 위 스크립트를 실행할 때 R 파일을 하나 만들고 <code><a href="https://rdrr.io/r/base/source.html">source()</a></code>라는 함수를 사용해서 파일 전체를 한번에 읽어들이고 실행을 시킵니다. 위 코드를 <code>myscript.R</code> 이라는 새로운 R 파일을 하나 만들고 저장 후 다음과 같이 실행할 수 있습니다. 참고로 위 파일은 현재 Working directory와 같은 위치에 저장해야 합니다.</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"myscript.R"</span><span class="op">)</span></code></pre></div>
 <p>그러나 위와 같은 식으로 실행할 경우 다음 몇 가지 문제가 있습니다. 하나는 입력 값이 바뀔 때마나 파일을 열어 바뀐 값을 저장해 줄 필요가 있습니다. 결과 값에 대해서 다른 처리를 하고 싶을 경우 또한 파일을 직접 수정해 주어야 합니다. 또한 모든 변수들이 전역변수로 사용되어 코드가 복잡해질 경우 변수간 간섭이 생길 가능성이 높습니다.</p>
 </div>
-<div id="functions" class="section level2" number="4.6">
-<h2>
-<span class="header-section-number">4.6</span> Functions<a class="anchor" aria-label="anchor" href="#functions"><i class="fas fa-link"></i></a>
-</h2>
-<p>함수(Function)란 사용자가 원하는 기능을 수행하는 코드의 모음으로서 반복적으로 쉽게 사용할 수 있도록 만들어 놓은 코드 입니다. 특정 데이터를 입력으로 받아 원하는 기능을 수행한 후 결과 데이터를 반환하는 구조를 가집니다. 함수는 일반적으로 다음과 같은 포멧으로 구현할 수 있습니다.</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div id="build-a-function" class="section level3" number="4.5.2">
+<h3>
+<span class="header-section-number">4.5.2</span> Build a function<a class="anchor" aria-label="anchor" href="#build-a-function"><i class="fas fa-link"></i></a>
+</h3>
+<p>함수는 특정 데이터를 입력으로 받아 원하는 기능을 수행한 후 결과 데이터를 반환하는 구조를 가집니다. 함수는 일반적으로 다음과 같은 포멧으로 구현할 수 있습니다.</p>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">my_function_name</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">parameter1</span>, <span class="va">parameter2</span>, <span class="va">...</span> <span class="op">)</span><span class="op">{</span>
   <span class="co">##any statements</span>
   <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <p>예를 들어 다음과 같은 <code>my_sine</code> 함수를 만들 수 있으며 parameter (매개변수)는 <code>x</code>이고 <code>y</code>는 반환값을 저장하는 지역변수 입니다.</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">my_sine</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
     <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
     <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
-<p>만들어진 함수는 다음과 같이 사용할 수 있습니다. 만들어진 함수는 처음에 한 번 실행해 주어 실행중인 R session에 등록한 후 사용할 수 있습니다. 여기서 함수로 전달되는 값 <code>pi</code>는 argument (전달인자) 라고 합니다. 전달인자는 함수에서 정의된 매개변수의 갯수와 같은 수의 전달인자를 입력해 주어야 합니다.</p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<p>만들어진 함수는 다음과 같이 사용할 수 있습니다. 만들어진 함수는 처음에 한 번 실행해 주어 실행중인 R session에 등록한 후 사용할 수 있습니다. 여기서 함수로 전달되는 값 <code>pi</code>는 argument (전달인자) 라고 합니다. 전달인자는 함수에서 정의된 매개변수의 갯수와 같은 수의 전달인자를 입력해 주어야 합니다. 참고로 parameter와 argument는 많은 사람들이 혼동하는 단어입니다. 본 예에서 <code>my_sine</code>함수의 괄호 안에 있는 변수 <code>x</code>는 parameter이고 <code>x</code>에 들어가는 값인 <code>pi</code> 나 <code>90</code>은 argument 입니다.</p>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">my_sine</span><span class="op">(</span><span class="va">pi</span><span class="op">)</span>
 <span class="fu">my_sine</span><span class="op">(</span><span class="fl">90</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="fl">90</span><span class="op">)</span></code></pre></div>
@@ -574,8 +602,8 @@
 </ul>
 </li>
 </ul>
-<p>이제 위 스크립트 (‘myscript.R’) 에서 사용된 코드를 함수로 바꿔봅니다. numbers (전달인자)를 받는 매개변수를 x로 하고 함수 이름은 <code>mymean</code> 이고 평균값 (numbers_mean)을 반환하는 합수입니다.</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<p>이제 위 스크립트 (<code>myscript.R</code>) 에서 사용된 코드를 함수로 바꿔봅니다. numbers (전달인자)를 받는 매개변수를 x로 하고 함수 이름은 <code>mymean</code> 이고 평균값 (numbers_mean)을 반환하는 합수입니다.</p>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">numbers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.452</span>, <span class="fl">1.474</span>, <span class="fl">0.22</span>, <span class="fl">0.545</span>, <span class="fl">1.205</span>, <span class="fl">3.55</span><span class="op">)</span>
 
 <span class="va">mymean</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
@@ -589,13 +617,12 @@
 <span class="va">retval</span> <span class="op">&lt;-</span> <span class="fu">mymean</span><span class="op">(</span><span class="va">numbers</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="va">retval</span><span class="op">)</span></code></pre></div>
 <p><code>myscript.R</code>이라는 파일을 열고 작성된 스크립트에 더해서 아래처럼 함수 코드를 만들 경우 <code><a href="https://rdrr.io/r/base/source.html">source()</a></code> 함수로 함수를 세션으로 읽어오고 바로 사용할 수 있습니다. 위와 같이 함수를 만들 경우 입력 값을 언제든 바꿔서 사용할 수 있고 반환값에 대한 추가적인 연산도 쉽게 수행 할 수 있습니다.</p>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">new_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
 <span class="va">retval</span> <span class="op">&lt;-</span> <span class="fu">mymean</span><span class="op">(</span><span class="va">new_values</span><span class="op">)</span>
 <span class="va">retval</span></code></pre></div>
-<div id="exercise-7" class="section level4 unnumbered rmdnote">
-<h4>Exercise<a class="anchor" aria-label="anchor" href="#exercise-7"><i class="fas fa-link"></i></a>
-</h4>
+<div class="rmdnote">
+<p><strong>Exercises</strong></p>
 <ol style="list-style-type: decimal">
 <li><p>변수 <code>x</code>에 1, 3, 5, 7, 9를, 변수 <code>y</code>에 2, 4, 6, 8, 10을 저장하는 코드를 작성하시오</p></li>
 <li><p><code>x</code>와 <code>y</code>를 더한 값을 <code>z</code>에 저장하는 코드를 작성하시오</p></li>
@@ -603,9 +630,8 @@
 <li><p><code>mymean</code> 이라는 이름의 함수를 작성하되 두 변수를 입력으로 받아 평균을 구한 후 결과를 반환하는 코드를 작성하시오</p></li>
 </ol>
 </div>
-<div id="exercise-8" class="section level4 unnumbered rmdnote">
-<h4>Exercise<a class="anchor" aria-label="anchor" href="#exercise-8"><i class="fas fa-link"></i></a>
-</h4>
+<div class="rmdnote">
+<p><strong>Exercises</strong></p>
 <ol style="list-style-type: decimal">
 <li>
 <code>mysd</code>라는 이름의 (표본)표준편차를 구하는 함수를 <code>myscript.R</code> 파일에 구현하시오 (<code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code>함수 사용하지 않고, 다음 표준편차 공식 이용)</li>
@@ -614,36 +640,30 @@
 \sigma = \sqrt{\frac{\sum(x-mean(x))^2}{length(x)-1}}
 \]</span></p>
 <p>코드는 아래와 같음</p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mysd</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
   <span class="va">numbers_sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu">mymean</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>  
   <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">numbers_sd</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
-<li>1부터 100까지의 값을 <code>x</code>에 저장하고 mysd 함수를 사용해서 표준편차를 구하시오</li>
-</ol>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span>
-<span class="fu">mysd</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
-<ol start="3" style="list-style-type: decimal">
-<li>앞서 작성한 <code>mymean</code> 함수와 <code>mysd</code> 함수를 같이 사용하여 <code>x</code>를 표준화 하고 <code>z</code>로 저장하시오. 표준화 공식은 다음과 같음</li>
+<li><p>1부터 100까지의 값을 <code>x</code>에 저장하고 mysd 함수를 사용해서 표준편차를 구하시오</p></li>
+<li><p>앞서 작성한 <code>mymean</code> 함수와 <code>mysd</code> 함수를 같이 사용하여 <code>x</code>를 표준화 하고 <code>z</code>로 저장하시오. 표준화 공식은 다음과 같음</p></li>
 </ol>
 <p><span class="math display">\[
 z = \frac{x - mean(x)}{sd(x)}
 \]</span></p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">z</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu">mymean</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fu">mysd</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
 <li>
-<code>x</code> 와 <code>z</code>를 갖는 <code>y</code>라는 이름의 <code>data.frame</code>을 생성하시오</li>
+<code>x</code> 와 <code>z</code> 변수를 원소로 갖는 <code>y</code>라는 이름의 <code>data.frame</code>을 생성하시오</li>
 </ol>
 </div>
-<div id="local-and-global-variables" class="section level3" number="4.6.1">
+</div>
+<div id="local-and-global-variables" class="section level3" number="4.5.3">
 <h3>
-<span class="header-section-number">4.6.1</span> local and global variables<a class="anchor" aria-label="anchor" href="#local-and-global-variables"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.5.3</span> local and global variables<a class="anchor" aria-label="anchor" href="#local-and-global-variables"><i class="fas fa-link"></i></a>
 </h3>
-<p>다음 코드를 보면 전역변수 <code>x</code>, <code>y</code>는 지역변수 <code>x</code>, <code>y</code>와 독립적으로 사용됨을 알 수 있습니다.</p>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<p>함수를 사용함에 따라서 함수 안에서 사용되는 변수와 함수 밖에서 사용되는 변수들의 경우를 명확히 이해할 필요가 있습니다. 다음 코드를 보면 전역변수 <code>x</code>, <code>y</code>는 지역변수 <code>x</code>, <code>y</code>와 독립적으로 사용되고 있습니다.</p>
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">my_half</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
   <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">/</span><span class="va">z</span>
   <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"local variable x:"</span>, <span class="va">x</span>, <span class="st">"\n"</span><span class="op">)</span>
@@ -669,7 +689,7 @@ z = \frac{x - mean(x)}{sd(x)}
 
 <span class="fu">my_half</span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span></code></pre></div>
 <p><code>log</code>, <code>sin</code>등의 함수들은 Built-in function으로 같은 이름의 함수를 만들지 않도록 주의합니다.</p>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">pi</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
@@ -680,12 +700,12 @@ z = \frac{x - mean(x)}{sd(x)}
 <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="vectorized-functions" class="section level3" number="4.6.2">
+<div id="vectorized-functions" class="section level3" number="4.5.4">
 <h3>
-<span class="header-section-number">4.6.2</span> Vectorized functions<a class="anchor" aria-label="anchor" href="#vectorized-functions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.5.4</span> Vectorized functions<a class="anchor" aria-label="anchor" href="#vectorized-functions"><i class="fas fa-link"></i></a>
 </h3>
 <p>초기에 R이 다른 프로그래밍 언어에 비해서 경쟁력을 갖는 이유 중 하나가 바로 이 벡터 연산 기능 이였습니다. <code>vector</code> 변수에 들어있는 각 원소들에 대해서 특정 함수나 연산을 적용하고 싶을 경우 전통 방식의 <code>C</code>나 <code>Java</code>등의 언어에서는 원소의 개수만큼 반복문을 돌면서 원하는 작업을 수행 했습니다. 그러나 R의 벡터 연산 기능은 별도의 반복문 없이 vector 안에 있는 원소들에 대한 함수 실행 또는 연산을 수행할 수 있습니다.</p>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span><span class="op">)</span>
 <span class="va">x</span> <span class="op">+</span> <span class="va">x</span>
 <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
@@ -696,9 +716,8 @@ z = \frac{x - mean(x)}{sd(x)}
 <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 <span class="va">test_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>Alice <span class="op">=</span> <span class="fl">87</span>, Bob <span class="op">=</span> <span class="fl">72</span>, James<span class="op">=</span> <span class="fl">99</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">test_scores</span><span class="op">)</span></code></pre></div>
-<div id="exercise-9" class="section level4 unnumbered rmdnote">
-<h4>Exercise<a class="anchor" aria-label="anchor" href="#exercise-9"><i class="fas fa-link"></i></a>
-</h4>
+<div class="rmdnote">
+<p><strong>Exercises</strong></p>
 <p>다음은 한 다이어트 프로그램의 수행 전 후의 다섯 명의 몸무게이다.</p>
 <div class="inline-table"><table class="table table-sm"><tbody>
 <tr class="odd">
@@ -723,9 +742,8 @@ z = \frac{x - mean(x)}{sd(x)}
 <li><p>diff에 저장된 값들의 합, 평균, 표준편차를 구하시오</p></li>
 </ol>
 </div>
-<div id="exercise-10" class="section level4 unnumbered rmdnote">
-<h4>Exercise<a class="anchor" aria-label="anchor" href="#exercise-10"><i class="fas fa-link"></i></a>
-</h4>
+<div class="rmdnote">
+<p><strong>Exercises</strong></p>
 <p>다음 네 학생이 있으며 “John”,“James”,“Sara”, “Lilly” 각 나이는 21, 55, 23, 53 이다. ages 라는 변수를 생성하고 각 나이를 저장한 후 who라는 이름의 함수를 만들어서 50살 이상인 사람의 이름을 출력하는 함수를 만드시오.</p>
 <ul>
 <li>
@@ -743,59 +761,59 @@ z = \frac{x - mean(x)}{sd(x)}
 </div>
 </div>
 </div>
-<div id="flow-control" class="section level2" number="4.7">
+<div id="flow-control" class="section level2" number="4.6">
 <h2>
-<span class="header-section-number">4.7</span> Flow control<a class="anchor" aria-label="anchor" href="#flow-control"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.6</span> Flow control<a class="anchor" aria-label="anchor" href="#flow-control"><i class="fas fa-link"></i></a>
 </h2>
-<div id="if-statements" class="section level3" number="4.7.1">
+<div id="if-statements" class="section level3" number="4.6.1">
 <h3>
-<span class="header-section-number">4.7.1</span> if statements<a class="anchor" aria-label="anchor" href="#if-statements"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.6.1</span> if statements<a class="anchor" aria-label="anchor" href="#if-statements"><i class="fas fa-link"></i></a>
 </h3>
 <p>R에서의 제어문의 사용은 다른 프로그래밍 언어와 거의 유사합니다. 먼저 <code>if</code> 는 다음과 같은 형식으로 사용되며 <code>()</code> 안에 특정 조건 판단을 위한 표현이 들어갑니다.</p>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">if</span><span class="op">(</span><span class="va">condition</span><span class="op">)</span><span class="op">{</span>
   <span class="va">expr_1</span>
 <span class="op">}</span><span class="kw">else</span><span class="op">{</span>
   <span class="va">expr_2</span>
 <span class="op">}</span></code></pre></div>
 <p>특히 <code>condition</code>은 하나의 원소에 대한 조건 판단문으로 <code>T</code> 또는 <code>F</code> 값 하나만을 반환하는 문장이어야 합니다. 위 코드는 만약 <code>condition</code> 조건이 <code>True</code> 이면 expr_1를 실행하고 <code>False</code>이면 expr_2를 실행하라는 명령입니다. <code>condition</code> 안에서 사용되는 비교 연산자들은 다음과 같습니다.</p>
-<div class="inline-figure"><img src="images/04/01.PNG"></div>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="r-programming.html#cb53-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb53-2"><a href="r-programming.html#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(x<span class="sc">%%</span><span class="dv">2</span> <span class="sc">==</span> <span class="dv">1</span>){</span>
-<span id="cb53-3"><a href="r-programming.html#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Odd"</span>)</span>
-<span id="cb53-4"><a href="r-programming.html#cb53-4" aria-hidden="true" tabindex="-1"></a>}<span class="cf">else</span>{</span>
-<span id="cb53-5"><a href="r-programming.html#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Even"</span>)</span>
-<span id="cb53-6"><a href="r-programming.html#cb53-6" aria-hidden="true" tabindex="-1"></a>} </span>
-<span id="cb53-7"><a href="r-programming.html#cb53-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-8"><a href="r-programming.html#cb53-8" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb53-9"><a href="r-programming.html#cb53-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(x <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> x <span class="sc">&lt;</span> <span class="dv">4</span>){</span>
-<span id="cb53-10"><a href="r-programming.html#cb53-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Positive number less than four"</span>)</span>
-<span id="cb53-11"><a href="r-programming.html#cb53-11" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb53-12"><a href="r-programming.html#cb53-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-13"><a href="r-programming.html#cb53-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="fu">print</span>(<span class="st">"Positive number"</span>)</span>
-<span id="cb53-14"><a href="r-programming.html#cb53-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-15"><a href="r-programming.html#cb53-15" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">5</span></span>
-<span id="cb53-16"><a href="r-programming.html#cb53-16" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>){</span>
-<span id="cb53-17"><a href="r-programming.html#cb53-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Non-negative number"</span>)</span>
-<span id="cb53-18"><a href="r-programming.html#cb53-18" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">&lt;=</span> <span class="dv">0</span> <span class="sc">&amp;</span> x <span class="sc">&gt;</span> <span class="sc">-</span><span class="dv">5</span>){</span>
-<span id="cb53-19"><a href="r-programming.html#cb53-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Negative number greater than -5"</span>)</span>
-<span id="cb53-20"><a href="r-programming.html#cb53-20" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb53-21"><a href="r-programming.html#cb53-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Negative number less than -5"</span>)</span>
-<span id="cb53-22"><a href="r-programming.html#cb53-22" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb53-23"><a href="r-programming.html#cb53-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-24"><a href="r-programming.html#cb53-24" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
-<span id="cb53-25"><a href="r-programming.html#cb53-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Non-negative number"</span>)</span>
-<span id="cb53-26"><a href="r-programming.html#cb53-26" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
-<span id="cb53-27"><a href="r-programming.html#cb53-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Negative number"</span>)</span></code></pre></div>
+<div class="inline-figure"><img src="images/04/01.PNG" width="150"></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="r-programming.html#cb63-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb63-2"><a href="r-programming.html#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(x<span class="sc">%%</span><span class="dv">2</span> <span class="sc">==</span> <span class="dv">1</span>){</span>
+<span id="cb63-3"><a href="r-programming.html#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Odd"</span>)</span>
+<span id="cb63-4"><a href="r-programming.html#cb63-4" aria-hidden="true" tabindex="-1"></a>}<span class="cf">else</span>{</span>
+<span id="cb63-5"><a href="r-programming.html#cb63-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Even"</span>)</span>
+<span id="cb63-6"><a href="r-programming.html#cb63-6" aria-hidden="true" tabindex="-1"></a>} </span>
+<span id="cb63-7"><a href="r-programming.html#cb63-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-8"><a href="r-programming.html#cb63-8" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb63-9"><a href="r-programming.html#cb63-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(x <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> x <span class="sc">&lt;</span> <span class="dv">4</span>){</span>
+<span id="cb63-10"><a href="r-programming.html#cb63-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Positive number less than four"</span>)</span>
+<span id="cb63-11"><a href="r-programming.html#cb63-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb63-12"><a href="r-programming.html#cb63-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-13"><a href="r-programming.html#cb63-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="fu">print</span>(<span class="st">"Positive number"</span>)</span>
+<span id="cb63-14"><a href="r-programming.html#cb63-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-15"><a href="r-programming.html#cb63-15" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">5</span></span>
+<span id="cb63-16"><a href="r-programming.html#cb63-16" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>){</span>
+<span id="cb63-17"><a href="r-programming.html#cb63-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Non-negative number"</span>)</span>
+<span id="cb63-18"><a href="r-programming.html#cb63-18" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">&lt;=</span> <span class="dv">0</span> <span class="sc">&amp;</span> x <span class="sc">&gt;</span> <span class="sc">-</span><span class="dv">5</span>){</span>
+<span id="cb63-19"><a href="r-programming.html#cb63-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Negative number greater than -5"</span>)</span>
+<span id="cb63-20"><a href="r-programming.html#cb63-20" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb63-21"><a href="r-programming.html#cb63-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Negative number less than -5"</span>)</span>
+<span id="cb63-22"><a href="r-programming.html#cb63-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb63-23"><a href="r-programming.html#cb63-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-24"><a href="r-programming.html#cb63-24" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb63-25"><a href="r-programming.html#cb63-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Non-negative number"</span>)</span>
+<span id="cb63-26"><a href="r-programming.html#cb63-26" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
+<span id="cb63-27"><a href="r-programming.html#cb63-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Negative number"</span>)</span></code></pre></div>
 </div>
-</div>
-<div id="ifelse-statements" class="section level2" number="4.8">
-<h2>
-<span class="header-section-number">4.8</span> ifelse statements<a class="anchor" aria-label="anchor" href="#ifelse-statements"><i class="fas fa-link"></i></a>
-</h2>
+<div id="ifelse-statements" class="section level3" number="4.6.2">
+<h3>
+<span class="header-section-number">4.6.2</span> ifelse statements<a class="anchor" aria-label="anchor" href="#ifelse-statements"><i class="fas fa-link"></i></a>
+</h3>
 <p><code>if</code>는 하나의 조건만 비교하는데 사용할 수 있습니다. 그러나 변수에는 여러 값이 벡터형식으로 들어가고 벡터연산을 수행할 경우의 결과도 벡터형식으로 나오지만 <code>if</code>문은 이들을 한 번에 처리하기 어렵습니다. <code>ifelse</code>는 이러한 단점을 보완하여 여러 값을 한번에 처리할 수 있습니다.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="r-programming.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span> (condition, True일 때 리턴값, False일 때 리턴값)</span></code></pre></div>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="r-programming.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span> (condition, True일 때 리턴값, False일 때 리턴값)</span></code></pre></div>
+<p><code>ifelse</code>의 경우 빠르게 원하는 값을 반환할 수 있으나 조건별로 다른 추가적인 명령의 수행은 불가능하다는 단점이 있습니다.</p>
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
 <span class="kw">if</span><span class="op">(</span><span class="va">x</span><span class="op">&gt;</span><span class="fl">10</span><span class="op">)</span><span class="op">{</span>
@@ -805,10 +823,8 @@ z = \frac{x - mean(x)}{sd(x)}
 <span class="op">}</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">x</span><span class="op">&gt;</span><span class="fl">10</span>, <span class="st">"Big"</span>, <span class="st">"Small"</span><span class="op">)</span></code></pre></div>
-<p>그러나 출력만 가능하며 조건별로 다른 명령 수행은 불가능하다는 단점이 있습니다.</p>
-<div id="exercise-11" class="section level4 unnumbered rmdnote">
-<h4>Exercise<a class="anchor" aria-label="anchor" href="#exercise-11"><i class="fas fa-link"></i></a>
-</h4>
+<div class="rmdnote">
+<p><strong>Exercises</strong></p>
 <p>다음은 median (중간값)을 구하는 공식이며 x의 길이가 (n이) 홀수일 경우와 짝수일 경우에 따라서 다른 공식이 사용된다. 다음 공식과 코드를 이용하여 mymedian 이라는 이름의 함수를 만들고 입력 값들의 중간값을 구해서 반환하는 함수를 만드시오. (<code>%%</code> 나머지 연산, <code>if</code>문 사용, 아래 중간값 코드 참고)</p>
 <p><span class="math display">\[
 median(X) =
@@ -817,7 +833,7 @@ median(X) =
 X[\frac{n+1}{2}] &amp; \mbox{if } n \mbox{ is odd}
 \end{cases}
 \]</span></p>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sorted_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 <span class="co"># 만약 짝수이면 </span>
 <span class="va">retval</span> <span class="op">&lt;-</span> <span class="va">sort_x</span><span class="op">[</span><span class="va">n</span><span class="op">/</span><span class="fl">2</span><span class="op">]</span><span class="op">/</span><span class="fl">2</span> <span class="op">+</span> <span class="va">sort_x</span><span class="op">[</span><span class="fl">1</span><span class="op">+</span><span class="op">(</span><span class="va">n</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span><span class="op">]</span><span class="op">/</span><span class="fl">2</span>
@@ -825,17 +841,17 @@ X[\frac{n+1}{2}] &amp; \mbox{if } n \mbox{ is odd}
 <span class="va">retval</span> <span class="op">&lt;-</span> <span class="va">sort_x</span><span class="op">[</span><span class="op">(</span><span class="va">n</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span><span class="op">]</span></code></pre></div>
 </div>
 </div>
-<div id="for-while-repeat" class="section level2" number="4.9">
-<h2>
-<span class="header-section-number">4.9</span> for, while, repeat<a class="anchor" aria-label="anchor" href="#for-while-repeat"><i class="fas fa-link"></i></a>
-</h2>
+<div id="for-while-repeat" class="section level3" number="4.6.3">
+<h3>
+<span class="header-section-number">4.6.3</span> for, while, repeat<a class="anchor" aria-label="anchor" href="#for-while-repeat"><i class="fas fa-link"></i></a>
+</h3>
 <p><code>for</code> 문은 반복적으로 특정 코드를 실행하고자 할 때 사용됩니다. 다음과 같은 형식으로 사용할 수 있습니다.</p>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">for</span><span class="op">(</span><span class="va">var</span> <span class="kw">in</span> <span class="va">seq</span><span class="op">)</span><span class="op">{</span>
   <span class="va">expression</span>
 <span class="op">}</span></code></pre></div>
 <p><code>var</code>는 반복을 돌 때마다 바뀌는 변수로 <code><a href="https://rdrr.io/r/base/Paren.html">{}</a></code> 안에서 사용되는 지역 변수 입니다. <code>seq</code>는 vector 형식의 변수로 반복을 돌 때마다 순차적으로 <code>var</code>에 저장되는 값들 입니다.</p>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>
 <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="va">x</span><span class="op">)</span><span class="op">{</span>
   <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="va">i</span>, <span class="st">"\n"</span><span class="op">)</span>
@@ -848,12 +864,12 @@ X[\frac{n+1}{2}] &amp; \mbox{if } n \mbox{ is odd}
   <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="va">i</span>, <span class="st">" "</span>, <span class="va">sum_of_i</span>, <span class="st">"\n"</span><span class="op">)</span>;<span class="fu"><a href="https://rdrr.io/r/utils/flush.console.html">flush.console</a></span><span class="op">(</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <p><code>while</code>문도 <code>for</code>문과 같이 반복적으로 특정 코드를 수행하고자 할 때 사용합니다. 사용하는 문법은 다음과 같으며 <code>cond</code>는 <code>True</code> 또는 <code>False</code> 로 반환되는 조건문을 넣고 <code>True</code> 일 경우 계속해서 반복하면서 <code>expressions</code>를 수행하며 이 반복은 <code>cond</code>가 <code>False</code>로 될 때 까지 계속됩니다.</p>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">while</span><span class="op">(</span><span class="va">cond</span><span class="op">)</span><span class="op">{</span>
   <span class="va">expression</span>
 <span class="op">}</span></code></pre></div>
 <p><code>while</code>문을 사용할 경우 다음과 같이 <code>indicator</code>라 불리우는 변수를 하나 정해서 반복 할 때마다 값이 바뀌도록 해 주어야 합니다. 그렇지 않으면 무한 루프를 돌게 되는 문제가 발생합니다.</p>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">i</span> <span class="op">&lt;-</span> <span class="fl">10</span>
 <span class="va">f</span> <span class="op">&lt;-</span> <span class="fl">1</span>
 <span class="kw">while</span><span class="op">(</span><span class="va">i</span><span class="op">&gt;</span><span class="fl">1</span><span class="op">)</span><span class="op">{</span>
@@ -864,7 +880,7 @@ X[\frac{n+1}{2}] &amp; \mbox{if } n \mbox{ is odd}
 <span class="va">f</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Special.html">factorial</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></code></pre></div>
 <p><code>repeat</code> 명령은 조건 없이 블럭 안에 있는 코드를 무조건 반복하라는 명령 입니다. 따라서 블럭 중간에 멈추기 위한 코드가 필요하고 이 명령이 <code><a href="https://rdrr.io/r/base/Control.html">break</a></code> 입니다.</p>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">repeat</span><span class="op">{</span>
   <span class="va">expressions</span>
   <span class="kw">if</span><span class="op">(</span><span class="va">cond</span><span class="op">)</span> <span class="kw">break</span>
@@ -881,12 +897,12 @@ X[\frac{n+1}{2}] &amp; \mbox{if } n \mbox{ is odd}
 <span class="va">f</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Special.html">factorial</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="avoiding-loops" class="section level2" number="4.10">
-<h2>
-<span class="header-section-number">4.10</span> Avoiding Loops<a class="anchor" aria-label="anchor" href="#avoiding-loops"><i class="fas fa-link"></i></a>
-</h2>
+<div id="avoiding-loops" class="section level3" number="4.6.4">
+<h3>
+<span class="header-section-number">4.6.4</span> Avoiding Loops<a class="anchor" aria-label="anchor" href="#avoiding-loops"><i class="fas fa-link"></i></a>
+</h3>
 <p>R에서는 가능하면 loop문을 사용하지 않는 것이 좋습니다. 이는 다른 언어들 보다 반복문이 느리게 수행된다는 이유 때문이기도 합니다. 그러나 R에서는 반복문을 수행하는 것 보다 훨씬 더 빠르게 반복문을 수행 한 것과 같은 결과를 얻을 수 있는 다양한 방법들이 제공되고 있습니다. 차차 그런 기법들에 대한 학습을 진행하도록 하겠습니다.</p>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1E7</span>
 <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>
@@ -898,10 +914,23 @@ X[\frac{n+1}{2}] &amp; \mbox{if } n \mbox{ is odd}
 <span class="op">}</span>
 <span class="va">ed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/proc.time.html">proc.time</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">ed</span><span class="op">-</span><span class="va">st</span></code></pre></div>
+<div class="rmdnote">
+<p><strong>Exercises</strong></p>
+<ol style="list-style-type: decimal">
+<li>다음 네 사람의 이름과 나이를 데이터로 갖는 <code>users</code> 변수를 (data.frame) 만드시오</li>
+</ol>
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">user_score</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">90</span>, <span class="fl">95</span>, <span class="fl">88</span>, <span class="fl">70</span><span class="op">)</span>
+<span class="va">user_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"John"</span>,<span class="st">"James"</span>,<span class="st">"Sara"</span>, <span class="st">"Lilly"</span><span class="op">)</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>각 사람의 점수가 80보다 작으면 <code>이름 점수: Fail</code> 크면 <code>이름 점수: Pass</code>를 출력을 하는 코드를 작성하시오. 예를 들어 John의 점수는 80보다 크므로 <code>John 90: Pass</code> 출력 (<code>for</code>, <code>print</code> 함수 이용)</li>
+</ol>
 </div>
-<div id="object-oriented-programming-advanced" class="section level2" number="4.11">
+</div>
+</div>
+<div id="object-oriented-programming-advanced" class="section level2" number="4.7">
 <h2>
-<span class="header-section-number">4.11</span> Object Oriented Programming (Advanced)<a class="anchor" aria-label="anchor" href="#object-oriented-programming-advanced"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.7</span> Object Oriented Programming (Advanced)<a class="anchor" aria-label="anchor" href="#object-oriented-programming-advanced"><i class="fas fa-link"></i></a>
 </h2>
 <p>OOP는 객체지향 프로그래밍 이라고 합니다. OOP를 이용해서 프로그래밍으로 풀고자 하는 문제를 좀 더 명확하게 개념을 수립하고 복잡한 코드를 명료하게 만들 수 있습니다. 그런데 R에서 OOP는 다른 언어보다는 좀 더 어려운 개념적인 이해가 필요합니다. <code>S3</code>, <code>S4</code>, 그리고 <code>Reference class</code> 가 있으며 <code>S3</code>, <code>S4</code>는 <code>Generic function</code>을 이용하며 다른 언어에서 사용하는 OOP 개념과는 다릅니다. <code>Reference class</code>는 다른 언어에서 사용하는 OOP 개념과 유사하며 <code>R6</code> 패키지를 이용해서 사용할 수 있습니다.</p>
 <hr>
@@ -911,14 +940,12 @@ X[\frac{n+1}{2}] &amp; \mbox{if } n \mbox{ is odd}
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="rmarkdown.html"><span class="header-section-number">3</span> Rmarkdown</a></div>
-<div class="empty"></div>
+<div class="next"><a href="data-transformation.html"><span class="header-section-number">5</span> Data transformation</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#r-programming"><span class="header-section-number">4</span> R programming</a></li>
-<li>
-<a class="nav-link" href="#console-calculator"><span class="header-section-number">4.1</span> Console calculator</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#exercise-1">Exercise</a></li></ul>
-</li>
+<li><a class="nav-link" href="#console-calculator"><span class="header-section-number">4.1</span> Console calculator</a></li>
 <li>
 <a class="nav-link" href="#what-is-a-programming-language"><span class="header-section-number">4.2</span> What is a programming language</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#terminology"><span class="header-section-number">4.2.1</span> Terminology</a></li></ul>
 </li>
@@ -936,20 +963,23 @@ X[\frac{n+1}{2}] &amp; \mbox{if } n \mbox{ is odd}
 <li><a class="nav-link" href="#list"><span class="header-section-number">4.4.4</span> list</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#a-script-in-r"><span class="header-section-number">4.5</span> A script in R</a></li>
 <li>
-<a class="nav-link" href="#functions"><span class="header-section-number">4.6</span> Functions</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#local-and-global-variables"><span class="header-section-number">4.6.1</span> local and global variables</a></li>
-<li><a class="nav-link" href="#vectorized-functions"><span class="header-section-number">4.6.2</span> Vectorized functions</a></li>
+<a class="nav-link" href="#functions"><span class="header-section-number">4.5</span> Functions</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#a-script-in-r"><span class="header-section-number">4.5.1</span> A script in R</a></li>
+<li><a class="nav-link" href="#build-a-function"><span class="header-section-number">4.5.2</span> Build a function</a></li>
+<li><a class="nav-link" href="#local-and-global-variables"><span class="header-section-number">4.5.3</span> local and global variables</a></li>
+<li><a class="nav-link" href="#vectorized-functions"><span class="header-section-number">4.5.4</span> Vectorized functions</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#flow-control"><span class="header-section-number">4.7</span> Flow control</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#if-statements"><span class="header-section-number">4.7.1</span> if statements</a></li></ul>
+<a class="nav-link" href="#flow-control"><span class="header-section-number">4.6</span> Flow control</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#if-statements"><span class="header-section-number">4.6.1</span> if statements</a></li>
+<li><a class="nav-link" href="#ifelse-statements"><span class="header-section-number">4.6.2</span> ifelse statements</a></li>
+<li><a class="nav-link" href="#for-while-repeat"><span class="header-section-number">4.6.3</span> for, while, repeat</a></li>
+<li><a class="nav-link" href="#avoiding-loops"><span class="header-section-number">4.6.4</span> Avoiding Loops</a></li>
+</ul>
 </li>
-<li><a class="nav-link" href="#ifelse-statements"><span class="header-section-number">4.8</span> ifelse statements</a></li>
-<li><a class="nav-link" href="#for-while-repeat"><span class="header-section-number">4.9</span> for, while, repeat</a></li>
-<li><a class="nav-link" href="#avoiding-loops"><span class="header-section-number">4.10</span> Avoiding Loops</a></li>
-<li><a class="nav-link" href="#object-oriented-programming-advanced"><span class="header-section-number">4.11</span> Object Oriented Programming (Advanced)</a></li>
+<li><a class="nav-link" href="#object-oriented-programming-advanced"><span class="header-section-number">4.7</span> Object Oriented Programming (Advanced)</a></li>
 </ul>
 
       <div class="book-extra">
@@ -967,7 +997,7 @@ X[\frac{n+1}{2}] &amp; \mbox{if } n \mbox{ is odd}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>2022년 한국생명공학연구원 연구데이터 분석과정 R</strong>" was written by 합성생물학전문연구단 김하성. It was last built on 2022-05-19.</p>
+    <p>"<strong>2022년 한국생명공학연구원 연구데이터 분석과정 R</strong>" was written by 합성생물학전문연구단 김하성. It was last built on 2022-05-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

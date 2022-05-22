@@ -37,7 +37,7 @@ mainfont : NanumGothic
 - 장소: 코빅 3층 전산교육장(1304호)
 - 강사: 한국생명공학연구원 합성생물학전문연구단 김하성
 - 연락처: 042-860-4372, haseong@kribb.re.kr 
-- 강의자료: https://greendaygh.github.io/kribb2022R/
+- 강의자료: https://greendaygh.github.io/kribbr2022/
 
 
 ## 강의 계획 {#Schedule}
