@@ -118,7 +118,7 @@
 
 \title{2022년 한국생명공학연구원 연구데이터 분석과정 R}
 \author{합성생물학전문연구단 김하성}
-\date{2022-05-22}
+\date{2022-05-31}
 
 \begin{document}
 \maketitle
@@ -2441,6 +2441,693 @@ built-in 데이터셋 중 \texttt{state.abb} 은 미국의 50개 주에대한 �
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 이 저작물은 크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제 라이선스에 따라 이용할 수 있습니다.
+
+\hypertarget{lecture-note-2}{%
+\chapter{Lecture note 2}\label{lecture-note-2}}
+
+\hypertarget{numeric-vector}{%
+\section{numeric vector}\label{numeric-vector}}
+
+\begin{itemize}
+\tightlist
+\item
+  Ctrl + Alt + i 누르면 코드청크 생성
+\item
+  커서를 해당 라인에 두구 Ctrl + Enter 누르면 해당 라인 실행
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{2} \SpecialCharTok{+} \DecValTok{2}
+\NormalTok{((}\DecValTok{2{-}1}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ (}\DecValTok{1{-}3}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{ )}\SpecialCharTok{\^{}}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)}
+\DecValTok{2} \SpecialCharTok{+} \DecValTok{2}\NormalTok{; }\DecValTok{2} \SpecialCharTok{{-}} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  기억할 단축키
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Ctrl + 1 : 편집창
+  \item
+    Ctrl + 2 : 콘솔창
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sqrt}\NormalTok{((}\DecValTok{4}\SpecialCharTok{+}\DecValTok{3}\NormalTok{)}\SpecialCharTok{*}\NormalTok{(}\DecValTok{2}\SpecialCharTok{+}\DecValTok{1}\NormalTok{))}
+\DecValTok{2}\SpecialCharTok{\^{}}\DecValTok{3} \SpecialCharTok{+} \DecValTok{3}\SpecialCharTok{\^{}}\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  변수에 값 저장하기
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{1}
+\NormalTok{y }\OtherTok{\textless{}{-}} \DecValTok{2}
+\NormalTok{z }\OtherTok{\textless{}{-}}\NormalTok{ x }\SpecialCharTok{+}\NormalTok{ y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  변수 값 보기
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x}
+\NormalTok{y}
+\NormalTok{z}
+\FunctionTok{print}\NormalTok{(x)}
+\FunctionTok{cat}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  numeric vector 만들기
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5}
+\NormalTok{x}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\AttributeTok{from=}\DecValTok{1}\NormalTok{, }\AttributeTok{to=}\DecValTok{5}\NormalTok{, }\AttributeTok{by=}\DecValTok{1}\NormalTok{)}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\AttributeTok{to=}\DecValTok{5}\NormalTok{, }\AttributeTok{from=}\DecValTok{1}\NormalTok{, }\AttributeTok{by=}\DecValTok{1}\NormalTok{)}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{1}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)}
+\NormalTok{?seq}
+\NormalTok{y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{연습문제}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{odds }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{100}\NormalTok{, }\AttributeTok{by=}\DecValTok{2}\NormalTok{)}
+\NormalTok{odds  }
+\NormalTok{evens }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{evens}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  인덱싱 (첫번째 값의 인덱스는 1부터 시작)
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{odds[}\DecValTok{1}\NormalTok{]}
+\NormalTok{odds[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{]}
+\NormalTok{i }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}
+\NormalTok{i}
+\NormalTok{odds[i]}
+\FunctionTok{dim}\NormalTok{(odds)}
+\FunctionTok{length}\NormalTok{(odds)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{precip}
+\NormalTok{?precip}
+
+\FunctionTok{head}\NormalTok{(precip)}
+\FunctionTok{str}\NormalTok{(precip)}
+\FunctionTok{dim}\NormalTok{(precip)}
+
+\NormalTok{precip[}\DecValTok{1}\NormalTok{]}
+\NormalTok{precip[}\StringTok{"Mobile"}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  logical vector
+\item
+  기본 그래픽 함수 이용하는 방법은 필요할때만 설명
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{precip}
+\FunctionTok{length}\NormalTok{(precip)}
+\FunctionTok{plot}\NormalTok{(precip)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{which} 함수 활용한 40 이상만 선택
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{precip }\SpecialCharTok{\textgreater{}} \DecValTok{40}
+\NormalTok{precip[precip }\SpecialCharTok{\textgreater{}} \DecValTok{40}\NormalTok{]}
+\NormalTok{idx }\OtherTok{\textless{}{-}}\NormalTok{ precip }\SpecialCharTok{\textgreater{}} \DecValTok{40}
+\FunctionTok{which}\NormalTok{(idx)}
+\NormalTok{myprecip }\OtherTok{\textless{}{-}}\NormalTok{ precip[}\FunctionTok{which}\NormalTok{(idx)]}
+\NormalTok{myprecip}
+\FunctionTok{plot}\NormalTok{(myprecip)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  짝수 만들기 (which사용)
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mynumers }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{1000}
+\NormalTok{mynumers\_res }\OtherTok{\textless{}{-}}\NormalTok{ mynumers }\SpecialCharTok{\%\%} \DecValTok{2}
+\NormalTok{i }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(mynumers\_res }\SpecialCharTok{==} \DecValTok{0}\NormalTok{)}
+\NormalTok{evens }\OtherTok{\textless{}{-}}\NormalTok{ mynumers[i]}
+\NormalTok{evens}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  홀수 값을 저장하는 벡터도 동일하게 만들고 하나씩 샘플링
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{odds }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1000}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\FunctionTok{length}\NormalTok{(evens)}
+\FunctionTok{length}\NormalTok{(odds)}
+\NormalTok{?sample}
+\NormalTok{mysample }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FunctionTok{sample}\NormalTok{(evens, }\DecValTok{1}\NormalTok{), }\FunctionTok{sample}\NormalTok{(odds, }\DecValTok{1}\NormalTok{))}
+\FunctionTok{print}\NormalTok{(mysample[}\DecValTok{1}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  기본
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{paste}\NormalTok{(}\StringTok{"X"}\NormalTok{, }\StringTok{"Y"}\NormalTok{, }\StringTok{"Z"}\NormalTok{, }\AttributeTok{sep=}\StringTok{"\_"}\NormalTok{)}
+\FunctionTok{paste}\NormalTok{(}\StringTok{"X"}\NormalTok{, }\StringTok{"Y"}\NormalTok{, }\StringTok{"Z"}\NormalTok{, }\AttributeTok{sep=}\StringTok{""}\NormalTok{)}
+\FunctionTok{paste}\NormalTok{(}\StringTok{"X"}\NormalTok{, }\StringTok{"Y"}\NormalTok{, }\StringTok{"Z"}\NormalTok{, }\StringTok{"X"}\NormalTok{, }\StringTok{"Y"}\NormalTok{, }\StringTok{"Z"}\NormalTok{, }\StringTok{"X"}\NormalTok{, }\AttributeTok{sep=}\StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  여러 벡터에서 각각의 원소를 붙여주는 기능능
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{paste}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"X"}\NormalTok{,}\StringTok{"Y"}\NormalTok{), }\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{, }\AttributeTok{sep=}\StringTok{""}\NormalTok{)}
+
+\NormalTok{gene\_names }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\StringTok{"gene"}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{100}\NormalTok{, }\AttributeTok{sep=}\StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  collapse (하나의 벡터에서 해당 벡터의 원소를 붙여주는 기능)
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{paste}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"X"}\NormalTok{, }\StringTok{"Y"}\NormalTok{), }\AttributeTok{collapse =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  예제 (\texttt{sample()}, \texttt{paste()}, \texttt{rep()})
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"C"}\NormalTok{, }\StringTok{"G"}\NormalTok{, }\StringTok{"T"}\NormalTok{), }\AttributeTok{size=}\DecValTok{20}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ T)}
+\NormalTok{x2 }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(x, }\AttributeTok{collapse =} \StringTok{""}\NormalTok{)}
+
+\NormalTok{myseq }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\StringTok{""}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\NormalTok{myseq[}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\FunctionTok{sample}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"C"}\NormalTok{, }\StringTok{"G"}\NormalTok{, }\StringTok{"T"}\NormalTok{), }\AttributeTok{size=}\DecValTok{20}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ T), }\AttributeTok{collapse=}\StringTok{""}\NormalTok{)}
+\NormalTok{myseq[}\DecValTok{2}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\FunctionTok{sample}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"C"}\NormalTok{, }\StringTok{"G"}\NormalTok{, }\StringTok{"T"}\NormalTok{), }\AttributeTok{size=}\DecValTok{20}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ T), }\AttributeTok{collapse=}\StringTok{""}\NormalTok{)}
+\NormalTok{myseq[}\DecValTok{3}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\FunctionTok{sample}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"C"}\NormalTok{, }\StringTok{"G"}\NormalTok{, }\StringTok{"T"}\NormalTok{), }\AttributeTok{size=}\DecValTok{20}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ T), }\AttributeTok{collapse=}\StringTok{""}\NormalTok{)}
+\NormalTok{myseq[}\DecValTok{4}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\FunctionTok{sample}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"C"}\NormalTok{, }\StringTok{"G"}\NormalTok{, }\StringTok{"T"}\NormalTok{), }\AttributeTok{size=}\DecValTok{20}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ T), }\AttributeTok{collapse=}\StringTok{""}\NormalTok{)}
+\NormalTok{myseq[}\DecValTok{5}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\FunctionTok{sample}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"C"}\NormalTok{, }\StringTok{"G"}\NormalTok{, }\StringTok{"T"}\NormalTok{), }\AttributeTok{size=}\DecValTok{20}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ T), }\AttributeTok{collapse=}\StringTok{""}\NormalTok{)}
+
+\NormalTok{myseq}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  `TAAGTCT' 바코드를 각 서열의 3'에 붙여보기
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{paste}\NormalTok{(myseq, }\FunctionTok{c}\NormalTok{(}\StringTok{"TAAGTCT"}\NormalTok{), }\AttributeTok{sep=}\StringTok{""}\NormalTok{)}
+\FunctionTok{strsplit}\NormalTok{(}\StringTok{"XYZ"}\NormalTok{, }\AttributeTok{split=}\StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  split
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{strsplit}\NormalTok{(}\StringTok{"XYZ"}\NormalTok{, }\AttributeTok{split=}\StringTok{""}\NormalTok{)}
+\FunctionTok{class}\NormalTok{(x)}
+\NormalTok{x}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{unlist}\NormalTok{(x)}
+\FunctionTok{class}\NormalTok{(y)}
+\NormalTok{y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  factor
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Red"}\NormalTok{, }\StringTok{"Blue"}\NormalTok{, }\StringTok{"Yellow"}\NormalTok{, }\StringTok{"Red"}\NormalTok{, }\StringTok{"Blue"}\NormalTok{)}
+\NormalTok{x}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(x)}
+\NormalTok{y}
+\NormalTok{y[}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"gold"}
+
+\FunctionTok{levels}\NormalTok{(y)[}\DecValTok{4}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"gold"}
+\NormalTok{y}
+\NormalTok{y[}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"gold"}
+\NormalTok{y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  예제
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(MASS)}
+\NormalTok{Cars93}
+\FunctionTok{str}\NormalTok{(Cars93)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  예제
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{aa }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Phe"}\NormalTok{, }\StringTok{"Leu"}\NormalTok{, }\StringTok{"Ser"}\NormalTok{)}
+\FunctionTok{class}\NormalTok{(aa)}
+\NormalTok{aa }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(aa)}
+\FunctionTok{class}\NormalTok{(aa)}
+
+\NormalTok{aa }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
+\NormalTok{aa[[}\DecValTok{1}\NormalTok{]] }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"UUU"}\NormalTok{, }\StringTok{"UUC"}\NormalTok{)}
+\NormalTok{aa}
+\NormalTok{aa[[}\DecValTok{2}\NormalTok{]] }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"UUA"}\NormalTok{, }\StringTok{"UUG"}\NormalTok{, }\StringTok{"CUA"}\NormalTok{, }\StringTok{"CUU"}\NormalTok{, }\StringTok{"CUG"}\NormalTok{, }\StringTok{"CUC"}\NormalTok{)}
+\NormalTok{aa}
+\FunctionTok{class}\NormalTok{(aa)}
+\FunctionTok{names}\NormalTok{(aa) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Phe"}\NormalTok{, }\StringTok{"Leu"}\NormalTok{)}
+\NormalTok{aa}
+\NormalTok{aa[[}\DecValTok{1}\NormalTok{]][}\DecValTok{1}\NormalTok{]}
+\NormalTok{aa[[}\DecValTok{2}\NormalTok{]][}\DecValTok{3}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  useful functions
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{z }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{, }\DecValTok{100}\NormalTok{, T)}
+\NormalTok{?sample}
+\NormalTok{z}
+\FunctionTok{head}\NormalTok{(z)}
+\FunctionTok{sort}\NormalTok{(z)}
+\FunctionTok{order}\NormalTok{(z)}
+\FunctionTok{table}\NormalTok{(z)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{matrix-1}{%
+\section{matrix}\label{matrix-1}}
+
+\begin{itemize}
+\tightlist
+\item
+  연습문제 - 성적별 테이블 정렬렬
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mynum }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{100}\NormalTok{, }\DecValTok{20}\NormalTok{, T)}
+\NormalTok{mynum}
+\NormalTok{score }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(mynum, }\AttributeTok{nrow =} \DecValTok{10}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{2}\NormalTok{)}
+\NormalTok{score}
+\NormalTok{myrowname }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\StringTok{"Name"}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{, }\AttributeTok{sep=}\StringTok{""}\NormalTok{)}
+\NormalTok{myrowname}
+\FunctionTok{rownames}\NormalTok{(score) }\OtherTok{\textless{}{-}}\NormalTok{ myrowname}
+\NormalTok{score}
+\FunctionTok{colnames}\NormalTok{(score) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Math"}\NormalTok{, }\StringTok{"Eng"}\NormalTok{)}
+
+\NormalTok{total\_score }\OtherTok{\textless{}{-}}\NormalTok{ score[,}\DecValTok{1}\NormalTok{] }\SpecialCharTok{+}\NormalTok{ score[,}\DecValTok{2}\NormalTok{]}
+\NormalTok{total\_score }\OtherTok{\textless{}{-}}\NormalTok{ score[,}\StringTok{"Math"}\NormalTok{] }\SpecialCharTok{+}\NormalTok{ score[,}\StringTok{"Eng"}\NormalTok{]}
+\FunctionTok{sort}\NormalTok{(total\_score, }\AttributeTok{decreasing =}\NormalTok{ T)}
+\NormalTok{score}
+\NormalTok{o }\OtherTok{\textless{}{-}} \FunctionTok{order}\NormalTok{(total\_score, }\AttributeTok{decreasing =}\NormalTok{ T)}
+\NormalTok{o}
+\NormalTok{score[o,]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{data.frame-1}{%
+\section{data.frame}\label{data.frame-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{math\_score }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{100}\NormalTok{, }\DecValTok{10}\NormalTok{, T)}
+\NormalTok{eng\_score }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{100}\NormalTok{, }\DecValTok{10}\NormalTok{, T)}
+\NormalTok{score }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(math\_score, eng\_score)}
+\NormalTok{score}
+\NormalTok{score}\SpecialCharTok{$}\NormalTok{math\_score}
+\NormalTok{score}\SpecialCharTok{$}\NormalTok{eng\_score}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  연습문제: 수학, 영어 성적을 더해서 \texttt{total\_score}를 만들고 이 값을 기준으로 내림차순으로 score 데이터프레임을 정렬 하시오.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{total\_score }\OtherTok{\textless{}{-}}\NormalTok{ score}\SpecialCharTok{$}\NormalTok{math\_score }\SpecialCharTok{+}\NormalTok{ score}\SpecialCharTok{$}\NormalTok{eng\_score}
+\NormalTok{o }\OtherTok{\textless{}{-}} \FunctionTok{order}\NormalTok{(total\_score, }\AttributeTok{decreasing =}\NormalTok{ T)}
+\NormalTok{score[o,]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{list-1}{%
+\section{list}\label{list-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{score}
+\FunctionTok{class}\NormalTok{(score)}
+\NormalTok{mynum}
+\FunctionTok{class}\NormalTok{(mynum)}
+
+\NormalTok{z }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
+\NormalTok{z[[}\DecValTok{1}\NormalTok{]] }\OtherTok{\textless{}{-}}\NormalTok{ score}
+\NormalTok{z[[}\DecValTok{2}\NormalTok{]] }\OtherTok{\textless{}{-}}\NormalTok{ mynum}
+\NormalTok{z}
+\FunctionTok{names}\NormalTok{(z) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"dataframe"}\NormalTok{, }\StringTok{"numericvector"}\NormalTok{)}
+\NormalTok{z}
+\NormalTok{z}\SpecialCharTok{$}\NormalTok{dataframe}
+\NormalTok{z}\SpecialCharTok{$}\NormalTok{numericvector}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  리스트 만들때 미리 원소의 개수를 알고 있으면 그 원소의 개수에 맞게 생성해 주는 것이 좋음 \texttt{aa\ \textless{}-\ vector("list",\ 5)}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{aa }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
+\NormalTok{aa[[}\DecValTok{1}\NormalTok{]] }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"UUU"}\NormalTok{, }\StringTok{"UUC"}\NormalTok{)}
+\NormalTok{aa}
+\NormalTok{aa[[}\DecValTok{2}\NormalTok{]] }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"UUA"}\NormalTok{, }\StringTok{"UUG"}\NormalTok{, }\StringTok{"CUA"}\NormalTok{, }\StringTok{"CUU"}\NormalTok{, }\StringTok{"CUG"}\NormalTok{, }\StringTok{"CUC"}\NormalTok{)}
+\NormalTok{aa}
+\FunctionTok{class}\NormalTok{(aa)}
+\FunctionTok{names}\NormalTok{(aa) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Phe"}\NormalTok{, }\StringTok{"Leu"}\NormalTok{)}
+\NormalTok{aa}
+
+\FunctionTok{as.data.frame}\NormalTok{(aa)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  바람직한 데이터 변환예시: data column은 변수, row는 샘플. 예를 들어서, 변수:먹이, 수명, 샘플: 마우스1, 마우스2, \ldots{}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{aa }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Phe"}\NormalTok{, }\StringTok{"Leu"}\NormalTok{)}
+\NormalTok{codon }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"UUU"}\NormalTok{, }\StringTok{"UUC"}\NormalTok{, }\StringTok{"UUA"}\NormalTok{, }\StringTok{"UUG"}\NormalTok{, }\StringTok{"CUA"}\NormalTok{, }\StringTok{"CUU"}\NormalTok{, }\StringTok{"CUG"}\NormalTok{, }\StringTok{"CUC"}\NormalTok{)}
+\FunctionTok{data.frame}\NormalTok{(aa, codon)}
+\NormalTok{aa }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\StringTok{"Phe"}\NormalTok{, }\DecValTok{2}\NormalTok{), }\FunctionTok{rep}\NormalTok{(}\StringTok{"Leu"}\NormalTok{,}\DecValTok{6}\NormalTok{))}
+\NormalTok{codon }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"UUU"}\NormalTok{, }\StringTok{"UUC"}\NormalTok{, }\StringTok{"UUA"}\NormalTok{, }\StringTok{"UUG"}\NormalTok{, }\StringTok{"CUA"}\NormalTok{, }\StringTok{"CUU"}\NormalTok{, }\StringTok{"CUG"}\NormalTok{, }\StringTok{"CUC"}\NormalTok{)}
+\FunctionTok{data.frame}\NormalTok{(aa, codon)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{functions-1}{%
+\section{functions}\label{functions-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\FunctionTok{source}\NormalTok{(}\StringTok{"myscript.R"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{source}\NormalTok{(}\StringTok{"myscript.R"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  함수만들기
+\end{itemize}
+
+\begin{verbatim}
+my_function_name <- function(parameter1, parameter2, ... ){
+  ##any statements
+  return(object)
+}
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\DocumentationTok{\#\# mynumers: numeric vector}
+\NormalTok{mymean }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(mynumers)\{}
+  \CommentTok{\#cat("Input numbers are", mynumers, "\textbackslash{}n")}
+\NormalTok{  numbers\_mean }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(mynumers)}\SpecialCharTok{/}\FunctionTok{length}\NormalTok{(mynumers)}
+  \CommentTok{\#out \textless{}{-} paste("The average is ", numbers\_mean, ".\textbackslash{}n", sep="")}
+  \CommentTok{\#cat(out)}
+  \FunctionTok{return}\NormalTok{(numbers\_mean)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  함수 만든 후 loading 할 때 \texttt{\{}, \texttt{\}} 밖에서 Ctrl + Enter로 로딩딩
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mymean}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{))}
+
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\FloatTok{0.452}\NormalTok{, }\FloatTok{1.474}\NormalTok{, }\FloatTok{0.22}\NormalTok{, }\FloatTok{0.545}\NormalTok{, }\FloatTok{1.205}\NormalTok{, }\FloatTok{3.55}\NormalTok{)}
+\FunctionTok{mymean}\NormalTok{(x)}
+
+\FunctionTok{mymean}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  데이터 표준화 예제
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mysd }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x)\{}
+\NormalTok{  numbers\_sd }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{sum}\NormalTok{((x }\SpecialCharTok{{-}} \FunctionTok{mymean}\NormalTok{(x))}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}\SpecialCharTok{/}\NormalTok{(}\FunctionTok{length}\NormalTok{(x)}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{))  }
+  \FunctionTok{return}\NormalTok{(numbers\_sd)}
+\NormalTok{\}}
+
+\CommentTok{\#x \textless{}{-} sample(1:100, 1000, T)}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{1000}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\NormalTok{z }\OtherTok{\textless{}{-}}\NormalTok{ (x }\SpecialCharTok{{-}} \FunctionTok{mymean}\NormalTok{(x))}\SpecialCharTok{/}\FunctionTok{mysd}\NormalTok{(x)}
+\FunctionTok{mymean}\NormalTok{(z)}
+\FunctionTok{mysd}\NormalTok{(z)}
+\FunctionTok{mymean}\NormalTok{(x)}
+\FunctionTok{mysd}\NormalTok{(x)}
+
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{density}\NormalTok{(x))}
+\FunctionTok{density}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  코드비교
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{30}\NormalTok{)}
+\NormalTok{x }\SpecialCharTok{+} \DecValTok{10}
+
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{3}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{)\{}
+\NormalTok{  y[i] }\OtherTok{\textless{}{-}}\NormalTok{ x[i] }\SpecialCharTok{+} \DecValTok{10}
+\NormalTok{\}}
+\NormalTok{y}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{for}{%
+\section{for}\label{for}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in}\NormalTok{ x)\{}
+  \FunctionTok{cat}\NormalTok{(i, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+  \FunctionTok{flush.console}\NormalTok{()}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{1}
+\ControlFlowTok{while}\NormalTok{(x }\SpecialCharTok{\textless{}=} \DecValTok{10}\NormalTok{)\{}
+  \FunctionTok{cat}\NormalTok{(x, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+  \FunctionTok{flush.console}\NormalTok{()}
+\NormalTok{  x }\OtherTok{\textless{}{-}}\NormalTok{ x }\SpecialCharTok{+} \DecValTok{1}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  예제 서열만들기
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"C"}\NormalTok{, }\StringTok{"G"}\NormalTok{, }\StringTok{"T"}\NormalTok{), }\AttributeTok{size=}\DecValTok{20}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ T)}
+\NormalTok{x2 }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(x, }\AttributeTok{collapse =} \StringTok{""}\NormalTok{)}
+
+\NormalTok{myseq }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\StringTok{""}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\NormalTok{myseq[}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\FunctionTok{sample}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"C"}\NormalTok{, }\StringTok{"G"}\NormalTok{, }\StringTok{"T"}\NormalTok{), }\AttributeTok{size=}\DecValTok{20}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ T), }\AttributeTok{collapse=}\StringTok{""}\NormalTok{)}
+\NormalTok{myseq[}\DecValTok{2}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\FunctionTok{sample}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"C"}\NormalTok{, }\StringTok{"G"}\NormalTok{, }\StringTok{"T"}\NormalTok{), }\AttributeTok{size=}\DecValTok{20}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ T), }\AttributeTok{collapse=}\StringTok{""}\NormalTok{)}
+\NormalTok{myseq[}\DecValTok{3}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\FunctionTok{sample}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"C"}\NormalTok{, }\StringTok{"G"}\NormalTok{, }\StringTok{"T"}\NormalTok{), }\AttributeTok{size=}\DecValTok{20}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ T), }\AttributeTok{collapse=}\StringTok{""}\NormalTok{)}
+\NormalTok{myseq[}\DecValTok{4}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\FunctionTok{sample}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"C"}\NormalTok{, }\StringTok{"G"}\NormalTok{, }\StringTok{"T"}\NormalTok{), }\AttributeTok{size=}\DecValTok{20}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ T), }\AttributeTok{collapse=}\StringTok{""}\NormalTok{)}
+\NormalTok{myseq[}\DecValTok{5}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\FunctionTok{sample}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"C"}\NormalTok{, }\StringTok{"G"}\NormalTok{, }\StringTok{"T"}\NormalTok{), }\AttributeTok{size=}\DecValTok{20}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ T), }\AttributeTok{collapse=}\StringTok{""}\NormalTok{)}
+
+
+\NormalTok{numseq }\OtherTok{\textless{}{-}} \DecValTok{7}
+\NormalTok{myseq }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\StringTok{""}\NormalTok{, numseq)}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(myseq))\{}
+\NormalTok{  x }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"C"}\NormalTok{, }\StringTok{"G"}\NormalTok{, }\StringTok{"T"}\NormalTok{), }\AttributeTok{size=}\DecValTok{20}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ T)}
+\NormalTok{  myseq[i] }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(x, }\AttributeTok{collapse=}\StringTok{""}\NormalTok{)}
+\NormalTok{\}}
+\NormalTok{myseq}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{datatransform-example}{%
+\section{Datatransform example}\label{datatransform-example}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(UsingR)}
+\FunctionTok{head}\NormalTok{(babies)}
+\FunctionTok{str}\NormalTok{(babies)}
+
+
+\NormalTok{new\_babies }\OtherTok{\textless{}{-}} \FunctionTok{within}\NormalTok{(babies, \{}
+\NormalTok{  gestation[gestation}\SpecialCharTok{==}\DecValTok{999}\NormalTok{] }\OtherTok{\textless{}{-}} \ConstantTok{NA}
+\NormalTok{  dwt[dwt}\SpecialCharTok{==}\DecValTok{999}\NormalTok{] }\OtherTok{\textless{}{-}} \ConstantTok{NA}
+\NormalTok{  smoke }\OtherTok{=} \FunctionTok{factor}\NormalTok{(smoke)}
+  \FunctionTok{levels}\NormalTok{(smoke) }\OtherTok{=} \FunctionTok{list}\NormalTok{(}
+    \StringTok{"never"} \OtherTok{=} \DecValTok{0}\NormalTok{, }
+    \StringTok{"smoke now"} \OtherTok{=} \DecValTok{1}\NormalTok{, }
+    \StringTok{"until current pregnancy"} \OtherTok{=} \DecValTok{2}\NormalTok{,}
+    \StringTok{"once did, not now"} \OtherTok{=} \DecValTok{3}\NormalTok{)}
+\NormalTok{  \})}
+\FunctionTok{str}\NormalTok{(new\_babies)}
+
+\NormalTok{fit }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(gestation}\SpecialCharTok{\textasciitilde{}}\NormalTok{smoke, new\_babies)}
+\FunctionTok{summary}\NormalTok{(fit) }\DocumentationTok{\#\# t{-}test 결과 }
+\FunctionTok{anova}\NormalTok{(fit)}
+\end{Highlighting}
+\end{Shaded}
+
 
   \bibliography{book.bib,packages.bib}
 

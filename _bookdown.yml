@@ -3,6 +3,7 @@ rmd_files: ["index.Rmd",
             "02-Rmarkdown.Rmd",
             "03-Rprogramming.Rmd",
             "04-Rdatatrans.Rmd",
+            "KRIBBR2022-Lecture2-haseong.Rmd",
             ]
 book_filename: "kribbr2022"
 repo: https://github.com/greendaygh/kribbr2022/
