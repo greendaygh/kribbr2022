@@ -112,13 +112,13 @@
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
   pdftitle={2022년 한국생명공학연구원 연구데이터 분석과정 R},
-  pdfauthor={합성생물학전문연구단 김하성},
+  pdfauthor={합성생물학전문연구소 김하성},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
 \title{2022년 한국생명공학연구원 연구데이터 분석과정 R}
-\author{합성생물학전문연구단 김하성}
-\date{2022-05-31}
+\author{합성생물학전문연구소 김하성}
+\date{2022-06-08}
 
 \begin{document}
 \maketitle
@@ -2438,12 +2438,154 @@ built-in 데이터셋 중 \texttt{state.abb} 은 미국의 50개 주에대한 �
   state.abb에 사용된 알파벳의 갯수를 구하고 가장 많이 쓰인 알파벳을 구하시오 (\texttt{strsplit()}, \texttt{table()} 등 사용)
 \end{enumerate}
 
+\hypertarget{apply}{%
+\section{apply}\label{apply}}
+
+\texttt{apply}는 데이터를 변형하기 위한 함수라기 보다는 데이터를 다룰 때 각 원소별, 그룹별, row, 또는 column 별로 반복적으로 수행되는 작업을 효율적으로 수행할 수 있도록 해주는 함수입니다. \texttt{apply} 계열의 함수를 적절히 사용하면 효율성이나 편리성 뿐만 아니라 코드의 간결성 등 많은 장점이 있습니다. 쉬운 이해를 위해 \texttt{colMean} 함수를 예로 들면 \texttt{colMean}은 column 또는 row 단위로 해당하는 모든 값들에 대해 평균을 계산해주는 함수이고 \texttt{apply}를 사용할 경우 다음과 같이 \texttt{apply} 함수와 \texttt{mean} 함수를 이용해서 같은 기능을 수행할 수 있습니다. 아래는 \texttt{babies} 데이터의 clearning 된 (위에서 만들었던) \texttt{new\_babies} 데이터에 이어서 수행되는 내용입니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(UsingR)}
+\FunctionTok{head}\NormalTok{(babies)}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(babies, }\AttributeTok{select=}\FunctionTok{c}\NormalTok{(gestation, wt, dwt))}
+\FunctionTok{colMeans}\NormalTok{(df, }\AttributeTok{na.rm=}\NormalTok{T)}
+\FunctionTok{apply}\NormalTok{(df, }\DecValTok{2}\NormalTok{, mean, }\AttributeTok{na.rm=}\NormalTok{T)}
+\end{Highlighting}
+\end{Shaded}
+
+위와 같이 \texttt{colMeans}와 \texttt{apply}가 똑같은 결과를 보여주고 있습니다. 두 번째 인자인 margin의 값으로 (\texttt{?apply}참고) 여기서는 \texttt{2}가 사용되었으며 margin 값이 1인지 2인지에 따라서 다음과 같이 작동을 합니다.
+
+\includegraphics[width=4.16667in,height=\textheight]{images/07/01.png}
+
+\texttt{mean}외에도 다양한 함수들이 사용될 수 있으며 아래와 같이 임의의 함수를 만들어서 사용할 수 도 있습니다. 아래 코드에서는 \texttt{function(x)...}로 바로 함수의 정의를 넣어서 사용했으나 그 아래 \texttt{mysd} 함수와 같이 미리 함수 하나를 만들고 난 후 함수 이름을 이용해서 \texttt{apply}를 적용할 수 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\FunctionTok{apply}\NormalTok{(df, }\DecValTok{2}\NormalTok{, sd, }\AttributeTok{na.rm=}\NormalTok{T)}
+\FunctionTok{apply}\NormalTok{(df, }\DecValTok{2}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(x)\{ }
+\NormalTok{  xmean }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(x, }\AttributeTok{na.rm=}\NormalTok{T) }
+  \FunctionTok{return}\NormalTok{(xmean)}
+\NormalTok{  \})}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{apply} 함수는 특히 R에서 느리게 작동하는 loop (\texttt{for}, \texttt{while} 등) 문 대신 사용되어 큰 행렬에 대해서도 빠른 계산 속도를 보여줄 수 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{40}
+\NormalTok{m }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{100}\NormalTok{, n, }\AttributeTok{replace=}\NormalTok{T), }\AttributeTok{ncol=}\DecValTok{4}\NormalTok{)}
+\NormalTok{mysd }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x)\{}
+\NormalTok{  xmean }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(x)}\SpecialCharTok{/}\FunctionTok{length}\NormalTok{(x)}
+\NormalTok{  tmpdif }\OtherTok{\textless{}{-}}\NormalTok{ x}\SpecialCharTok{{-}}\NormalTok{xmean}
+\NormalTok{  xvar }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(tmpdif}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}\SpecialCharTok{/}\NormalTok{(}\FunctionTok{length}\NormalTok{(x)}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)}
+\NormalTok{  xsd }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{(xvar)}
+  \FunctionTok{return}\NormalTok{(xsd)}
+\NormalTok{\}}
+
+\DocumentationTok{\#\# for }
+\NormalTok{results }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(m))}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(m))\{}
+\NormalTok{  results[i] }\OtherTok{\textless{}{-}} \FunctionTok{mysd}\NormalTok{(m[i,])}
+\NormalTok{\}}
+\FunctionTok{print}\NormalTok{(results)}
+\FunctionTok{apply}\NormalTok{(m, }\DecValTok{1}\NormalTok{, mysd)}
+\FunctionTok{apply}\NormalTok{(m, }\DecValTok{1}\NormalTok{, sd)}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{apply} 함수 외에도 \texttt{sapply}, \texttt{lapply}, \texttt{mapply} 등의 다양한 \texttt{apply}계열 함수가 쓰일 수 있습니다. 먼저 \texttt{lapply}는 \texttt{matrix} 형태 데이터가 아닌 \texttt{list} 데이터에 사용되어 각 \texttt{list} 원소별로 주어진 기능을 반복해서 수행하며 \texttt{sapply}는 \texttt{lapply}와 유사하나 벡터, 리스트, 데이터프레임 등에 함수를 적용할 수 있고 그 결과를 벡터 또는 행렬로 반환합니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{a=}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{, }\AttributeTok{b=}\FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{3}\SpecialCharTok{:}\DecValTok{3}\NormalTok{), }\AttributeTok{logic=}\FunctionTok{c}\NormalTok{(T,T,F,T))}
+\FunctionTok{mean}\NormalTok{(x}\SpecialCharTok{$}\NormalTok{a)}
+\FunctionTok{lapply}\NormalTok{(x, mean)}
+\FunctionTok{sapply}\NormalTok{(x, mean)}
+
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{a=}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{, }\AttributeTok{b=}\FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{4}\SpecialCharTok{:}\DecValTok{5}\NormalTok{))}
+\FunctionTok{sapply}\NormalTok{(x, mean)}
+
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{16}\NormalTok{)}
+\FunctionTok{sapply}\NormalTok{(x, sqrt)}
+\FunctionTok{sqrt}\NormalTok{(x)}
+
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{)}
+\FunctionTok{sapply}\NormalTok{(y, }\ControlFlowTok{function}\NormalTok{(x)\{}\DecValTok{2}\SpecialCharTok{*}\NormalTok{x\})}
+\NormalTok{y}\SpecialCharTok{*}\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+마지막 예제에서처럼 \texttt{sapply}나 \texttt{lapply}도 임의의 함수를 만들어 적용시킬 수도 있습니다. 자세히 살펴 보면 y는 10개의 값을 갖는 벡터이고 이 벡터의 각 원소 (값에) 함수를 반복해서 적용하는 것 입니다. 함수에서 \texttt{x}는 각 원소의 값을 차례차례 받는 역할을 하므로 1부터 10까지 값이 함수로 들어가 2를 곱한 수가 반환됩니다. 따라서 벡터연산을 하는 \texttt{y*2}와 결과가 같으나 원하는 함수를 정의해서 자유롭게 사용할 수 있다는 장점이 있습니다. 리스트의 경우는 다음과 같이 사용합니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{a=}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{, }\AttributeTok{b=}\FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{3}\SpecialCharTok{:}\DecValTok{3}\NormalTok{), }\AttributeTok{logic=}\FunctionTok{c}\NormalTok{(T,T,F,T))}
+\NormalTok{myfunc }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x)\{}
+  \FunctionTok{return}\NormalTok{(}\FunctionTok{mean}\NormalTok{(x, }\AttributeTok{na.rm=}\NormalTok{T))}
+\NormalTok{\}}
+\FunctionTok{lapply}\NormalTok{(y, myfunc)}
+\FunctionTok{unlist}\NormalTok{(}\FunctionTok{lapply}\NormalTok{(y, myfunc))}
+\end{Highlighting}
+\end{Shaded}
+
+즉, \texttt{myfunc}의 \texttt{x}가 list y의 각 원소들, y{[}{[}1{]}{]}, y{[}{[}2{]}{]}, y{[}{[}3{]}{]}를 각각 받아서 \texttt{mean} 연산을 수행해 줍니다. 결과로 각 \texttt{list} 원소들의 평균 값이 반환되며 \texttt{unlist} 함수는 \texttt{list} 형태의 반환 값을 \texttt{vector} 형태로 전환해 줍니다.
+
+\textbf{Exercises}
+
+다음은 앞에서 수행했던 \texttt{airquality} 데이터를 월별로 나눈 데이터셋임. 이 데이터셋을 이용하여 각 월별로 온도와 오존 농도의 평균값을 저장한 \texttt{data.frame} 형식의 데이터를 만들기 위하여 다음 단계별 과정에 적절한 코드를 작성하시오
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# dataset}
+\NormalTok{g }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(airquality}\SpecialCharTok{$}\NormalTok{month)}
+\NormalTok{airq\_split }\OtherTok{\textless{}{-}} \FunctionTok{split}\NormalTok{(airquality, g)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  다음 \texttt{df}의 \texttt{ozone} 평균을 구하는 \texttt{ozone\_func} 함수를 작성하시오 (단 입력은 \texttt{data.frame} 형식의 오브젝트를 받고 출력은 평균값 (정수 값 하나) 출력. \texttt{mean} 함수 사용시 데이터에 \texttt{NA}가 포함되어 있을 경우 \texttt{na.rm=T} 옵션 적용)
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# May data.frame}
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ airq\_split[[}\DecValTok{1}\NormalTok{]]}
+\CommentTok{\#}
+\CommentTok{\# write your code here for ozone\_func function}
+\CommentTok{\#}
+
+\DocumentationTok{\#\# Usage}
+\FunctionTok{ozone\_func}\NormalTok{(df)}
+\DocumentationTok{\#\# output}
+\CommentTok{\# 23.61538}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{1}
+\item
+  \texttt{lapply}와 \texttt{ozone\_func} 함수를 사용하여 \texttt{airq\_split} list 데이터의 월별 \texttt{ozone} 평균 값을 구하고 \texttt{ozone\_means}에 \texttt{vector} 형식으로 저장하시오
+\item
+  위 1), 2)와 같은 방법으로 \texttt{temp\_func} 함수를 만들고 월별 \texttt{temp}의 평균값을 \texttt{temp\_means}에 \texttt{vector} 형식으로 저장하시오.
+\item
+  위에서 구해진 두 변수값들을 이용하여 \texttt{air\_means} 라는 이름의 \texttt{data.frame}으로 저장하시오
+\end{enumerate}
+
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 이 저작물은 크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제 라이선스에 따라 이용할 수 있습니다.
 
 \hypertarget{lecture-note-2}{%
 \chapter{Lecture note 2}\label{lecture-note-2}}
+
+설명이나 실습을 위해 \texttt{R\ 사용법\ 및\ 데이터\ 분석\ 기초\ 5.19(목),\ 5.26(목)} 강의를 진행하며 작성한 코드입니다.
 
 \hypertarget{numeric-vector}{%
 \section{numeric vector}\label{numeric-vector}}
@@ -2537,7 +2679,7 @@ built-in 데이터셋 중 \texttt{state.abb} 은 미국의 50개 주에대한 �
 \begin{itemize}
 \tightlist
 \item
-  \textbf{연습문제}
+  연습문제 풀이
 \end{itemize}
 
 \begin{Shaded}
@@ -2552,7 +2694,7 @@ built-in 데이터셋 중 \texttt{state.abb} 은 미국의 50개 주에대한 �
 \begin{itemize}
 \tightlist
 \item
-  인덱싱 (첫번째 값의 인덱스는 1부터 시작)
+  vector의 인덱싱 (첫번째 값의 인덱스는 1부터 시작)
 \end{itemize}
 
 \begin{Shaded}
@@ -2585,7 +2727,7 @@ built-in 데이터셋 중 \texttt{state.abb} 은 미국의 50개 주에대한 �
 \begin{itemize}
 \tightlist
 \item
-  logical vector
+  logical vector 설명
 \item
   기본 그래픽 함수 이용하는 방법은 필요할때만 설명
 \end{itemize}
@@ -2619,7 +2761,7 @@ built-in 데이터셋 중 \texttt{state.abb} 은 미국의 50개 주에대한 �
 \begin{itemize}
 \tightlist
 \item
-  짝수 만들기 (which사용)
+  \texttt{which}함수 활용한 짝수 만들기
 \end{itemize}
 
 \begin{Shaded}
@@ -2635,7 +2777,7 @@ built-in 데이터셋 중 \texttt{state.abb} 은 미국의 50개 주에대한 �
 \begin{itemize}
 \tightlist
 \item
-  홀수 값을 저장하는 벡터도 동일하게 만들고 하나씩 샘플링
+  홀수 값을 저장하는 벡터 만들고 하나씩 샘플링 (\texttt{sample} 함수 사용)
 \end{itemize}
 
 \begin{Shaded}
@@ -2652,7 +2794,7 @@ built-in 데이터셋 중 \texttt{state.abb} 은 미국의 50개 주에대한 �
 \begin{itemize}
 \tightlist
 \item
-  기본
+  문자열 붙이기, \texttt{,}로 나누어진 벡터들 각각의 원소를 붙여줌
 \end{itemize}
 
 \begin{Shaded}
@@ -2666,7 +2808,7 @@ built-in 데이터셋 중 \texttt{state.abb} 은 미국의 50개 주에대한 �
 \begin{itemize}
 \tightlist
 \item
-  여러 벡터에서 각각의 원소를 붙여주는 기능능
+  여러 벡터에서 각각의 원소를 붙여주는 기능
 \end{itemize}
 
 \begin{Shaded}
@@ -2680,7 +2822,7 @@ built-in 데이터셋 중 \texttt{state.abb} 은 미국의 50개 주에대한 �
 \begin{itemize}
 \tightlist
 \item
-  collapse (하나의 벡터에서 해당 벡터의 원소를 붙여주는 기능)
+  collapse (하나의 벡터에서 해당 벡터의 원소들을 붙여주는 기능)
 \end{itemize}
 
 \begin{Shaded}
@@ -2715,7 +2857,7 @@ built-in 데이터셋 중 \texttt{state.abb} 은 미국의 50개 주에대한 �
 \begin{itemize}
 \tightlist
 \item
-  `TAAGTCT' 바코드를 각 서열의 3'에 붙여보기
+  예제 `TAAGTCT' 바코드를 각 서열의 3'에 붙여보기
 \end{itemize}
 
 \begin{Shaded}
@@ -2728,7 +2870,7 @@ built-in 데이터셋 중 \texttt{state.abb} 은 미국의 50개 주에대한 �
 \begin{itemize}
 \tightlist
 \item
-  split
+  \texttt{split} 함수 사용
 \end{itemize}
 
 \begin{Shaded}
@@ -2745,7 +2887,7 @@ built-in 데이터셋 중 \texttt{state.abb} 은 미국의 50개 주에대한 �
 \begin{itemize}
 \tightlist
 \item
-  factor
+  \texttt{factor} 간단한 설명
 \end{itemize}
 
 \begin{Shaded}
@@ -2766,7 +2908,7 @@ built-in 데이터셋 중 \texttt{state.abb} 은 미국의 50개 주에대한 �
 \begin{itemize}
 \tightlist
 \item
-  예제
+  데이터에서 \texttt{factor}들 보기
 \end{itemize}
 
 \begin{Shaded}
@@ -2780,7 +2922,7 @@ built-in 데이터셋 중 \texttt{state.abb} 은 미국의 50개 주에대한 �
 \begin{itemize}
 \tightlist
 \item
-  예제
+  아미노산 및 각 아미노산에 해당하는 코돈 표현 예제
 \end{itemize}
 
 \begin{Shaded}
@@ -2828,7 +2970,7 @@ built-in 데이터셋 중 \texttt{state.abb} 은 미국의 50개 주에대한 �
 \begin{itemize}
 \tightlist
 \item
-  연습문제 - 성적별 테이블 정렬렬
+  연습문제 풀이 성적별 테이블 정렬
 \end{itemize}
 
 \begin{Shaded}
@@ -2871,7 +3013,7 @@ built-in 데이터셋 중 \texttt{state.abb} 은 미국의 50개 주에대한 �
 \begin{itemize}
 \tightlist
 \item
-  연습문제: 수학, 영어 성적을 더해서 \texttt{total\_score}를 만들고 이 값을 기준으로 내림차순으로 score 데이터프레임을 정렬 하시오.
+  추가 연습문제: 수학, 영어 성적을 더해서 \texttt{total\_score}를 만들고 이 값을 기준으로 내림차순으로 score 데이터프레임을 정렬 하시오.
 \end{itemize}
 
 \begin{Shaded}
@@ -2907,6 +3049,8 @@ built-in 데이터셋 중 \texttt{state.abb} 은 미국의 50개 주에대한 �
 \tightlist
 \item
   리스트 만들때 미리 원소의 개수를 알고 있으면 그 원소의 개수에 맞게 생성해 주는 것이 좋음 \texttt{aa\ \textless{}-\ vector("list",\ 5)}
+\item
+  각 아미노산에 해당하는 코돈 길이가 달라도 list 형태로 저장 가능
 \end{itemize}
 
 \begin{Shaded}
@@ -2927,7 +3071,7 @@ built-in 데이터셋 중 \texttt{state.abb} 은 미국의 50개 주에대한 �
 \begin{itemize}
 \tightlist
 \item
-  바람직한 데이터 변환예시: data column은 변수, row는 샘플. 예를 들어서, 변수:먹이, 수명, 샘플: 마우스1, 마우스2, \ldots{}
+  바람직한 데이터는 column은 변수, row는 샘플 구조의 데이터. 예를 들어서, 변수:먹이, 수명 --\textgreater{} 컬럼, 샘플: 마우스1, 마우스2 --\textgreater{} Row, 등
 \end{itemize}
 
 \begin{Shaded}
@@ -2943,13 +3087,6 @@ built-in 데이터셋 중 \texttt{state.abb} 은 미국의 50개 주에대한 �
 
 \hypertarget{functions-1}{%
 \section{functions}\label{functions-1}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-
-\FunctionTok{source}\NormalTok{(}\StringTok{"myscript.R"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2987,7 +3124,7 @@ my_function_name <- function(parameter1, parameter2, ... ){
 \begin{itemize}
 \tightlist
 \item
-  함수 만든 후 loading 할 때 \texttt{\{}, \texttt{\}} 밖에서 Ctrl + Enter로 로딩딩
+  함수 만든 후 loading 할 때 \texttt{\{}, \texttt{\}} 밖에서 Ctrl + Enter로 로딩
 \end{itemize}
 
 \begin{Shaded}
@@ -3073,7 +3210,7 @@ my_function_name <- function(parameter1, parameter2, ... ){
 \begin{itemize}
 \tightlist
 \item
-  예제 서열만들기
+  랜덤 서열만들기 예제
 \end{itemize}
 
 \begin{Shaded}
@@ -3100,8 +3237,14 @@ my_function_name <- function(parameter1, parameter2, ... ){
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{datatransform-example}{%
-\section{Datatransform example}\label{datatransform-example}}
+\hypertarget{data-transformation-1}{%
+\section{Data transformation}\label{data-transformation-1}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{UsingR} 패키지의 babies 데이터셋을 적절히 변환하는 예제. \texttt{with}와 \texttt{within} 활용법 알아두기 (설명 안 함)
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3128,6 +3271,837 @@ my_function_name <- function(parameter1, parameter2, ... ){
 \end{Highlighting}
 \end{Shaded}
 
+\hypertarget{r-basic-graphics}{%
+\chapter{R basic graphics}\label{r-basic-graphics}}
+
+\hypertarget{scatter-plot}{%
+\section{scatter plot}\label{scatter-plot}}
+
+R에서 \texttt{plot} 함수는 가장 기본이 되는 그래프 함수 입니다. 아래는 산포도를 그려주는 코드로서 myxy가 두 개의 변수(x1과 y1)를 가지고 있으므로 아래 명령들은 모두 같은 그림을 그려주게 됩니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{100}\NormalTok{)}
+\NormalTok{y }\OtherTok{\textless{}{-}}\NormalTok{ x}\SpecialCharTok{*}\DecValTok{2} \SpecialCharTok{+} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\NormalTok{myxy }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(x,y)}
+\FunctionTok{plot}\NormalTok{(myxy)}
+\FunctionTok{plot}\NormalTok{(myxy}\SpecialCharTok{$}\NormalTok{x, myxy}\SpecialCharTok{$}\NormalTok{y)}
+\FunctionTok{plot}\NormalTok{(}\AttributeTok{x=}\NormalTok{myxy}\SpecialCharTok{$}\NormalTok{x, }\AttributeTok{y=}\NormalTok{myxy}\SpecialCharTok{$}\NormalTok{y)}
+\FunctionTok{plot}\NormalTok{(y}\SpecialCharTok{\textasciitilde{}}\NormalTok{x, }\AttributeTok{data=}\NormalTok{myxy)}
+\end{Highlighting}
+\end{Shaded}
+
+가장 마지막 명령은 \texttt{formula}를 사용한 plot으로 첫번째 파라메터 인자로 \texttt{formula} 타입이 전달되면 plot.formula 함수가 실행되며 x, y 값이 전달될 경우 \texttt{plot.default} 함수가 수행됩니다. R에서는 이렇게 전달되는 파라메터의 타입에 따라서 다른 기능을 하는 함수를 \texttt{Generic\ function} 이라고 합니다. 만약 기존 그림에 추가 데이터의 산포를 그리고 싶은 경우 \texttt{points}라는 함수를 사용합니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{z }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{100}\NormalTok{, }\DecValTok{100}\NormalTok{, }\AttributeTok{replace =}\NormalTok{T)}
+\FunctionTok{points}\NormalTok{(x, z)}
+\FunctionTok{points}\NormalTok{(x, z, }\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{histogram}{%
+\section{histogram}\label{histogram}}
+
+\texttt{hist} 함수는 데이터들의 분포를 히스토그램으로 그려주는 함수입니다. 히스토그램은 데이터들이 갖는 값을 특정 구간으로 나누고 각 구간에 해당하는 데이터가 몇 개인지 빈도수를 계산하여 막대그래프로 보여줍니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\FunctionTok{hist}\NormalTok{(x, }\AttributeTok{br=}\DecValTok{20}\NormalTok{, }\AttributeTok{xlim=}\FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{), }\AttributeTok{main=}\StringTok{"Main text"}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"X label"}\NormalTok{)}
+
+
+\FunctionTok{hist}\NormalTok{(airquality}\SpecialCharTok{$}\NormalTok{Wind, }\AttributeTok{br=}\DecValTok{50}\NormalTok{)}
+\FunctionTok{hist}\NormalTok{(airquality}\SpecialCharTok{$}\NormalTok{Wind, }\AttributeTok{br=}\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{boxplot}{%
+\section{boxplot}\label{boxplot}}
+
+boxplot (상자 수염 그림)은 데이터의 여러가지 대표값 (중간값 median, 첫번째 사분위수 1st quantile, 세번째 사분위수 3rd quantile, 최소 minimum, 최대값 maximum) 등을 한눈에 볼 수 있도록 만들어놓은 그래프 입니다. 수염이 나타내는 값은 최소값이나 최대값이 될 수 있고 또는 하위 1.5 IQR 에서 최소 데이터와 상위 1.5 IQR 내에 최고 데이터를 나타낼 수 있으며 이 경우 그 외에 존재하는 값들은 outlier가 됩니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\FunctionTok{boxplot}\NormalTok{(x)}
+
+\NormalTok{r }\OtherTok{\textless{}{-}} \FunctionTok{boxplot}\NormalTok{(airquality}\SpecialCharTok{$}\NormalTok{Wind)}
+
+\NormalTok{airquality}\SpecialCharTok{$}\NormalTok{Wind[}\FunctionTok{which}\NormalTok{(airquality}\SpecialCharTok{$}\NormalTok{Wind }\SpecialCharTok{\textgreater{}}\NormalTok{ (}\FloatTok{1.5}\SpecialCharTok{*}\NormalTok{(r}\SpecialCharTok{$}\NormalTok{stats[}\DecValTok{4}\NormalTok{]}\SpecialCharTok{{-}}\NormalTok{r}\SpecialCharTok{$}\NormalTok{stats[}\DecValTok{2}\NormalTok{])}\SpecialCharTok{+}\NormalTok{r}\SpecialCharTok{$}\NormalTok{stats[}\DecValTok{4}\NormalTok{]))]}
+
+\FunctionTok{with}\NormalTok{(airquality, \{}
+\NormalTok{  Wind[}\FunctionTok{which}\NormalTok{(Wind }\SpecialCharTok{\textgreater{}}\NormalTok{ (}\FloatTok{1.5}\SpecialCharTok{*}\NormalTok{(r}\SpecialCharTok{$}\NormalTok{stats[}\DecValTok{4}\NormalTok{]}\SpecialCharTok{{-}}\NormalTok{r}\SpecialCharTok{$}\NormalTok{stats[}\DecValTok{2}\NormalTok{])}\SpecialCharTok{+}\NormalTok{r}\SpecialCharTok{$}\NormalTok{stats[}\DecValTok{4}\NormalTok{]))]}
+\NormalTok{\})}
+
+\FunctionTok{with}\NormalTok{(airquality, \{}
+\NormalTok{  val }\OtherTok{\textless{}{-}}\NormalTok{ (}\FloatTok{1.5}\SpecialCharTok{*}\NormalTok{(r}\SpecialCharTok{$}\NormalTok{stats[}\DecValTok{4}\NormalTok{]}\SpecialCharTok{{-}}\NormalTok{r}\SpecialCharTok{$}\NormalTok{stats[}\DecValTok{2}\NormalTok{])}\SpecialCharTok{+}\NormalTok{r}\SpecialCharTok{$}\NormalTok{stats[}\DecValTok{4}\NormalTok{])}
+\NormalTok{  Wind[}\FunctionTok{which}\NormalTok{(Wind }\SpecialCharTok{\textgreater{}}\NormalTok{ val)]}
+\NormalTok{\})}
+
+\FunctionTok{with}\NormalTok{(airquality, \{}
+\NormalTok{  iqr }\OtherTok{\textless{}{-}} \FunctionTok{quantile}\NormalTok{(Wind, }\DecValTok{3}\SpecialCharTok{/}\DecValTok{4}\NormalTok{) }\SpecialCharTok{{-}} \FunctionTok{quantile}\NormalTok{(Wind, }\DecValTok{1}\SpecialCharTok{/}\DecValTok{4}\NormalTok{)}
+\NormalTok{  val }\OtherTok{\textless{}{-}} \FloatTok{1.5} \SpecialCharTok{*}\NormalTok{ iqr }\SpecialCharTok{+} \FunctionTok{quantile}\NormalTok{(Wind, }\DecValTok{3}\SpecialCharTok{/}\DecValTok{4}\NormalTok{)}
+\NormalTok{  Wind[}\FunctionTok{which}\NormalTok{(Wind }\SpecialCharTok{\textgreater{}}\NormalTok{ val)]}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+data.frame 타입의 오브젝트에 대해서 boxplot을 그릴 경우 여러 변수의 데이터들의 분포를 한눈에 비교할 수 있읍니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\CommentTok{\#boxplot(y)}
+\NormalTok{xy }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(x, y)}
+\FunctionTok{boxplot}\NormalTok{(xy)}
+\FunctionTok{class}\NormalTok{(xy)}
+
+\DocumentationTok{\#\#}
+\NormalTok{mean\_vals }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\NormalTok{mymat }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(mean\_vals, }\ControlFlowTok{function}\NormalTok{(x)\{}\FunctionTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{, x)\})}
+\FunctionTok{dim}\NormalTok{(mymat)}
+\FunctionTok{boxplot}\NormalTok{(mymat)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{barplot}{%
+\section{barplot}\label{barplot}}
+
+막대그래프는 각 값들을 막대 형태로 나란히 배치하여 서로 비교가 용이하도록 만든 그래프 입니다. \texttt{table} 함수는 같은 값을 갖는 데이터들이 몇 개나 있는지 테이블을 만들어주는 함수 입니다. rbind는 두 변수를 row를 기준으로 붙여주는 역할의 함수입니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{12}\NormalTok{, }\DecValTok{200}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ T)}
+\NormalTok{tab\_x }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(x)}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{12}\NormalTok{, }\DecValTok{200}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ T)}
+\NormalTok{tab\_y }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(y)}
+\NormalTok{tab\_xy }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(tab\_x, tab\_y)}
+\FunctionTok{barplot}\NormalTok{(tab\_xy)}
+\FunctionTok{barplot}\NormalTok{(tab\_xy, }\AttributeTok{beside =}\NormalTok{ T)}
+\FunctionTok{barplot}\NormalTok{(tab\_xy, }\AttributeTok{beside =}\NormalTok{ T, }\AttributeTok{col=}\FunctionTok{c}\NormalTok{(}\StringTok{"darkblue"}\NormalTok{,}\StringTok{"red"}\NormalTok{))}
+\FunctionTok{barplot}\NormalTok{(tab\_xy, }\AttributeTok{beside =}\NormalTok{ T, }\AttributeTok{col=}\FunctionTok{c}\NormalTok{(}\StringTok{"darkblue"}\NormalTok{,}\StringTok{"red"}\NormalTok{), }\AttributeTok{xlab=}\StringTok{"Month"}\NormalTok{)}
+\FunctionTok{barplot}\NormalTok{(tab\_xy, }\AttributeTok{beside =}\NormalTok{ T, }\AttributeTok{col=}\FunctionTok{c}\NormalTok{(}\StringTok{"darkblue"}\NormalTok{,}\StringTok{"red"}\NormalTok{), }\AttributeTok{xlab=}\StringTok{"Month"}\NormalTok{, }\AttributeTok{horiz=}\ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Exercises}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  \texttt{iris} 데이터의 꽃받침 (Sepal) 길이와 넓이를 각각 x와 y축으로 하는 산포도를 그리시오
+\item
+  \texttt{iris} 데이터에서 setosa 품종의 꽃받침의 (Sepal) 길이와 넓이 데이터를 빨간 점으로 나타내시오
+\item
+  \texttt{iris} 데이터에서 꽃받침과 (Sepal) 꽃잎의 (Petal) 길이의 분포를 그리시오 (\texttt{hist} 사용)
+\item
+  \texttt{iris} 데이터에서 꽃받침과 (Sepal) 꽃잎의 (Petal) 넓이의 분포를 그리시오 (\texttt{boxplot} 사용)
+\item
+  \texttt{iris} 데이터에서 품종별 꽃받침 (Sepal) 길이의 분포를 그리시오 (\texttt{boxplot} 사용)
+\end{enumerate}
+
+\hypertarget{draw-multiple-graphs-in-the-same-plot}{%
+\section{Draw multiple graphs in the same plot}\label{draw-multiple-graphs-in-the-same-plot}}
+
+위 예제들에서 사용한 high level function들을 low level function (\texttt{lines}, \texttt{points}, \texttt{ablines}, \texttt{axis} 등)들과 함께 사용함으로써 원하는 도표 대부분을 그려낼 수 있습니다. 최근 널리 사용되는 \texttt{ggplot2} 패키지를 이용한 그래프 사용법 강의에서는 오늘 배우는 그래픽 명령어는 거의 사용하지 않습니다. 그러나 위 함수들은 R의 기본 그래프 함수들로서 단순한 도표에서부터 복잡한 그래픽까지 구현할 수 있는 다양한 유연성을 제공하므로 기본적인 사용법을 정확히 이해하는 것이 좋습니다.
+
+아래 도표는 평균 0, 분산 1인 분포에서 500개의 랜덤한 수를 뽑아 x에 저장하고 x의 분포를 히스토그램으로 표현한 것 입니다. 그리고 x 값들과 상관성이 있는 y값들을 (x에 2를 곱하고 평균 5, 분산 1인 랜덤하게 뽑힌 수를 노이즈로 더함) 생성하고 모든 1000개 값들의 분포를 그린 히스토그램 입니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{500}\NormalTok{)}
+\FunctionTok{hist}\NormalTok{(x, }\DecValTok{100}\NormalTok{)}
+\NormalTok{y }\OtherTok{\textless{}{-}} \DecValTok{2}\SpecialCharTok{*}\NormalTok{x }\SpecialCharTok{+} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{500}\NormalTok{, }\AttributeTok{mean=}\DecValTok{5}\NormalTok{, }\AttributeTok{sd=}\DecValTok{1}\NormalTok{)}
+\NormalTok{z }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(x,y)}
+\FunctionTok{hist}\NormalTok{(z, }\AttributeTok{br=}\DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+이제 위 histogram 그래프에 \texttt{density} 함수와 \texttt{lines} 함수를 조합하여 확률밀도함수 커브를 그려 넣을 수 있습니다. 이 때 \texttt{hist} 함수에 \texttt{probability=T} 옵션을 넣어 y축의 스케일을 확률밀도함수의 y 스케일과 맞춰주어 같은 화면에 그려지도록 했습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(z, }\AttributeTok{br=}\DecValTok{100}\NormalTok{)}
+\FunctionTok{hist}\NormalTok{(z, }\AttributeTok{br=}\DecValTok{100}\NormalTok{, }\AttributeTok{probability =}\NormalTok{ T)}
+\NormalTok{zd }\OtherTok{\textless{}{-}} \FunctionTok{density}\NormalTok{(z)}
+\FunctionTok{lines}\NormalTok{(zd)}
+\end{Highlighting}
+\end{Shaded}
+
+또한 아래 그래프는 위에서 생성한 x, y 값의 산포도를 그리고 x축과 y축 범위를 xlim, ylim 파라메터로 조절하는 예제 입니다. ?pch 도움말을 참고하여 다양한 포인트 모양을 선택할 수 있으며 x 값이 0 보다 작은 경우의 index를 뽑아 해당되는 x 값들과 그 값들의 짝이 되는 y값들에 대해서만 다시 포인트 그림을 red 색상으로 그려 넣었습니다. lm 은 linear model의 약자로 회귀 곡선을 구할 때 사용하는 함수이며 이 함수를 abline과 조합하여 회귀 직선을 그릴 수 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(x,y, }\AttributeTok{xlim=}\FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{5}\NormalTok{, }\DecValTok{5}\NormalTok{), }\AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{5}\NormalTok{, }\DecValTok{15}\NormalTok{), }\AttributeTok{pch=}\DecValTok{3}\NormalTok{)}
+\NormalTok{idx }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(x}\SpecialCharTok{\textless{}}\DecValTok{0}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(x[idx], y[idx], }\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
+\NormalTok{fit }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(y}\SpecialCharTok{\textasciitilde{}}\NormalTok{x)}
+\FunctionTok{abline}\NormalTok{(fit)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Exercises}
+
+\includegraphics{images/05/01.png}
+
+\begin{itemize}
+\tightlist
+\item
+  1부터 100까지 수 를 랜덤하게 1000개 생성해서 x좌표를 생성하고 xcoord에 저장 하시오 (중복허용)
+\item
+  1부터 100까지 수 를 랜덤하게 1000개 생성해서 y좌표를 생성하고 ycoord에 저장 하시오 (중복허용)
+\item
+  x, y 좌표 평면에 xcoord와 ycoord 값을 이용하여 좌표를 (산포도) 그리되 x와 y의 범위가 모두 -10부터 110까지 되도록 지정 하시오 (plot 이용)
+\item
+  앞서 문제와 같은 plot에 x가 50보다 크고 y가 50보다 큰 곳에 있는 좌표들에 red closed circle로 표현하시오 (which, points, pch parameter 등 이용, 아래 참고)
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{idx }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(xcoord}\SpecialCharTok{\textgreater{}}\DecValTok{50} \SpecialCharTok{\&}\NormalTok{ ycoord}\SpecialCharTok{\textgreater{}}\DecValTok{50}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(}\AttributeTok{x=}\NormalTok{xcoord[idx], }\AttributeTok{y=}\NormalTok{ycoord[idx], }\AttributeTok{col=}\StringTok{"red"}\NormalTok{, }\AttributeTok{pch=}\DecValTok{19}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  앞서 문제와 같은 plot에 x가 50보다 작고 y가 50보다 큰 곳에 있는 좌표들에 blue closed circle로 표현하시오 (which, points, pch parameter 등 이용)
+\item
+  앞서 문제와 같은 plot에 원점으로부터 거리가 50 이하인 좌표들을 green closed circle로 표현 하시오
+\end{itemize}
+
+\hypertarget{usuful-functions-ii}{%
+\section{Usuful functions II}\label{usuful-functions-ii}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#match(), \%in\%, intersect()}
+
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}
+\NormalTok{y }\OtherTok{\textless{}{-}} \DecValTok{5}\SpecialCharTok{:}\DecValTok{15}
+\FunctionTok{match}\NormalTok{(x, y)}
+\NormalTok{x }\SpecialCharTok{\%in\%}\NormalTok{ y}
+\FunctionTok{intersect}\NormalTok{(x, y)}
+
+\CommentTok{\#unique()}
+\FunctionTok{unique}\NormalTok{(}\FunctionTok{c}\NormalTok{(x, y))}
+
+\CommentTok{\#substr()}
+\NormalTok{x }\OtherTok{\textless{}{-}} \StringTok{"Factors, raw vectors, and lists, are converted"}
+\FunctionTok{substr}\NormalTok{(x, }\DecValTok{1}\NormalTok{, }\DecValTok{6}\NormalTok{)}
+
+\CommentTok{\#grep()}
+\FunctionTok{grep}\NormalTok{(}\StringTok{"raw"}\NormalTok{, x)}
+
+\CommentTok{\#grepl()}
+\FunctionTok{grepl}\NormalTok{(}\StringTok{"raw"}\NormalTok{, x)}
+\ControlFlowTok{if}\NormalTok{(}\FunctionTok{grepl}\NormalTok{(}\StringTok{"raw"}\NormalTok{, x))\{}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"I found raw!"}\NormalTok{)}
+\NormalTok{\}}
+
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(LETTERS, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{100}\NormalTok{, }\AttributeTok{sep=}\StringTok{""}\NormalTok{)}
+\FunctionTok{grep}\NormalTok{(}\StringTok{"A"}\NormalTok{, x)}
+\NormalTok{x[}\FunctionTok{grep}\NormalTok{(}\StringTok{"A"}\NormalTok{, x)]}
+
+\FunctionTok{grepl}\NormalTok{(}\StringTok{"A"}\NormalTok{, x)}
+\NormalTok{r }\OtherTok{\textless{}{-}} \FunctionTok{grepl}\NormalTok{(}\StringTok{"A"}\NormalTok{, x)}
+\ControlFlowTok{if}\NormalTok{(r)\{}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"Yes, I found A"}\NormalTok{)}
+\NormalTok{\}}\ControlFlowTok{else}\NormalTok{\{}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"No A"}\NormalTok{)}
+\NormalTok{\}}
+
+\CommentTok{\#strsplit()}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Factors, raw vectors, and lists, are converted"}\NormalTok{, }\StringTok{"vectors, or for, strings with"}\NormalTok{)}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{strsplit}\NormalTok{(x, }\AttributeTok{split=}\StringTok{", "}\NormalTok{)}
+
+\CommentTok{\#unlist()}
+\FunctionTok{unlist}\NormalTok{(y)}
+
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{strsplit}\NormalTok{(x, }\AttributeTok{split=}\StringTok{""}\NormalTok{)}
+\NormalTok{ychar }\OtherTok{\textless{}{-}} \FunctionTok{unlist}\NormalTok{(y)}
+\NormalTok{ycount }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(y2)}
+\NormalTok{ycount\_sort }\OtherTok{\textless{}{-}} \FunctionTok{sort}\NormalTok{(ycount)}
+\NormalTok{ycount\_sort }\OtherTok{\textless{}{-}} \FunctionTok{sort}\NormalTok{(ycount, }\AttributeTok{decreasing =}\NormalTok{ T)}
+\NormalTok{ycount\_top }\OtherTok{\textless{}{-}}\NormalTok{ ycount\_sort[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{]}
+\NormalTok{ycount\_top\_char }\OtherTok{\textless{}{-}} \FunctionTok{names}\NormalTok{(ycount\_top)}
+
+\CommentTok{\#toupper(), tolower()}
+\FunctionTok{toupper}\NormalTok{(ycount\_top\_char)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Exercises}
+
+built-in 데이터셋 중 \texttt{state.abb} 은 미국의 50개 주에대한 축약어임.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  이 중 문자 A 가 들어가는 주를 뽑아 x에 저장 하시오 (\texttt{grep} 또는 \texttt{grepl} 사용)
+\item
+  state.abb 중 위 x에 저장된 이름들을 빼고 y에 저장 하시오 (\texttt{match()} 또는 \texttt{\%in\%}사용)
+\item
+  state.abb에 사용된 알파벳의 갯수를 구하고 가장 많이 쓰인 알파벳을 구하시오 (\texttt{strsplit()}, \texttt{table()} 등 사용)
+\end{enumerate}
+
+\textbf{Exercises}
+
+\texttt{iris} 데이터셋의 각 Species 별로 꽃잎과 꽃받침의 길이와 넓이에 대한 평균값들을 구하고 막대그래프를 그리시오
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+이 저작물은 크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제 라이선스에 따라 이용할 수 있습니다.
+
+\hypertarget{tidyverse}{%
+\chapter{tidyverse}\label{tidyverse}}
+
+tidyverse (\url{https://www.tidyverse.org/)는} 데이터 사이언스를 위한 R 기반의 독창적인 패키지들의 모음입니다. Rstudio의 핵심 전문가인 해들리위컴이 (Hadley Wickham) 중심이 되어 만들어 졌으며 기존의 툴보다 쉽고 효율적으로 데이터 분석을 수행할 수 있습니다.
+
+\includegraphics[width=5.72917in,height=\textheight]{images/07/tidyverse.JPG}
+
+데이터사이언스는 넓은 범위의 개념과 방법적인 정도가 있는 것은 아닙니다. 그러나 tidyverse의 목적은 데이터 분석을 위한 핵심이되는 고효율의 툴을 제공하는 것이며 그 철학은 다음과 같은 그림으로 요약할 수 있습니다.
+
+\begin{figure}
+\centering
+\includegraphics{images/07/data-science.png}
+\caption{from \url{https://r4ds.had.co.nz/}}
+\end{figure}
+
+\hypertarget{tibble-object-type}{%
+\section{tibble object type}\label{tibble-object-type}}
+
+R은 20년 이상된 비교적 오랜 역사를 가진 언어로서 \texttt{data.frame} 형태의 데이터 타입이 가장 많이 사용되고 있습니다. 그러나 당시에는 유용했던 기능이 시간이 흐르면서 몇몇 단점들이 드러나는 문제로 기존 코드를 그대로 유지한채 package 형태로 단점을 보완한 새로운 형태의 tibble 오브젝트 형식을 만들어 냈습니다. 대부분의 R 코드는 여전히 data.frame 형태의 데이터 타입을 사용하고 있으나 tidyverse에서는 \texttt{tibble}이 사용되는 것을 참고하시기 바랍니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+
+\NormalTok{tb }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+  \AttributeTok{x =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, }
+  \AttributeTok{y =} \DecValTok{1}\NormalTok{, }
+  \AttributeTok{z =}\NormalTok{ x }\SpecialCharTok{\^{}} \DecValTok{2} \SpecialCharTok{+}\NormalTok{ y}
+\NormalTok{)}
+
+\FunctionTok{as\_tibble}\NormalTok{(iris)}
+\FunctionTok{head}\NormalTok{(iris)}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{tibble}은 \texttt{data.frame}과 다음 몇 가지 점이 다릅니다. \texttt{data.frame}의 경우 타입을 변환할 때 강제로 값의 타입을 바꾸거나 내부 변수의 이름을 바꾸는 경우가 있었으나 \texttt{tibble}은 이를 허용하지 않습니다. 샘플들 (row) 이름을 바꿀수도 없습니다. 또한 프린팅할 때 출력물에 나오는 정보가 다르며 마지막으로 \texttt{data.frame}은 subset에 대한 타입이 바뀔 경우가 있었지만 \texttt{tibble}은 바뀌지 않습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{3}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{20}\NormalTok{)}
+
+\FunctionTok{data.frame}\NormalTok{(x, y)}
+\FunctionTok{tibble}\NormalTok{(x, y)}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{tibble}은 컬럼 하나가 벡터형 변수가 아닌 리스트형 변수가 될 수 있다는 것도 \texttt{data.frame}과 다른 점 입니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{crazy name}\StringTok{\textasciigrave{}} \OtherTok{=} \DecValTok{1}\NormalTok{))}
+\FunctionTok{names}\NormalTok{(}\FunctionTok{tibble}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{crazy name}\StringTok{\textasciigrave{}} \OtherTok{=} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+또한 다음과 같이 사용되는 변수의 (\texttt{x}) 참조 범위가 다릅니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{x =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, }\AttributeTok{y =}\NormalTok{ x }\SpecialCharTok{\^{}} \DecValTok{2}\NormalTok{)}
+\FunctionTok{tibble}\NormalTok{(}\AttributeTok{x =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, }\AttributeTok{y =}\NormalTok{ x }\SpecialCharTok{\^{}} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df1 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{x =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{, }\AttributeTok{y =} \DecValTok{3}\SpecialCharTok{:}\DecValTok{1}\NormalTok{)}
+\FunctionTok{class}\NormalTok{(df1)}
+\FunctionTok{class}\NormalTok{(df1[, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{])}
+\FunctionTok{class}\NormalTok{(df1[, }\DecValTok{1}\NormalTok{])}
+
+\NormalTok{df2 }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{x =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{, }\AttributeTok{y =} \DecValTok{3}\SpecialCharTok{:}\DecValTok{1}\NormalTok{)}
+\FunctionTok{class}\NormalTok{(df2)}
+\FunctionTok{class}\NormalTok{(df2[, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{])}
+\FunctionTok{class}\NormalTok{(df2[, }\DecValTok{1}\NormalTok{])}
+\FunctionTok{class}\NormalTok{(df2}\SpecialCharTok{$}\NormalTok{x)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{tidy-data-structure}{%
+\section{Tidy data structure}\label{tidy-data-structure}}
+
+데이터의 변수와 값을 구분하는 일은 적절한 데이터 분석을 위해 필수적인 과정입니다. 특히 복잡하고 사이즈가 큰 데이터일 경우는 더욱 중요할 수 있으나 경험에 의존해서 구분을 하는 것이 대부분 입니다. Tidy data는 이러한 변수와 값의 명확한 구분과 활용을 위한 데이터 구조중 하나 입니다 (Hadley Wickham. Tidy data. \emph{The Journal of Statistical Software}, vol.~59, 2014).
+
+\includegraphics{images/07/notidy.JPG}
+
+tidy data는 다음과 같은 특징이 있습니다.
+
+\begin{itemize}
+\tightlist
+\item
+  각 변수는 해당하는 유일한 하나의 column을 가짐
+\item
+  각 샘플은 해당하는 유일한 하나의 row를 가짐
+\item
+  각 관측값은 해당하는 유일한 하나의 cell을 가짐
+\end{itemize}
+
+\begin{figure}
+\centering
+\includegraphics[width=6.25in,height=\textheight]{images/07/tidy-1.png}
+\caption{from \url{https://r4ds.had.co.nz/}}
+\end{figure}
+
+Tidy 데이터는 Long형 데이터로 알려져 있기도 합니다. 참고로 Wide형 데이터의 경우 샘플 데이터가 늘어날수록 row에 쌓이고 새로운 변수는 column에 쌓이는 방식으로 데이터가 확장되는 형태 입니다. 엑셀에서 볼 수 있는 일반적인 형식으로 다음 그림과 같습니다.
+
+\includegraphics{images/07/05.png}
+
+Long형 데이터의 경우 ID, variable, value 세가지 변수만 기억하면 되겠습니다. 위 wide형 데이터 경우를 보면 ID, variable, 그리고 value 이 세가지 요인이 주요 구성 요소임을 알 수 있습니다. Long형으로 변환할 경우 샘플을 참조할 수 있는 어떤 변수 (variable)도 ID가 될 수 있으며 2개 이상의 변수가 ID로 지정될 수 있습니다. 참고로 ID를 지정할 경우 해당 ID는 가능하면 중복되지 않는 값들을 갖는 변수를 사용해야 식별자로서 기능을 적절히 수행할 수 있습니다. Long형을 사용할 경우 데이터의 변수가 늘어나도 행의 수만 늘어나므로 코딩의 일관성과 변수들의 그룹을 만들어서 분석하는 등의 장점이 있습니다. 아래는 새로운 변수 F가 추가될 때 long 형 데이터에 데이터가 추가되는 경우를 나타낸 그림 입니다.
+
+\includegraphics{images/07/06.png}
+
+\hypertarget{pivoting}{%
+\section{Pivoting}\label{pivoting}}
+
+일반적으로 얻어지는 데이터의 형태는 wide형이며 이를 Long형으로 변환하기 위해서는 \texttt{tidyverse} 패키지에 속한 \texttt{tidyr} 패키지의 \texttt{pivot\_longer}와 \texttt{pivot\_wider}를 사용합니다. 또한 \texttt{reshape2} 패키지의 \texttt{melt}함수와 그 반대의 경우 \texttt{dcast} 함수를 사용할 수도 있습니다. 본 강의에서는 \texttt{tidyr} 패키지를 사용합니다. wide형 데이터를 long형으로 변환하거나 long형을 wide형으로 변환하는 작업을 pivoting 이라고 합니다.
+
+\includegraphics{images/07/wide2long.JPG}
+
+\texttt{airquality} 데이터는 전형적인 wide형 데이터로 특정 날짜에 네 개의 변수에 해당하는 값들을 측정했습니다. 이 데이터를 long형으로 바꿀 경우 ID를 날짜로 하면 데이터들을 식별 할 수 있습니다. 그런데 날짜는 변수가 Month와 Day두 개로 나누어져 있으므로 다음과 같이 두 변수를 식별 변수로 (ID로) 사용 합니다. 확인을 위해 상위 5개의 데이터만 가지고 형 변환을 진행해 보겠습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{airquality}
+
+\NormalTok{myair }\OtherTok{\textless{}{-}}\NormalTok{ airquality[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{,]}
+\NormalTok{myair\_long }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_longer}\NormalTok{(myair, }\FunctionTok{c}\NormalTok{(}\StringTok{"Ozone"}\NormalTok{, }\StringTok{"Solar.R"}\NormalTok{, }\StringTok{"Wind"}\NormalTok{, }\StringTok{"Temp"}\NormalTok{))}
+\NormalTok{myair\_long }
+\NormalTok{myair\_long2 }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_longer}\NormalTok{(myair, }\FunctionTok{c}\NormalTok{(Ozone, Solar.R, Wind, Temp))}
+\NormalTok{myair\_long2 }
+\NormalTok{myair\_long3 }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_longer}\NormalTok{(myair, }\SpecialCharTok{!}\FunctionTok{c}\NormalTok{(Month, Day))}
+\NormalTok{myair\_long3}
+\end{Highlighting}
+\end{Shaded}
+
+생성되는 long형 데이터의 변수 이름인 name과 value는 다음 파라메터를 지정하여 바꿀 수 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{myair\_long }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_longer}\NormalTok{(myair, }
+                          \FunctionTok{c}\NormalTok{(Ozone, Solar.R, Wind, Temp), }
+                          \AttributeTok{names\_to =} \StringTok{"Type"}\NormalTok{, }
+                          \AttributeTok{values\_to =} \StringTok{"Observation"}\NormalTok{)}
+\NormalTok{myair\_long }
+\end{Highlighting}
+\end{Shaded}
+
+long형 데이터를 wide형 데이터로 변환 할 수도 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pivot\_wider}\NormalTok{(myair\_long, }\AttributeTok{names\_from =}\NormalTok{ Type, }\AttributeTok{values\_from =}\NormalTok{ Observation)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Exercises}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  다음 데이터가 long형인지 wide형인지 판단하시오\\
+\item
+  long형이면 wide형으로 wide형이면 long형으로 변환하시오
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{stocks }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+  \AttributeTok{year   =} \FunctionTok{c}\NormalTok{(}\DecValTok{2015}\NormalTok{, }\DecValTok{2015}\NormalTok{, }\DecValTok{2016}\NormalTok{, }\DecValTok{2016}\NormalTok{),}
+  \AttributeTok{month  =} \FunctionTok{c}\NormalTok{(   }\DecValTok{1}\NormalTok{,    }\DecValTok{2}\NormalTok{,     }\DecValTok{1}\NormalTok{,    }\DecValTok{2}\NormalTok{),}
+  \AttributeTok{profit =} \FunctionTok{c}\NormalTok{(}\FloatTok{1.88}\NormalTok{, }\FloatTok{0.59}\NormalTok{, }\FloatTok{0.92}\NormalTok{, }\FloatTok{0.17}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{ggplot}을 이용한 그래프 작성에는 위와 같은 long형 데이터가 주로 사용됩니다. R을 이용한 데이터 가시화는 \texttt{dplyr} 패키지로 wide형 데이터를 편집하고 \texttt{pivot\_longer} 함수로 long형 데이터로 변환 후 \texttt{ggplot}을 이용하는 방식으로 수행합니다. 두 데이터 포멧에 대한 좀 더 구체적인 내용은 다음 링크를 참고하시기 바랍니다. \url{https://www.theanalysisfactor.com/wide-and-long-data/}
+
+\hypertarget{separating-and-uniting}{%
+\section{Separating and uniting}\label{separating-and-uniting}}
+
+데이터를 분석할 때 하나의 컬럼에 두 개 이상의 변수값이 저장되어 있거나 두 개의 변수를 하나의 컬럼으로 합해야 하는 경우가 종종 있습니다. 전자의 경우 \texttt{separate()} 함수를 사용해서 두 변수(컬럼)으로 나누어 줄 수 있으며 후자의 경우 \texttt{unite()} 함수를 사용하여 두 변수를 하나의 값으로 병합할 수 있습니다. 다음은 \texttt{airquality}데이터에서 Month와 Day 변수를 하나의 컬럼으로 병합하여 Date라는 변수로 만들어 주는 경우의 예 입니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{newairquality }\OtherTok{\textless{}{-}} \FunctionTok{unite}\NormalTok{(airquality, Date, Month, Day, }\AttributeTok{sep=}\StringTok{"."}\NormalTok{)}
+\NormalTok{newairquality}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{separate()}함수를 사용하면 다음과 같이 해당 변수의 값을 나누어 다시 두 개의 변수(컬럼)으로 나누어 줄 수 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\FunctionTok{separate}\NormalTok{(newairquality, }\AttributeTok{col=}\NormalTok{Date, }\AttributeTok{into =} \FunctionTok{c}\NormalTok{(}\StringTok{"Month"}\NormalTok{, }\StringTok{"Day"}\NormalTok{), }\AttributeTok{sep =} \StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{."}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{dplyr-and-pipe-operator}{%
+\section{dplyr and pipe operator}\label{dplyr-and-pipe-operator}}
+
+\texttt{dplyr} (\url{https://dplyr.tidyverse.org/}) 은 \texttt{ggplot2}을 개발한 해들리위컴이 (Hadley Wickham) 중심이 되어 만들어 졌으며 \texttt{ggplot2}와 함께 \texttt{tidyverse}의 (\url{https://www.tidyverse.org/}) 핵심 패키지 입니다. \texttt{dplyr}은 데이터를 다루는 크기나 분석의 속도, 편의성을 향상시켜 새롭게 만들어놓은 패키지 입니다. 기존 \texttt{apply}와 같은 행렬 연산 기능과 \texttt{subset}, \texttt{split}, \texttt{group} 와 같은 행렬 편집 기능을 더하여 만들어진 도구라고 할 수 있습니다.
+
+\texttt{dplyr}의 전신이라 할 수 있는 \texttt{plyr} 패키지는 다음과 같이 설명이 되어 있습니다. \emph{A set of tools for a common set of problems: you need to split up a big data structure into homogeneous pieces, apply a function to each piece and then combine all the results back together.} 즉 split-apply-combine 세 가지 동작을 쉽게 할 수 있도록 만들어 놓은 툴 입니다. R이 다른 언어에 비해 데이터 분석에서 주목을 받는 이유로 \texttt{split}, \texttt{apply} 등의 행렬 연산 함수가 발달한 것을 내세우는데 \texttt{dplyr}은 이들을 보다 더 편리하게 사용할 수 있도록 만들어 놓은 것 입니다.
+
+\texttt{dplyr}의 사용을 위해서는 여러 명령을 연속적으로 수행하도록 해주는 \texttt{\%\textgreater{}\%} 파이프 오퍼레이터의 이해가 필요합니다. 파이프 오퍼레이터의 작동법은 간단히 \texttt{\%\textgreater{}\%}의 왼쪽 코드의 결과를 출력으로 받아 오른쪽 코드의 입력 (첫번째 파라미터의 값)으로 받아들이는 작동을 합니다 (\textbf{단축키: Shift+Ctrl+m}). 다음 예에서 보면 \texttt{sin(pi)} 와 같은 함수의 일반적인 사용법 대신 \texttt{pi\ \%\textgreater{}\%\ sin} 처럼 사용해도 똑같은 결과를 보여줍니다. \texttt{cos(sin(pi))}와 같이 여러 합수를 중첩하여 사용할 경우와 비교해서 코드의 가독성이나 효율 측면에서 크게 향상된 방법을 제공해 줍니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+
+\NormalTok{pi }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ sin}
+\FunctionTok{sin}\NormalTok{(pi)}
+\NormalTok{pi }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ sin }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ cos}
+\FunctionTok{cos}\NormalTok{(}\FunctionTok{sin}\NormalTok{(pi))}
+\end{Highlighting}
+\end{Shaded}
+
+특히 \texttt{\%\textgreater{}\%}는 이후 설명할 \texttt{dplyr}의 \texttt{group\_by}, \texttt{split}, \texttt{filter}, \texttt{summary} 등의 행렬 편집/연산 함수를 빈번히 다양한 조합으로 쓰게되는 상황에서 더 큰 효과를 발휘할 수 있습니다.
+
+\includegraphics[width=5.20833in,height=\textheight]{images/07/02.PNG}
+
+pipe operator의 왼쪽 구문의 결과가 오른쪽 구문의 첫 번째 파라미터의 입력 값으로 처리된다고 말씀 드렸습니다. 즉, 함수에서 사용되는 파라미터가 여러개일 경우가 있으므로 기본적으로 \texttt{\%\textgreater{}\%} 의 왼쪽 구문의 출력 값은 오른쪽 구문 (함수)의 첫 번째 인자의 입력값으로 들어가는 것 입니다. 이는 다음 예들을 통해서 명확히 알 수 있습니다. 먼저 \texttt{paste}함수는 그 파라미터로 \texttt{,}로 구분되는 여러개의 입력 값을 가질 수 있습니다. 따라서 다음 코드는 \texttt{x}가 \texttt{paste}의 첫 번째 파라미터로 들어가게 되어 \texttt{"1a",\ "2a",\ "3a",\ "4a",\ "5a"}로 a 앞에 x 값들이 붙어서 출력된 것을 알 수 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5}
+\NormalTok{x }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{paste}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\AttributeTok{sep=}\StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+특정 데이터셋의 컬럼별 평균을 구하고 각 평균의 합을 구할 경우를 생각해 봅시다. R에서는 \texttt{colMeans}라는 특별한 함수를 제공하여 컬럼별로 평균을 계산해 줍니다. 그 후 sum 함수를 사용하여 최종 원하는 값을 얻을 수 있습니다. 이러한 코드를 \texttt{\%\textgreater{}\%} 오퍼레이터를 사용한 경우의 코드와 비교해 볼 수 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{x=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{100}\NormalTok{), }\AttributeTok{y=}\FunctionTok{c}\NormalTok{(}\DecValTok{201}\SpecialCharTok{:}\DecValTok{300}\NormalTok{))}
+\FunctionTok{sum}\NormalTok{(}\FunctionTok{colMeans}\NormalTok{(x))}
+
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{x=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{100}\NormalTok{), }\AttributeTok{y=}\FunctionTok{c}\NormalTok{(}\DecValTok{201}\SpecialCharTok{:}\DecValTok{300}\NormalTok{))}
+\NormalTok{x }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ colMeans }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ sum}
+\end{Highlighting}
+\end{Shaded}
+
+그럼 만약 두 번째 파라미터에 입력으로 왼쪽 구문의 출력을 받아들이고 싶을 경우는 place holer \texttt{.} 을 사용하면 되겠습니다. \texttt{round} 함수는 두 개의 파라미터를 설정할 있 이으며 digits 라는 두 번째 파라미터에 값을 pipe operator로 넘겨주고 싶을 경우 아래와 같이 표현할 수 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{6} \SpecialCharTok{\%\textgreater{}\%} \FunctionTok{round}\NormalTok{(pi, }\AttributeTok{digits=}\NormalTok{.)}
+\FunctionTok{round}\NormalTok{(pi, }\AttributeTok{digits=}\DecValTok{6}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Exercises}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  pipe operator를 사용해서 \texttt{airquality}데이터를 long형으로 전환하는 코드를 작성하시오 (단 col 파라메터에는 Ozone, Solar.R, Wind, Temp 변수를 넣음)\\
+\item
+  pipe operator를 사용해서 \texttt{airquality}데이터의 Month와 Day 변수(컬럼)을 Date 변수로 병합하는 코드를 작성하시오
+\end{enumerate}
+
+\hypertarget{dplyr---important-functions}{%
+\section{dplyr - Important functions}\label{dplyr---important-functions}}
+
+이제 \texttt{dplyr} 패키지에서 제공하는 함수를 사용해 보겠습니다. \texttt{dplyr}을 구성하는 중요한 함수는 다음과 같습니다.
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{filter()} - 샘플 (rows) 선택
+\item
+  \texttt{arrange()} - 샘플들의 정렬 순서 변경
+\item
+  \texttt{select()} - 변수 (columns) 선택
+\item
+  \texttt{mutate()} - 새로운 변수 만들기
+\item
+  \texttt{summarise()} - 대표값 만들기
+\item
+  \texttt{group\_by()} - 그룹별로 계산 수행
+\item
+  \texttt{join()} - 두 tibble 또는 data.frame을 병합할 때 사용
+\end{itemize}
+
+이 함수들은 \texttt{\%\textgreater{}\%}와 함께 쓰이면서 강력한 성능을 발휘합니다. \texttt{summarise} 함수는 특정 값들의 통계 값을 계산해 주는 함수이며 그 외 함수들은 행렬 편집을 위한 함수들로 보시면 되겠습니다. 간단한 예제를 수행하면서 각각의 기능을 살펴보고 왜 \texttt{dplyr}이 널리 사용되고 그 장점이 무엇인지 파악해 보도록 하겠습니다.
+
+\texttt{iris} 데이터는 세 종류의 iris 품종에 대한 꽃잎과 꽃받침의 length와 with를 측정해 놓은 데이터 입니다. \texttt{head}와 \texttt{str} 명령어를 \texttt{\%\textgreater{}\%}를 이용해서 데이터를 살펴 봅니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+
+\NormalTok{iris }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{head}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\NormalTok{iris }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ str}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{filter}{%
+\subsection{filter}\label{filter}}
+
+먼저 아래와 같이 \texttt{filter} 함수를 사용해서 원하는 조건의 데이터 (샘플)을 골라낼 수 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+
+\FunctionTok{head}\NormalTok{(iris)}
+\NormalTok{iris }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(Species}\SpecialCharTok{==}\StringTok{"setosa"}\NormalTok{)}
+\NormalTok{iris }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(Species}\SpecialCharTok{==}\StringTok{"setosa"} \SpecialCharTok{|}\NormalTok{ Species}\SpecialCharTok{==}\StringTok{"versicolor"}\NormalTok{)}
+\NormalTok{iris }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(Species}\SpecialCharTok{==}\StringTok{"setosa"} \SpecialCharTok{\&}\NormalTok{ Species}\SpecialCharTok{==}\StringTok{"versicolor"}\NormalTok{)}
+\NormalTok{iris }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(Species}\SpecialCharTok{==}\StringTok{"setosa"} \SpecialCharTok{|}\NormalTok{ Species}\SpecialCharTok{==}\StringTok{"versicolor"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dim}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{filter}의 \texttt{,}로 구분되는 매개변수는 \texttt{and} 로직으로 묶인 조건입니다. 지난 강좌에서 보셨듯 R에서 \texttt{and}는 \texttt{\&}, \texttt{or}는 \texttt{\textbar{}}, 그리고 not은 \texttt{!} 으로 사용하면 되며 \texttt{filter}에서 \texttt{,}로 구분된 조건은 \texttt{and}와 같다고 보시면 되겠습니다.
+
+\includegraphics[width=5.20833in,height=\textheight]{images/07/03.png}
+
+Image from (\url{https://r4ds.had.co.nz/})
+
+\hypertarget{arrange}{%
+\subsection{arrange}\label{arrange}}
+
+\texttt{arrange()}는 지정된 변수를 기준으로 값의 크기순서로 샘플들의 배열 순서 즉, row의 순서를 바꾸는 기능을 수행합니다. 기본으로 크기가 커지는 순서로 정렬이 진행되며 작아지는 순서를 원할 경우 \texttt{desc} 함수를 사용할 수 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{arrange}\NormalTok{(Sepal.Length)}
+\NormalTok{iris }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(Sepal.Length))}
+\NormalTok{iris }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{arrange}\NormalTok{(Sepal.Length, Sepal.Width)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{select}{%
+\subsection{select}\label{select}}
+
+\texttt{select()} 는 주어진 데이터셋으로부터 관심있는 변수를 (column) 선택하여 보여줍니다. 다음 helper 함수들은 select 함수와 같이 유용하게 쓰일 수 있습니다.
+
+\begin{quote}
+starts\_with(``abc'') - ``abc'' 로 시작하는 문자열을 갖는 변수 이름
+ends\_with(``xyz'') - ``xyz''으로 끝나는 문자열을 갖는 변수 이름
+contains(``ijk'') - ``ijk'' 문자열을 포함하는 변수 이름
+matches(``(.)\textbackslash1'') - 정규식, 반복되는 문자
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(iris)}
+\NormalTok{iris }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(Species, }\FunctionTok{everything}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{head}\NormalTok{(}\DecValTok{5}\NormalTok{)}
+\NormalTok{iris }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(Species, }\FunctionTok{everything}\NormalTok{())}
+\NormalTok{iris }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{Species)}
+\NormalTok{iris }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{\textquotesingle{}S\textquotesingle{}}\NormalTok{))}
+\NormalTok{iris }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\AttributeTok{obs =} \FunctionTok{starts\_with}\NormalTok{(}\StringTok{\textquotesingle{}S\textquotesingle{}}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+아래는 \texttt{matches} 함수를 사용한 방법 입니다. 좀 더 복잡한 패턴을 적용하여 변수들을 선택할 수 있으며 \texttt{grep} 함수를 사용할 경우도 정규식 패턴을 적용할 수 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris2 }\OtherTok{\textless{}{-}} \FunctionTok{rename}\NormalTok{(iris, }\AttributeTok{aavar =}\NormalTok{ Petal.Length)}
+\FunctionTok{select}\NormalTok{(iris2, }\FunctionTok{matches}\NormalTok{(}\StringTok{"(.)}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{1"}\NormalTok{))}
+\NormalTok{tmp }\OtherTok{\textless{}{-}}\NormalTok{iris[,}\DecValTok{3}\SpecialCharTok{:}\DecValTok{5}\NormalTok{]}
+\FunctionTok{colnames}\NormalTok{(iris)[}\FunctionTok{grep}\NormalTok{(}\StringTok{"\^{}S"}\NormalTok{, }\FunctionTok{colnames}\NormalTok{(iris))]}
+\NormalTok{iris[,}\FunctionTok{grep}\NormalTok{(}\StringTok{"\^{}S"}\NormalTok{, }\FunctionTok{colnames}\NormalTok{(iris))]}
+\NormalTok{tmp}
+\end{Highlighting}
+\end{Shaded}
+
+아래 \texttt{(.)\textbackslash{}\textbackslash{}1}은 하나의 문자 \texttt{.}가 (어떤 문자든) 한 번 더 \texttt{\textbackslash{}\textbackslash{}1} 사용된 변수 이름을 말하며 이는 \texttt{aavar} 의 \texttt{aa}밖에 없으므로 \texttt{aavar}가 선택됩니다. \texttt{grep}에서 \texttt{\^{}} 표시는 맨 처음을 나타내므로 \texttt{\^{}S}는 S로 시작하는 문자가 되겠습니다. 따라서 \texttt{grep("\^{}S",\ colnames(iris))}의 경우 컬럼 이름 중 S로 시작하는 이름은 True로 그렇지 않으면 False 값을 리턴합니다.
+
+\hypertarget{mutate}{%
+\subsection{mutate}\label{mutate}}
+
+\texttt{mutate()} 함수는 새로운 변수를 추가할 수 있는 기능을 제공하며 앞에서 배웠던 \texttt{within()}과 비슷하다고 볼 수 있습니다. 아래와 같이 \texttt{mutate}함수는 sepal\_ratio라는 변수를 새로 만들어서 기존 iris 데이터들과 함께 반환해 줍니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris2 }\OtherTok{\textless{}{-}}\NormalTok{ iris }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{sepal\_ratio =}\NormalTok{ Sepal.Length}\SpecialCharTok{/}\NormalTok{Sepal.Width)}
+\FunctionTok{head}\NormalTok{(iris2)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{summarise}{%
+\subsection{summarise}\label{summarise}}
+
+\texttt{summarise()}는 \texttt{data.frame}내 특정 변수의 값들로 하나의 요약값/대푯값을 만들어 줍니다. \texttt{summarise} 함수는 단독으로 쓰이기 보다는 \texttt{group\_by()} 기능과 병행해서 쓰이는 경우에 유용하게 쓰입니다. \texttt{summarise\_all()} 함수를 사용하면 모든 변수에 대해서 지정된 함수를 실행합니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{summarise}\NormalTok{(}\FunctionTok{mean}\NormalTok{(Sepal.Length), }\AttributeTok{m=}\FunctionTok{mean}\NormalTok{(Sepal.Width))}
+\NormalTok{iris }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(Species) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{mean}\NormalTok{(Sepal.Width))}
+
+\NormalTok{iris }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(Species) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise\_all}\NormalTok{(mean)}
+
+\NormalTok{iris }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(Species) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{everything}\NormalTok{(), mean))}
+
+
+\NormalTok{iris }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(Species) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise\_all}\NormalTok{(sd)}
+
+\NormalTok{iris }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(Species) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{everything}\NormalTok{(), sd))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{join}{%
+\subsection{join}\label{join}}
+
+\texttt{join} 함수는 데이터를 병합해주는 기능을 수행하는 함수 입니다. 네 가지 종류의 함수가 있으며 (\texttt{left\_join()}, 'right\_join()\texttt{,\ \textquotesingle{}inner\_join()}, 'full\_join()\texttt{)\ 기본적으로\ 공통되는\ 이름의\ 변수를\ (key)\ 이용해서\ 공통되는\ 샘플끼리\ 자동으로\ 병합해\ 주는\ 기능을\ 수행합니다.}by`에서 지정해준 파라메터의 값을 기준으로 기능이 수행 됩니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df1 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{id=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{), }\AttributeTok{age=}\FunctionTok{c}\NormalTok{(}\DecValTok{30}\NormalTok{, }\DecValTok{41}\NormalTok{, }\DecValTok{33}\NormalTok{, }\DecValTok{56}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{17}\NormalTok{))}
+\NormalTok{df2 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{id=}\FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{), }\AttributeTok{gender=}\FunctionTok{c}\NormalTok{(}\StringTok{"f"}\NormalTok{, }\StringTok{"f"}\NormalTok{, }\StringTok{"m"}\NormalTok{, }\StringTok{"m"}\NormalTok{, }\StringTok{"f"}\NormalTok{, }\StringTok{"m"}\NormalTok{))}
+
+\FunctionTok{inner\_join}\NormalTok{(df1, df2, }\AttributeTok{by=}\StringTok{"id"}\NormalTok{)}
+\FunctionTok{left\_join}\NormalTok{(df1, df2, }\StringTok{"id"}\NormalTok{)}
+\FunctionTok{right\_join}\NormalTok{(df1, df2, }\StringTok{"id"}\NormalTok{)}
+\FunctionTok{full\_join}\NormalTok{(df1, df2, }\StringTok{"id"}\NormalTok{)}
+
+\CommentTok{\# vs.}
+\FunctionTok{cbind}\NormalTok{(df1, df2)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{code-comparison}{%
+\section{Code comparison}\label{code-comparison}}
+
+이제 \texttt{split}, \texttt{apply}, \texttt{combine}을 활용하여 평균을 구하는 코드와 \texttt{dplyr} 패키지를 사용하여 만든 코드를 비교해 보도록 하겠습니다. iris 데이터를 분석하여 품종별로 꽃받침의 길이 (Sepal.length)의 평균과 표준편차, 그리고 샘플의 수를 구해보는 코드입니다.
+
+\texttt{split}은 \texttt{factor}형 변수인 Species를 기준으로 \texttt{iris} 데이터를 나누어 주는 역할을 하며 \texttt{lapply}는 \texttt{list} 형 데이터인 \texttt{iris\_split}을 각 리스트의 각각의 원소들에 대해서 임의의 함수 \texttt{function(x)...} 를 수행하는 역할을 합니다. 마지막 \texttt{data.frame}으로 최종 경로를 combine 합니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris\_split }\OtherTok{\textless{}{-}} \FunctionTok{split}\NormalTok{(iris, iris}\SpecialCharTok{$}\NormalTok{Species)}
+\NormalTok{iris\_means }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(iris\_split, }\ControlFlowTok{function}\NormalTok{(x)\{}\FunctionTok{mean}\NormalTok{(x}\SpecialCharTok{$}\NormalTok{Sepal.Length)\})}
+\NormalTok{iris\_sd }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(iris\_split, }\ControlFlowTok{function}\NormalTok{(x)\{}\FunctionTok{sd}\NormalTok{(x}\SpecialCharTok{$}\NormalTok{Sepal.Length)\})}
+\NormalTok{iris\_cnt }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(iris\_split, }\ControlFlowTok{function}\NormalTok{(x)\{}\FunctionTok{length}\NormalTok{(x}\SpecialCharTok{$}\NormalTok{Sepal.Length)\})}
+\NormalTok{iris\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{unlist}\NormalTok{(iris\_cnt), }\FunctionTok{unlist}\NormalTok{(iris\_means), }\FunctionTok{unlist}\NormalTok{(iris\_sd))}
+\end{Highlighting}
+\end{Shaded}
+
+아래는 \texttt{dplyr} 패키지를 사용한 코드 입니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris\_df }\OtherTok{\textless{}{-}}\NormalTok{ iris }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(Species) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{n=}\FunctionTok{n}\NormalTok{(), }\AttributeTok{mean=}\FunctionTok{mean}\NormalTok{(Sepal.Length), }\AttributeTok{sd=}\FunctionTok{sd}\NormalTok{(Sepal.Length))}
+\end{Highlighting}
+\end{Shaded}
+
+위에서 보듯 \texttt{dplyr} 패키지를 사용할 경우 그 결과는 같으나 코드의 가독성과 효율성면에서 장점을 보여줍니다. \texttt{iris} 데이터를 받아서 Species에 명시된 그룹으로 나누고 원하는 함수를 타깃 컬럼에 대해서 적용하라는 의미 입니다. 다음은 모든 변수에 대한 평균을 구하는 코드 입니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris\_mean\_df }\OtherTok{\textless{}{-}}\NormalTok{ iris }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(Species) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{everything}\NormalTok{(), mean))}
+\end{Highlighting}
+\end{Shaded}
+
+자세한 ggplot의 내용은 다음시간에 학습하겠지만 각 평균에 대한 막대그래프를 그러보겠습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\NormalTok{iris\_mean\_df2 }\OtherTok{\textless{}{-}}\NormalTok{ iris\_mean\_df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{pivot\_longer}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{Species)}
+
+\FunctionTok{ggplot}\NormalTok{(iris\_mean\_df2, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{value, }\AttributeTok{fill=}\NormalTok{name)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat=}\StringTok{"identity"}\NormalTok{, }\AttributeTok{position=}\StringTok{"dodge"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=5.20833in,height=\textheight]{images/08/Rplot01.png}
+
+\textbf{Exercises}
+
+InsectSprays 데이터는 살충제 6종에 대한 살충력을 (죽은 벌래의 마릿수) 나타내는 데이터이다. 각 살충제별로 평균과 표준편차를 구하시오
+
+\textbf{Exercises}
+
+dplyr 패키지의 starwars 는 스타워즈 영화에 나오는 등장인물들을 분석한 데이터셋 이다. 종족에 따른 키의 평균과 표준편차를 구하시오. (NA 데이터는 제외하고 분석)
+
+\textbf{Exercises}
+
+airquality 데이터는 뉴욕주의 몇몇 지점에서의 공기질을 측정한 데이터이다. 데이터에서 NA를 제거하고 각 월별로 평균 오존, 자외선, 풍속, 및 온도에 대한 평균과 표준편차를 구하시오
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{airmean }\OtherTok{\textless{}{-}}\NormalTok{ airquality }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(}\FunctionTok{complete.cases}\NormalTok{(.)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{Day) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(Month) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{everything}\NormalTok{(), mean)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{pivot\_longer}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{Month, }\AttributeTok{values\_to =} \StringTok{"mean"}\NormalTok{)}
+
+\NormalTok{airsd }\OtherTok{\textless{}{-}}\NormalTok{ airquality }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(}\FunctionTok{complete.cases}\NormalTok{(.)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{Day) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(Month) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{everything}\NormalTok{(), sd)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{pivot\_longer}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{Month, }\AttributeTok{values\_to =} \StringTok{"sd"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+참고로 errorbar가 있는 막대그래프를 그려보겠습니다. 이를 위해서 먼저 두 테이블을 병합한 후 \texttt{ggplot2} 패키지의 \texttt{ggplot} 함수를 이용해서 그래프를 그립니다. 자세한 \texttt{ggplot}의 내용은 다음시간에 학습하겠습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{airdata }\OtherTok{\textless{}{-}} \FunctionTok{left\_join}\NormalTok{(airmean, airsd, }\AttributeTok{by=}\FunctionTok{c}\NormalTok{(}\StringTok{"Month"}\NormalTok{, }\StringTok{"name"}\NormalTok{))}
+
+\FunctionTok{ggplot}\NormalTok{(airdata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Month, }\AttributeTok{y=}\NormalTok{mean, }\AttributeTok{fill=}\NormalTok{name)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat=}\StringTok{"identity"}\NormalTok{, }\AttributeTok{position=}\StringTok{"dodge"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_errorbar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{ymin=}\NormalTok{mean}\SpecialCharTok{{-}}\NormalTok{sd, }\AttributeTok{ymax=}\NormalTok{mean}\SpecialCharTok{+}\NormalTok{sd), }\AttributeTok{position=}\FunctionTok{position\_dodge}\NormalTok{(}\AttributeTok{width=}\FloatTok{0.9}\NormalTok{), }\AttributeTok{width=}\FloatTok{0.4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=5.20833in,height=\textheight]{images/08/Rplot02.png}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+이 저작물은 크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제 라이선스에 따라 이용할 수 있습니다.
 
   \bibliography{book.bib,packages.bib}
 

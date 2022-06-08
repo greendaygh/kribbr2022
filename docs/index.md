@@ -1,8 +1,8 @@
 --- 
 title: 2022년 한국생명공학연구원 연구데이터 분석과정 R
 #subtitle: R프로그래밍 1차
-author: 합성생물학전문연구단 김하성
-date: "2022-05-31"
+author: 합성생물학전문연구소 김하성
+date: "2022-06-08"
 output:
   pdf_document:
     toc: yes

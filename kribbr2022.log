@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2022.5.11)  31 MAY 2022 15:19
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2022.5.11)  8 JUN 2022 04:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2031,41 +2031,336 @@ Underfull \hbox (badness 1735) in paragraph at lines 2964--2966
 []\TU/NanumGothic(0)/m/sl/10 state.abb에 사용된 알파벳의 갯수를 구하고 가장 많이 쓰인 알파벳을
  []
 
+File: images/07/01.png Graphic file (type bmp)
+<images/07/01.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 2970--2972
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[56] [57]
+Underfull \hbox (badness 1097) in paragraph at lines 3099--3103
+[]\TU/NanumGothic(0)/m/sl/10 다음은 앞에서 수행했던 \TU/lmtt/m/n/10 airquality \TU/NanumG
+othic(0)/m/sl/10 데이터를 월별로 나눈 데이터셋임. 이
+ []
+
+[58]
+Overfull \hbox (10.88335pt too wide) in paragraph at lines 3149--3151
+[]\TU/NanumGothic(0)/m/sl/10 위에서 구해진 두 변수값들을 이용하여 \TU/lmtt/m/n/10 air_means \TU
+/NanumGothic(0)/m/sl/10 라는 이름의 \TU/lmtt/m/n/10 data.frame\TU/NanumGothic(0)/m/s
+l/10 으로
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3155--3157
 []\TU/NanumGothic(0)/m/sl/10 이 저작물은 크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제
  []
 
-[56]
-Chapter 6.
-[57
-
-] [58] [59] [60] [61] [62]
-Overfull \vbox (1.29994pt too high) detected at line 3560
- []
-
-[63] [64]
-Missing character: There is no 결 in font [lmmonolt10-boldoblique]:!
-Missing character: There is no 과 in font [lmmonolt10-boldoblique]:!
-[65] [66
+[59] [60
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3665.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 3665.
+Chapter 6.
+Missing character: There is no 사 in font [lmmono10-regular]:!
+Missing character: There is no 용 in font [lmmono10-regular]:!
+Missing character: There is no 법 in font [lmmono10-regular]:!
+Missing character: There is no 및 in font [lmmono10-regular]:!
+Missing character: There is no 데 in font [lmmono10-regular]:!
+Missing character: There is no 이 in font [lmmono10-regular]:!
+Missing character: There is no 터 in font [lmmono10-regular]:!
+Missing character: There is no 분 in font [lmmono10-regular]:!
+Missing character: There is no 석 in font [lmmono10-regular]:!
+Missing character: There is no 기 in font [lmmono10-regular]:!
+Missing character: There is no 초 in font [lmmono10-regular]:!
+Missing character: There is no 목 in font [lmmono10-regular]:!
+Missing character: There is no 목 in font [lmmono10-regular]:!
+[61] [62] [63] [64] [65] [66] [67] [68]
+Missing character: There is no 결 in font [lmmonolt10-boldoblique]:!
+Missing character: There is no 과 in font [lmmonolt10-boldoblique]:!
+[69] [70
+
+]
+Chapter 7.
+
+Underfull \hbox (badness 5288) in paragraph at lines 3878--3884
+[]\TU/NanumGothic(0)/m/sl/10 가장 마지막 명령은 \TU/lmtt/m/n/10 formula\TU/NanumGothic(
+0)/m/sl/10 를 사용한 plot으로 첫번째 파라메터 인자로
+ []
+
+
+Underfull \hbox (badness 1831) in paragraph at lines 3878--3884
+\TU/lmtt/m/n/10 formula \TU/NanumGothic(0)/m/sl/10 타입이 전달되면 plot.formula 함수가 실행
+되며 x, y 값이 전달될
+ []
+
+
+Underfull \hbox (badness 2096) in paragraph at lines 3878--3884
+\TU/NanumGothic(0)/m/sl/10 타입에 따라서 다른 기능을 하는 함수를 \TU/lmtt/m/n/10 Generic functi
+on \TU/NanumGothic(0)/m/sl/10 이라고 합니다.
+ []
+
+
+Overfull \hbox (3.85225pt too wide) in paragraph at lines 3896--3900
+\TU/lmtt/m/n/10 hist \TU/NanumGothic(0)/m/sl/10 함수는 데이터들의 분포를 히스토그램으로 그려주는 함수입니
+다. 히스토그램은
+ []
+
+[71]
+Underfull \hbox (badness 4193) in paragraph at lines 3948--3950
+[]\TU/NanumGothic(0)/m/sl/10 data.frame 타입의 오브젝트에 대해서 boxplot을 그릴 경우 여러 변수의
+ []
+
+[72]
+Underfull \hbox (badness 1184) in paragraph at lines 4016--4024
+\TU/NanumGothic(0)/m/sl/10 위 예제들에서 사용한 high level function들을 low level function
+ (\TU/lmtt/m/n/10 lines\TU/NanumGothic(0)/m/sl/10 ,
+ []
+
+
+Underfull \hbox (badness 1137) in paragraph at lines 4016--4024
+\TU/NanumGothic(0)/m/sl/10 수 있습니다. 최근 널리 사용되는 \TU/lmtt/m/n/10 ggplot2 \TU/Nanum
+Gothic(0)/m/sl/10 패키지를 이용한 그래프 사용법
+ []
+
+[73]
+File: images/05/01.png Graphic file (type bmp)
+<images/05/01.png>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[74]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[75] [76]
+Underfull \hbox (badness 1735) in paragraph at lines 4187--4189
+[]\TU/NanumGothic(0)/m/sl/10 state.abb에 사용된 알파벳의 갯수를 구하고 가장 많이 쓰인 알파벳을
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4198--4200
+[]\TU/NanumGothic(0)/m/sl/10 이 저작물은 크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제
+ []
+
+[77] [78
+
+]
+Chapter 8.
+File: images/07/tidyverse.JPG Graphic file (type bmp)
+<images/07/tidyverse.JPG>
+
+Overfull \hbox (69.05318pt too wide) in paragraph at lines 4209--4210
+[][] 
+ []
+
+File: images/07/data-science.png Graphic file (type bmp)
+<images/07/data-science.png>
+[79] [80]
+
+LaTeX Font Warning: Font shape `TU/NanumGothic(0)/m/it' undefined
+(Font)              using `TU/NanumGothic(0)/m/sl' instead on input line 4308.
+
+
+Underfull \hbox (badness 2698) in paragraph at lines 4304--4310
+\TU/NanumGothic(0)/m/sl/10 데이터의 변수와 값을 구분하는 일은 적절한 데이터 분석을 위해 필수적인
+ []
+
+File: images/07/notidy.JPG Graphic file (type bmp)
+<images/07/notidy.JPG>
+File: images/07/tidy-1.png Graphic file (type bmp)
+<images/07/tidy-1.png>
+
+Overfull \hbox (106.68639pt too wide) in paragraph at lines 4327--4328
+ [][] 
+ []
+
+File: images/07/05.png Graphic file (type bmp)
+<images/07/05.png>
+
+Underfull \vbox (badness 2635) has occurred while \output is active []
+
+[81]
+File: images/07/06.png Graphic file (type bmp)
+<images/07/06.png>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[82]
+Overfull \hbox (12.71669pt too wide) in paragraph at lines 4354--4361
+\TU/NanumGothic(0)/m/sl/10 위해서는 \TU/lmtt/m/n/10 tidyverse \TU/NanumGothic(0)/m/
+sl/10 패키지에 속한 \TU/lmtt/m/n/10 tidyr \TU/NanumGothic(0)/m/sl/10 패키지의 \TU/lmtt/m/
+n/10 pivot_longer\TU/NanumGothic(0)/m/sl/10 와 \TU/lmtt/m/n/10 pivot_wider\TU/Na
+numGothic(0)/m/sl/10 를
+ []
+
+File: images/07/wide2long.JPG Graphic file (type bmp)
+<images/07/wide2long.JPG>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[83]
+Underfull \hbox (badness 10000) in paragraph at lines 4413--4415
+
+ []
+
+[84]
+
+LaTeX Font Warning: Font shape `TU/NanumGothic(0)/m/it' undefined
+(Font)              using `TU/NanumGothic(0)/m/sl' instead on input line 4479.
+
+[85]
+File: images/07/02.PNG Graphic file (type bmp)
+<images/07/02.PNG>
+
+Overfull \hbox (31.41504pt too wide) in paragraph at lines 4512--4513
+[][] 
+ []
+
+[86]
+Underfull \hbox (badness 3333) in paragraph at lines 4567--4571
+[]\TU/NanumGothic(0)/m/sl/10 pipe operator를 사용해서 \TU/lmtt/m/n/10 airquality\TU/
+NanumGothic(0)/m/sl/10 데이터를 long형으로 전환하는
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4567--4571
+
+ []
+
+
+Overfull \hbox (0.78003pt too wide) in paragraph at lines 4571--4573
+[]\TU/NanumGothic(0)/m/sl/10 pipe operator를 사용해서 \TU/lmtt/m/n/10 airquality\TU/
+NanumGothic(0)/m/sl/10 데이터의 Month와 Day 변수(컬럼)을
+ []
+
+[87]
+File: images/07/03.png Graphic file (type bmp)
+<images/07/03.png>
+
+Overfull \hbox (31.42004pt too wide) in paragraph at lines 4645--4646
+[][] 
+ []
+
+
+Underfull \hbox (badness 1742) in paragraph at lines 4668--4671
+\TU/lmtt/m/n/10 select() \TU/NanumGothic(0)/m/sl/10 는 주어진 데이터셋으로부터 관심있는 변수를 (co
+lumn) 선택하여
+ []
+
+
+Underfull \vbox (badness 1502) has occurred while \output is active []
+
+[88]
+Underfull \hbox (badness 3907) in paragraph at lines 4717--4721
+\TU/lmtt/m/n/10 mutate() \TU/NanumGothic(0)/m/sl/10 함수는 새로운 변수를 추가할 수 있는 기능을 제공
+하며 앞에서
+ []
+
+[89]
+Missing character: There is no 기 in font [lmmono10-regular]:!
+Missing character: There is no 본 in font [lmmono10-regular]:!
+Missing character: There is no 적 in font [lmmono10-regular]:!
+Missing character: There is no 으 in font [lmmono10-regular]:!
+Missing character: There is no 로 in font [lmmono10-regular]:!
+Missing character: There is no 공 in font [lmmono10-regular]:!
+Missing character: There is no 통 in font [lmmono10-regular]:!
+Missing character: There is no 되 in font [lmmono10-regular]:!
+Missing character: There is no 는 in font [lmmono10-regular]:!
+Missing character: There is no 이 in font [lmmono10-regular]:!
+Missing character: There is no 름 in font [lmmono10-regular]:!
+Missing character: There is no 의 in font [lmmono10-regular]:!
+Missing character: There is no 변 in font [lmmono10-regular]:!
+Missing character: There is no 수 in font [lmmono10-regular]:!
+Missing character: There is no 를 in font [lmmono10-regular]:!
+Missing character: There is no 이 in font [lmmono10-regular]:!
+Missing character: There is no 용 in font [lmmono10-regular]:!
+Missing character: There is no 해 in font [lmmono10-regular]:!
+Missing character: There is no 서 in font [lmmono10-regular]:!
+Missing character: There is no 공 in font [lmmono10-regular]:!
+Missing character: There is no 통 in font [lmmono10-regular]:!
+Missing character: There is no 되 in font [lmmono10-regular]:!
+Missing character: There is no 는 in font [lmmono10-regular]:!
+Missing character: There is no 샘 in font [lmmono10-regular]:!
+Missing character: There is no 플 in font [lmmono10-regular]:!
+Missing character: There is no 끼 in font [lmmono10-regular]:!
+Missing character: There is no 리 in font [lmmono10-regular]:!
+Missing character: There is no 자 in font [lmmono10-regular]:!
+Missing character: There is no 동 in font [lmmono10-regular]:!
+Missing character: There is no 으 in font [lmmono10-regular]:!
+Missing character: There is no 로 in font [lmmono10-regular]:!
+Missing character: There is no 병 in font [lmmono10-regular]:!
+Missing character: There is no 합 in font [lmmono10-regular]:!
+Missing character: There is no 해 in font [lmmono10-regular]:!
+Missing character: There is no 주 in font [lmmono10-regular]:!
+Missing character: There is no 는 in font [lmmono10-regular]:!
+Missing character: There is no 기 in font [lmmono10-regular]:!
+Missing character: There is no 능 in font [lmmono10-regular]:!
+Missing character: There is no 을 in font [lmmono10-regular]:!
+Missing character: There is no 수 in font [lmmono10-regular]:!
+Missing character: There is no 행 in font [lmmono10-regular]:!
+Missing character: There is no 합 in font [lmmono10-regular]:!
+Missing character: There is no 니 in font [lmmono10-regular]:!
+Missing character: There is no 다 in font [lmmono10-regular]:!
+[90]
+Underfull \hbox (badness 1102) in paragraph at lines 4797--4802
+\TU/NanumGothic(0)/m/sl/10 대해서 임의의 함수 \TU/lmtt/m/n/10 function(x)... \TU/NanumG
+othic(0)/m/sl/10 를 수행하는 역할을 합니다. 마지막
+ []
+
+
+Underfull \hbox (badness 1565) in paragraph at lines 4823--4828
+\TU/NanumGothic(0)/m/sl/10 효율성면에서 장점을 보여줍니다. \TU/lmtt/m/n/10 iris \TU/NanumGoth
+ic(0)/m/sl/10 데이터를 받아서 Species에 명시된
+ []
+
+
+Underfull \hbox (badness 1033) in paragraph at lines 4823--4828
+\TU/NanumGothic(0)/m/sl/10 그룹으로 나누고 원하는 함수를 타깃 컬럼에 대해서 적용하라는 의미 입니다.
+ []
+
+File: images/08/Rplot01.png Graphic file (type bmp)
+<images/08/Rplot01.png>
+
+Overfull \hbox (31.40955pt too wide) in paragraph at lines 4852--4853
+[][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[91]
+Underfull \hbox (badness 2460) in paragraph at lines 4867--4870
+[]\TU/NanumGothic(0)/m/sl/10 airquality 데이터는 뉴욕주의 몇몇 지점에서의 공기질을 측정한 데이터이다.
+ []
+
+[92]
+File: images/08/Rplot02.png Graphic file (type bmp)
+<images/08/Rplot02.png>
+
+Overfull \hbox (31.42052pt too wide) in paragraph at lines 4906--4907
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4910--4912
+[]\TU/NanumGothic(0)/m/sl/10 이 저작물은 크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제
+ []
+
+[93] [94
+
+]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 4914.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 4914.
 (./kribbr2022.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 3665.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 3665.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 4914.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 4914.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 18991 strings out of 479819
- 335677 string characters out of 5895846
- 781178 words of memory out of 5000000
- 35806 multiletter control sequences out of 15000+600000
+ 19107 strings out of 479819
+ 337660 string characters out of 5895846
+ 782117 words of memory out of 5000000
+ 35909 multiletter control sequences out of 15000+600000
  538893 words of font info for 90 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  58i,7n,118p,809b,557s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on kribbr2022.pdf (70 pages).
+Output written on kribbr2022.pdf (98 pages).
