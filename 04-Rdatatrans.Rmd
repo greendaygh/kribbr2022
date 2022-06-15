@@ -492,6 +492,58 @@ ozone_func(df)
 
 
 
+```{r, eval=F, echo=F}
+
+# if (!require("BiocManager", quietly = TRUE))
+#     install.packages("BiocManager")
+# 
+# BiocManager::install("GEOquery")
+# BiocManager::install("SummarizedExperiment", force=TRUE)
+
+library(SummarizedExperiment)
+library(GEOquery)
+library(tidyverse)
+
+list.files("GEO")
+tempdir()
+
+gse <- getGEO(GEO="GSE103512", destdir = "GEO")
+gse
+
+class(gse[[1]])
+gse103512 <- as(gse[[1]], "SummarizedExperiment")
+class(gse103512)
+
+assays(gse103512)$exprs
+
+rowData(gse103512)
+colData(gse103512)
+
+slotNames(gse103512)
+
+mymt <- metadata(gse103512)
+
+myel <- elementMetadata(gse103512)
+write.table(rowData(gse103512)[1:5000,], "examples/gse103512_element_metadata.csv", sep=",")
+write.table(colData(gse103512), "examples/gse103512_sample_metadata.csv", sep=",")
+write.table(assays(gse103512)$exprs[1:5000,], "examples/gse103512_expression_values.csv", sep=",")
+
+tmp <- read.table("examples/element_metadata.csv", sep=",")
+
+
+
+
+gse <- getGEO(GEO="GSE93819")
+gse93819 <- as(gse[[1]], "SummarizedExperiment")
+
+write.table(rowData(gse93819)[1:5000,], "examples/gse93819_element_metadata.csv", sep=",")
+write.table(colData(gse93819), "examples/gse93819_sample_metadata.csv", sep=",")
+write.table(assays(gse93819)$exprs[1:5000,], "examples/gse93819_expression_values.csv", sep=",")
+
+```
+
+
+
 
 ---
 
