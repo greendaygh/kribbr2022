@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 6 Lecture 2 Note | 2022년 한국생명공학연구원 연구데이터 분석과정 R</title>
+<meta name="author" content="합성생물학전문연구소 김하성">
+<meta name="description" content="설명이나 실습을 위해 R 사용법 및 데이터 분석 기초 5.19(목), 5.26(목) 강의를 진행하며 작성한 코드입니다.  6.1 numeric vector Ctrl + Alt + i 누르면 코드청크 생성 커서를 해당 라인에 두구 Ctrl + Enter 누르면 해당 라인 실행 2 + 2 ((2-1)^2 + (1-3)^2 )^(1/2) 2 + 2; 2...">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta property="og:title" content="Chapter 6 Lecture 2 Note | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
+<meta property="og:type" content="book">
+<meta property="og:description" content="설명이나 실습을 위해 R 사용법 및 데이터 분석 기초 5.19(목), 5.26(목) 강의를 진행하며 작성한 코드입니다.  6.1 numeric vector Ctrl + Alt + i 누르면 코드청크 생성 커서를 해당 라인에 두구 Ctrl + Enter 누르면 해당 라인 실행 2 + 2 ((2-1)^2 + (1-3)^2 )^(1/2) 2 + 2; 2...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 6 Lecture 2 Note | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
+<meta name="twitter:description" content="설명이나 실습을 위해 R 사용법 및 데이터 분석 기초 5.19(목), 5.26(목) 강의를 진행하며 작성한 코드입니다.  6.1 numeric vector Ctrl + Alt + i 누르면 코드청크 생성 커서를 해당 라인에 두구 Ctrl + Enter 누르면 해당 라인 실행 2 + 2 ((2-1)^2 + (1-3)^2 )^(1/2) 2 + 2; 2...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">2022년 한국생명공학연구원 연구데이터 분석과정 R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="rrstudio-basics.html"><span class="header-section-number">2</span> R/Rstudio basics</a></li>
+<li><a class="" href="rmarkdown.html"><span class="header-section-number">3</span> Rmarkdown</a></li>
+<li><a class="" href="r-programming.html"><span class="header-section-number">4</span> R programming</a></li>
+<li><a class="" href="data-transformation.html"><span class="header-section-number">5</span> Data transformation</a></li>
+<li><a class="active" href="lecture-2-note.html"><span class="header-section-number">6</span> Lecture 2 Note</a></li>
+<li><a class="" href="r-basic-graphics.html"><span class="header-section-number">7</span> R basic graphics</a></li>
+<li><a class="" href="tidyverse.html"><span class="header-section-number">8</span> tidyverse</a></li>
+<li><a class="" href="lecture-3-note.html"><span class="header-section-number">9</span> Lecture 3 Note</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="lecture-2-note" class="section level1" number="6">
+<h1>
+<span class="header-section-number">6</span> Lecture 2 Note<a class="anchor" aria-label="anchor" href="#lecture-2-note"><i class="fas fa-link"></i></a>
+</h1>
+<p>설명이나 실습을 위해 <code>R 사용법 및 데이터 분석 기초 5.19(목), 5.26(목)</code> 강의를 진행하며 작성한 코드입니다.</p>
+<div id="numeric-vector" class="section level2" number="6.1">
+<h2>
+<span class="header-section-number">6.1</span> numeric vector<a class="anchor" aria-label="anchor" href="#numeric-vector"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Ctrl + Alt + i 누르면 코드청크 생성</li>
+<li>커서를 해당 라인에 두구 Ctrl + Enter 누르면 해당 라인 실행</li>
+</ul>
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fl">2</span> <span class="op">+</span> <span class="fl">2</span>
+<span class="op">(</span><span class="op">(</span><span class="fl">2</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fl">3</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">)</span><span class="op">^</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span>
+<span class="fl">2</span> <span class="op">+</span> <span class="fl">2</span>; <span class="fl">2</span> <span class="op">-</span> <span class="fl">2</span></code></pre></div>
+<ul>
+<li>기억할 단축키
+<ul>
+<li>Ctrl + 1 : 편집창</li>
+<li>Ctrl + 2 : 콘솔창</li>
+</ul>
+</li>
+</ul>
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="op">(</span><span class="fl">4</span><span class="op">+</span><span class="fl">3</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">2</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<span class="fl">2</span><span class="op">^</span><span class="fl">3</span> <span class="op">+</span> <span class="fl">3</span><span class="op">^</span><span class="fl">2</span></code></pre></div>
+<ul>
+<li>변수에 값 저장하기</li>
+</ul>
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fl">2</span>
+<span class="va">z</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">+</span> <span class="va">y</span></code></pre></div>
+<ul>
+<li>변수 값 보기</li>
+</ul>
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span>
+<span class="va">y</span>
+<span class="va">z</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>numeric vector 만들기</li>
+</ul>
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>
+<span class="va">x</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">1</span><span class="op">)</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from<span class="op">=</span><span class="fl">1</span>, to<span class="op">=</span><span class="fl">5</span>, by<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>to<span class="op">=</span><span class="fl">5</span>, from<span class="op">=</span><span class="fl">1</span>, by<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
+<span class="op">?</span><span class="va">seq</span>
+<span class="va">y</span></code></pre></div>
+<ul>
+<li>연습문제 풀이</li>
+</ul>
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">odds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">100</span>, by<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+<span class="va">odds</span>  
+<span class="va">evens</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">100</span>, <span class="fl">2</span><span class="op">)</span>
+<span class="va">evens</span></code></pre></div>
+<ul>
+<li>vector의 인덱싱 (첫번째 값의 인덱스는 1부터 시작)</li>
+</ul>
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">odds</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
+<span class="va">odds</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>
+<span class="va">i</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>
+<span class="va">i</span>
+<span class="va">odds</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">odds</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">odds</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">precip</span>
+<span class="op">?</span><span class="va">precip</span>
+
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">precip</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">precip</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">precip</span><span class="op">)</span>
+
+<span class="va">precip</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
+<span class="va">precip</span><span class="op">[</span><span class="st">"Mobile"</span><span class="op">]</span></code></pre></div>
+<ul>
+<li>logical vector 설명</li>
+<li>기본 그래픽 함수 이용하는 방법은 필요할때만 설명</li>
+</ul>
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">precip</span>
+<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">precip</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">precip</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>
+<code>which</code> 함수 활용한 40 이상만 선택</li>
+</ul>
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">precip</span> <span class="op">&gt;</span> <span class="fl">40</span>
+<span class="va">precip</span><span class="op">[</span><span class="va">precip</span> <span class="op">&gt;</span> <span class="fl">40</span><span class="op">]</span>
+<span class="va">idx</span> <span class="op">&lt;-</span> <span class="va">precip</span> <span class="op">&gt;</span> <span class="fl">40</span>
+<span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">idx</span><span class="op">)</span>
+<span class="va">myprecip</span> <span class="op">&lt;-</span> <span class="va">precip</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">idx</span><span class="op">)</span><span class="op">]</span>
+<span class="va">myprecip</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">myprecip</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>
+<code>which</code>함수 활용한 짝수 만들기</li>
+</ul>
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mynumers</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>
+<span class="va">mynumers_res</span> <span class="op">&lt;-</span> <span class="va">mynumers</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">2</span>
+<span class="va">i</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">mynumers_res</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span>
+<span class="va">evens</span> <span class="op">&lt;-</span> <span class="va">mynumers</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>
+<span class="va">evens</span></code></pre></div>
+<ul>
+<li>홀수 값을 저장하는 벡터 만들고 하나씩 샘플링 (<code>sample</code> 함수 사용)</li>
+</ul>
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">odds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1000</span>, <span class="fl">2</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">evens</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">odds</span><span class="op">)</span>
+<span class="op">?</span><span class="va">sample</span>
+<span class="va">mysample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">evens</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">odds</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">mysample</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>문자열 붙이기, <code>,</code>로 나누어진 벡터들 각각의 원소를 붙여줌</li>
+</ul>
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"X"</span>, <span class="st">"Y"</span>, <span class="st">"Z"</span>, sep<span class="op">=</span><span class="st">"_"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"X"</span>, <span class="st">"Y"</span>, <span class="st">"Z"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"X"</span>, <span class="st">"Y"</span>, <span class="st">"Z"</span>, <span class="st">"X"</span>, <span class="st">"Y"</span>, <span class="st">"Z"</span>, <span class="st">"X"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>여러 벡터에서 각각의 원소를 붙여주는 기능</li>
+</ul>
+<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"X"</span>,<span class="st">"Y"</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>
+
+<span class="va">gene_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"gene"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">100</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>collapse (하나의 벡터에서 해당 벡터의 원소들을 붙여주는 기능)</li>
+</ul>
+<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"X"</span>, <span class="st">"Y"</span><span class="op">)</span>, collapse <span class="op">=</span> <span class="st">""</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>예제 (<code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code>, <code><a href="https://rdrr.io/r/base/paste.html">paste()</a></code>, <code><a href="https://rdrr.io/r/base/rep.html">rep()</a></code>)</li>
+</ul>
+<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"C"</span>, <span class="st">"G"</span>, <span class="st">"T"</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">20</span>, replace <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+<span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">x</span>, collapse <span class="op">=</span> <span class="st">""</span><span class="op">)</span>
+
+<span class="va">myseq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">""</span>, <span class="fl">5</span><span class="op">)</span>
+<span class="va">myseq</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"C"</span>, <span class="st">"G"</span>, <span class="st">"T"</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">20</span>, replace <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>, collapse<span class="op">=</span><span class="st">""</span><span class="op">)</span>
+<span class="va">myseq</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"C"</span>, <span class="st">"G"</span>, <span class="st">"T"</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">20</span>, replace <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>, collapse<span class="op">=</span><span class="st">""</span><span class="op">)</span>
+<span class="va">myseq</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"C"</span>, <span class="st">"G"</span>, <span class="st">"T"</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">20</span>, replace <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>, collapse<span class="op">=</span><span class="st">""</span><span class="op">)</span>
+<span class="va">myseq</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"C"</span>, <span class="st">"G"</span>, <span class="st">"T"</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">20</span>, replace <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>, collapse<span class="op">=</span><span class="st">""</span><span class="op">)</span>
+<span class="va">myseq</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"C"</span>, <span class="st">"G"</span>, <span class="st">"T"</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">20</span>, replace <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>, collapse<span class="op">=</span><span class="st">""</span><span class="op">)</span>
+
+<span class="va">myseq</span></code></pre></div>
+<ul>
+<li>예제 ‘TAAGTCT’ 바코드를 각 서열의 3’에 붙여보기</li>
+</ul>
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">myseq</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TAAGTCT"</span><span class="op">)</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="st">"XYZ"</span>, split<span class="op">=</span><span class="st">""</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>
+<code>split</code> 함수 사용</li>
+</ul>
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="st">"XYZ"</span>, split<span class="op">=</span><span class="st">""</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+<span class="va">x</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>
+<span class="va">y</span></code></pre></div>
+<ul>
+<li>
+<code>factor</code> 간단한 설명</li>
+</ul>
+<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Red"</span>, <span class="st">"Blue"</span>, <span class="st">"Yellow"</span>, <span class="st">"Red"</span>, <span class="st">"Blue"</span><span class="op">)</span>
+<span class="va">x</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+<span class="va">y</span>
+<span class="va">y</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"gold"</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"gold"</span>
+<span class="va">y</span>
+<span class="va">y</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"gold"</span>
+<span class="va">y</span></code></pre></div>
+<ul>
+<li>데이터에서 <code>factor</code>들 보기</li>
+</ul>
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/">MASS</a></span><span class="op">)</span>
+<span class="va">Cars93</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">Cars93</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>아미노산 및 각 아미노산에 해당하는 코돈 표현 예제</li>
+</ul>
+<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">aa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Phe"</span>, <span class="st">"Leu"</span>, <span class="st">"Ser"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">aa</span><span class="op">)</span>
+<span class="va">aa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">aa</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">aa</span><span class="op">)</span>
+
+<span class="va">aa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">aa</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"UUU"</span>, <span class="st">"UUC"</span><span class="op">)</span>
+<span class="va">aa</span>
+<span class="va">aa</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"UUA"</span>, <span class="st">"UUG"</span>, <span class="st">"CUA"</span>, <span class="st">"CUU"</span>, <span class="st">"CUG"</span>, <span class="st">"CUC"</span><span class="op">)</span>
+<span class="va">aa</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">aa</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">aa</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Phe"</span>, <span class="st">"Leu"</span><span class="op">)</span>
+<span class="va">aa</span>
+<span class="va">aa</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
+<span class="va">aa</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span></code></pre></div>
+<ul>
+<li>useful functions</li>
+</ul>
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">100</span>, <span class="cn">T</span><span class="op">)</span>
+<span class="op">?</span><span class="va">sample</span>
+<span class="va">z</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="matrix-1" class="section level2" number="6.2">
+<h2>
+<span class="header-section-number">6.2</span> matrix<a class="anchor" aria-label="anchor" href="#matrix-1"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>연습문제 풀이 성적별 테이블 정렬</li>
+</ul>
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mynum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span>, <span class="fl">20</span>, <span class="cn">T</span><span class="op">)</span>
+<span class="va">mynum</span>
+<span class="va">score</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="va">mynum</span>, nrow <span class="op">=</span> <span class="fl">10</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<span class="va">score</span>
+<span class="va">myrowname</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Name"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>
+<span class="va">myrowname</span>
+<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">score</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">myrowname</span>
+<span class="va">score</span>
+<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">score</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Math"</span>, <span class="st">"Eng"</span><span class="op">)</span>
+
+<span class="va">total_score</span> <span class="op">&lt;-</span> <span class="va">score</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">score</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>
+<span class="va">total_score</span> <span class="op">&lt;-</span> <span class="va">score</span><span class="op">[</span>,<span class="st">"Math"</span><span class="op">]</span> <span class="op">+</span> <span class="va">score</span><span class="op">[</span>,<span class="st">"Eng"</span><span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">total_score</span>, decreasing <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+<span class="va">score</span>
+<span class="va">o</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">total_score</span>, decreasing <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+<span class="va">o</span>
+<span class="va">score</span><span class="op">[</span><span class="va">o</span>,<span class="op">]</span></code></pre></div>
+</div>
+<div id="data.frame-1" class="section level2" number="6.3">
+<h2>
+<span class="header-section-number">6.3</span> data.frame<a class="anchor" aria-label="anchor" href="#data.frame-1"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">math_score</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span>, <span class="fl">10</span>, <span class="cn">T</span><span class="op">)</span>
+<span class="va">eng_score</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span>, <span class="fl">10</span>, <span class="cn">T</span><span class="op">)</span>
+<span class="va">score</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">math_score</span>, <span class="va">eng_score</span><span class="op">)</span>
+<span class="va">score</span>
+<span class="va">score</span><span class="op">$</span><span class="va">math_score</span>
+<span class="va">score</span><span class="op">$</span><span class="va">eng_score</span></code></pre></div>
+<ul>
+<li>추가 연습문제: 수학, 영어 성적을 더해서 <code>total_score</code>를 만들고 이 값을 기준으로 내림차순으로 score 데이터프레임을 정렬 하시오.</li>
+</ul>
+<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">total_score</span> <span class="op">&lt;-</span> <span class="va">score</span><span class="op">$</span><span class="va">math_score</span> <span class="op">+</span> <span class="va">score</span><span class="op">$</span><span class="va">eng_score</span>
+<span class="va">o</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">total_score</span>, decreasing <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+<span class="va">score</span><span class="op">[</span><span class="va">o</span>,<span class="op">]</span></code></pre></div>
+</div>
+<div id="list-1" class="section level2" number="6.4">
+<h2>
+<span class="header-section-number">6.4</span> list<a class="anchor" aria-label="anchor" href="#list-1"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">score</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">score</span><span class="op">)</span>
+<span class="va">mynum</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">mynum</span><span class="op">)</span>
+
+<span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">z</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">score</span>
+<span class="va">z</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">mynum</span>
+<span class="va">z</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"dataframe"</span>, <span class="st">"numericvector"</span><span class="op">)</span>
+<span class="va">z</span>
+<span class="va">z</span><span class="op">$</span><span class="va">dataframe</span>
+<span class="va">z</span><span class="op">$</span><span class="va">numericvector</span></code></pre></div>
+<ul>
+<li>리스트 만들때 미리 원소의 개수를 알고 있으면 그 원소의 개수에 맞게 생성해 주는 것이 좋음 <code>aa &lt;- vector("list", 5)</code>
+</li>
+<li>각 아미노산에 해당하는 코돈 길이가 달라도 list 형태로 저장 가능</li>
+</ul>
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">aa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">aa</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"UUU"</span>, <span class="st">"UUC"</span><span class="op">)</span>
+<span class="va">aa</span>
+<span class="va">aa</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"UUA"</span>, <span class="st">"UUG"</span>, <span class="st">"CUA"</span>, <span class="st">"CUU"</span>, <span class="st">"CUG"</span>, <span class="st">"CUC"</span><span class="op">)</span>
+<span class="va">aa</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">aa</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">aa</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Phe"</span>, <span class="st">"Leu"</span><span class="op">)</span>
+<span class="va">aa</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">aa</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>바람직한 데이터는 column은 변수, row는 샘플 구조의 데이터. 예를 들어서, 변수:먹이, 수명 –&gt; 컬럼, 샘플: 마우스1, 마우스2 –&gt; Row, 등</li>
+</ul>
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">aa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Phe"</span>, <span class="st">"Leu"</span><span class="op">)</span>
+<span class="va">codon</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"UUU"</span>, <span class="st">"UUC"</span>, <span class="st">"UUA"</span>, <span class="st">"UUG"</span>, <span class="st">"CUA"</span>, <span class="st">"CUU"</span>, <span class="st">"CUG"</span>, <span class="st">"CUC"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">aa</span>, <span class="va">codon</span><span class="op">)</span>
+<span class="va">aa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Phe"</span>, <span class="fl">2</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Leu"</span>,<span class="fl">6</span><span class="op">)</span><span class="op">)</span>
+<span class="va">codon</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"UUU"</span>, <span class="st">"UUC"</span>, <span class="st">"UUA"</span>, <span class="st">"UUG"</span>, <span class="st">"CUA"</span>, <span class="st">"CUU"</span>, <span class="st">"CUG"</span>, <span class="st">"CUC"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">aa</span>, <span class="va">codon</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="functions-1" class="section level2" number="6.5">
+<h2>
+<span class="header-section-number">6.5</span> functions<a class="anchor" aria-label="anchor" href="#functions-1"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"myscript.R"</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>함수만들기</li>
+</ul>
+<!-- --><pre><code>my_function_name &lt;- function(parameter1, parameter2, ... ){
+  ##any statements
+  return(object)
+}</code></pre>
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co">## mynumers: numeric vector</span>
+<span class="va">mymean</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">mynumers</span><span class="op">)</span><span class="op">{</span>
+  <span class="co">#cat("Input numbers are", mynumers, "\n")</span>
+  <span class="va">numbers_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">mynumers</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">mynumers</span><span class="op">)</span>
+  <span class="co">#out &lt;- paste("The average is ", numbers_mean, ".\n", sep="")</span>
+  <span class="co">#cat(out)</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">numbers_mean</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
+<ul>
+<li>함수 만든 후 loading 할 때 <code>{</code>, <code>}</code> 밖에서 Ctrl + Enter로 로딩</li>
+</ul>
+<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">mymean</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">0.452</span>, <span class="fl">1.474</span>, <span class="fl">0.22</span>, <span class="fl">0.545</span>, <span class="fl">1.205</span>, <span class="fl">3.55</span><span class="op">)</span>
+<span class="fu">mymean</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+
+<span class="fu">mymean</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>데이터 표준화 예제</li>
+</ul>
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mysd</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
+  <span class="va">numbers_sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu">mymean</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>  
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">numbers_sd</span><span class="op">)</span>
+<span class="op">}</span>
+
+<span class="co">#x &lt;- sample(1:100, 1000, T)</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">10</span>, <span class="fl">5</span><span class="op">)</span>
+<span class="va">z</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu">mymean</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fu">mysd</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+<span class="fu">mymean</span><span class="op">(</span><span class="va">z</span><span class="op">)</span>
+<span class="fu">mysd</span><span class="op">(</span><span class="va">z</span><span class="op">)</span>
+<span class="fu">mymean</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+<span class="fu">mysd</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>코드비교</li>
+</ul>
+<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span><span class="op">)</span>
+<span class="va">x</span> <span class="op">+</span> <span class="fl">10</span>
+
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span>
+<span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">{</span>
+  <span class="va">y</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">+</span> <span class="fl">10</span>
+<span class="op">}</span>
+<span class="va">y</span></code></pre></div>
+</div>
+<div id="for" class="section level2" number="6.6">
+<h2>
+<span class="header-section-number">6.6</span> for<a class="anchor" aria-label="anchor" href="#for"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>
+<span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="va">x</span><span class="op">)</span><span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="va">i</span>, <span class="st">"\n"</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/flush.console.html">flush.console</a></span><span class="op">(</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span>
+<span class="kw">while</span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">10</span><span class="op">)</span><span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"\n"</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/flush.console.html">flush.console</a></span><span class="op">(</span><span class="op">)</span>
+  <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">+</span> <span class="fl">1</span>
+<span class="op">}</span></code></pre></div>
+<ul>
+<li>랜덤 서열만들기 예제</li>
+</ul>
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"C"</span>, <span class="st">"G"</span>, <span class="st">"T"</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">20</span>, replace <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+<span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">x</span>, collapse <span class="op">=</span> <span class="st">""</span><span class="op">)</span>
+
+<span class="va">myseq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">""</span>, <span class="fl">5</span><span class="op">)</span>
+<span class="va">myseq</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"C"</span>, <span class="st">"G"</span>, <span class="st">"T"</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">20</span>, replace <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>, collapse<span class="op">=</span><span class="st">""</span><span class="op">)</span>
+<span class="va">myseq</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"C"</span>, <span class="st">"G"</span>, <span class="st">"T"</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">20</span>, replace <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>, collapse<span class="op">=</span><span class="st">""</span><span class="op">)</span>
+<span class="va">myseq</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"C"</span>, <span class="st">"G"</span>, <span class="st">"T"</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">20</span>, replace <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>, collapse<span class="op">=</span><span class="st">""</span><span class="op">)</span>
+<span class="va">myseq</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"C"</span>, <span class="st">"G"</span>, <span class="st">"T"</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">20</span>, replace <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>, collapse<span class="op">=</span><span class="st">""</span><span class="op">)</span>
+<span class="va">myseq</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"C"</span>, <span class="st">"G"</span>, <span class="st">"T"</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">20</span>, replace <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>, collapse<span class="op">=</span><span class="st">""</span><span class="op">)</span>
+
+
+<span class="va">numseq</span> <span class="op">&lt;-</span> <span class="fl">7</span>
+<span class="va">myseq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">""</span>, <span class="va">numseq</span><span class="op">)</span>
+<span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">myseq</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"C"</span>, <span class="st">"G"</span>, <span class="st">"T"</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">20</span>, replace <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+  <span class="va">myseq</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">x</span>, collapse<span class="op">=</span><span class="st">""</span><span class="op">)</span>
+<span class="op">}</span>
+<span class="va">myseq</span></code></pre></div>
+</div>
+<div id="data-transformation-1" class="section level2" number="6.7">
+<h2>
+<span class="header-section-number">6.7</span> Data transformation<a class="anchor" aria-label="anchor" href="#data-transformation-1"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>
+<code>UsingR</code> 패키지의 babies 데이터셋을 적절히 변환하는 예제. <code>with</code>와 <code>within</code> 활용법 알아두기 (설명 안 함)</li>
+</ul>
+<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">UsingR</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">babies</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">babies</span><span class="op">)</span>
+
+
+<span class="va">new_babies</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">within</a></span><span class="op">(</span><span class="va">babies</span>, <span class="op">{</span>
+  <span class="va">gestation</span><span class="op">[</span><span class="va">gestation</span><span class="op">==</span><span class="fl">999</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span>
+  <span class="va">dwt</span><span class="op">[</span><span class="va">dwt</span><span class="op">==</span><span class="fl">999</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span>
+  <span class="va">smoke</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">smoke</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">smoke</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+    <span class="st">"never"</span> <span class="op">=</span> <span class="fl">0</span>, 
+    <span class="st">"smoke now"</span> <span class="op">=</span> <span class="fl">1</span>, 
+    <span class="st">"until current pregnancy"</span> <span class="op">=</span> <span class="fl">2</span>,
+    <span class="st">"once did, not now"</span> <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
+  <span class="op">}</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">new_babies</span><span class="op">)</span>
+
+<span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">gestation</span><span class="op">~</span><span class="va">smoke</span>, <span class="va">new_babies</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span> <span class="co">## t-test 결과 </span>
+<span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></code></pre></div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="data-transformation.html"><span class="header-section-number">5</span> Data transformation</a></div>
+<div class="next"><a href="r-basic-graphics.html"><span class="header-section-number">7</span> R basic graphics</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#lecture-2-note"><span class="header-section-number">6</span> Lecture 2 Note</a></li>
+<li><a class="nav-link" href="#numeric-vector"><span class="header-section-number">6.1</span> numeric vector</a></li>
+<li><a class="nav-link" href="#matrix-1"><span class="header-section-number">6.2</span> matrix</a></li>
+<li><a class="nav-link" href="#data.frame-1"><span class="header-section-number">6.3</span> data.frame</a></li>
+<li><a class="nav-link" href="#list-1"><span class="header-section-number">6.4</span> list</a></li>
+<li><a class="nav-link" href="#functions-1"><span class="header-section-number">6.5</span> functions</a></li>
+<li><a class="nav-link" href="#for"><span class="header-section-number">6.6</span> for</a></li>
+<li><a class="nav-link" href="#data-transformation-1"><span class="header-section-number">6.7</span> Data transformation</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>2022년 한국생명공학연구원 연구데이터 분석과정 R</strong>" was written by 합성생물학전문연구소 김하성. It was last built on 2022-06-16.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

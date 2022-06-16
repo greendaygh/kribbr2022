@@ -48,9 +48,10 @@
 <li><a class="active" href="rmarkdown.html"><span class="header-section-number">3</span> Rmarkdown</a></li>
 <li><a class="" href="r-programming.html"><span class="header-section-number">4</span> R programming</a></li>
 <li><a class="" href="data-transformation.html"><span class="header-section-number">5</span> Data transformation</a></li>
-<li><a class="" href="lecture-note-2.html"><span class="header-section-number">6</span> Lecture note 2</a></li>
+<li><a class="" href="lecture-2-note.html"><span class="header-section-number">6</span> Lecture 2 Note</a></li>
 <li><a class="" href="r-basic-graphics.html"><span class="header-section-number">7</span> R basic graphics</a></li>
 <li><a class="" href="tidyverse.html"><span class="header-section-number">8</span> tidyverse</a></li>
+<li><a class="" href="lecture-3-note.html"><span class="header-section-number">9</span> Lecture 3 Note</a></li>
 </ul>
 
         <div class="book-extra">
@@ -74,9 +75,18 @@
 <p>Rmarkdown은 plain text 기반으로 작성되며 Rmd 라는 확장자를 갖는 파일로 저장됩니다. 다음과 같은 텍스트 파일이 Rmd 파일의 전형적인 예 입니다.</p>
 <div class="inline-figure"><img src="images/rmarkdown/how-1-file.png" width="500"></div>
 <p>위 예제에서 네 가지 다른 종류의 컨텐츠를 볼 수 있습니다. 하나는 - - - 으로 둘러쌓인 내용으로 YAML 이라고 하며 JSON과 같은 데이터 직렬화를 수행하는 하나의 데이터 저장 포멧입니다. 백틱(`) 으로 둘러쌓인 코드청그(Code Chunks)라고 하는 부분에는 R이나 python 등의 다양한 코드(실재 작동하는)를 넣어서 사용합니다. 그리고 ### 으로 표시된 글은 제목 글을 나타내며 나머지는 일반적인 텍스트를 나타냅니다.</p>
+<pre><code>---
+title: "Lecture3"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+    toc_depth: 2
+    number_sections: yes
+---</code></pre>
 <p>이러한 Rmarkdown 파일은 <code>render</code>라는 명령어로 원하는 포맷의 문서로 변환할 수 있습니다. 다음 예의 파일을 pdf 형식으로 rendering 하기 위해서는 YAML에 pdf 임을 명시하고 아래와 같이 <code>render</code>함수를 사용하면 됩니다. 또는 Rstudio 코드 입력창 상단의 Knit 버튼으로 pdf나 html 문서를 생성할 수 있습니다.</p>
 <div class="inline-figure"><img src="images/rmarkdown/example2.PNG" width="500"></div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">render</span><span class="op">(</span><span class="st">"examples/test.Rmd"</span>, output_format <span class="op">=</span> <span class="st">"pdf_document"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="images/rmarkdown/ex_pdf.PNG" width="450"></div>
 <p>Rmarkdown의 작동 원리는 Rmd 파일을 만든 후 <code>render</code> 함수를 부르면 <a href="https://yihui.org/knitr/">knitr</a> 소프트웨어가 R 코드를 실행시킨 후 markdown (.md) 파일을 생성합니다. 이 후 .md 파일을 <a href="https://pandoc.org/">pandoc</a> 이라는 문서변환기가 원하는 문서 형태로 전환해 줍니다.</p>
@@ -102,21 +112,21 @@
 <img src="images/rmarkdown/codechunk1.PNG" width="250" alt=""><p class="caption">코드청크 옵션 예시</p>
 </div>
 <p>실행 결과는 아래와 같습니다.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># default</span>
 <span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>
 <span class="co">#&gt; [1] 2</span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># eval=FALSE</span>
 <span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; [1] 2</code></pre>
 <p>Rmarkdown에서는 ` r`을 사용해서 코드청크가 아닌 곳에 R 코드를 넣을 수 있습니다. 또한 R 언어 외에도 <code>Python</code>, <code>SQL</code>, <code>Bash</code>, <code>Rcpp</code>, <code>Stan</code>, <code>JavaScript</code>, <code>CSS</code> 등의 다양한 프로그래밍 언어에 대해서도 코드청크 기능을 사용할 수 있습니다. 그런데 이러한 언어들이 사용 가능해지기 위해서는 해당 언어들을 실행해주는 엔진이 있어야 하며 python의 경우 <code>reticulate</code> 라는 패키지가 이러한 기능을 담당합니다. 이 패키지를 설치할 경우 miniconda라는 가상환경 및 데이터 분석을 위한 오픈소스 패키지가 자동으로 설치됩니다.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/reticulate/">reticulate</a></span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="rmarkdown.html#cb12-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="st">"hello, python in R"</span></span>
-<span id="cb12-2"><a href="rmarkdown.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x.split(<span class="st">' '</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="rmarkdown.html#cb13-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="st">"hello, python in R"</span></span>
+<span id="cb13-2"><a href="rmarkdown.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x.split(<span class="st">' '</span>))</span></code></pre></div>
 <p>아래는 위에 해당하는 소스코드 입니다.</p>
 <div class="inline-figure"><img src="images/02/lecticulate.png" width="250"></div>
 </div>
@@ -233,7 +243,7 @@ color: red;
 <span class="header-section-number">3.5</span> 테이블<a class="anchor" aria-label="anchor" href="#%ED%85%8C%EC%9D%B4%EB%B8%94"><i class="fas fa-link"></i></a>
 </h2>
 <p><code>kable</code> 함수를 이용하여 Rmarkdown 문서에 포함되는 표를 원하는 방향으로 작성할 수 있습니다. <code>mtcars</code>는 데이터프레임 형식의 데이터입니다.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>
   <span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span>, 
   caption <span class="op">=</span> <span class="st">"A knitr kable."</span>
@@ -419,7 +429,7 @@ mainfont: NanumGothic
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>2022년 한국생명공학연구원 연구데이터 분석과정 R</strong>" was written by 합성생물학전문연구소 김하성. It was last built on 2022-06-08.</p>
+    <p>"<strong>2022년 한국생명공학연구원 연구데이터 분석과정 R</strong>" was written by 합성생물학전문연구소 김하성. It was last built on 2022-06-16.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

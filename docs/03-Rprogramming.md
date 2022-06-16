@@ -329,8 +329,8 @@ levels(x)
 plot(x)
 ```
  
- 
- ::: rmdnote
+
+::: rmdnote
 **Exercises**
 
 ![](images/03/codon_table.png){width=350}

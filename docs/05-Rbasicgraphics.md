@@ -267,7 +267,9 @@ built-in 데이터셋 중 `state.abb` 은 미국의 50개 주에대한 축약어
 `iris` 데이터셋의 각 Species 별로 꽃잎과 꽃받침의 길이와 넓이에 대한 평균값들을 구하고 막대그래프를 그리시오
 
 1. 각 species 별로 데이터를 나누시오 (list 형태)
-2. list의 각 원소 (data.frame)별로 
+2. list의 각 원소 (data.frame)의 변수들의 평균을 `lapply`를 사용하여 구하시오 
+3. `do.call`과 `rbind` 함수로 list의 원소를 통합해 data.frame을 생성하시오 
+4. `barplot`을 이용하여 막대그래프를 그리시오 
 
 
 

@@ -102,100 +102,9 @@ Long형 데이터의 경우 ID, variable, value 세가지 변수만 기억하면
 
 ![](images/07/06.png)
 
-## Pivoting 
+## Pipe operator
 
-일반적으로 얻어지는 데이터의 형태는 wide형이며 이를 Long형으로 변환하기 위해서는 `tidyverse` 패키지에 속한 `tidyr` 패키지의 `pivot_longer`와  `pivot_wider`를 사용합니다. 또한 `reshape2` 패키지의 `melt`함수와 그 반대의 경우 `dcast` 함수를 사용할 수도 있습니다. 본 강의에서는 `tidyr` 패키지를 사용합니다. wide형 데이터를 long형으로 변환하거나 long형을 wide형으로 변환하는 작업을 pivoting 이라고 합니다. 
-
-
-![](images/07/wide2long.JPG)
-
-
-`airquality` 데이터는 전형적인 wide형 데이터로 특정 날짜에 네 개의 변수에 해당하는 값들을 측정했습니다. 이 데이터를 long형으로 바꿀 경우 ID를 날짜로 하면 데이터들을 식별 할 수 있습니다. 그런데 날짜는 변수가 Month와 Day두 개로 나누어져 있으므로 다음과 같이 두 변수를 식별 변수로 (ID로) 사용 합니다. 확인을 위해 상위 5개의 데이터만 가지고 형 변환을 진행해 보겠습니다.
-
-
-
-```r
-airquality
-
-myair <- airquality[1:5,]
-myair_long <- pivot_longer(myair, c("Ozone", "Solar.R", "Wind", "Temp"))
-myair_long 
-myair_long2 <- pivot_longer(myair, c(Ozone, Solar.R, Wind, Temp))
-myair_long2 
-myair_long3 <- pivot_longer(myair, !c(Month, Day))
-myair_long3
-
-```
-
-생성되는 long형 데이터의 변수 이름인 name과 value는 다음 파라메터를 지정하여 바꿀 수 있습니다. 
-
-
-```r
-
-myair_long <- pivot_longer(myair, 
-                          c(Ozone, Solar.R, Wind, Temp), 
-                          names_to = "Type", 
-                          values_to = "Observation")
-myair_long 
-
-```
-long형 데이터를 wide형 데이터로 변환 할 수도 있습니다. 
-
-
-
-```r
-pivot_wider(myair_long, names_from = Type, values_from = Observation)
-```
-
-::: rmdnote
-**Exercises**
-
-1) 다음 데이터가 long형인지 wide형인지 판단하시오   
-2) long형이면 wide형으로 wide형이면 long형으로 변환하시오
-
-
-```r
-stocks <- tibble(
-  year   = c(2015, 2015, 2016, 2016),
-  month  = c(   1,    2,     1,    2),
-  profit = c(1.88, 0.59, 0.92, 0.17)
-)
-
-```
-
-:::
-
-`ggplot`을 이용한 그래프 작성에는 위와 같은 long형 데이터가 주로 사용됩니다. R을 이용한 데이터 가시화는 `dplyr` 패키지로 wide형 데이터를 편집하고 `pivot_longer` 함수로 long형 데이터로 변환 후 `ggplot`을 이용하는 방식으로 수행합니다. 두 데이터 포멧에 대한 좀 더 구체적인 내용은 다음 링크를 참고하시기 바랍니다. https://www.theanalysisfactor.com/wide-and-long-data/
-
-## Separating and uniting
-
-데이터를 분석할 때 하나의 컬럼에 두 개 이상의 변수값이 저장되어 있거나 두 개의 변수를 하나의 컬럼으로 합해야 하는 경우가 종종 있습니다. 전자의 경우 `separate()` 함수를 사용해서 두 변수(컬럼)으로 나누어 줄 수 있으며 후자의 경우  `unite()` 함수를 사용하여 두 변수를 하나의 값으로 병합할 수 있습니다. 다음은  `airquality`데이터에서 Month와 Day 변수를 하나의 컬럼으로 병합하여 Date라는 변수로 만들어 주는 경우의 예 입니다. 
-
-
-
-```r
-newairquality <- unite(airquality, Date, Month, Day, sep=".")
-newairquality
-```
-
-`separate()`함수를 사용하면 다음과 같이 해당 변수의 값을 나누어 다시 두 개의 변수(컬럼)으로 나누어 줄 수 있습니다. 
-
-
-```r
-
-separate(newairquality, col=Date, into = c("Month", "Day"), sep = "\\.")
-
-```
-
-
-## dplyr and pipe operator
-
-`dplyr` (https://dplyr.tidyverse.org/) 은 `ggplot2`을 개발한 해들리위컴이 (Hadley Wickham) 중심이 되어 만들어 졌으며 `ggplot2`와 함께 `tidyverse`의 (https://www.tidyverse.org/) 핵심 패키지 입니다. `dplyr`은 데이터를 다루는 크기나 분석의 속도, 편의성을 향상시켜 새롭게 만들어놓은 패키지 입니다. 기존 `apply`와 같은 행렬 연산 기능과 `subset`, `split`, `group` 와 같은 행렬 편집 기능을 더하여 만들어진 도구라고 할 수 있습니다.
-
-`dplyr`의 전신이라 할 수 있는 `plyr` 패키지는 다음과 같이 설명이 되어 있습니다. *A set of tools for a common set of problems: you need to split up a big data structure into homogeneous pieces, apply a function to each piece and then combine all the results back together.* 즉 split-apply-combine 세 가지 동작을 쉽게 할 수 있도록 만들어 놓은 툴 입니다. R이 다른 언어에 비해 데이터 분석에서 주목을 받는 이유로 `split`, `apply` 등의 행렬 연산 함수가 발달한 것을 내세우는데 `dplyr`은 이들을 보다 더 편리하게 사용할 수 있도록 만들어 놓은 것 입니다.
-
-
-`dplyr`의 사용을 위해서는 여러 명령을 연속적으로 수행하도록 해주는 `%>%` 파이프 오퍼레이터의 이해가 필요합니다. 파이프 오퍼레이터의 작동법은 간단히 `%>%`의 왼쪽 코드의 결과를 출력으로 받아 오른쪽 코드의 입력 (첫번째 파라미터의 값)으로 받아들이는 작동을 합니다 (**단축키: Shift+Ctrl+m**). 다음 예에서 보면 `sin(pi)` 와 같은 함수의 일반적인 사용법 대신 `pi %>% sin` 처럼 사용해도 똑같은 결과를 보여줍니다. `cos(sin(pi))`와 같이 여러 합수를 중첩하여 사용할 경우와 비교해서 코드의 가독성이나 효율 측면에서 크게 향상된 방법을 제공해 줍니다.
+tidyverse 패키지를 활용하기 위해서는 `%>%` 파이프 오퍼레이터의 이해가 필요합니다. 파이프 오퍼레이터의 작동법은 간단히 `%>%`의 왼쪽 코드의 결과를 출력으로 받아 오른쪽 코드의 입력 (첫번째 파라미터의 값)으로 받아들이는 작동을 합니다 (**단축키: Shift+Ctrl+m**). 다음 예에서 보면 `sin(pi)` 와 같은 함수의 일반적인 사용법 대신 `pi %>% sin` 처럼 사용해도 똑같은 결과를 보여줍니다. `cos(sin(pi))`와 같이 여러 합수를 중첩하여 사용할 경우와 비교해서 코드의 가독성이나 효율 측면에서 크게 향상된 방법을 제공해 줍니다.
 
 
 
@@ -209,7 +118,7 @@ cos(sin(pi))
 ```
 
 
-특히 ` %>% `는 이후 설명할 `dplyr`의 `group_by`, `split`, `filter`, `summary` 등의 행렬 편집/연산 함수를 빈번히 다양한 조합으로 쓰게되는 상황에서 더 큰 효과를 발휘할 수 있습니다.
+특히 ` %>% `는 이후 설명할 `dplyr`의 `group_by`, `split`, `filter`, `summary` 등 행렬 편집/연산 함수를 빈번히 다양한 조합으로 쓰게되는 상황에서 더 큰 효과를 발휘할 수 있습니다.
 
 
 ![](images/07/02.PNG){width=500px}
@@ -253,18 +162,143 @@ round(pi, digits=6)
 
 :::
 
-## dplyr - Important functions
+## Pivoting 
+
+일반적으로 얻어지는 데이터의 형태는 wide형이며 이를 Long형으로 변환하기 위해서는 `tidyverse` 패키지에 속한 `tidyr` 패키지의 `pivot_longer`와  `pivot_wider`를 사용합니다. 또한 `reshape2` 패키지의 `melt`함수와 그 반대의 경우 `dcast` 함수를 사용할 수도 있습니다. 본 강의에서는 `tidyr` 패키지를 사용합니다. wide형 데이터를 long형으로 변환하거나 long형을 wide형으로 변환하는 작업을 pivoting 이라고 합니다. 
+
+
+![](images/07/wide2long.JPG)
+
+
+`airquality` 데이터는 전형적인 wide형 데이터로 특정 날짜에 네 개의 변수에 해당하는 값들을 측정했습니다. 이 데이터를 long형으로 바꿀 경우 ID를 날짜로 하면 데이터들을 식별 할 수 있습니다. 그런데 날짜는 변수가 Month와 Day두 개로 나누어져 있으므로 다음과 같이 두 변수를 식별 변수로 (ID로) 사용 합니다. 확인을 위해 상위 5개의 데이터만 가지고 형 변환을 진행해 보겠습니다.
+
+
+
+```r
+airquality
+
+myair <- airquality[1:5,]
+myair_long <- pivot_longer(myair, c("Ozone", "Solar.R", "Wind", "Temp"))
+myair_long 
+
+myair_long <- myair %>% 
+  pivot_longer(c("Ozone", "Solar.R", "Wind", "Temp"))
+myair_long 
+
+myair_long2 <- myair %>% 
+  pivot_longer(c(Ozone, Solar.R, Wind, Temp))
+myair_long2 
+
+myair_long3 <- myair %>% 
+  pivot_longer(!c(Month, Day))
+myair_long3
+
+```
+
+생성되는 long형 데이터의 변수 이름인 name과 value는 다음 파라메터를 지정하여 바꿀 수 있습니다. 
+
+
+```r
+
+
+myair_long <- myair %>% 
+  pivot_longer(c(Ozone, Solar.R, Wind, Temp), 
+               names_to = "Type", 
+               values_to = "Observation")
+myair_long 
+
+```
+long형 데이터를 wide형 데이터로 변환 할 수도 있습니다. 
+
+
+
+```r
+myair_long %>% 
+  pivot_wider(
+    names_from = Type, 
+    values_from = Observation)
+```
+
+::: rmdnote
+**Exercises**
+
+1) 다음 데이터가 long형인지 wide형인지 판단하시오   
+2) long형이면 wide형으로 wide형이면 long형으로 변환하시오
+
+
+```r
+stocks <- tibble(
+  year   = c(2015, 2015, 2016, 2016),
+  month  = c(   1,    2,     1,    2),
+  profit = c(1.88, 0.59, 0.92, 0.17)
+)
+
+```
+
+:::
+
+
+::: rmdnote
+**Exercises**
+
+앞서 gse93819 데이터에서 만든 myexpmean data.frame을 long 형으로 변환하시오 
+
+:::
+
+
+
+
+
+`ggplot`을 이용한 그래프 작성에는 위와 같은 long형 데이터가 주로 사용됩니다. R을 이용한 데이터 가시화는 `dplyr` 패키지로 wide형 데이터를 편집하고 `pivot_longer` 함수로 long형 데이터로 변환 후 `ggplot`을 이용하는 방식으로 수행합니다. 두 데이터 포멧에 대한 좀 더 구체적인 내용은 다음 링크를 참고하시기 바랍니다. https://www.theanalysisfactor.com/wide-and-long-data/
+
+## Separating and uniting
+
+데이터를 분석할 때 하나의 컬럼에 두 개 이상의 변수값이 저장되어 있거나 두 개의 변수를 하나의 컬럼으로 합해야 하는 경우가 종종 있습니다. 전자의 경우 `separate()` 함수를 사용해서 두 변수(컬럼)으로 나누어 줄 수 있으며 후자의 경우  `unite()` 함수를 사용하여 두 변수를 하나의 값으로 병합할 수 있습니다. 다음은  `airquality`데이터에서 Month와 Day 변수를 하나의 컬럼으로 병합하여 Date라는 변수로 만들어 주는 경우의 예 입니다. 
+
+
+
+```r
+
+newairquality <- airquality %>% 
+  unite(Date, Month, Day, sep=".")
+newairquality
+```
+
+`separate()`함수를 사용하면 다음과 같이 해당 변수의 값을 나누어 다시 두 개의 변수(컬럼)으로 나누어 줄 수 있습니다. 
+
+
+```r
+newairquality %>% 
+  separate(col=Date, into = c("Month", "Day"), sep = "\\.")
+
+```
+
+
+## dplyr 
+
+`dplyr` (https://dplyr.tidyverse.org/) 은 `ggplot2`을 개발한 해들리위컴이 (Hadley Wickham) 중심이 되어 만들어 졌으며 ggplot2와 함께 tidyverse의 (https://www.tidyverse.org/) 핵심 패키지 입니다. `dplyr`은 데이터를 다루는 크기나 분석의 속도, 편의성을 향상시켜 새롭게 만들어놓은 패키지 입니다. 기존 `apply`와 같은 행렬 연산 기능과 `subset`, `split`, `group` 와 같은 행렬 편집 기능을 더하여 만들어진 도구라고 할 수 있습니다.
+
+`dplyr`의 전신이라 할 수 있는 `plyr` 패키지는 다음과 같이 설명이 되어 있습니다. A set of tools for a common set of problems: you need to split up a big data structure into homogeneous pieces, apply a function to each piece and then combine all the results back together. 즉 split-apply-combine 세 가지 동작을 쉽게 할 수 있도록 만들어 놓은 툴 입니다. R이 다른 언어에 비해 데이터 분석에서 주목을 받는 이유로 `split`, `apply` 등의 행렬 연산 함수가 발달한 것을 내세우는데 `dplyr`은 이들을 보다 더 편리하게 사용할 수 있도록 만들어 놓은 것 입니다.
 
 이제 `dplyr` 패키지에서 제공하는 함수를 사용해 보겠습니다. `dplyr`을 구성하는 중요한 함수는 다음과 같습니다. 
 
+* `select()` -	변수 (columns) 선택
 * `filter()` -	샘플 (rows) 선택
 * `arrange()` -	샘플들의 정렬 순서 변경
-* `select()` -	변수 (columns) 선택
-* `mutate()` -	새로운 변수 만들기
+* `mutate()` -	새로운 변수 만들기 
 * `summarise()` -	대표값 만들기 
 * `group_by()` -	그룹별로 계산 수행 
 * `join()` - 두 tibble 또는 data.frame을 병합할 때 사용
+* 위 함수들과 (특히 `filter`, `select`, `mutate`, `summarise`) 조합하여 (함수 내에서) 사용할 수 있는 helper 함수들이 같이 사용될 수 있습니다 (독립적으로도 사용 가능).
 
+  * `across`
+  * `if_any`
+  * `if_all`
+  * `everything`
+  * `starts_with`
+  * `end_with`
+  * `contains`
+  
 
 이 함수들은 ` %>% `와 함께 쓰이면서 강력한 성능을 발휘합니다. `summarise` 함수는 특정 값들의 통계 값을 계산해 주는 함수이며 그 외 함수들은 행렬 편집을 위한 함수들로 보시면 되겠습니다. 간단한 예제를 수행하면서 각각의 기능을 살펴보고 왜 `dplyr`이 널리 사용되고 그 장점이 무엇인지 파악해 보도록 하겠습니다.
 
@@ -278,48 +312,29 @@ iris %>% head(10)
 iris %>% str
 ```
 
-### filter 
-
-먼저 아래와 같이 `filter` 함수를 사용해서 원하는 조건의 데이터 (샘플)을 골라낼 수 있습니다. 
-
-
-```r
-library(dplyr)
-
-head(iris)
-iris %>% filter(Species=="setosa")
-iris %>% filter(Species=="setosa" | Species=="versicolor")
-iris %>% filter(Species=="setosa" & Species=="versicolor")
-iris %>% 
-  filter(Species=="setosa" | Species=="versicolor") %>% 
-  dim
-
-```
-
-
-`filter`의 `,`로 구분되는 매개변수는 `and` 로직으로 묶인 조건입니다. 지난 강좌에서 보셨듯 R에서 `and`는 `&`,  `or`는 `|`, 그리고 not은 `!` 으로 사용하면 되며 `filter`에서 `,`로 구분된 조건은 `and`와 같다고 보시면 되겠습니다. 
-
-
-![](images/07/03.png){width=500px}
-
-Image from (https://r4ds.had.co.nz/)
-
-
-### arrange 
-
-`arrange()`는 지정된 변수를 기준으로 값의 크기순서로 샘플들의 배열 순서 즉, row의 순서를 바꾸는 기능을 수행합니다. 기본으로 크기가 커지는 순서로 정렬이 진행되며 작아지는 순서를 원할 경우 `desc` 함수를 사용할 수 있습니다. 
-
-
-
-```r
-iris %>% arrange(Sepal.Length)
-iris %>% arrange(desc(Sepal.Length))
-iris %>% arrange(Sepal.Length, Sepal.Width)
-```
 
 ### select
 
-`select()` 는 주어진 데이터셋으로부터 관심있는 변수를 (column) 선택하여 보여줍니다. 다음 helper 함수들은 select 함수와 같이 유용하게 쓰일 수 있습니다. 
+`select()` 는 주어진 데이터셋으로부터 관심있는 변수를 (column) 선택하여 보여줍니다. 
+
+
+```r
+head(iris)
+iris %>% select(Species, everything()) %>% head(5)
+iris %>% select(Species, everything())
+iris %>% select(-Species)
+```
+
+
+::: rmdnote
+**Exercises**
+
+babies 데이터의 변수/구조를 확인해 보고 id, age, gestation, wt, dwt, smoke 변수만을 선택한 새로운 newbabies 데이터를 만드시오 
+
+:::
+
+
+다음 helper 함수들은 `select` 함수와 같이 유용하게 쓰일 수 있습니다. 
 
 > starts_with("abc") -	"abc" 로 시작하는 문자열을 갖는 변수 이름 
 > ends_with("xyz") -	"xyz"으로 끝나는 문자열을 갖는 변수 이름 
@@ -329,13 +344,8 @@ iris %>% arrange(Sepal.Length, Sepal.Width)
 
 
 ```r
-head(iris)
-iris %>% select(Species, everything()) %>% head(5)
-iris %>% select(Species, everything())
-iris %>% select(-Species)
 iris %>% select(starts_with('S'))
 iris %>% select(obs = starts_with('S'))
-
 ```
 
 아래는 `matches` 함수를 사용한 방법 입니다. 좀 더 복잡한 패턴을 적용하여 변수들을 선택할 수 있으며 `grep` 함수를 사용할 경우도 정규식 패턴을 적용할 수 있습니다. 
@@ -354,6 +364,61 @@ tmp
 아래 `(.)\\1`은 하나의 문자 `.`가  (어떤 문자든) 한 번 더 `\\1` 사용된 변수 이름을 말하며 이는 `aavar` 의 `aa`밖에 없으므로 `aavar`가 선택됩니다. `grep`에서 `^` 표시는 맨 처음을 나타내므로 `^S`는 S로 시작하는 문자가 되겠습니다. 따라서 `grep("^S", colnames(iris))`의 경우 컬럼 이름 중 S로 시작하는 이름은 True로 그렇지 않으면 False 값을 리턴합니다. 
 
 
+
+### filter 
+
+`filter` 함수를 사용해서 원하는 조건의 데이터 (샘플)을 골라낼 수 있습니다. 
+
+
+```r
+library(dplyr)
+
+head(iris)
+iris %>% 
+  filter(Species=="setosa")
+
+iris %>% 
+  filter(Species=="setosa" | Species=="versicolor")
+
+iris %>% 
+  filter(Species=="setosa" & Species=="versicolor")
+
+iris %>% 
+  filter(Species=="setosa" | Species=="versicolor") %>% 
+  dim
+
+```
+
+
+`filter`의 `,`로 구분되는 매개변수는 `and` 로직으로 묶인 조건입니다. 지난 강좌에서 보셨듯 R에서 `and`는 `&`,  `or`는 `|`, 그리고 not은 `!` 으로 사용하면 되며 `filter`에서 `,`로 구분된 조건은 `and`와 같다고 보시면 되겠습니다. 
+
+
+![](images/07/03.png){width=500px}
+
+Image from (https://r4ds.had.co.nz/)
+
+::: rmdnote
+**Exercises**
+
+위 예제에서 만든 newbabies 데이터에서 999 값이 들어있는 값을 제외한 새로운 데이터를 만드시오 
+
+:::
+
+
+
+### arrange 
+
+`arrange()`는 지정된 변수를 기준으로 값의 크기순서로 샘플들의 배열 순서 즉, row의 순서를 바꾸는 기능을 수행합니다. 기본으로 크기가 커지는 순서로 정렬이 진행되며 작아지는 순서를 원할 경우 `desc` 함수를 사용할 수 있습니다. 
+
+
+```r
+iris %>% arrange(Sepal.Length)
+iris %>% arrange(desc(Sepal.Length))
+iris %>% arrange(Sepal.Length, Sepal.Width)
+```
+
+
+
 ### mutate
 
 `mutate()` 함수는 새로운 변수를 추가할 수 있는 기능을 제공하며 앞에서 배웠던 `within()`과 비슷하다고 볼 수 있습니다. 아래와 같이 `mutate`함수는 sepal_ratio라는 변수를 새로 만들어서 기존 iris 데이터들과 함께 반환해 줍니다. 
@@ -368,7 +433,7 @@ head(iris2)
 
 ### summarise
 
-`summarise()`는 `data.frame`내 특정 변수의 값들로 하나의 요약값/대푯값을 만들어 줍니다. `summarise` 함수는 단독으로 쓰이기 보다는 `group_by()` 기능과 병행해서 쓰이는 경우에 유용하게 쓰입니다. `summarise_all()` 함수를 사용하면 모든 변수에 대해서 지정된 함수를 실행합니다. 
+`summarise()`는 `data.frame`내 특정 변수의 값들로 하나의 요약값/대푯값을 만들어 줍니다. `summarise` 함수는 단독으로 쓰이기 보다는 `group_by()` 기능과 병행해서 쓰이는 경우에 유용하게 쓰입니다. `summarise_all()` 함수를 사용하면 모든 변수에 대해서 지정된 함수를 실행합니다. 특히 summarise 함수는 다음과 같이 `across`, `if_any`, `if_all` 등의 helper 함수와 조합되어 사용이 가능합니다. 
 
 
 
@@ -396,6 +461,9 @@ iris %>%
   summarise(across(everything(), sd))
 
 ```
+
+
+
 
 ### join 
 
@@ -458,8 +526,6 @@ iris_mean_df <- iris %>%
 
 
 
-
-
 ```r
 library(ggplot2)
 
@@ -472,6 +538,59 @@ ggplot(iris_mean_df2, aes(x=Species, y=value, fill=name)) +
 ```
 
 ![](images/08/Rplot01.png){width=500px}
+
+
+::: rmdnote
+**Exercises**
+
+5.5의 babies 데이터를 tidyverse 패키지를 활용하여 다시 분석해 보시오 (모든 경우를 tidyverse 패키지 함수를 사용할 필요는 없음, `select` 를 사용할 경우 `dplyr::select` 로 사용하시오)
+
+1) babies 데이터의 변수를 확인하시오 
+
+2) babies 데이터의 id, age, gestation, wt, dwt, smoke 변수만을 갖는 newbabies 데이터를 만드시오
+
+3) 위 2번에 더해 999로 입력된 데이터를 제외한 newbabies 데이터를 만드시오 
+
+4) 위 3번에 더해 smoke 데이터를 factor 형으로 변환한 smokef 변수를 추가한 newbabies 데이터를 만드시오 
+
+5) 위 4번에 더해 25세 미만의 샘플만 갖고 smoke 변수는 제외한 는 newbabies 데이터를 만드시오 
+
+:::
+
+
+
+
+
+
+
+::: rmdnote
+**Exercises**
+
+1. `airquality` 데이터에서 `NA`가 포함된 샘플 (row)를 제거한 `myair` 라는 데이터셋을 생성하시오 
+
+2. 위 1)에 Month 변수를 factor형으로 변환한 Monthf 를 추가하고 Month와 Day 변수를 제거한 새로운 데이터셋 `myair` 데이터를 생성하시오    
+
+3. myair 데이터에서 월별로 모든 변수에 (Ozone, Solar.R, Wind, Temp) 대한 평균을 구한 후 `myairmean` 변수에 저장하시오 (group_by로 먼저 Monthf를 기준으로 grouping 필요, summarise_all 사용)
+
+4. 위 3)에 더하여 데이터를 long 형으로 바꾸고 myairmean에 저장하시오
+
+5. `ggplot`으로 myairmean 데이터의 월별 각 변수들의 평균 값들을 다음과 같은 bar 그래프로 그리시오  
+
+~~~
+ggplot(myairmean, aes(x=Monthf, y=value, fill=Monthf)) +
+  geom_bar(stat="identity") +
+  theme_bw()
+~~~
+
+
+![](images/08/00002e.png)
+
+
+:::
+
+
+
+
 
 
 ::: rmdnote
@@ -502,23 +621,6 @@ dplyr 패키지의 starwars 는 스타워즈 영화에 나오는 등장인물들
 airquality 데이터는 뉴욕주의 몇몇 지점에서의 공기질을 측정한 데이터이다. 데이터에서 NA를 제거하고 각 월별로 평균 오존, 자외선, 풍속, 및 온도에 대한 평균과 표준편차를 구하시오
 
 
-```r
-
-airmean <- airquality %>% 
-  filter(complete.cases(.)) %>% 
-  select(-Day) %>% 
-  group_by(Month) %>% 
-  summarise(across(everything(), mean)) %>% 
-  pivot_longer(-Month, values_to = "mean")
-
-airsd <- airquality %>% 
-  filter(complete.cases(.)) %>% 
-  select(-Day) %>% 
-  group_by(Month) %>% 
-  summarise(across(everything(), sd)) %>% 
-  pivot_longer(-Month, values_to = "sd")
-
-```
 
 :::
 
@@ -541,11 +643,39 @@ ggplot(airdata, aes(x=Month, y=mean, fill=name)) +
 
 
 
+::: rmdnote
+**Exercises**
+
+1. 다음 코드를 이용해서 gse93819 실험 관련 파일들을 다운로드하여 저장하고 데이터의 구조 및 샘플들의 이름을 확인하시오 
+
+~~~
+myexp <- read.csv("https://github.com/greendaygh/kribbr2022/raw/main/examples/gse93819_expression_values.csv", header=T)
+~~~
+
+2. 샘플들의 정보에 따라서 발현 데이터를 나누시오 
+
+3. 각 그룹별 프루브들의 평균과 표준편차를 구하시오 
+
+:::
 
 
 
 
 
+::: rmdnote
+**Exercises**
+
+gse103512 데이터도 동일한 방법으로 분석해 보시오 
+
+:::
+
+
+## 참고 통계
+
+- https://greendaygh.github.io/Rstat2020/statistical-inference.html#two-sample-significance-tests 
+- 정규분포와 t분포이해
+- t 통계량 계산 
+- t-test 이해 
 
 
 ---

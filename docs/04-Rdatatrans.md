@@ -307,6 +307,8 @@ newdf <- subset(new_babies, (smoke=="smoke now" | smoke == "never") & age < 25, 
 ```
 
 
+
+
 ## Useful functions
 
 지금까지 배운 여러 R 프로그래밍 기법이나 함수들과 같이 R을 활용한 데이터 분석에서 자주쓰이거나 유용하게 사용되는 함수들을 소개합니다. 먼저 원소들을 비교하여 공통적 또는 유일한 원소들만을 추출해내는 함수들 입니다. 
@@ -519,6 +521,31 @@ ozone_func(df)
 
 
 
+
+
+
+::: rmdnote
+**Exercises**
+
+1. 다음 코드를 이용해서 파일을 다운로드 하고 myexp에 저장하고 데이터의 구조 및 샘플들의 이름을 확인하시오 
+
+~~~
+myexp <- read.csv("https://github.com/greendaygh/kribbr2022/raw/main/examples/gse93819_expression_values.csv", header=T)
+~~~
+
+2. myexp의 1부터 10번째 샘플(컬럼) 데이터를 myexp1으로 11부터 20번째 샘플 데이터를 myexp2로 나누시오 
+
+3. myexp1의 row별 평균을 구해서 myexp1mean에 myexp2의 row별 평균을 구해서 myexp2mean에 저장하시오 (apply 이용)
+
+4. myexp1mean과 myexp2mean을 합하여 myexpmean이라는 data.frame을 만드시오 (cbind이용, 주의필요)
+
+5. plot을 이용하여 두 평균들의 산포도를 그리시오 
+
+6. myexpmean의 두 변수에 대한 차이를 구하여 mydiff 라는 변수에 저장하시오 
+
+7. mydiff의 값들에 대한 히스토그램 (막대그래프)을 그리시오 
+
+:::
 
 
 
