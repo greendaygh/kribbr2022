@@ -261,7 +261,7 @@ knitr::kable(
 
 
 
-Table: A knitr kable.
+Table: (\#tab:unnamed-chunk-8)A knitr kable.
 
 |                  |  mpg| cyl| disp|  hp| drat|    wt|  qsec| vs| am| gear| carb|
 |:-----------------|----:|---:|----:|---:|----:|-----:|-----:|--:|--:|----:|----:|
