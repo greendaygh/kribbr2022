@@ -118,7 +118,7 @@
 
 \title{2022년 한국생명공학연구원 연구데이터 분석과정 R}
 \author{합성생물학전문연구소 김하성}
-\date{2022-06-16}
+\date{2022-07-06}
 
 \begin{document}
 \maketitle
@@ -4853,6 +4853,1633 @@ A 190 S M D
 \end{Highlighting}
 \end{Shaded}
 
+\hypertarget{lecture-4-note}{%
+\chapter{Lecture 4 Note}\label{lecture-4-note}}
+
+\hypertarget{class-1-1}{%
+\section{Class 1}\label{class-1-1}}
+
+\begin{itemize}
+\tightlist
+\item
+  강의노트 주소 \url{https://greendaygh.github.io/kribbr2022/index.html}
+\item
+  Rmarkdown 사용시 코드 청크 입력 Ctrl + Alt + i
+\item
+  tidyverse 설치시 dbplyr 패키지 문제로 설치가 되지 않음. 우선 아래 4개 패키지 개별 설치 후 진행
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\CommentTok{\#install.packages("tidyverse")}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"tibble"}\NormalTok{)}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"tidyr"}\NormalTok{)}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{)}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  Shortcut Ctrl + enter: 커서 있는 라인 콘솔에서 실행
+\item
+  인덱싱에 의한 subset과 \texttt{subset} 함수를 이용한 subset
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\FunctionTok{library}\NormalTok{(UsingR)}
+\FunctionTok{str}\NormalTok{(babies)}
+
+\FunctionTok{head}\NormalTok{(babies)}
+
+\DocumentationTok{\#\# variables }
+
+\NormalTok{newbabies }\OtherTok{\textless{}{-}}\NormalTok{ babies[,}\FunctionTok{c}\NormalTok{(}\StringTok{"gestation"}\NormalTok{, }\StringTok{"dwt"}\NormalTok{)]}
+\FunctionTok{head}\NormalTok{(newbabies)}
+
+\NormalTok{newbabies[newbabies}\SpecialCharTok{==}\DecValTok{999}\NormalTok{] }\OtherTok{\textless{}{-}} \ConstantTok{NA}
+\NormalTok{newbabies}
+
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(babies, }\AttributeTok{select=}\FunctionTok{c}\NormalTok{(gestation, wt, dwt))}
+\NormalTok{df}
+\FunctionTok{mean}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{gestation)}
+\FunctionTok{mean}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{wt)}
+\FunctionTok{mean}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{dwt)}
+
+\FunctionTok{apply}\NormalTok{(df, }\DecValTok{2}\NormalTok{, mean)}
+\NormalTok{?apply}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  인덱스 (숫자)로만 인덱싱하는 방식은 지양함 (가독률 낮음)
+\item
+  \texttt{subset} 함수 사용할 수 있으며 \texttt{tidyverse} 패키지의 \texttt{dplyr::select} 사용 추천
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1st column}
+\NormalTok{babies[,}\DecValTok{1}\NormalTok{]}
+\NormalTok{babies[,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{)]}
+
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(babies, }\AttributeTok{select=}\FunctionTok{c}\NormalTok{(id, gestation))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{apply}, \texttt{lapply} 많이 씀
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{airquality}
+\FunctionTok{str}\NormalTok{(airquality)}
+\FunctionTok{class}\NormalTok{(airquality)}
+\NormalTok{grp }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(airquality}\SpecialCharTok{$}\NormalTok{Month)}
+\NormalTok{grp}
+\FunctionTok{class}\NormalTok{(grp)}
+
+\NormalTok{airlist }\OtherTok{\textless{}{-}} \FunctionTok{split}\NormalTok{(airquality, grp)}
+\NormalTok{airlist}
+\FunctionTok{class}\NormalTok{(airlist)}
+
+\CommentTok{\# remove Month, Day}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(airquality, }\AttributeTok{select=}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(Month, Day))}
+\NormalTok{df}
+\NormalTok{df2 }\OtherTok{\textless{}{-}} \FunctionTok{split}\NormalTok{(df, grp)}
+\FunctionTok{length}\NormalTok{(df2)}
+
+\FunctionTok{lapply}\NormalTok{(df2, colMeans)}
+
+\FunctionTok{colMeans}\NormalTok{(df2}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{5}\StringTok{\textasciigrave{}}\NormalTok{, }\AttributeTok{na.rm =}\NormalTok{ T)}
+
+\FunctionTok{lapply}\NormalTok{(df2, colMeans, }\AttributeTok{na.rm =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{gse93819} 예제 데이터 두 그룹으로 나누고 각 유전자별 평균
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{myexp }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"https://raw.githubusercontent.com/greendaygh/kribbr2022/main/examples/gse93819\_expression\_values.csv"}\NormalTok{, }\AttributeTok{header=}\NormalTok{T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+https://raw.githubusercontent.com/greendaygh/kribbr2022/main/examples/gse93819_expression_values.csv
+
+위 주소 그대로 복사 후 브라우저 주소창에 입력
+CTRL + A 로 모두 선택 후 CTRL+C 복사 
+Rstudio > File > New file > Text file 생성 후 붙여넣기
+CTRL + S "myexample1.csv"로 저장 
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  발현데이터를 둘로 나누고 각 그룹의 유전자 발현 평균 구하기
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{myexp }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"myexample1.csv"}\NormalTok{, }\AttributeTok{header=}\NormalTok{T)}
+\FunctionTok{str}\NormalTok{(myexp)}
+
+\FunctionTok{head}\NormalTok{(myexp)}
+\NormalTok{myexp1 }\OtherTok{\textless{}{-}}\NormalTok{ myexp[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{]}
+\NormalTok{myexp2 }\OtherTok{\textless{}{-}}\NormalTok{ myexp[,}\DecValTok{11}\SpecialCharTok{:}\DecValTok{20}\NormalTok{]}
+
+\NormalTok{myexp1mean }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(myexp1, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{myexp2mean }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(myexp2, }\DecValTok{1}\NormalTok{, mean)}
+
+\NormalTok{myexpmean }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(myexp1mean, myexp2mean)}
+\NormalTok{myexpmean}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  cbind 주의점: 이름이 달라도 병합이 되고 이런 문제 때문에 dplyr \texttt{join} 사용
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\FunctionTok{head}\NormalTok{(}\FunctionTok{names}\NormalTok{(myexp1mean))}
+\FunctionTok{head}\NormalTok{(}\FunctionTok{names}\NormalTok{(myexp2mean))}
+\FunctionTok{head}\NormalTok{(myexpmean)}
+
+\FunctionTok{names}\NormalTok{(myexp1mean)[}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"myexp"}
+
+\FunctionTok{head}\NormalTok{(}\FunctionTok{names}\NormalTok{(myexp1mean))}
+\FunctionTok{head}\NormalTok{(}\FunctionTok{names}\NormalTok{(myexp2mean))}
+\NormalTok{myexpmean2 }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(myexp1mean, myexp2mean)}
+\FunctionTok{head}\NormalTok{(myexpmean2)}
+
+\FunctionTok{plot}\NormalTok{(myexpmean)}
+
+\FunctionTok{class}\NormalTok{(myexpmean)}
+\FunctionTok{str}\NormalTok{(myexpmean)}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(myexpmean)}
+\FunctionTok{str}\NormalTok{(df)}
+
+\FunctionTok{plot}\NormalTok{(df)}
+\NormalTok{mydiff }\OtherTok{\textless{}{-}}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{myexp1mean }\SpecialCharTok{{-}}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{myexp2mean}
+\NormalTok{mydiff}
+\FunctionTok{hist}\NormalTok{(mydiff, }\AttributeTok{br=}\DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  airquality long 형 변환
+\item
+  pipe operator short cut: SHift + ctrl + m
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(tidyr)}
+
+\FunctionTok{data}\NormalTok{(airquality)}
+
+\NormalTok{airquality }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ head}
+\NormalTok{airquality }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ str}
+
+\NormalTok{airquality }\SpecialCharTok{\%\textgreater{}\%} 
+   \FunctionTok{pivot\_longer}\NormalTok{(}\FunctionTok{c}\NormalTok{(Ozone, Solar.R, Wind, Temp))}
+
+\NormalTok{myexpmeandf }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(myexpmean)}
+\NormalTok{myexpmeandf }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ str}
+\NormalTok{myexpmeandf }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ head}
+
+\NormalTok{myexpmeandf }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{pivot\_longer}\NormalTok{(}\FunctionTok{c}\NormalTok{(myexp1mean, myexp2mean))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{babies }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ str}
+
+\NormalTok{newbabies }\OtherTok{\textless{}{-}}\NormalTok{ babies }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(id, age, gestation, wt, dwt, smoke)}
+\NormalTok{newbabies }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ str}
+
+\NormalTok{newbabies }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(gestation }\SpecialCharTok{!=} \DecValTok{999} \SpecialCharTok{\&}\NormalTok{ dwt }\SpecialCharTok{!=} \DecValTok{999}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{class-2-1}{%
+\section{Class 2}\label{class-2-1}}
+
+\begin{itemize}
+\tightlist
+\item
+  random sequence 생성 grep, grepl 실습
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{mydna }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"C"}\NormalTok{, }\StringTok{"G"}\NormalTok{, }\StringTok{"T"}\NormalTok{), }\DecValTok{20}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ T)}
+\NormalTok{mydna }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(mydna, }\AttributeTok{collapse =} \StringTok{""}\NormalTok{)}
+
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{100}
+\NormalTok{mydna }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\StringTok{""}\NormalTok{, n) }
+\NormalTok{mydna}
+
+\DocumentationTok{\#\# case1}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{n)\{}
+\NormalTok{  mydna[i] }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\FunctionTok{sample}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"C"}\NormalTok{, }\StringTok{"G"}\NormalTok{, }\StringTok{"T"}\NormalTok{), }\DecValTok{20}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ T), }
+                    \AttributeTok{collapse =} \StringTok{""}\NormalTok{)}
+\NormalTok{\}}
+\NormalTok{mydna}
+
+\DocumentationTok{\#\# case2}
+\NormalTok{mydna }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\StringTok{""}\NormalTok{, n)}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{n)\{}
+\NormalTok{  mydna[i] }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"C"}\NormalTok{, }\StringTok{"G"}\NormalTok{, }\StringTok{"T"}\NormalTok{), }\DecValTok{20}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ T) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{paste}\NormalTok{(}\AttributeTok{collapse =} \StringTok{""}\NormalTok{)}
+\NormalTok{\}}
+\NormalTok{mydna}
+
+\DocumentationTok{\#\# case3}
+\NormalTok{mydna }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{n, }\ControlFlowTok{function}\NormalTok{(x)\{}
+  \FunctionTok{sample}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"C"}\NormalTok{, }\StringTok{"G"}\NormalTok{, }\StringTok{"T"}\NormalTok{), }\DecValTok{20}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ T) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{paste}\NormalTok{(}\AttributeTok{collapse =} \StringTok{""}\NormalTok{)}
+\NormalTok{\})}
+\NormalTok{mydna}
+
+\DocumentationTok{\#\# return index}
+\FunctionTok{grep}\NormalTok{(}\StringTok{"ATG"}\NormalTok{, mydna) }
+
+\FunctionTok{grepl}\NormalTok{(}\StringTok{"ATG"}\NormalTok{, mydna)}
+
+\FunctionTok{grep}\NormalTok{(}\StringTok{"Se"}\NormalTok{, }\FunctionTok{colnames}\NormalTok{(iris))}
+\FunctionTok{colnames}\NormalTok{(iris)[}\FunctionTok{grep}\NormalTok{(}\StringTok{"Se"}\NormalTok{, }\FunctionTok{colnames}\NormalTok{(iris))]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  dplyr의 주요 함수들과 같이 사용되는 helper function
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\CommentTok{\#newbabies \%\textgreater{}\% }
+\CommentTok{\#  filter(man1 != 999 \& man2 != 999.. )  x}
+
+\CommentTok{\#newbabies$gestation == 999}
+\NormalTok{newbabies }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{if\_any}\NormalTok{(}\AttributeTok{.fns =} \ControlFlowTok{function}\NormalTok{(x)\{x}\SpecialCharTok{==}\DecValTok{999}\NormalTok{\}))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  NA 제외 후 새로 데이터 생성
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\FunctionTok{is.na}\NormalTok{(airquality}\SpecialCharTok{$}\NormalTok{Ozone)}
+\NormalTok{airquality}\SpecialCharTok{$}\NormalTok{Ozone}
+
+\NormalTok{mynewdata }\OtherTok{\textless{}{-}}\NormalTok{ airquality }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{if\_any}\NormalTok{(}\AttributeTok{.fns=}\NormalTok{is.na))}
+\NormalTok{mynewdata}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  arrange 기존 방법과 비교
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mynewdata}\SpecialCharTok{$}\NormalTok{Ozone}
+\FunctionTok{sort}\NormalTok{(mynewdata}\SpecialCharTok{$}\NormalTok{Ozone)}
+\NormalTok{i }\OtherTok{\textless{}{-}} \FunctionTok{order}\NormalTok{(mynewdata}\SpecialCharTok{$}\NormalTok{Ozone) }\CommentTok{\# return index}
+\NormalTok{i}
+\NormalTok{mynewdata[i,]}
+
+
+\NormalTok{mynewdata }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{arrange}\NormalTok{(Ozone) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  mutate 새로운 변수 추가 가능
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(myexpmean)}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(myexpmean)}
+\FunctionTok{class}\NormalTok{(df)}
+\NormalTok{newdf }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{diff =} \FunctionTok{sqrt}\NormalTok{((myexp1mean}\SpecialCharTok{{-}}\NormalTok{myexp2mean)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{))}
+  
+\NormalTok{newdf}\SpecialCharTok{$}\NormalTok{diff }\SpecialCharTok{\textgreater{}} \FunctionTok{mean}\NormalTok{(newdf}\SpecialCharTok{$}\NormalTok{diff)}
+
+\NormalTok{newdf }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{diff =} \FunctionTok{sqrt}\NormalTok{((myexp1mean}\SpecialCharTok{{-}}\NormalTok{myexp2mean)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{diffl =}\NormalTok{ diff}\SpecialCharTok{\textgreater{}}\FunctionTok{mean}\NormalTok{(diff))}
+
+\NormalTok{newdf }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(diffl}\SpecialCharTok{==}\NormalTok{T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  summarise 를 이용해서 타입별 평균과 표준편차 구하기
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ str}
+
+\NormalTok{iris }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(Species) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Sepal.Length.mean =} \FunctionTok{mean}\NormalTok{(Sepal.Length),}
+            \AttributeTok{Sepal.Width.mean =} \FunctionTok{mean}\NormalTok{(Sepal.Width))}
+
+
+\NormalTok{irismean }\OtherTok{\textless{}{-}}\NormalTok{ iris }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(Species) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\AttributeTok{.fns=}\NormalTok{mean))}
+
+\NormalTok{irissd }\OtherTok{\textless{}{-}}\NormalTok{ iris }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(Species) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\AttributeTok{.fns=}\NormalTok{sd))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{cbind} 대신 \texttt{join} 사용
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df1 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{id=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{), }\AttributeTok{age=}\FunctionTok{c}\NormalTok{(}\DecValTok{30}\NormalTok{, }\DecValTok{41}\NormalTok{, }\DecValTok{33}\NormalTok{, }\DecValTok{56}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{17}\NormalTok{))}
+\NormalTok{df2 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{id=}\FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{), }\AttributeTok{gender=}\FunctionTok{c}\NormalTok{(}\StringTok{"f"}\NormalTok{, }\StringTok{"f"}\NormalTok{, }\StringTok{"m"}\NormalTok{, }\StringTok{"m"}\NormalTok{, }\StringTok{"f"}\NormalTok{, }\StringTok{"m"}\NormalTok{))}
+
+\FunctionTok{inner\_join}\NormalTok{(df1, df2, }\AttributeTok{by=}\StringTok{"id"}\NormalTok{)}
+\FunctionTok{left\_join}\NormalTok{(df1, df2, }\StringTok{"id"}\NormalTok{)}
+\FunctionTok{right\_join}\NormalTok{(df1, df2, }\StringTok{"id"}\NormalTok{)}
+\FunctionTok{full\_join}\NormalTok{(df1, df2, }\StringTok{"id"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  ggplot mean
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{irismean}
+\NormalTok{irissd}
+
+\NormalTok{irisplot }\OtherTok{\textless{}{-}}\NormalTok{ irismean }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{pivot\_longer}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{Species)}
+
+\FunctionTok{ggplot}\NormalTok{(irisplot, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{value, }\AttributeTok{fill=}\NormalTok{name)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat=}\StringTok{"identity"}\NormalTok{, }\AttributeTok{position=}\StringTok{"dodge"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  ggplot error bar
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{d1 }\OtherTok{\textless{}{-}}\NormalTok{ irismean }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{pivot\_longer}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{Species)}
+
+\NormalTok{d2 }\OtherTok{\textless{}{-}}\NormalTok{ irissd }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{pivot\_longer}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{Species)}
+
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{left\_join}\NormalTok{(d1, d2, }\AttributeTok{by=}\FunctionTok{c}\NormalTok{(}\StringTok{"Species"}\NormalTok{, }\StringTok{"name"}\NormalTok{))}
+\NormalTok{df}
+\FunctionTok{ggplot}\NormalTok{(df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{value.x, }\AttributeTok{fill=}\NormalTok{name)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat=}\StringTok{"identity"}\NormalTok{, }\AttributeTok{position=}\StringTok{"dodge"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_errorbar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{ymin=}\NormalTok{value.x}\SpecialCharTok{{-}}\NormalTok{value.y, }\AttributeTok{ymax=}\NormalTok{value.x}\SpecialCharTok{+}\NormalTok{value.y),}
+                \AttributeTok{position=}\FunctionTok{position\_dodge}\NormalTok{(}\AttributeTok{width=}\FloatTok{0.9}\NormalTok{), }
+                \AttributeTok{width=}\FloatTok{0.4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{gse93819}를 4개 그룹으로 나누고 각 그룹별 평균, 표준편차 구하고 barplot 그리기
+\item
+  산포도 그리고 평균보다 2배 이상 차이나는 유전자를 골라서 색을 다르게 그리기기
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tmpid }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"B"}\NormalTok{, }\StringTok{"C"}\NormalTok{, }\StringTok{"D"}\NormalTok{), }\AttributeTok{each=}\DecValTok{5}\NormalTok{)}
+\NormalTok{groupid }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(tmpid, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, }\AttributeTok{sep=}\StringTok{""}\NormalTok{)}
+\NormalTok{groupid}
+
+\FunctionTok{colnames}\NormalTok{(myexp) }\OtherTok{\textless{}{-}}\NormalTok{ groupid}
+
+\NormalTok{data\_meana }\OtherTok{\textless{}{-}}\NormalTok{ myexp }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"A"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{apply}\NormalTok{(}\DecValTok{1}\NormalTok{, mean)}
+  
+\NormalTok{data\_meanb }\OtherTok{\textless{}{-}}\NormalTok{ myexp }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"B"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{apply}\NormalTok{(}\DecValTok{1}\NormalTok{, mean)}
+  
+\NormalTok{data\_sda }\OtherTok{\textless{}{-}}\NormalTok{ myexp }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"A"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{apply}\NormalTok{(}\DecValTok{1}\NormalTok{, sd)}
+
+\NormalTok{data\_sdb }\OtherTok{\textless{}{-}}\NormalTok{ myexp }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"B"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{apply}\NormalTok{(}\DecValTok{1}\NormalTok{, sd)}
+
+\NormalTok{mydata }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(data\_meana,}
+\NormalTok{           data\_meanb,}
+\NormalTok{           data\_sda,}
+\NormalTok{           data\_sdb)}
+
+\NormalTok{mydata}
+
+\DocumentationTok{\#\# for the rownames\_to\_column()}
+\FunctionTok{library}\NormalTok{(tibble)}
+
+\NormalTok{mydataplot }\OtherTok{\textless{}{-}}\NormalTok{ mydata }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{rownames\_to\_column}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{pivot\_longer}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{rowname)}
+  
+\NormalTok{d1 }\OtherTok{\textless{}{-}}\NormalTok{ mydataplot }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(}\FunctionTok{grepl}\NormalTok{(}\StringTok{"data\_mean"}\NormalTok{,name)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{slice}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{100}\NormalTok{) }
+
+\NormalTok{d2 }\OtherTok{\textless{}{-}}\NormalTok{ mydataplot }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(}\FunctionTok{grepl}\NormalTok{(}\StringTok{"data\_sd"}\NormalTok{,name)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{slice}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{100}\NormalTok{) }
+
+\FunctionTok{ggplot}\NormalTok{(d1, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{rowname, }\AttributeTok{y=}\NormalTok{value, }\AttributeTok{fill=}\NormalTok{name)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat=}\StringTok{"identity"}\NormalTok{, }\AttributeTok{position=}\StringTok{"dodge"}\NormalTok{) }
+  
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{data-visualization-with-ggplot2}{%
+\chapter{Data visualization with ggplot2}\label{data-visualization-with-ggplot2}}
+
+이번시간에는 \texttt{ggplot2}( \url{https://ggplot2.tidyverse.org/} )를 이용한 시각화에 대해서 알아봅니다. 데이터를 분석할 때 실제 데이터를 눈으로 확인하는 것은 중요합니다. raw 데이터를 보면서 크기 비교나 분포를 대략적으로 예측할 수 있다면 tool을 사용해서 나오는 결과를 가늠하는 척도가 될 수도 있습니다. \texttt{ggplot2} 는 Rstudio 개발팀의 해들리위컴이 (Hadley Wickham) 중심이 되어 만든 데이터 시각화 패키지입니다. 몇 가지 새로운 규칙을 학습해야 하지만 그 활용성이나 성능을 고려한다면 꼭 배워야할 패키지 중 하나입니다.
+
+\hypertarget{basics}{%
+\section{Basics}\label{basics}}
+
+\texttt{iris} 데이터를 이용해서 간단하게 barplot을 그려봅니다. \texttt{iris} 데이터는 3가지 품종별 꽃잎과 꽃받침의 길이와 넓이를 측정한 데이터 입니다. 다음은 꽃잎의 길이와 넓이의 관계를 볼 수 있는 산점도 입니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{head}\NormalTok{(iris)}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{iris) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{mapping=}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Petal.Length, }\AttributeTok{y=}\NormalTok{Petal.Width))}
+\end{Highlighting}
+\end{Shaded}
+
+눈에 띄이는 부분은 \texttt{+}를 이용한 레이어들의 연결입니다. \texttt{ggplot()} 함수 뒤에 다양한 레이어들을 연결할 수 있고 \texttt{geom\_point()} 함수는 지정한 위치에 산점도 레이어를 추가하는 기능을 합니다. 각 레이어들은 다음과 같은 다양한 기능을 갖는 함수들로 구성될 수 있습니다.
+
+\begin{itemize}
+\tightlist
+\item
+  데이터 지정 (ggplot)
+\item
+  색상, 크기, x축의 값, y축의 값 등 심미적 요소 지정 (aes)
+\item
+  점, 선, 면 등 기하학적 요소 지정 (geoms)
+\item
+  그릴 통계량 지정 (stats)
+\item
+  테마, 스케일 지정 (theme)
+\end{itemize}
+
+일반적으로 \texttt{ggplot}을 이용하여 그래프를 그리는 순서는 다음과 같습니다.
+
+\begin{itemize}
+\tightlist
+\item
+  어떤 그래프를 그릴지 결정
+\item
+  ggplot의 데이터셋과 aesthetic 설정
+\item
+  geometric 요소와 적절한 statistics를 설정한 레이어 추가
+\item
+  스케일과 테마를 설정한 레이어 추가
+\end{itemize}
+
+ggplot만을 실행할 경우 데이터와 x, y 축만 지정한 상태로 어떤 그래프 (히스토그램인지, 산포도인지 등)를 그릴지 명시되어 있지 않아서 아무것도 그리지 않은 상태의 빈 켄버스만 그려지게 되며 \texttt{geom\_point()} 함수를 즉, 점을 그릴지 선을 그릴지 어떤 통계량을 그릴지 아니면 값 자체를 그릴지 등을 지정해 주고 나서야 비로서 그래프가 그려집니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{iris, }\AttributeTok{mapping=}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Petal.Length, }\AttributeTok{y=}\NormalTok{Petal.Width))}
+\NormalTok{?ggplot}
+\FunctionTok{ggplot}\NormalTok{(iris, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Petal.Length, }\AttributeTok{y=}\NormalTok{Petal.Width))}
+\FunctionTok{ggplot}\NormalTok{(iris, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Petal.Length, }\AttributeTok{y=}\NormalTok{Petal.Width)) }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{geom\_point()}의 도움말을 보면 다음과 같이 \texttt{data}, \texttt{mapping}, \texttt{stat} 등의 파라미터들이 있습니다. 이는 \texttt{ggplot}함수에서 설정한 \texttt{data}나 \texttt{mapping} 정보를 \texttt{geom\_point}에서 설정 하거나 완전히 다른 데이터를 x축과 y축에 그릴 수 있다는 뜻 이기도 합니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{data=}\NormalTok{iris, }\AttributeTok{mapping=}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Petal.Length, }\AttributeTok{y=}\NormalTok{Petal.Width)) }
+\end{Highlighting}
+\end{Shaded}
+
+그런데 위 꽃잎의 길이와 넓이는 세 가지 다른 종류의 붓꽃에 대한 정보입니다. 따라서 각 종에 따라 다른 색이나 기호를 할당하는 것도 \texttt{mapping}에서 설정할 수 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(iris, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Petal.Length, }
+                 \AttributeTok{y=}\NormalTok{Petal.Width, }
+                 \AttributeTok{color=}\NormalTok{Species, }
+                 \AttributeTok{shape=}\NormalTok{Species)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{()}
+
+\FunctionTok{ggplot}\NormalTok{(iris, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Petal.Length, }\AttributeTok{y=}\NormalTok{Petal.Width)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color=}\NormalTok{Species, }\AttributeTok{shape=}\NormalTok{Species))}
+\end{Highlighting}
+\end{Shaded}
+
+위 산점도들의 \texttt{stat}은 \texttt{identity} 입니다. 즉, 따로 통계량을 계산할 필요 없이 값 그 자체를 사용하겠다는 것 입니다. 히스토그램의 경우 \texttt{geom\_bar()} 함수로 막대그래프를 그릴 수 있습니다. \texttt{geom\_bar}의 help페이지를 보면 \texttt{stat="count"}로 설정되어 있는 것을 알 수 있습니다. 꽃잎의 넓이에 대한 분포를 예로 구해봅니다. 히스토그램을 그릴경우 변수 한 개의 데이터만 필요하고 y축에는 자동으로 빈도수가 들어가게 되므로 \texttt{aes}에서 x만 mapping 해 주면 됩니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(iris, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Petal.Width)) }\SpecialCharTok{+}  
+  \FunctionTok{geom\_bar}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{bar-graph}{%
+\section{Bar graph}\label{bar-graph}}
+
+ggplot을 이용한 막대그래프 그리는 방법에 대해서 좀 더 알아보겠습니다. 앞서와 같이 ggplot 함수로 먼저 데이터와 aes로 x축 y축 등을 명시하고 \texttt{+} 오퍼레이터를 사용하여 필요한 레이어를 차례로 추가하면서 그래프를 그릴 수 있습니다. \texttt{geom\_bar()} 함수의 경우 x가 연속형일 경우는 아래와 같이 히스토그램을 그려주기 어렵습니다 (위 iris 예제에서 \texttt{geom\_bar()} 그래프에서는 실제 꽃받침의 width 값은 연속형이 맞으나 관측된 iris 데이터들이 같은 값들이 많은 범주형처럼 되어 있어 히스토그램 그림이 그려졌습니다) 이럴 경우 stat을 \texttt{bin}으로 바꿔주면 해당 범위 안에 있는 값들의 빈도수를 계산하여 히스토그램을 그릴 수 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{x1=}\FunctionTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{))}
+\FunctionTok{ggplot}\NormalTok{(dat, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{x1)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{()}
+
+\FunctionTok{ggplot}\NormalTok{(dat, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{x1)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat=}\StringTok{"bin"}\NormalTok{, }\AttributeTok{bins=}\DecValTok{30}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+x가 이산형인 경우는 stat을 디폴트 값인 \texttt{count}로 설정하여 해당 값들의 빈도수를 그려줄 수 있습니다. 이는 앞서 \texttt{iris}에서 배운 예제와 같습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x1 }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{, }\DecValTok{100}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ T)}
+\NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{x=}\NormalTok{x1)}
+\FunctionTok{ggplot}\NormalTok{(dat, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{x)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat=}\StringTok{"count"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+이제 두 개의 변수가 있는 경우를 생각해 봅니다. 두 변수에 대해서 막대그래프를 그릴 경우 다음과 같이 \texttt{Error:\ stat\_count()\ must\ not\ be\ used\ with\ a\ y\ aesthetic.} 에러가 발생할 수 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x1 }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\NormalTok{x2 }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(x1, x2)}
+\FunctionTok{ggplot}\NormalTok{(dat, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{x1, }\AttributeTok{y=}\NormalTok{x2)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+이는 \texttt{geom\_bar()}의 \texttt{stat}이 기본적으로 \texttt{count}로 설정되어 있으므로 생기는 에러 입니다. \texttt{stat}을 \texttt{identity}로 설정하면 x1값에 해당하는 x2값을 그려주는 막대 그래프를 그릴 수 있습니다. 참고로 이 그래프는 \texttt{geom\_point}와 비슷한 정보를 보여 주게 됩니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x1 }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\NormalTok{x2 }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(x1, x2)}
+\FunctionTok{ggplot}\NormalTok{(dat, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{x1, }\AttributeTok{y=}\NormalTok{x2)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat=}\StringTok{"identity"}\NormalTok{)}
+
+\FunctionTok{ggplot}\NormalTok{(dat, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{x1, }\AttributeTok{y=}\NormalTok{x2)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+다음과 같이 레이어를 추가하여 두 그래프를 같은 화면에 그릴 수도 있습니다. 여기서 \texttt{col}과 \texttt{size}는 \texttt{aes}함수안에서 쓰이지 않았음을 주의하시기 바랍니다. \texttt{aes}에서는 데이터와 특정 모양, 색깔을 mapping 해주는 역할을 하고 아래와 같이 지정해 줄 경우 데이터와 상관 없이 해당 레이어의 모든 그래프에 대해서 일괄적으로 적용되게 됩니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(dat, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{x1, }\AttributeTok{y=}\NormalTok{x2)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat=}\StringTok{"identity"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{col=}\StringTok{"red"}\NormalTok{, }\AttributeTok{size=}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+또한 다음과 같이 다양한 레이어를 추가하여 필요한 기능을 사용할 수 있습니다. \texttt{fill=x1} 이라는 코드는 막대그래프의 색을 채울 때 x1에 따라서 다른 값들을 채우는 역할을 한다고 보면 되겠습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x1 }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{)}
+\NormalTok{y1 }\OtherTok{\textless{}{-}} \FunctionTok{tabulate}\NormalTok{(}\FunctionTok{sample}\NormalTok{(x1, }\DecValTok{100}\NormalTok{, }\AttributeTok{replace=}\NormalTok{T))}
+\NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(x1, y1)}
+\FunctionTok{ggplot}\NormalTok{(dat, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{x1, }\AttributeTok{y=}\NormalTok{y1, }\AttributeTok{fill=}\NormalTok{x1)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat=}\StringTok{"identity"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+위 그래프에 더해서 legend를 없애고 x, y축 라벨과 스케일, 그리고 타이틀 등을 설정할 수 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(dat, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{x1, }\AttributeTok{y=}\NormalTok{y1, }\AttributeTok{fill=}\NormalTok{x1)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat=}\StringTok{"identity"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill=}\ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"Discrete cases"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"Value"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ylim}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{50}\NormalTok{))}\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Bar graph for x:discrete and y:value"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{line-graph}{%
+\section{Line graph}\label{line-graph}}
+
+다음으로 ggplot을 이용한 line graph를 그리는 방법을 알아 봅니다. Line graph는 geom\_line이라는 함수를 사용해서 그릴 수 있으며 stat의 사용법은 앞서 bar graph와 같습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x1 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{12}\NormalTok{, }\DecValTok{21}\NormalTok{, }\DecValTok{40}\NormalTok{)}
+\NormalTok{x2 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{33}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{82}\NormalTok{)}
+\NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(x1, x2)}
+\FunctionTok{ggplot}\NormalTok{(dat, }\FunctionTok{aes}\NormalTok{(x1, x2)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+아래와 같이 그려지는 선의 두께를 조절하거나 레이어를 추가하는 방법으로 점을 추가로 그려볼 수 있습니다. \texttt{fill}의 경우 특정 도형에 채워지는 색을 의미합니다. 도형에 대한 자세한 종류는 \texttt{?pch} 라는 도움말로 살펴보실 수 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(dat, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{x1, }\AttributeTok{y=}\NormalTok{x2)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{size=}\DecValTok{2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size=}\DecValTok{4}\NormalTok{, }\AttributeTok{pch=}\DecValTok{21}\NormalTok{, }\AttributeTok{fill=}\StringTok{"white"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill=}\ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ylim}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{100}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"Continuous cases"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{ylab}\NormalTok{(}\StringTok{"Value"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Line graph for x:continuous and y:continuous"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+위 경우는 x와 y가 모두 연속형 데이터일 경우 입니다. x는 이산형, y가 연속형일 경우 앞에서와 같이 bar graph를 이용하여 그래프를 그리게 됩니다. 그런데 이런 bar의 높이에 해당하는 값들을 서로 선으로 연결하고 싶은 경우가 있습니다. 이 때는 다음과 같이 \texttt{aes}의 \texttt{group} 이라는 파라미터를 설정하여 두 점 이상을 연결할 수 있습니다. 만약 group으로 나타낼 수 있는 변수가 없을 경우 \texttt{group=1}이라고 명시해 주고 선을 그릴 수 있으며 이 경우 모든 값들이 같은 \texttt{1} 그룹에 있는 것으로 간주됩니다. \texttt{1}이라는 것은 하나의 예이며 어떤 숫자나 문자가 와도 괜찮습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x1 }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{))}
+\NormalTok{y1 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{33}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{82}\NormalTok{)}
+\NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(x1, y1)}
+\FunctionTok{str}\NormalTok{(dat)}
+\FunctionTok{ggplot}\NormalTok{(dat, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{x1, }\AttributeTok{y=}\NormalTok{y1, }\AttributeTok{group=}\DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{stat=}\StringTok{"identity"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill=}\ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"Discrete cases"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{ylab}\NormalTok{(}\StringTok{"Value"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ylim}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{100}\NormalTok{))}\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Line plot for x:discrete and y:continuous"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+위에서와 같은 방법으로 point와 bar 등을 같이 그려줄 수 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(dat, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{x1, }\AttributeTok{y=}\NormalTok{y1, }\AttributeTok{group=}\DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat=}\StringTok{"identity"}\NormalTok{, }\AttributeTok{fill=}\NormalTok{x1) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{size=}\DecValTok{2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size=}\DecValTok{4}\NormalTok{, }\AttributeTok{pch=}\DecValTok{21}\NormalTok{, }\AttributeTok{fill=}\StringTok{"white"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill=}\ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"Discrete cases"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{ylab}\NormalTok{(}\StringTok{"Value"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ylim}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{100}\NormalTok{))}\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Line for x:discrete and y:value"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+여기서는 fill 옵션이 geom\_bar에 하나 geom\_point에 하나씩 쓰였는데 geom\_bar에서 사용된 fill은 bar에 채워지는 색을 x1의 값에 따라 바꾸겠다는 것을 의미하고 \texttt{geom\_point}의 fill은 데이터에 상관 없이 모두 white로 채우라는 명령 입니다. 각 geometry에 따라서 필요한 옵션이 다르므로 각각의 geom\_xxx를 사용할 때 상황에 맞게 사용하시면 되겠습니다.
+
+\hypertarget{smoothing}{%
+\section{Smoothing}\label{smoothing}}
+
+산포도는 앞서와 같이 데이터를 점으로 표현한 그래프입니다. Smoothing은 관측된 데이터를 이용하여 모형을 추정하는데 사용되는 통계적 방법이며 이를 그래프로 표현하여 추세선을 그릴 수 있습니다. 예를 들어 몸무게와 키라는 두 변수의 관계를 알아보고자 할 때 산포도를 그리고 Smoothing을 통해 점들의 평균값을 이어주는 방법으로 모형을 추정하고 추세선을 그릴 수 있습니다.
+
+\texttt{mtcars} 데이터는 1974년 미국 자동차 잡지에서 추출한 데이터로서 당시 다양한 모델의 자동차에대한 성능을 저장하고 있습니다 (\texttt{?mtcars}로 자세한 정보를 볼 수 있음). 이 데이터를 이용해서 연비와 마력 (horsepower) 두 변수의 관계를 그래프로 그려보겠습니다. 직관적으로 생각하면 두 변수는 반비례 할 것으로 기대됩니다. \texttt{ggplot}을 활용해서 두 변수의 산포도를 그리고 smoothing을 수행해 보도록 하겠습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mtcars, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{mpg, }\AttributeTok{y=}\NormalTok{hp)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+위와 같이 \texttt{mtcars}는 \texttt{data.frame}이므로 \texttt{ggplot}으로 바로 받아서 x축과 y축 mapping에 필요한 변수들 이름을 직접 할당하고 \texttt{geom\_point}함수를 이용해서 간단히 산포도를 그릴 수 있습니다. 이 산포도만으로도 mpg와 hp 두 변수간의 관계가 역함수 관계임을 알 수 있고 또한 선형이 아닌 것도 알 수 있습니다. 이제 위 그림에 \texttt{geom\_smooth()}함수를 이용해서 (모형) 적합 곡선 (또는 추세선)을 그려봅니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mtcars, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{mpg, }\AttributeTok{y=}\NormalTok{hp)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+간단히 \texttt{geom\_smooth()} 한 줄을 추가하여 추세선을 그렸으며 경고 메세지에서 볼 수 있듯이 알고리즘은 \texttt{loess} 모형을 사용했고 공식은 (formula는) \texttt{y\textasciitilde{}x}로, 즉, y축 변수를 반응변수로 x축 변수를 설명변수로 설정하여 그려졌습니다. 직선의 공식 \texttt{y=ax+b}를 생각해 보시면 무슨 의미인지 이해가 더 쉬울듯 합니다. \texttt{?geom\_smooth}로 보면 알 수 있듯이 모형을 적합하는 알고리즘 옵션을 \texttt{lm}, \texttt{glm}, \texttt{loess} 등 다양하게 설정할 수 있으며 \texttt{auto}로 하게 되면 데이터의 크기나 형식에 맞춰서 방법을 자동으로 선택해서 그려주게 됩니다. \texttt{se} 옵션은 기본적으로 \texttt{TRUE} 값을 가지며 위 그림에서 볼 수 있는 선분 주위의 회색 구간으로 신뢰구간을 그려주는 옵션 입니다. \texttt{span} 옵션은 loess 모형의 smoothing 정도를 조절할 수 있는데 이는 직접 바꿔가면서 실습을 해보면 이해에 도움이 되겠습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mtcars, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{mpg, }\AttributeTok{y=}\NormalTok{hp)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{se=}\ConstantTok{FALSE}\NormalTok{, }\AttributeTok{span=}\FloatTok{0.2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+위와 같이 \texttt{span} 옵션을 작게 설정할 수록 관측된 데이터(점)에 선분(모형)이 가까이 붙게 됩니다. 이를 과대적합 (overfitting)이라고 하며 간단히 설명하면 관측된 데이터에만 너무 잘맞는 모형을 만드는 경우를 말합니다. 이럴 경우 새롭게 관측된 데이터는 모형의 예측값과 잘 맞지 않게 됩니다.
+
+이번에는 모의 데이터를 생성해서 그래프를 그려보겠습니다. 네 개 학급에 있는 학생들의 키와 몸무게를 저장한 데이터를 만들어 봅니다. 이 경우 몇 개의 변수가 필요할지 생각해 보시기 바랍니다. 키와 몸무게 그리고 학급을 나타내는 변수 3개가 필요하며 키와 몸무게는 정수형, 그룹을 나타내는 변수는 문자형이나 factor형으로 나타내면 되겠습니다. 각 학급의 학생수는 50명으로 총 200명의 학생이 있는 것으로 하며 각 그룹별로 키나 몸무게의 차이는 없고 키가 큰 사람은 몸무게가 많이 나가는 것으로 합니다. 키와 몸무게 사이에는 다음과 같은 연관성을 만들어 줍니다. \(height= weight + N(100, 10)\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{weights }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{200}\NormalTok{, }\DecValTok{75}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\NormalTok{heights }\OtherTok{\textless{}{-}}\NormalTok{ weights }\SpecialCharTok{+} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{200}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\NormalTok{classes }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"B"}\NormalTok{, }\StringTok{"C"}\NormalTok{, }\StringTok{"D"}\NormalTok{), }\AttributeTok{size=}\FunctionTok{length}\NormalTok{(heights), }\AttributeTok{replace =}\NormalTok{ T)}
+\NormalTok{mydata }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(heights, weights, classes)}
+\FunctionTok{str}\NormalTok{(mydata)}
+\end{Highlighting}
+\end{Shaded}
+
+이제 위 데이터를 이용해서 몸무게와 키의 산포도와 추세선을 그려보고 추가로 그룹별로 다른 색의 점으로 표현해 보겠습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{weights, }\AttributeTok{y=}\NormalTok{heights, }\AttributeTok{color=}\NormalTok{classes)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+그런데 위와 같은 코드를 실행하면 그룹마다 다른 점과 smooth 선분이 그려집니다. 우리가 원하는 그림은 단지 점만 그룹별로 다른 색으로 표현하고 추세선은 전체 학생들에 대해서 하나의 선분만 그려지길 원합니다. 이제 우리가 알아야할 부분은 각 레이어마다 mapping을 지정할 수 있다는 것이고 이 원리를 이해한다면 다음과 같이 \texttt{geom\_point}에서는 \texttt{color}를 mapping해 주고 \texttt{geom\_smooth}에서는 지정해주지 않으면 됩니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mydata) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{weights, }\AttributeTok{y=}\NormalTok{heights, }\AttributeTok{color=}\NormalTok{classes)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{weights, }\AttributeTok{y=}\NormalTok{heights))}
+\end{Highlighting}
+\end{Shaded}
+
+그리고 중복되는 부분을 줄여줄 수도 있습니다. 즉, ggplot에서 지정하는 mapping은 하위 layer에 모두 적용이 되며 각 layer마다 다른 mapping 특성을 부여하고 싶을 경우 해당 layer의 mapping 함수 (aes)를 이용하여 설정할 수 있다는 점을 기억하시기 바랍니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{weights, }\AttributeTok{y=}\NormalTok{heights)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color=}\NormalTok{classes)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{statstics-and-positions}{%
+\section{Statstics and positions}\label{statstics-and-positions}}
+
+앞서 smoothing 곡선은 실제 데이터에서 관측된 값이 아닌 계산된 값을 그래프에 표현한 것 입니다. 막대그래프에서도 y축 count 값은 관측된 값이 아닌 빈도수를 계산한 값이고 boxplot의 경우도 중간값 1,3사분위수 등 통계량을 표현해 주는 그래프 입니다. 이는 대부분 통계 분석용 소프트웨어에서 제공되는 기능으로 통계량을 가시화 해주는 역할을 합니다. \texttt{ggplot2}에서도 각 geom 레이어에 \texttt{stat}이라는 옵션을 통해 이러한 통계량을 그래프로 표현할 수 있습니다. 예를 들어 앞서 생성한 키, 몸무게 데이터에서 키의 분포를 보기 위한 히스토그램을 그리면 \texttt{geom\_histogram}을 사용할 수 있고 이 레이어의 \texttt{stat} 옵션의 기본값은 \texttt{"bin"} 입니다 (\texttt{?geom\_histogram} 참고).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+
+\NormalTok{weights }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{200}\NormalTok{, }\DecValTok{75}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\NormalTok{heights }\OtherTok{\textless{}{-}}\NormalTok{ weights }\SpecialCharTok{+} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{200}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\NormalTok{classes }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"B"}\NormalTok{, }\StringTok{"C"}\NormalTok{, }\StringTok{"D"}\NormalTok{), }\AttributeTok{size=}\FunctionTok{length}\NormalTok{(heights), }\AttributeTok{replace =}\NormalTok{ T)}
+\NormalTok{mydata }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(heights, weights, classes)}
+\FunctionTok{str}\NormalTok{(mydata)}
+
+\FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{heights)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+경고 문구의 \texttt{bins=30}은 기본 \texttt{stat}옵션이 \texttt{bin}인데 \texttt{bins}옵션은 null로 되어 있기 때문에 경고가 발생한 것이고 30으로 강제 할당해서 그린다는 메세지 입니다. bins 옵션을 다르게 해서 테스트 해보시기 바랍니다. 또한 \texttt{stat="identity"}로 그래프를 그린 경우는 데이터 값을 그대로 그린다는 것도 다시 기억해 보시기 바랍니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{heights)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{stat=}\StringTok{"identity"}\NormalTok{)}
+
+\FunctionTok{ggplot}\NormalTok{(mydata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{heights, }\AttributeTok{y=}\NormalTok{weights)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{stat=}\StringTok{"identity"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+또 다른 예를위해 앞서 키 몸무게 데이터에 혈액형 변수를 추가해 보겠습니다. 혈액형은 위 4개 학급에 관계 없이 A, B, O, AB 네 그룹으로 나눌 수 있으며 200명의 학생들에게 랜덤하게 할당하도록 합니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bloodtype }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"B"}\NormalTok{, }\StringTok{"O"}\NormalTok{, }\StringTok{"AB"}\NormalTok{), }\FunctionTok{nrow}\NormalTok{(mydata), }\AttributeTok{replace=}\NormalTok{T)}
+\NormalTok{mynewdata }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(mydata, bloodtype)}
+\FunctionTok{str}\NormalTok{(mynewdata)}
+\end{Highlighting}
+\end{Shaded}
+
+위와 같이 새로운 변수 bloodtype 이 \texttt{factor}형으로 추가되어 새로운 \texttt{data.frame}을 생성하도록 했습니다. 이제 각 학급별로 몇 명의 혈액형 타입을 갖는 학생들이 있는지를 막대그래프로 표현해 보도록 하겠습니다. 혈액형의 타입별로 다른 색으로 막대를 칠하도록 해봅니다. 막대그래프의 색은 \texttt{fill}옵션으로 채울수 있고 막대그래프는 \texttt{geom\_bar}그리고 이 레이어의 \texttt{stat}은 기본값이 \texttt{count}이므로 따로 명시하지 않은채로 다음과 같이 코드를 작성할 수 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mynewdata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{classes, }\AttributeTok{fill=}\NormalTok{bloodtype)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+그런데 위와같이 그래프가 위로 쌓여서 보입니다. 이는 \texttt{geom\_bar}의 \texttt{position} 기본값이 \texttt{stack}으로 되어있어서 보이는 현상입니다 (\texttt{?geom\_bar}참고). 옆으로 나란히 막대를 위치시킨 후 크기를 비교하기 위해서 \texttt{position="dodge"}를 사용합니다. 또한 막대그래프에 칠해지는 색의 투명도를 \texttt{alpha} 옵션을 사용해 변경할 수 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mynewdata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{classes, }\AttributeTok{fill=}\NormalTok{bloodtype)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{alpha=}\FloatTok{0.5}\NormalTok{, }\AttributeTok{position=}\StringTok{"dodge"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+다음과 같이 간단히 한 줄만 추가하여 위 막대그래프의 위치를 가로로 전환하거나 Coxcomb chart로 그릴수도 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mynewdata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{classes, }\AttributeTok{fill=}\NormalTok{bloodtype)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position=}\StringTok{"dodge"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mynewdata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{classes, }\AttributeTok{fill=}\NormalTok{bloodtype)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position=}\StringTok{"dodge"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_polar}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+참고로 위 Coxcomb 그래프의 경우는 해석이 어렵거나 x, y축의 라벨링에 혼돈이 올수 있으니 정보 전달이 명확하도록 그래프의 옵션들을 추가하거나 용도에 맞게 사용할 필요가 있습니다.
+
+\hypertarget{facets}{%
+\section{Facets}\label{facets}}
+
+산점도의 예에서 위와 같이 다른 색이나 모양으로 그리기 보다는 종 별로 다른 켄버스에 별도의 산점도를 그려야 할 경우가 있습니다. 이럴때 사용하는 함수가 \texttt{facet\_wrap()}이나 \texttt{facet\_grid()} 입니다. 보통 범주형 자료에 대해서 적용할 수 있으며 \texttt{facet\_wrap()}은 하나의 변수에 대해서 그림을 나눠그릴때 사용하고 \texttt{facet\_grid()}는 두 개 변수의 조합에 의한 그래프들을 그릴 때 사용합니다. 위 붓꽃 예에서는 3가지 종을 나타내는 변수 \texttt{Species}를 이용하면 되겠습니다. \texttt{facet\_wrap()}함수에는 \texttt{\textasciitilde{}}를 이용한 formula를 사용합니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\FunctionTok{ggplot}\NormalTok{(iris, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Petal.Length, }\AttributeTok{y=}\NormalTok{Petal.Width)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color=}\NormalTok{Species, }\AttributeTok{shape=}\NormalTok{Species)) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{Species, }\AttributeTok{nrow=}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+만약 두 개의 범주형 변수에 대해서 x, y축 각각으로 나누고 싶을 때는 \texttt{facet\_grid()}를 사용할 수 있습니다. \texttt{iris} 데이터는 하나의 범주형 변수와 네 개의 숫자형 변수로 구성되어 있습니다 (\texttt{str(iris)} 확인). 여기에 랜덤하게 0과 1을 갖는 범주형 변수 하나를 추가해 보겠습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(iris)}
+\NormalTok{mycate }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{), }\FunctionTok{nrow}\NormalTok{(iris), }\AttributeTok{replace=}\NormalTok{T)}
+\NormalTok{myiris }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(iris, mycate)}
+\FunctionTok{str}\NormalTok{(myiris)}
+\end{Highlighting}
+\end{Shaded}
+
+이제 mycate와 Species 두 범주형 변수에 대해서 facet 그래프를 그려보면 다음과 같습니다. \texttt{facet\_grid()}함수를 사용하면 되며 x와 y축의 변수는 \texttt{\textasciitilde{}}를 활용한 formula를 사용합니다. 즉 \texttt{\textasciitilde{}} 왼편의 변수는 y축 오른편의 변수는 x축으로 구성되어집니다. 새로운 \texttt{myiris}라는 데이터를 만들었으므로 iris 대신 myiris를 사용합니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(myiris, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Petal.Length, }\AttributeTok{y=}\NormalTok{Petal.Width)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color=}\NormalTok{Species, }\AttributeTok{shape=}\NormalTok{Species)) }\SpecialCharTok{+}
+  \FunctionTok{facet\_grid}\NormalTok{(Species}\SpecialCharTok{\textasciitilde{}}\NormalTok{mycate)}
+\end{Highlighting}
+\end{Shaded}
+
+만약 하나의 변수에 대해서 x축이나 y축 하나에만 나열하고 싶은 경우 다음처럼 \texttt{.} 을 사용하면 됩니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(myiris, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Petal.Length, }\AttributeTok{y=}\NormalTok{Petal.Width)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color=}\NormalTok{Species, }\AttributeTok{shape=}\NormalTok{Species)) }\SpecialCharTok{+}
+  \FunctionTok{facet\_grid}\NormalTok{(.}\SpecialCharTok{\textasciitilde{}}\NormalTok{mycate)}
+
+\FunctionTok{ggplot}\NormalTok{(myiris, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Petal.Length, }\AttributeTok{y=}\NormalTok{Petal.Width)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color=}\NormalTok{Species, }\AttributeTok{shape=}\NormalTok{Species)) }\SpecialCharTok{+}
+  \FunctionTok{facet\_grid}\NormalTok{(Species}\SpecialCharTok{\textasciitilde{}}\NormalTok{.)}
+
+\FunctionTok{ggplot}\NormalTok{(myiris, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Petal.Length, }\AttributeTok{y=}\NormalTok{Petal.Width)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color=}\NormalTok{Species, }\AttributeTok{shape=}\NormalTok{Species)) }\SpecialCharTok{+}
+  \FunctionTok{facet\_grid}\NormalTok{(.}\SpecialCharTok{\textasciitilde{}}\NormalTok{Species)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{ex10.1}{%
+\subsection{Exercise}\label{ex10.1}}
+
+\texttt{Orange} 데이터셋은 다섯 그루의 오랜지 나무에 대한 시간에(age-days) 따른 성장을(circumference) 기록한 데이터임.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  age와 circumference 를 각각 x와 y축으로 하는 산점도를 그리는 코드를 작성하시오 (ggplot 이용, 나무별로 다른 색 사용)
+\end{enumerate}
+
+\includegraphics{07-ggplot_files/figure-latex/unnamed-chunk-35-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  나무별로 다른 켄버스에 age와 circumference를 x와 y축으로 하는 산점도를 그리는 코드를 작성하시오 (ggplot, facet\_grid이용)
+\end{enumerate}
+
+\includegraphics{07-ggplot_files/figure-latex/unnamed-chunk-36-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  2)에서 그려진 나무별 산점도에 다음과 같이 선분을 추가한 그래프를 그리는 코드를 작성 하시오
+\end{enumerate}
+
+\includegraphics{07-ggplot_files/figure-latex/unnamed-chunk-37-1.pdf}
+
+\hypertarget{ex10.2}{%
+\subsection{Exercise}\label{ex10.2}}
+
+\texttt{InsectSprays}는 제초제의 효능에 관한 데이터이다. 다음과 같은 plot을 그리는 코드를 작성 하시오
+
+\includegraphics{07-ggplot_files/figure-latex/unnamed-chunk-38-1.pdf}
+
+\hypertarget{themes-labels-and-scales}{%
+\section{Themes, Labels, and Scales}\label{themes-labels-and-scales}}
+
+Theme은 data관련 요소들 외의 것들에 대한 설정을 위해서 사용됩니다. 즉, 제목이나 라벨, 배경, 범례 등의 색, 위치, 크기, 모양 등을 설정하는데 사용합니다. 주의할 부분은 해당 택스트 등 데이터를 변경하는 것이 아니고 보여지는 모습만을 바꿀 수 있다는 것 입니다. 택스트 설정은 \texttt{labs}를 사용합니다. 예제를 가지고 몇 가지 실습을 해 보겠습니다. 먼저 \texttt{labs}라는 명령어로 x축, y축, Title 등을 설정할 수 있습니다. 참고로 \texttt{xlab()}, \texttt{ylab()} 등의 함수도 x축, y축 라벨을 설정하는데 사용될 수 있지만 여기서는 \texttt{labs}만을 사용하도록 합니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mynewdata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{classes, }\AttributeTok{fill=}\NormalTok{bloodtype)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position=}\StringTok{"dodge"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{\textquotesingle{}Four classes\textquotesingle{}}\NormalTok{,}
+       \AttributeTok{y=}\StringTok{\textquotesingle{}Number of students\textquotesingle{}}\NormalTok{,}
+       \AttributeTok{title=}\StringTok{\textquotesingle{}Blood type distribution\textquotesingle{}}\NormalTok{,}
+       \AttributeTok{subtitle =} \StringTok{\textquotesingle{}Blood type distribution from the 200 students\textquotesingle{}}\NormalTok{,}
+       \AttributeTok{fill=}\StringTok{\textquotesingle{}Blood Types\textquotesingle{}}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+위 코드에서 \texttt{labs}에서 설정할 수 있는 옵션은 \texttt{title}, \texttt{subtitle}과 x축, y축 라벨 그리고 범례의 title까지 가능합니다. 특히 \texttt{ggplot} 명령에서 \texttt{aes(fill=bloodtype)}이 사용되었으므로 범례의 title은 \texttt{fill="Blood\ types"}로 설정해야 하며 만약 \texttt{aes(color=bloodtype)}으로 사용되었을 경우에는 \texttt{color="Blood\ types"}으로 설정합니다. 참고로 범례의 label을 설정하는 방법은 다음과 같이 \texttt{scale\_fill\_discrete} 함수의 \texttt{labels} 옵션을 사용하면 됩니다. \texttt{element\_blank()}는 택스트를 공백으로 설정할 때 사용합니다. 아래 나올 \texttt{scale} 관련 내용과 함께 이해하시면 좋습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mynewdata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{classes, }\AttributeTok{fill=}\NormalTok{bloodtype)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position=}\StringTok{"dodge"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_discrete}\NormalTok{(}\AttributeTok{name=}\FunctionTok{element\_blank}\NormalTok{(), }\AttributeTok{labels=}\FunctionTok{c}\NormalTok{(}\StringTok{"A type"}\NormalTok{, }\StringTok{"AB type"}\NormalTok{, }\StringTok{"B type"}\NormalTok{, }\StringTok{"O type"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+이제 본격적으로 Theme으로 그래프를 장식해 보도록 합니다. \texttt{Theme} 관련된 옵션들은 \url{https://ggplot2.tidyverse.org/reference/theme.html} 이곳을 참고하시기 바랍니다. 여기서 mapping은 그대로인채로 모양 등의 설정을 바꿔가면서 그래프의 형태를 확인하는 작업이 반복되므로 다음과 같이 \texttt{myplot}이라는 변수에 기본이 되는 ggplot 코드를 저장하고 이후 \texttt{+} 연산자를 사용해서 옵션을 바꿔가며 편리하게 코드를 재사용 할 수도 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{myplot }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(mynewdata, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{classes, }\AttributeTok{fill=}\NormalTok{bloodtype)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position=}\StringTok{"dodge"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{\textquotesingle{}Four classes\textquotesingle{}}\NormalTok{,}
+       \AttributeTok{y=}\StringTok{\textquotesingle{}Number of students\textquotesingle{}}\NormalTok{,}
+       \AttributeTok{title=}\StringTok{\textquotesingle{}Blood type distribution\textquotesingle{}}\NormalTok{,}
+       \AttributeTok{subtitle =} \StringTok{\textquotesingle{}Blood type distribution from the 200 students\textquotesingle{}}\NormalTok{,}
+       \AttributeTok{fill=}\StringTok{\textquotesingle{}Blood Types\textquotesingle{}}\NormalTok{) }
+\NormalTok{myplot }\SpecialCharTok{+} \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+위 \texttt{theme\_bw()} 함수는 theme의 세부 사항 몇 가지를 미리 설정해 놓아서 (배경을 white 색, 눈금을 회색으로 바꾸는 등) theme 설정을 위한 일련의 과정을 한번에 수행하도록 만든 함수 입니다. theme을 이용한 설정은 plot, axis, legend, panel, facet 등에 적용할 수 있으며 따라서 다음 코드와 같이 해당하는 요소를 참고할 때 \texttt{.} 기호로 구분된 옵션 이름을 사용합니다. 값을 지정할 때에는 \texttt{element\_xxx}의 패턴으로 이루어진 함수를 사용합니다. 다음은 각각 plot과 panel 배경색을 바꾸는 코드 입니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{myplot }\SpecialCharTok{+} \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.background =} \FunctionTok{element\_rect}\NormalTok{(}\AttributeTok{fill=}\StringTok{"gray"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{myplot }\SpecialCharTok{+} \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.background =} \FunctionTok{element\_rect}\NormalTok{(}\AttributeTok{fill=}\StringTok{"gray"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{myplot }\SpecialCharTok{+} 
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{panel.background =} \FunctionTok{element\_rect}\NormalTok{(}\AttributeTok{fill=}\StringTok{"gray"}\NormalTok{),}
+    \AttributeTok{plot.background =} \FunctionTok{element\_rect}\NormalTok{(}\AttributeTok{fill=}\StringTok{"gray"}\NormalTok{)}
+\NormalTok{    )}
+\end{Highlighting}
+\end{Shaded}
+
+또한 축이나 라벨 택스트의 모양도 바꿀 수 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{myplot }\SpecialCharTok{+} 
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{axis.line =} \FunctionTok{element\_line}\NormalTok{(}\AttributeTok{arrow =} \FunctionTok{arrow}\NormalTok{(}\AttributeTok{angle =} \DecValTok{15}\NormalTok{, }\AttributeTok{length =} \FunctionTok{unit}\NormalTok{(.}\DecValTok{15}\NormalTok{,}\StringTok{"inches"}\NormalTok{))),}
+    \AttributeTok{axis.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{, }\AttributeTok{size =} \DecValTok{12}\NormalTok{, }\AttributeTok{angle =} \DecValTok{30}\NormalTok{),}
+    \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{color=}\StringTok{"blue"}\NormalTok{, }\AttributeTok{size=}\DecValTok{18}\NormalTok{)}
+\NormalTok{    )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{myplot }\SpecialCharTok{+} 
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{plot.title=}\FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size=}\DecValTok{18}\NormalTok{, }\AttributeTok{face =} \StringTok{"bold"}\NormalTok{, }\AttributeTok{color=}\StringTok{"red"}\NormalTok{, }\AttributeTok{hjust=}\FloatTok{0.5}\NormalTok{),}
+    \AttributeTok{plot.subtitle =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size=}\DecValTok{18}\NormalTok{, }\AttributeTok{face =} \StringTok{"bold"}\NormalTok{, }\AttributeTok{color=}\StringTok{"gray"}\NormalTok{)}
+\NormalTok{    )}
+\end{Highlighting}
+\end{Shaded}
+
+위 예제 외에도 다양한 그래프를 그릴 수 있으며 모든 사용법을 외워서 사용하기 보다는 사용할 때 마다 필요한 함수와 옵션을 찾아서 사용하다 보면 점차 익숙해질 것 입니다. 가장 정확한 참고 자료는 공식 reference 페이지를 참고하면 좋으며 \url{https://ggplot2.tidyverse.org/reference/index.html} 이 외에도 다른 사람들이 만들어 놓은 그래프를 \url{https://exts.ggplot2.tidyverse.org/} 참고해서 원하는 목적에 맞는 코드를 가져다 사용할 수 있습니다.
+
+본 장에서 마지막으로 소개할 내용은 \texttt{Scale} 입니다. 앞서 어떤 데이터를 x축, y축 또는 group이나 color로 맵핑할지를 결정하는 함수가 \texttt{aes}였다면 scale은 어떻게 (위치, 색상, 크기, 모양 등) 맵핑할 것인가를 설정하는 방법입니다. 함수 형태는 \texttt{scale\_\textless{}aesthetic\textgreater{}\_\textless{}type\textgreater{}} 이며 \texttt{\textless{}aesthetic\textgreater{}}과 \texttt{\textless{}type\textgreater{}}에 해당하는 (미리 지정된) 단어를 넣어주면 되겠습니다. 예를 들어 앞서 예제에서 \texttt{fill=bloodtype}로 혈액형 데이터를 막대그래프의 색을 칠하는데 사용했다면 \texttt{scale\_fill\_manual} 함수로 어떤 색을 칠할지를 정해주는 방식입니다. 다음 몇 가지 예를 실습해 보고 이해해 봅니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{myplot }\SpecialCharTok{+} 
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"orange"}\NormalTok{, }\StringTok{"skyblue"}\NormalTok{, }\StringTok{"royalblue"}\NormalTok{, }\StringTok{"blue"}\NormalTok{))}
+
+\NormalTok{myplot }\SpecialCharTok{+} 
+  \FunctionTok{scale\_fill\_brewer}\NormalTok{(}\AttributeTok{palette=}\StringTok{"BrBG"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+두 번째 \texttt{scale\_fill\_brewer}의 경우는 \texttt{brewer}라는 (\url{https://colorbrewer2.org/}) 미리 지정된 색의 조합을 가져와 사용하는 방식입니다. \texttt{?scale\_fill\_brewer}의 Palettes 섹션을 보시면 사용 가능한 팔레트의 이름이 나와 있으며 위 예제 에서는 BrBG라는 이름의 팔레트를 사용했습니다. 아래는 viridis 라는 이름의 팔레트이며 (\url{https://bids.github.io/colormap/}) 이러한 팔레트는 R 뿐만 아니라 python, Matlab 등의 다른 프로그래밍 언어에서도 사용할 수 있도록 라이브러리를 제공하고 있습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{myplot }\SpecialCharTok{+} 
+  \FunctionTok{scale\_fill\_viridis\_d}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+참고로 앞서 설명한 바와 같이 \texttt{aes(fill=bloodtype)}이 사용되었으므로 \texttt{scale\_fill\_viridis\_d}을 사용했으며 만약 \texttt{aes(color=bloodtype)}으로 사용되었을 경우에는 이에 맞는 \texttt{scale\_fill\_viridis\_d}으로 설정해야 합니다. 맵핑된 데이터가 연속형일 경우에는 (위 학급 예제의 혈액형은 4개의 혈액형으로 나뉘는 범주형 데이터임) \texttt{scale\_fill\_gradient}, \texttt{scale\_fill\_distiller} 등의 연속형 데이터에 맞는 scale 함수를 사용해야 합니다. 또한 데이터의 스케일이 log나 지수 단위일 경우에도 일 때에도 \texttt{scale\_x\_log10()} 등의 함수를 이용해서 x축 또는 y축의 스케일을 변경해줄 수 있습니다. 다음은 간단한 형태의 로그 분포 데이터를 생성하고 히스토그램을 그리는 코드입니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydf }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{x=}\FunctionTok{rlnorm}\NormalTok{(}\DecValTok{1000}\NormalTok{, }\FunctionTok{log}\NormalTok{(}\DecValTok{10}\NormalTok{), }\FunctionTok{log}\NormalTok{(}\FloatTok{2.5}\NormalTok{)))}
+\NormalTok{p }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(mydf, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{x)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{()}
+\NormalTok{p}
+\end{Highlighting}
+\end{Shaded}
+
+위 히스토그램의 x축을 로그 스케일로 전환하고자 할 때 다음과 같이 \texttt{scale\_x\_log10()} 함수를 추가하면 됩니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p }\SpecialCharTok{+} \FunctionTok{scale\_x\_log10}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{ex10.3}{%
+\subsection{Exercise}\label{ex10.3}}
+
+\texttt{mpg} 데이터셋은 38종 자동차의 연비 데이터임. 이 데이터셋을 이용하여 다음 그래프를 그리시오
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  엔진 배기량과 (displ) 도심연비 (cty)를 비교하는 산포도를 그리고 어떤 연관성이 있는지 설명하시오
+\item
+  위 산포도의 점들은 실제로는 한 개 이상의 데이터가 겹쳐셔 표현된 경우가 많음. ggplot2에서는 이러한 문제를 극복하기 위해서 \texttt{position="jitter"} 라는 옵션을 사용할 수 있음. 이 옵션을 적용한 코드를 작성하시오.
+\item
+  위 그래프에 배기량과 (displ) 고속도로연비 (hwy) 산포도를 추가하여 다음과 같이 \texttt{scale\_color\_manual()} 함수를 사용해서 ``red''와 ``blue''로 점들을 표현한 그래프를 그리시오.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{mydf }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{displ=}\NormalTok{mpg}\SpecialCharTok{$}\NormalTok{displ, }\AttributeTok{cty=}\NormalTok{mpg}\SpecialCharTok{$}\NormalTok{cty, }\AttributeTok{hwy=}\NormalTok{mpg}\SpecialCharTok{$}\NormalTok{hwy) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols=}\FunctionTok{c}\NormalTok{(}\StringTok{"cty"}\NormalTok{, }\StringTok{"hwy"}\NormalTok{), }\AttributeTok{names\_to=}\StringTok{"type"}\NormalTok{)}
+\FunctionTok{str}\NormalTok{(mydf)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{images/06/ex6-4-2.png}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  다음과 같이 배기량과 고속도로/도심 연비의 관계를 나타내는 추세선을 추가하시오 (\texttt{geom\_smooth} 이용)
+\end{enumerate}
+
+\includegraphics{images/06/ex6-4-4.png}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  아래 그림과 같이 Theme을 \texttt{theme\_bw()}를 사용하고 추가로 Title, subtitle, x축, y축 라벨, 그리고 범례의 Title을 변경하시오. (범례의 라벨 설정은 \texttt{scale\_color\_manual}에서 \texttt{labels=c("City\ MPG",\ "Highway\ MPG")}으로 설정, 범례의 title을 지울때는 \texttt{name=element\_blank()}, Title의 택스트 크기는 20, x축, y축의 라벨 텍스트 크기는 18로 설정)
+\end{enumerate}
+
+\includegraphics{images/06/ex6-4-5.png}
+
+\hypertarget{ggplot2-examples}{%
+\chapter{ggplot2 examples}\label{ggplot2-examples}}
+
+인터넷에서 찾은 다음 사이트의 예제를 보면서 다양한 그래프 예제를 실행해 보겠습니다. 코드는 조금씩 변형된 부분이 있으니 참고 부탁 드립니다.
+
+\begin{itemize}
+\tightlist
+\item
+  \url{https://www.r-graph-gallery.com/ggplot2-package.html}
+\item
+  \url{http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html}
+\item
+  \url{https://www.datanovia.com/en/blog/ggplot-examples-best-reference/}
+\end{itemize}
+
+\hypertarget{violin-plot}{%
+\section{Violin plot}\label{violin-plot}}
+
+\begin{itemize}
+\tightlist
+\item
+  \url{https://www.r-graph-gallery.com/violin_and_boxplot_ggplot2.html}
+\end{itemize}
+
+\includegraphics{images/10/000013.png}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(viridis)}
+
+\CommentTok{\# create a dataset}
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{name=}\FunctionTok{c}\NormalTok{( }\FunctionTok{rep}\NormalTok{(}\StringTok{"A"}\NormalTok{,}\DecValTok{500}\NormalTok{), }\FunctionTok{rep}\NormalTok{(}\StringTok{"B"}\NormalTok{,}\DecValTok{500}\NormalTok{), }\FunctionTok{rep}\NormalTok{(}\StringTok{"B"}\NormalTok{,}\DecValTok{500}\NormalTok{), }\FunctionTok{rep}\NormalTok{(}\StringTok{"C"}\NormalTok{,}\DecValTok{20}\NormalTok{), }\FunctionTok{rep}\NormalTok{(}\StringTok{\textquotesingle{}D\textquotesingle{}}\NormalTok{, }\DecValTok{100}\NormalTok{)  ),}
+  \AttributeTok{value=}\FunctionTok{c}\NormalTok{( }\FunctionTok{rnorm}\NormalTok{(}\DecValTok{500}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{5}\NormalTok{), }\FunctionTok{rnorm}\NormalTok{(}\DecValTok{500}\NormalTok{, }\DecValTok{13}\NormalTok{, }\DecValTok{1}\NormalTok{), }\FunctionTok{rnorm}\NormalTok{(}\DecValTok{500}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{1}\NormalTok{), }\FunctionTok{rnorm}\NormalTok{(}\DecValTok{20}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{4}\NormalTok{), }\FunctionTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{1}\NormalTok{) )}
+\NormalTok{)}
+
+\NormalTok{data }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ str}
+
+\FunctionTok{ggplot}\NormalTok{(data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{name, }\AttributeTok{y=}\NormalTok{value, }\AttributeTok{fill=}\NormalTok{name)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_violin}\NormalTok{(}\AttributeTok{width=}\FloatTok{1.4}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{width=}\FloatTok{0.1}\NormalTok{, }\AttributeTok{alpha=}\FloatTok{0.2}\NormalTok{) }
+
+\CommentTok{\# sample summary}
+\NormalTok{sample\_size }\OtherTok{=}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(name) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{num=}\FunctionTok{n}\NormalTok{()) }
+
+\NormalTok{xlab }\OtherTok{\textless{}{-}}\NormalTok{ sample\_size }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{apply}\NormalTok{(}\DecValTok{1}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(x)}\FunctionTok{paste0}\NormalTok{(x, }\AttributeTok{collapse=}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{ n="}\NormalTok{))}
+
+\FunctionTok{apply}\NormalTok{(sample\_size, }\DecValTok{1}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(x)}\FunctionTok{paste0}\NormalTok{(x, }\AttributeTok{collapse=}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{ n="}\NormalTok{))}
+
+\FunctionTok{ggplot}\NormalTok{(data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{name, }\AttributeTok{y=}\NormalTok{value, }\AttributeTok{fill=}\NormalTok{name)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_violin}\NormalTok{(}\AttributeTok{width=}\FloatTok{1.4}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{width=}\FloatTok{0.1}\NormalTok{, }\AttributeTok{alpha=}\FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{scale\_fill\_viridis}\NormalTok{(}\AttributeTok{discrete =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{labels=}\NormalTok{xlab) }\SpecialCharTok{+}
+    \FunctionTok{theme}\NormalTok{(}
+      \AttributeTok{legend.position=}\StringTok{"none"}\NormalTok{,}
+      \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size=}\DecValTok{11}\NormalTok{)}
+\NormalTok{    ) }\SpecialCharTok{+}
+    \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"A Violin wrapping a boxplot"}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{xlab}\NormalTok{(}\StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{bubble-plot}{%
+\section{Bubble plot}\label{bubble-plot}}
+
+\begin{itemize}
+\tightlist
+\item
+  \url{https://www.r-graph-gallery.com/320-the-basis-of-bubble-plot.html}
+\end{itemize}
+
+\includegraphics{images/10/000049.png}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mpg }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ str}
+
+\CommentTok{\# Most basic bubble plot}
+\FunctionTok{ggplot}\NormalTok{(mpg, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{cty, }\AttributeTok{y=}\NormalTok{displ, }\AttributeTok{size =}\NormalTok{ hwy)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha=}\FloatTok{0.7}\NormalTok{, }\AttributeTok{position=}\StringTok{"jitter"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mpg, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{cty, }\AttributeTok{y=}\NormalTok{displ, }\AttributeTok{size =}\NormalTok{ hwy)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha=}\FloatTok{0.3}\NormalTok{, }\AttributeTok{position=}\StringTok{"jitter"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_size}\NormalTok{(}\AttributeTok{range =} \FunctionTok{c}\NormalTok{(.}\DecValTok{1}\NormalTok{, }\DecValTok{7}\NormalTok{), }\AttributeTok{name=}\StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mpg, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{cty, }\AttributeTok{y=}\NormalTok{displ, }\AttributeTok{size =}\NormalTok{ hwy, }\AttributeTok{color=}\NormalTok{year)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha=}\FloatTok{0.3}\NormalTok{, }\AttributeTok{position=}\StringTok{"jitter"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_size}\NormalTok{(}\AttributeTok{range =} \FunctionTok{c}\NormalTok{(.}\DecValTok{1}\NormalTok{, }\DecValTok{7}\NormalTok{), }\AttributeTok{name=}\StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mpg }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{yearf =} \FunctionTok{factor}\NormalTok{(year)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{cty, }\AttributeTok{y=}\NormalTok{displ, }\AttributeTok{size=}\NormalTok{hwy, }\AttributeTok{color=}\NormalTok{yearf)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha=}\FloatTok{0.3}\NormalTok{, }\AttributeTok{position=}\StringTok{"jitter"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_size}\NormalTok{(}\AttributeTok{range =} \FunctionTok{c}\NormalTok{(.}\DecValTok{1}\NormalTok{, }\DecValTok{7}\NormalTok{), }\AttributeTok{name=}\StringTok{""}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mpg }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{yearf =} \FunctionTok{factor}\NormalTok{(year)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{cty, }\AttributeTok{y=}\NormalTok{displ, }\AttributeTok{size=}\NormalTok{hwy, }\AttributeTok{fill=}\NormalTok{yearf)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha=}\FloatTok{0.5}\NormalTok{, }\AttributeTok{position=}\StringTok{"jitter"}\NormalTok{, }\AttributeTok{shape=}\DecValTok{21}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_size}\NormalTok{(}\AttributeTok{range =} \FunctionTok{c}\NormalTok{(.}\DecValTok{1}\NormalTok{, }\DecValTok{7}\NormalTok{), }\AttributeTok{name=}\StringTok{""}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{scale\_fill\_viridis}\NormalTok{(}\AttributeTok{discrete=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{guide=}\ConstantTok{FALSE}\NormalTok{, }\AttributeTok{option=}\StringTok{"D"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"Engine displacement"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"City miles per gallon"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{barplot-with-errorbars}{%
+\section{Barplot with errorbars}\label{barplot-with-errorbars}}
+
+\includegraphics{images/10/00000e.png}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ToothGrowth }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ str}
+
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ ToothGrowth }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{dose =} \FunctionTok{as.factor}\NormalTok{(dose))}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ str}
+
+\DocumentationTok{\#\# summary}
+\NormalTok{df\_summary }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(dose) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{sd =} \FunctionTok{sd}\NormalTok{(len, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), }\AttributeTok{len =} \FunctionTok{mean}\NormalTok{(len))}
+\NormalTok{df\_summary}
+
+
+\FunctionTok{ggplot}\NormalTok{(df\_summary, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{dose, }\AttributeTok{y=}\NormalTok{len, }\AttributeTok{fill=}\NormalTok{dose)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_errorbar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{ymin =}\NormalTok{ len, }\AttributeTok{ymax =}\NormalTok{ len}\SpecialCharTok{+}\NormalTok{sd), }\AttributeTok{width =} \FloatTok{0.2}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{horizontal-barplot}{%
+\section{horizontal barplot}\label{horizontal-barplot}}
+
+\includegraphics{images/10/00000b.png}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ mtcars }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{rownames\_to\_column}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{as\_data\_frame}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{cyl =} \FunctionTok{as.factor}\NormalTok{(cyl)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(rowname, wt, mpg, cyl)}
+\NormalTok{df}
+
+\CommentTok{\# change fill color by groups and add text labels}
+\FunctionTok{ggplot}\NormalTok{(df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(rowname, mpg), }\AttributeTok{y =}\NormalTok{ mpg)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{fill =}\NormalTok{ cyl)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =}\NormalTok{ mpg), }\AttributeTok{nudge\_y =} \DecValTok{2}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_viridis\_d}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{circular-barplot}{%
+\section{Circular barplot}\label{circular-barplot}}
+
+\begin{itemize}
+\tightlist
+\item
+  \url{https://www.r-graph-gallery.com/297-circular-barplot-with-groups.html}
+\end{itemize}
+
+\includegraphics{images/10/000002.png}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create dataset}
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{70}
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{id =} \FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, n),}
+  \AttributeTok{individual=}\FunctionTok{paste}\NormalTok{( }\StringTok{"Mister "}\NormalTok{, }\FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{,n), }\AttributeTok{sep=}\StringTok{""}\NormalTok{),}
+  \AttributeTok{group=}\FunctionTok{c}\NormalTok{( }\FunctionTok{rep}\NormalTok{(}\StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{, }\DecValTok{10}\NormalTok{), }\FunctionTok{rep}\NormalTok{(}\StringTok{\textquotesingle{}B\textquotesingle{}}\NormalTok{, }\DecValTok{30}\NormalTok{), }\FunctionTok{rep}\NormalTok{(}\StringTok{\textquotesingle{}C\textquotesingle{}}\NormalTok{, }\DecValTok{14}\NormalTok{), }\FunctionTok{rep}\NormalTok{(}\StringTok{\textquotesingle{}D\textquotesingle{}}\NormalTok{, n}\DecValTok{{-}10{-}30{-}14}\NormalTok{)) ,}
+  \AttributeTok{value=}\FunctionTok{sample}\NormalTok{( }\FunctionTok{seq}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{100}\NormalTok{), n, }\AttributeTok{replace=}\NormalTok{T)}
+\NormalTok{)}
+\NormalTok{data }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ str}
+
+\CommentTok{\# introduce NA}
+\NormalTok{empty\_bar\_idx }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{n, }\DecValTok{10}\NormalTok{)}
+\NormalTok{data[empty\_bar\_idx,}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\SpecialCharTok{:}\DecValTok{4}\NormalTok{)] }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\ConstantTok{NA}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\ConstantTok{NA}\NormalTok{)}
+
+\NormalTok{label\_data }\OtherTok{\textless{}{-}}\NormalTok{ data}
+\NormalTok{number\_of\_bar }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(label\_data)}
+\NormalTok{angle }\OtherTok{\textless{}{-}} \DecValTok{90} \SpecialCharTok{{-}} \DecValTok{360} \SpecialCharTok{*}\NormalTok{ (label\_data}\SpecialCharTok{$}\NormalTok{id}\FloatTok{{-}0.5}\NormalTok{) }\SpecialCharTok{/}\NormalTok{number\_of\_bar     }\CommentTok{\# I substract 0.5 because the letter must have the angle of the center of the bars. Not extreme right(1) or extreme left (0)}
+\NormalTok{label\_data}\SpecialCharTok{$}\NormalTok{hjust }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{( angle }\SpecialCharTok{\textless{}} \SpecialCharTok{{-}}\DecValTok{90}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+\NormalTok{label\_data}\SpecialCharTok{$}\NormalTok{angle }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(angle }\SpecialCharTok{\textless{}} \SpecialCharTok{{-}}\DecValTok{90}\NormalTok{, angle}\SpecialCharTok{+}\DecValTok{180}\NormalTok{, angle)}
+
+\NormalTok{data }\SpecialCharTok{\%\textgreater{}\%} 
+\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\FunctionTok{as.factor}\NormalTok{(id), }\AttributeTok{y=}\NormalTok{value, }\AttributeTok{fill=}\NormalTok{group)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat=}\StringTok{"identity"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ylim}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{100}\NormalTok{,}\DecValTok{120}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{axis.text =} \FunctionTok{element\_blank}\NormalTok{(),}
+    \AttributeTok{axis.title =} \FunctionTok{element\_blank}\NormalTok{(),}
+    \AttributeTok{panel.grid =} \FunctionTok{element\_blank}\NormalTok{(),}
+    \AttributeTok{plot.margin =} \FunctionTok{unit}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{), }\StringTok{"cm"}\NormalTok{) }
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{coord\_polar}\NormalTok{(}\AttributeTok{start =} \DecValTok{0}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_text}\NormalTok{(}\AttributeTok{data=}\NormalTok{label\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{id, }\AttributeTok{y=}\NormalTok{value}\SpecialCharTok{+}\DecValTok{10}\NormalTok{, }\AttributeTok{label=}\NormalTok{individual, }\AttributeTok{hjust=}\NormalTok{hjust), }\AttributeTok{color=}\StringTok{"black"}\NormalTok{, }\AttributeTok{fontface=}\StringTok{"bold"}\NormalTok{, }\AttributeTok{alpha=}\FloatTok{0.6}\NormalTok{, }\AttributeTok{size=}\FloatTok{2.5}\NormalTok{, }\AttributeTok{angle=}\NormalTok{ label\_data}\SpecialCharTok{$}\NormalTok{angle, }\AttributeTok{inherit.aes =} \ConstantTok{FALSE}\NormalTok{ ) }
+\end{Highlighting}
+\end{Shaded}
+
+데이터 정렬 후 plot
+
+\includegraphics{images/10/000008.png}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{data2 }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{arrange}\NormalTok{(group, value) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{id2=}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{n}\NormalTok{()) }
+
+\NormalTok{label\_data2 }\OtherTok{\textless{}{-}}\NormalTok{ data2}
+\NormalTok{number\_of\_bar }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(label\_data2)}
+\NormalTok{angle }\OtherTok{\textless{}{-}} \DecValTok{90} \SpecialCharTok{{-}} \DecValTok{360} \SpecialCharTok{*}\NormalTok{ (label\_data2}\SpecialCharTok{$}\NormalTok{id2}\FloatTok{{-}0.5}\NormalTok{) }\SpecialCharTok{/}\NormalTok{number\_of\_bar     }\CommentTok{\# I substract 0.5 because the letter must have the angle of the center of the bars. Not extreme right(1) or extreme left (0)}
+\NormalTok{label\_data2}\SpecialCharTok{$}\NormalTok{hjust }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{( angle }\SpecialCharTok{\textless{}} \SpecialCharTok{{-}}\DecValTok{90}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+\NormalTok{label\_data2}\SpecialCharTok{$}\NormalTok{angle }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(angle }\SpecialCharTok{\textless{}} \SpecialCharTok{{-}}\DecValTok{90}\NormalTok{, angle}\SpecialCharTok{+}\DecValTok{180}\NormalTok{, angle)}
+
+
+\NormalTok{data2 }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\FunctionTok{as.factor}\NormalTok{(id2), }\AttributeTok{y=}\NormalTok{value, }\AttributeTok{fill=}\NormalTok{group)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat=}\StringTok{"identity"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ylim}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{100}\NormalTok{,}\DecValTok{120}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{axis.text =} \FunctionTok{element\_blank}\NormalTok{(),}
+    \AttributeTok{axis.title =} \FunctionTok{element\_blank}\NormalTok{(),}
+    \AttributeTok{panel.grid =} \FunctionTok{element\_blank}\NormalTok{(),}
+    \AttributeTok{plot.margin =} \FunctionTok{unit}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{), }\StringTok{"cm"}\NormalTok{) }
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{coord\_polar}\NormalTok{(}\AttributeTok{start =} \DecValTok{0}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_text}\NormalTok{(}\AttributeTok{data=}\NormalTok{label\_data2, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{id2, }\AttributeTok{y=}\NormalTok{value}\SpecialCharTok{+}\DecValTok{10}\NormalTok{, }\AttributeTok{label=}\NormalTok{individual, }\AttributeTok{hjust=}\NormalTok{hjust), }\AttributeTok{color=}\StringTok{"black"}\NormalTok{, }\AttributeTok{fontface=}\StringTok{"bold"}\NormalTok{,}\AttributeTok{alpha=}\FloatTok{0.6}\NormalTok{, }\AttributeTok{size=}\FloatTok{2.5}\NormalTok{, }\AttributeTok{angle=}\NormalTok{ label\_data}\SpecialCharTok{$}\NormalTok{angle, }\AttributeTok{inherit.aes =} \ConstantTok{FALSE}\NormalTok{ ) }
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{stacked-area-chart}{%
+\section{Stacked area chart}\label{stacked-area-chart}}
+
+\begin{itemize}
+\tightlist
+\item
+  \url{https://www.data-to-viz.com/caveat/stacking.html}
+\end{itemize}
+
+\includegraphics{images/10/000009a.png}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(babynames)}
+
+\NormalTok{babynames }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ str}
+
+
+\CommentTok{\# Load dataset from github}
+\NormalTok{data }\OtherTok{\textless{}{-}}\NormalTok{ babynames }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(name }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Amanda"}\NormalTok{, }\StringTok{"Jessica"}\NormalTok{,    }\StringTok{"Patricia"}\NormalTok{, }\StringTok{"Deborah"}\NormalTok{,   }\StringTok{"Dorothy"}\NormalTok{,  }\StringTok{"Helen"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(sex}\SpecialCharTok{==}\StringTok{"F"}\NormalTok{)}
+
+\CommentTok{\# Plot}
+\NormalTok{p }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{year, }\AttributeTok{y=}\NormalTok{n, }\AttributeTok{fill=}\NormalTok{name, }\AttributeTok{text=}\NormalTok{name)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_area}\NormalTok{( ) }\SpecialCharTok{+}
+    \FunctionTok{scale\_fill\_viridis}\NormalTok{(}\AttributeTok{discrete =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Popularity of American names in the previous 30 years"}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{theme}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{xlab}\NormalTok{(}\StringTok{"Birth year"}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{ylab}\NormalTok{(}\StringTok{"Number of babies"}\NormalTok{)}
+\NormalTok{p}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{images/10/000006.png}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p }\SpecialCharTok{+} \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{name, }\AttributeTok{scale=}\StringTok{"free\_y"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{density-plot}{%
+\section{Density plot}\label{density-plot}}
+
+\includegraphics{images/10/000003.png}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Plot}
+\NormalTok{g }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(mpg, }\FunctionTok{aes}\NormalTok{(cty))}
+\NormalTok{g }\SpecialCharTok{+} \FunctionTok{geom\_density}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{fill=}\FunctionTok{factor}\NormalTok{(cyl)), }\AttributeTok{alpha=}\FloatTok{0.8}\NormalTok{) }\SpecialCharTok{+} 
+    \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"Density plot"}\NormalTok{, }
+         \AttributeTok{subtitle=}\StringTok{"City Mileage Grouped by Number of cylinders"}\NormalTok{,}
+         \AttributeTok{caption=}\StringTok{"Source: mpg"}\NormalTok{,}
+         \AttributeTok{x=}\StringTok{"City Mileage"}\NormalTok{,}
+         \AttributeTok{fill=}\StringTok{"\# Cylinders"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{waffle-chart}{%
+\section{Waffle chart}\label{waffle-chart}}
+
+\begin{itemize}
+\tightlist
+\item
+  \url{http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html\#Waffle\%20Chart}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{var }\OtherTok{\textless{}{-}}\NormalTok{ mpg}\SpecialCharTok{$}\NormalTok{class  }\CommentTok{\# the categorical data }
+
+\DocumentationTok{\#\# Prep data (nothing to change here)}
+\NormalTok{nrows }\OtherTok{\textless{}{-}} \DecValTok{10}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{expand.grid}\NormalTok{(}\AttributeTok{y =} \DecValTok{1}\SpecialCharTok{:}\NormalTok{nrows, }\AttributeTok{x =} \DecValTok{1}\SpecialCharTok{:}\NormalTok{nrows)}
+\NormalTok{categ\_table }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(}\FunctionTok{table}\NormalTok{(var) }\SpecialCharTok{*}\NormalTok{ ((nrows}\SpecialCharTok{*}\NormalTok{nrows)}\SpecialCharTok{/}\NormalTok{(}\FunctionTok{length}\NormalTok{(var))))}
+\NormalTok{categ\_table}
+
+
+\NormalTok{df}\SpecialCharTok{$}\NormalTok{category }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\FunctionTok{names}\NormalTok{(categ\_table), categ\_table))  }
+\CommentTok{\# }\AlertTok{NOTE}\CommentTok{: if sum(categ\_table) is not 100 (i.e. nrows\^{}2), it will need adjustment to make the sum to 100.}
+
+\DocumentationTok{\#\# Plot}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ str}
+\FunctionTok{ggplot}\NormalTok{(df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x, }\AttributeTok{y =}\NormalTok{ y, }\AttributeTok{fill =}\NormalTok{ category)) }\SpecialCharTok{+} 
+        \FunctionTok{geom\_tile}\NormalTok{(}\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{size =} \FloatTok{0.5}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{images/10/00000a.png}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x, }\AttributeTok{y =}\NormalTok{ y, }\AttributeTok{fill =}\NormalTok{ category)) }\SpecialCharTok{+} 
+        \FunctionTok{geom\_tile}\NormalTok{(}\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{size =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+        \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{expand =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{)) }\SpecialCharTok{+}
+        \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{expand =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{), }\AttributeTok{trans =} \StringTok{\textquotesingle{}reverse\textquotesingle{}}\NormalTok{) }\SpecialCharTok{+}
+        \FunctionTok{scale\_fill\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Set3"}\NormalTok{) }\SpecialCharTok{+}
+        \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"Waffle Chart"}\NormalTok{, }\AttributeTok{subtitle=}\StringTok{"\textquotesingle{}Class\textquotesingle{} of vehicles"}\NormalTok{,}
+             \AttributeTok{caption=}\StringTok{"Source: mpg"}\NormalTok{) }\SpecialCharTok{+} 
+        \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \FunctionTok{rel}\NormalTok{(}\FloatTok{1.2}\NormalTok{)),}
+              \AttributeTok{axis.text =} \FunctionTok{element\_blank}\NormalTok{(),}
+              \AttributeTok{axis.title =} \FunctionTok{element\_blank}\NormalTok{(),}
+              \AttributeTok{axis.ticks =} \FunctionTok{element\_blank}\NormalTok{(),}
+              \AttributeTok{legend.title =} \FunctionTok{element\_blank}\NormalTok{(),}
+              \AttributeTok{legend.position =} \StringTok{"right"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{marginal-histogram}{%
+\section{Marginal histogram}\label{marginal-histogram}}
+
+\includegraphics{images/10/000046.png}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggExtra)}
+
+\CommentTok{\# Scatterplot}
+\NormalTok{p }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(mpg, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{cty, }\AttributeTok{y=}\NormalTok{hwy)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{position=}\StringTok{"jitter"}\NormalTok{, }\AttributeTok{alpha=}\FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method=}\StringTok{"lm"}\NormalTok{, }\AttributeTok{se=}\NormalTok{F) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"none"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"City miles per gallon"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"Highway miles per gallon"}\NormalTok{)}
+\NormalTok{p}
+\FunctionTok{ggMarginal}\NormalTok{(p, }\AttributeTok{type =} \StringTok{"histogram"}\NormalTok{, }\AttributeTok{fill=}\StringTok{"transparent"}\NormalTok{) }
+\FunctionTok{ggMarginal}\NormalTok{(p, }\AttributeTok{type =} \StringTok{"density"}\NormalTok{, }\AttributeTok{fill=}\StringTok{"transparent"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{images/10/000005.png}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggpubr)}
+\CommentTok{\# Grouped Scatter plot with marginal density plots}
+\FunctionTok{ggscatterhist}\NormalTok{(}
+\NormalTok{  iris, }
+  \AttributeTok{x =} \StringTok{"Sepal.Length"}\NormalTok{, }
+  \AttributeTok{y =} \StringTok{"Sepal.Width"}\NormalTok{,}
+  \AttributeTok{color =} \StringTok{"Species"}\NormalTok{, }
+  \AttributeTok{size =} \DecValTok{3}\NormalTok{, }
+  \AttributeTok{alpha =} \FloatTok{0.6}\NormalTok{,}
+  \AttributeTok{palette =} \FunctionTok{c}\NormalTok{(}\StringTok{"\#00AFBB"}\NormalTok{, }\StringTok{"\#E7B800"}\NormalTok{, }\StringTok{"\#FC4E07"}\NormalTok{),}
+  \AttributeTok{margin.params =} \FunctionTok{list}\NormalTok{(}\AttributeTok{fill =} \StringTok{"Species"}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{size =} \FloatTok{0.2}\NormalTok{)}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{density-ridgeline-plots}{%
+\section{Density ridgeline plots}\label{density-ridgeline-plots}}
+
+\includegraphics{images/10/000004.png}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggridges)}
+\FunctionTok{ggplot}\NormalTok{(iris, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Sepal.Length, }\AttributeTok{y =}\NormalTok{ Species)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density\_ridges}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{fill =}\NormalTok{ Species)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"\#00AFBB"}\NormalTok{, }\StringTok{"\#E7B800"}\NormalTok{, }\StringTok{"\#FC4E07"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+이 저작물은 크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제 라이선스에 따라 이용할 수 있습니다.
 
   \bibliography{book.bib,packages.bib}
 

@@ -7,7 +7,8 @@ rmd_files: ["index.Rmd",
             "05-Rbasicgraphics.Rmd",
             "06-tidyverse.Rmd",
             "KRIBBR2022-Lecture3-haseong.Rmd",
-            "KRIBBR2022-Lecture4-haseong.Rmd"
+            "KRIBBR2022-Lecture4-haseong.Rmd", 
+            "07-ggplot.Rmd"
             ]
 book_filename: "kribbr2022"
 repo: https://github.com/greendaygh/kribbr2022/
