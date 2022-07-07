@@ -123,3 +123,13 @@ density-plot
 waffle-chart
 marginal-histogram
 density-ridgeline-plots
+lecture-5-note
+class-01
+basic
+bargraph
+class-02
+case1-고전적-프로그래밍-방법
+case-2-apply
+case-3-tidyverse
+class-03
+class-04

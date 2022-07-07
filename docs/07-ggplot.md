@@ -477,7 +477,8 @@ names(expmeant) <- tmpd$group_name
 
 ggplot(expmeant, aes(x=A, y=B)) +
   geom_point() +
-  geom_smooth()
+  geom_smooth(method='lm')+
+  scale_x_continuous(trans='log10')
   
 
 ```
