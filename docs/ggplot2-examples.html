@@ -48,14 +48,15 @@
 <li><a class="" href="rmarkdown.html"><span class="header-section-number">3</span> Rmarkdown</a></li>
 <li><a class="" href="r-programming.html"><span class="header-section-number">4</span> R programming</a></li>
 <li><a class="" href="data-transformation.html"><span class="header-section-number">5</span> Data transformation</a></li>
-<li><a class="" href="lecture-2-note.html"><span class="header-section-number">6</span> Lecture 2 Note</a></li>
+<li><a class="" href="lecture-02-note.html"><span class="header-section-number">6</span> Lecture 02 Note</a></li>
 <li><a class="" href="r-basic-graphics.html"><span class="header-section-number">7</span> R basic graphics</a></li>
 <li><a class="" href="tidyverse.html"><span class="header-section-number">8</span> tidyverse</a></li>
-<li><a class="" href="lecture-3-note.html"><span class="header-section-number">9</span> Lecture 3 Note</a></li>
-<li><a class="" href="lecture-4-note.html"><span class="header-section-number">10</span> Lecture 4 Note</a></li>
+<li><a class="" href="lecture-03-note.html"><span class="header-section-number">9</span> Lecture 03 Note</a></li>
+<li><a class="" href="lecture-04-note.html"><span class="header-section-number">10</span> Lecture 04 Note</a></li>
 <li><a class="" href="data-visualization-with-ggplot2.html"><span class="header-section-number">11</span> Data visualization with ggplot2</a></li>
 <li><a class="active" href="ggplot2-examples.html"><span class="header-section-number">12</span> ggplot2 examples</a></li>
-<li><a class="" href="lecture-5-note.html"><span class="header-section-number">13</span> Lecture 5 Note</a></li>
+<li><a class="" href="lecture-05-note.html"><span class="header-section-number">13</span> Lecture 05 Note</a></li>
+<li><a class="" href="lecture-06-note.html"><span class="header-section-number">14</span> Lecture 06 Note</a></li>
 </ul>
 
         <div class="book-extra">
@@ -406,7 +407,7 @@
 <div class="sourceCode" id="cb296"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/ggridges/">ggridges</a></span><span class="op">)</span>
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>, y <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_density_ridges</span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <hr>
 <p><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="크리에이티브 커먼즈 라이선스" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png"></a><br>이 저작물은 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제 라이선스</a>에 따라 이용할 수 있습니다.</p>
@@ -415,7 +416,7 @@
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="data-visualization-with-ggplot2.html"><span class="header-section-number">11</span> Data visualization with ggplot2</a></div>
-<div class="next"><a href="lecture-5-note.html"><span class="header-section-number">13</span> Lecture 5 Note</a></div>
+<div class="next"><a href="lecture-05-note.html"><span class="header-section-number">13</span> Lecture 05 Note</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -446,7 +447,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>2022년 한국생명공학연구원 연구데이터 분석과정 R</strong>" was written by 합성생물학전문연구소 김하성. It was last built on 2022-07-07.</p>
+    <p>"<strong>2022년 한국생명공학연구원 연구데이터 분석과정 R</strong>" was written by 합성생물학전문연구소 김하성. It was last built on 2022-07-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

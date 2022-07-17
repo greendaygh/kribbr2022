@@ -1,4 +1,4 @@
-# Lecture 4 Note
+# Lecture 04 Note
 
 ## Class 1
 

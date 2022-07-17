@@ -1,0 +1,202 @@
+```{r}
+library(UsingR)
+mpg
+
+
+```
+
+
+```{r}
+library(viridis)
+
+data <- data.frame(
+  name=c( rep("A",500), rep("B",500), rep("B",500), rep("C",20), rep('D', 100)  ),
+  value=c( rnorm(500, 10, 5), rnorm(500, 13, 1), rnorm(500, 18, 1), rnorm(20, 25, 4), rnorm(100, 12, 1) )
+)
+data %>% str
+
+
+ggplot(data, aes(x=name, y=value, fill=name)) +
+    #geom_violin(width=1.4) +
+    geom_boxplot(width=0.1, alpha=0.2) 
+
+# sample summary
+sample_size = data %>% 
+  group_by(name) %>% 
+  summarize(num=n()) 
+
+xlab <- sample_size %>% 
+  apply(1, function(x)paste0(x, collapse="\n n="))
+
+apply(sample_size, 1, function(x)paste0(x, collapse="\n n="))
+
+
+ggplot(data, aes(x=name, y=value, fill=name)) +
+    geom_violin(width=1.4) +
+    geom_boxplot(width=0.1, alpha=0.2) +
+    scale_fill_viridis(discrete = TRUE) +
+    scale_x_discrete(labels=xlab) +
+    theme(
+      legend.position="none",
+      plot.title = element_text(size=11)
+    ) +
+    ggtitle("A Violin wrapping a boxplot") +
+    xlab("")
+
+
+
+library(tidyverse)
+
+myexp <- read.csv("https://raw.githubusercontent.com/greendaygh/kribbr2022/main/examples/gse93819_expression_values.csv", header=T)
+
+tmpd <- myexp %>% 
+  rownames_to_column() %>% 
+  pivot_longer(-rowname)
+
+
+ggplot(tmpd, aes(x=name, y=value, fill=name)) +
+    #geom_violin(width=1.4) +
+    geom_boxplot(width=0.5, alpha=0.2) +
+    scale_y_continuous(trans = "log", breaks = c(0.1, 20, 1000)) +
+    scale_fill_viridis(discrete = TRUE) +
+  theme(
+      legend.position="none",
+      plot.title = element_text(size=11),
+      axis.text.x = element_text(angle=90)
+    ) +
+    ggtitle("A Violin wrapping a boxplot") +
+    xlab("") 
+
+```
+
+
+```{r}
+options(repos = c(CRAN="https://cran.rstudio.com"))
+```
+
+
+transpose
+
+
+```{r}
+mygroup <- rep(c("A", "B", "C", "D"), each=5)
+mysample <- data.frame(sample_name=names(myexp), group_name=mygroup)
+mysample
+
+
+myexpt <- t(myexp)
+myexp %>% 
+  rownames_to_column() %>% 
+  pivot_longer(cols = -rowname) %>% 
+  pivot_wider(names_from = rowname, values_from = value)
+
+
+```
+
+
+points 
+
+```{r}
+ggplot(mpg, aes(x=cty, y=displ, size = hwy)) +
+  geom_point() +
+  scale_size(range=c(0.1, 20))
+
+mpg %>% 
+  mutate(yearf = factor(year)) %>% 
+  ggplot(aes(x=cty, y=displ, size=hwy, fill=yearf)) +
+  geom_point(alpha=0.5, position="jitter", shape=21) +
+  scale_size(range = c(.1, 7), name="") + 
+  scale_fill_viridis(discrete=TRUE, guide=FALSE, option="D") +
+  theme_bw() +
+  ylab("Engine displacement") +
+  xlab("City miles per gallon") +
+  theme(legend.position = "none")
+```
+
+
+
+
+```{r}
+
+mygroup <- rep(c("A", "B", "C", "D"), each=5)
+mysample <- data.frame(sample_name=names(myexp), group_name=mygroup)
+mysample
+
+
+
+myexpt <- myexp %>% 
+  rownames_to_column() %>% 
+  pivot_longer(cols = -rowname) %>% 
+  pivot_wider(names_from = rowname, values_from = value)
+
+
+myexp2 <- myexpt %>% 
+  left_join(mysample, by=c("name" = "sample_name")) %>% 
+  select(group_name, everything()) %>% 
+  group_by(group_name)
+
+
+mymean <- myexp2 %>% 
+  summarise(across(where(is.numeric), mean))
+mymean
+
+myplotdata <- mymean %>% 
+  pivot_longer(cols = -c("group_name"))
+  
+
+ggplot(myplotdata, aes(x=name, y=value, fill=group_name)) +
+  geom_bar(stat="identity", position = "dodge") +
+  scale_x_discrete(limit=c("1415670_at", "1415671_at")) 
+```
+
+```{r}
+g <- ggplot(mpg, aes(cty))
+g + geom_histogram()
+
+g + geom_density(aes(fill=factor(cyl)), alpha=0.8) + 
+    labs(title="Density plot", 
+         subtitle="City Mileage Grouped by Number of cylinders",
+         caption="Source: mpg",
+         x="City Mileage",
+         fill="# Cylinders") +
+  facet_wrap(~cyl)
+
+```
+
+
+```{r}
+library(ggridges)
+
+d <- data.frame(
+  x = rep(1:5, 3),
+  y = c(rep(0, 5), rep(1, 5), rep(2, 5)),
+  height = c(0, 1, 3, 4, 0, 1, 2, 3, 5, 4, 0, 5, 4, 4, 1)
+)
+
+density()
+
+ggplot(mpg, aes(cty, group=model)) +
+  geom_density()
+
+ggplot(mpg, aes(x=cty, height= cty, group=model)) +
+  geom_density_ridges(stat = "identity")
+```
+
+
+
+```{r}
+var <- mpg$class  # the categorical data 
+
+## Prep data (nothing to change here)
+nrows <- 10
+df <- expand.grid(y = 1:nrows, x = 1:nrows)
+categ_table <- round(table(var) * ((nrows*nrows)/(length(var))))
+categ_table
+df$category <- factor(rep(names(categ_table), categ_table))  
+
+df
+
+ggplot(df, aes(x = x, y = y, fill = category)) + 
+        geom_tile(color = "black", size = 0.5) 
+```
+

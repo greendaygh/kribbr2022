@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Chapter 19 {r} # merdata %&gt;% # group_by(group_name) %&gt;% # summarise(across(where(is.numeric), mytest)) # # # merdata %&gt;% # group_by(group_name) %&gt;% # summarise(across(where(is.numeric), function(x))) # | 2022년 한국생명공학연구원 연구데이터 분석과정 R</title>
+
+    <meta name="author" content="합성생물학전문연구소 김하성" />
+  
+   <meta name="description" content="Lecture" />
+   <meta name="generator" content="placeholder" />
+  <meta property="og:title" content="Chapter 19 {r} # merdata %&gt;% # group_by(group_name) %&gt;% # summarise(across(where(is.numeric), mytest)) # # # merdata %&gt;% # group_by(group_name) %&gt;% # summarise(across(where(is.numeric), function(x))) # | 2022년 한국생명공학연구원 연구데이터 분석과정 R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Lecture" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 19 {r} # merdata %&gt;% # group_by(group_name) %&gt;% # summarise(across(where(is.numeric), mytest)) # # # merdata %&gt;% # group_by(group_name) %&gt;% # summarise(across(where(is.numeric), function(x))) # | 2022년 한국생명공학연구원 연구데이터 분석과정 R" />
+  
+  <meta name="twitter:description" content="Lecture" />
+  
+  <!-- JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
+    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
+    <script src="libs/bs3compat-0.3.1/transition.js"></script>
+    <script src="libs/bs3compat-0.3.1/tabs.js"></script>
+    <script src="libs/bs3compat-0.3.1/bs3compat.js"></script>
+    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
+    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
+
+  <!-- CSS -->
+  <style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+      <link rel="stylesheet" href="style.css" />
+  
+</head>
+
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
+    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">2022년 한국생명공학연구원 연구데이터 분석과정 R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+      </form>
+
+      <nav aria-label="Table of contents">
+        <h2>Table of contents</h2>
+        <div id="book-toc"></div>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
+<div id="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx" class="section level1" number="19">
+<h1><span class="header-section-number">Chapter 19</span> <code>{r} # merdata %&gt;%  #   group_by(group_name) %&gt;%  #   summarise(across(where(is.numeric), mytest)) #  #  # merdata %&gt;%  #   group_by(group_name) %&gt;%  #   summarise(across(where(is.numeric), function(x))) #</code></h1>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb339-1" aria-hidden="true" tabindex="-1"></a>mytest <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb339-2"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb339-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t.test</span>(x[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>], x[<span class="dv">6</span><span class="sc">:</span><span class="dv">10</span>])<span class="sc">$</span>p.value</span>
+<span id="cb339-3"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb339-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb339-4"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb339-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb339-5"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb339-5" aria-hidden="true" tabindex="-1"></a>merdata <span class="sc">%&gt;%</span> </span>
+<span id="cb339-6"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb339-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="st">&quot;sample_name&quot;</span>, <span class="st">&quot;group_name&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb339-7"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb339-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">apply</span>(<span class="dv">2</span>, <span class="cf">function</span>(x){<span class="fu">t.test</span>(x[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>], x[<span class="dv">6</span><span class="sc">:</span><span class="dv">10</span>])<span class="sc">$</span>p.value})</span>
+<span id="cb339-8"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb339-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb339-9"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb339-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb339-10"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb339-10" aria-hidden="true" tabindex="-1"></a>mypvalue <span class="ot">&lt;-</span> merdata <span class="sc">%&gt;%</span> </span>
+<span id="cb339-11"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb339-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="st">&quot;sample_name&quot;</span>, <span class="st">&quot;group_name&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb339-12"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb339-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">apply</span>(<span class="dv">2</span>, mytest)</span>
+<span id="cb339-13"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb339-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb339-14"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb339-14" aria-hidden="true" tabindex="-1"></a>myplotdata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(mypvalue) <span class="sc">%&gt;%</span> </span>
+<span id="cb339-15"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb339-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb339-16"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb339-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(mymean2, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;rowname&quot;</span> <span class="ot">=</span> <span class="st">&quot;name&quot;</span>))</span>
+<span id="cb339-17"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb339-17" aria-hidden="true" tabindex="-1"></a>  </span></code></pre></div>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb340-1" aria-hidden="true" tabindex="-1"></a>myplotdata <span class="sc">%&gt;%</span> </span>
+<span id="cb340-2"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb340-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mlogp =</span> <span class="sc">-</span><span class="fu">log</span>(mypvalue)) <span class="sc">%&gt;%</span> </span>
+<span id="cb340-3"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb340-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>N, <span class="at">y=</span>T, <span class="at">size=</span>mlogp)) <span class="sc">+</span></span>
+<span id="cb340-4"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb340-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape=</span><span class="dv">21</span>, <span class="at">fill=</span><span class="st">&quot;black&quot;</span>, <span class="at">alpha=</span><span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb340-5"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb340-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">trans =</span> <span class="st">&quot;log&quot;</span>, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">20</span>, <span class="dv">400</span>, <span class="dv">8000</span>)) <span class="sc">+</span></span>
+<span id="cb340-6"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb340-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">trans =</span> <span class="st">&quot;log&quot;</span>, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">20</span>, <span class="dv">400</span>, <span class="dv">8000</span>))</span>
+<span id="cb340-7"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb340-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb340-8"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb340-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb340-9"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb340-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb340-10"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb340-10" aria-hidden="true" tabindex="-1"></a>myplotdata <span class="sc">%&gt;%</span> </span>
+<span id="cb340-11"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb340-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mlogp =</span> <span class="sc">-</span><span class="fu">log</span>(mypvalue)) <span class="sc">%&gt;%</span> </span>
+<span id="cb340-12"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb340-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>N, <span class="at">y=</span>T, <span class="at">size=</span>mlogp, <span class="at">fill=</span>mlogp)) <span class="sc">+</span></span>
+<span id="cb340-13"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb340-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape=</span><span class="dv">21</span>) <span class="sc">+</span></span>
+<span id="cb340-14"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb340-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">trans =</span> <span class="st">&quot;log&quot;</span>, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">20</span>, <span class="dv">400</span>, <span class="dv">8000</span>)) <span class="sc">+</span></span>
+<span id="cb340-15"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb340-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">trans =</span> <span class="st">&quot;log&quot;</span>, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">20</span>, <span class="dv">400</span>, <span class="dv">8000</span>)) <span class="sc">+</span></span>
+<span id="cb340-16"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb340-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis</span>(<span class="at">alpha=</span><span class="fl">0.2</span>)</span></code></pre></div>
+<ul>
+<li>barplot</li>
+</ul>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb341-1" aria-hidden="true" tabindex="-1"></a>mymean <span class="ot">&lt;-</span> merdata <span class="sc">%&gt;%</span></span>
+<span id="cb341-2"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb341-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">group_by</span>(group_name) <span class="sc">%&gt;%</span></span>
+<span id="cb341-3"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb341-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), mean)) <span class="sc">%&gt;%</span></span>
+<span id="cb341-4"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb341-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">pivot_longer</span>(<span class="sc">-</span>group_name)</span>
+<span id="cb341-5"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb341-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb341-6"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb341-6" aria-hidden="true" tabindex="-1"></a>mysd <span class="ot">&lt;-</span> merdata <span class="sc">%&gt;%</span></span>
+<span id="cb341-7"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb341-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">group_by</span>(group_name) <span class="sc">%&gt;%</span></span>
+<span id="cb341-8"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb341-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), sd)) <span class="sc">%&gt;%</span></span>
+<span id="cb341-9"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb341-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">pivot_longer</span>(<span class="sc">-</span>group_name)</span>
+<span id="cb341-10"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb341-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb341-11"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb341-11" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> mymean <span class="sc">%&gt;%</span></span>
+<span id="cb341-12"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb341-12" aria-hidden="true" tabindex="-1"></a> <span class="fu">left_join</span>(mysd, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;group_name&quot;</span>, <span class="st">&quot;name&quot;</span>))</span>
+<span id="cb341-13"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb341-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb341-14"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb341-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb341-15"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb341-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mydata, <span class="fu">aes</span>(<span class="at">x=</span>name, <span class="at">y=</span>value.x, <span class="at">fill=</span>group_name)) <span class="sc">+</span></span>
+<span id="cb341-16"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb341-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="at">position=</span><span class="st">&quot;dodge&quot;</span>, <span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb341-17"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb341-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="st">&quot;1415670_at&quot;</span>, <span class="st">&quot;1415671_at&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb341-18"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb341-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3000</span>)) <span class="sc">+</span></span>
+<span id="cb341-19"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb341-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>value.x, <span class="at">ymax=</span>value.x<span class="sc">+</span>value.y),</span>
+<span id="cb341-20"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb341-20" aria-hidden="true" tabindex="-1"></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width=</span><span class="fl">0.9</span>), </span>
+<span id="cb341-21"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb341-21" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb341-22"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb341-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis</span>(<span class="at">discrete =</span> T, <span class="at">option =</span> <span class="st">&quot;D&quot;</span>)</span>
+<span id="cb341-23"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb341-23" aria-hidden="true" tabindex="-1"></a>  </span></code></pre></div>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb342-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mydata, <span class="fu">aes</span>(<span class="at">x=</span>name, <span class="at">y=</span>value.x, <span class="at">fill=</span>group_name)) <span class="sc">+</span></span>
+<span id="cb342-2"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb342-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="at">position=</span><span class="st">&quot;dodge&quot;</span>, <span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb342-3"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb342-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="st">&quot;1415670_at&quot;</span>, <span class="st">&quot;1415671_at&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb342-4"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb342-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3000</span>)) <span class="sc">+</span></span>
+<span id="cb342-5"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb342-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>value.x, <span class="at">ymax=</span>value.x<span class="sc">+</span>value.y),</span>
+<span id="cb342-6"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb342-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width=</span><span class="fl">0.9</span>), </span>
+<span id="cb342-7"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb342-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb342-8"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb342-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis</span>(<span class="at">discrete =</span> T, <span class="at">option =</span> <span class="st">&quot;D&quot;</span>) <span class="sc">+</span></span>
+<span id="cb342-9"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb342-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb343-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb343-2"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb343-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mydata, <span class="fu">aes</span>(<span class="at">x=</span>name, <span class="at">y=</span>value.x, <span class="at">fill=</span>group_name)) <span class="sc">+</span></span>
+<span id="cb343-3"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb343-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="at">position=</span><span class="st">&quot;dodge&quot;</span>, <span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb343-4"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb343-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="st">&quot;1415670_at&quot;</span>, <span class="st">&quot;1415671_at&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb343-5"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb343-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3000</span>)) <span class="sc">+</span></span>
+<span id="cb343-6"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb343-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>value.x, <span class="at">ymax=</span>value.x<span class="sc">+</span>value.y),</span>
+<span id="cb343-7"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb343-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width=</span><span class="fl">0.9</span>), </span>
+<span id="cb343-8"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb343-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb343-9"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb343-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis</span>(<span class="at">discrete =</span> T, <span class="at">option =</span> <span class="st">&quot;D&quot;</span>) <span class="sc">+</span></span>
+<span id="cb343-10"><a href="r-merdata-group_bygroup_name-summariseacrosswhereis.numeric-mytest-merdata-group_bygroup_name-summariseacrosswhereis.numeric-functionx.html#cb343-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_polar</span>(<span class="at">start =</span> <span class="dv">0</span>)  </span></code></pre></div>
+</div>
+  </main>
+
+  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page">
+      <h2>On this page</h2>
+      <div id="book-on-this-page"></div>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5">
+  <div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>2022년 한국생명공학연구원 연구데이터 분석과정 R</strong>" was written by 합성생물학전문연구소 김하성. It was last built on 2022-07-17.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+<script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+
+</html>

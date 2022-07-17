@@ -1,4 +1,4 @@
-# Lecture 3 Note
+# Lecture 03 Note
 
 ## Class 1
 
@@ -91,7 +91,7 @@ class(mydf)
 mydf$playerID
 ```
 
-## class 2
+## Class 2
 
 ### apply
 
@@ -217,7 +217,7 @@ lapply(airlist, myozone)
 
 ```
 
-## class 3
+## Class 3
 
 ### graphics 
 
