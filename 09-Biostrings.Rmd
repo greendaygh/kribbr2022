@@ -222,11 +222,24 @@ x1
 
 위 x0 스트링들을 XStringSet으로 바꾸고 GC 비율을 구한 후 bargraph를 그리겠습니다. gc_ratio가 G와 C의 비율값을 저장한 10x2 테이블이므로 x축에 10개의 서열과 각 서열의 GC비율을 나타내고 y축에 비율 값을 그리는 것으로 생각한 후 ggplot의 aes와 파라메터를 적절히 지정해 줍니다.
 
+[bar plot using ggplto2](https://greendaygh.github.io/kribbr2022/data-visualization.html#bar-graph)
+
 ```{r, eval=F}
 x1 <- DNAStringSet(x0)
 gc_ratio1 <- letterFrequency(x1, c("G", "C"), as.prob=TRUE)
 gc_ratio2 <- rowSums(gc_ratio1)
 barplot(gc_ratio2, beside=T)
+
+names(gc_ratio2) <- paste("seq", 1:length(gc_ratio2), sep="")
+barplot(gc_ratio2, beside=T)
+
+data.frame(gc_ratio2) %>% 
+  rownames_to_column() %>% 
+  ggplot(aes(x=rowname, y=gc_ratio2, fill=rowname)) +
+  geom_bar(stat="identity") +
+  scale_y_continuous(limits = c(0, 1)) +
+  scale_fill_brewer(palette = "green") +
+  theme_bw()
 
 ```
 

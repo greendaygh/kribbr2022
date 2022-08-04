@@ -230,7 +230,11 @@ Block quotations
 
 ![](images/02/style.png){width=150}
 
-
+<style type="text/css">
+#header1 {
+color: red;
+}
+</style>
 
 <div id='header1'>
 소스코드 
@@ -257,7 +261,7 @@ knitr::kable(
 
 
 
-Table: A knitr kable.
+Table: (\#tab:unnamed-chunk-8)A knitr kable.
 
 |                  |  mpg| cyl| disp|  hp| drat|    wt|  qsec| vs| am| gear| carb|
 |:-----------------|----:|---:|----:|---:|----:|-----:|-----:|--:|--:|----:|----:|
