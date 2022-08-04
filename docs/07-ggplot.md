@@ -1,4 +1,4 @@
-# Data visualization with ggplot2
+# Data visualization 
 
 이번시간에는 `ggplot2`( https://ggplot2.tidyverse.org/ )를 이용한 시각화에 대해서 알아봅니다. 데이터를 분석할 때 실제 데이터를 눈으로 확인하는 것은 중요합니다. raw 데이터를 보면서 크기 비교나 분포를 대략적으로 예측할 수 있다면 tool을 사용해서 나오는 결과를 가늠하는 척도가 될 수도 있습니다. `ggplot2` 는 Rstudio 개발팀의 해들리위컴이 (Hadley Wickham) 중심이 되어 만든 데이터 시각화 패키지입니다. 몇 가지 새로운 규칙을 학습해야 하지만 그 활용성이나 성능을 고려한다면 꼭 배워야할 패키지 중 하나입니다. 
 
@@ -549,15 +549,15 @@ ggplot(myiris, aes(x=Petal.Length, y=Petal.Width)) +
 
 1) age와 circumference 를 각각 x와 y축으로 하는 산점도를 그리는 코드를 작성하시오 (ggplot 이용, 나무별로 다른 색 사용) 
 
-<img src="07-ggplot_files/figure-html/unnamed-chunk-41-1.png" width="672" />
+![](07-ggplot_files/figure-latex/unnamed-chunk-41-1.pdf)<!-- --> 
 
 2) 나무별로 다른 켄버스에 age와 circumference를 x와 y축으로 하는 산점도를 그리는 코드를 작성하시오 (ggplot, facet_grid이용)
 
-<img src="07-ggplot_files/figure-html/unnamed-chunk-42-1.png" width="672" />
+![](07-ggplot_files/figure-latex/unnamed-chunk-42-1.pdf)<!-- --> 
 
 3) 2)에서 그려진 나무별 산점도에 다음과 같이 선분을 추가한 그래프를 그리는 코드를 작성 하시오 
 
-<img src="07-ggplot_files/figure-html/unnamed-chunk-43-1.png" width="672" />
+![](07-ggplot_files/figure-latex/unnamed-chunk-43-1.pdf)<!-- --> 
 
 :::
 
@@ -566,7 +566,7 @@ ggplot(myiris, aes(x=Petal.Length, y=Petal.Width)) +
 
 `InsectSprays`는 제초제의 효능에 관한 데이터이다. 다음과 같은 plot을 그리는 코드를 작성 하시오
 
-<img src="07-ggplot_files/figure-html/unnamed-chunk-44-1.png" width="672" />
+![](07-ggplot_files/figure-latex/unnamed-chunk-44-1.pdf)<!-- --> 
 
 :::
 

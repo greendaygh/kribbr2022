@@ -10,7 +10,10 @@ rmd_files: ["index.Rmd",
             "KRIBBR2022-Lecture4-haseong.Rmd", 
             "07-ggplot.Rmd",
             "KRIBBR2022-Lecture5-haseong.Rmd",
-            "KRIBBR2022-Lecture6-haseong.Rmd"
+            "KRIBBR2022-Lecture6-haseong.Rmd",
+            "08-bioconductor.Rmd",
+            "09-Biostrings.Rmd",
+            "10-toolsforsequences.Rmd"
             ]
 book_filename: "kribbr2022"
 repo: https://github.com/greendaygh/kribbr2022/

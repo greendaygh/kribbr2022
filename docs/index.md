@@ -2,7 +2,7 @@
 title: 2022년 한국생명공학연구원 연구데이터 분석과정 R
 #subtitle: R프로그래밍 1차
 author: 합성생물학전문연구소 김하성
-date: "2022-07-18"
+date: "2022-08-04"
 output:
   pdf_document:
     toc: yes
@@ -67,4 +67,8 @@ mainfont : NanumGothic
   - [Second edition](https://www.crcpress.com/Using-R-for-Introductory-Statistics-Second-Edition/Verzani/p/book/9781466590731)
 - [Bioinformatics Data Skills](http://2.droppdf.com/files/5aTvl/bioinformatics-data-skills.pdf) by Vince Buffalo
 - [Introductory Statistics with R](http://www.academia.dk/BiologiskAntropologi/Epidemiologi/PDF/Introductory_Statistics_with_R__2nd_ed.pdf) by Dalgaard
+- [Modern Statistics for Modern Biology](http://web.stanford.edu/class/bios221/book/index.html)
+- [bios221](https://web.stanford.edu/class/bios221/labs/)
+- [Annotation Workshop 2021](https://jmacdon.github.io/Bioc2021Anno/articles/AnnotationWorkshop.html#summarizedexperiment-objects-1)
+- [Annotation_Resources 2015](https://bioconductor.org/help/course-materials/2015/BioC2015/Annotation_Resources.html)
 - 일반통계학 (영지문화사, 김우철 외)

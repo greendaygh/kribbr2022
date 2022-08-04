@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 15 Bioconductor | 2022년 한국생명공학연구원 연구데이터 분석과정 R</title>
+<meta name="author" content="합성생물학전문연구소 김하성">
+<meta name="description" content="https://www.bioconductor.org Bioconductor는 바이오인포메틱스를 위한 R기반의 데이터, 메소드, 그리고 패키지들의 모음입니다. 2002년 microarray 데이터 분석을 위한 플랫폼으로 시작되었으며 현재 2000개 이상의 패키지로 구성되어 있습니다. R은 분산형 오픈소스이나 Bioconductor는 Full-time...">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta property="og:title" content="Chapter 15 Bioconductor | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
+<meta property="og:type" content="book">
+<meta property="og:description" content="https://www.bioconductor.org Bioconductor는 바이오인포메틱스를 위한 R기반의 데이터, 메소드, 그리고 패키지들의 모음입니다. 2002년 microarray 데이터 분석을 위한 플랫폼으로 시작되었으며 현재 2000개 이상의 패키지로 구성되어 있습니다. R은 분산형 오픈소스이나 Bioconductor는 Full-time...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 15 Bioconductor | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
+<meta name="twitter:description" content="https://www.bioconductor.org Bioconductor는 바이오인포메틱스를 위한 R기반의 데이터, 메소드, 그리고 패키지들의 모음입니다. 2002년 microarray 데이터 분석을 위한 플랫폼으로 시작되었으며 현재 2000개 이상의 패키지로 구성되어 있습니다. R은 분산형 오픈소스이나 Bioconductor는 Full-time...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">2022년 한국생명공학연구원 연구데이터 분석과정 R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="rrstudio-basics.html"><span class="header-section-number">2</span> R/Rstudio basics</a></li>
+<li><a class="" href="rmarkdown.html"><span class="header-section-number">3</span> Rmarkdown</a></li>
+<li><a class="" href="r-programming.html"><span class="header-section-number">4</span> R programming</a></li>
+<li><a class="" href="data-transformation.html"><span class="header-section-number">5</span> Data transformation</a></li>
+<li><a class="" href="lecture-02-note.html"><span class="header-section-number">6</span> Lecture 02 Note</a></li>
+<li><a class="" href="r-basic-graphics.html"><span class="header-section-number">7</span> R basic graphics</a></li>
+<li><a class="" href="tidyverse.html"><span class="header-section-number">8</span> tidyverse</a></li>
+<li><a class="" href="lecture-03-note.html"><span class="header-section-number">9</span> Lecture 03 Note</a></li>
+<li><a class="" href="lecture-04-note.html"><span class="header-section-number">10</span> Lecture 04 Note</a></li>
+<li><a class="" href="data-visualization.html"><span class="header-section-number">11</span> Data visualization</a></li>
+<li><a class="" href="ggplot2-examples.html"><span class="header-section-number">12</span> ggplot2 examples</a></li>
+<li><a class="" href="lecture-05-note.html"><span class="header-section-number">13</span> Lecture 05 Note</a></li>
+<li><a class="" href="lecture-06-note.html"><span class="header-section-number">14</span> Lecture 06 Note</a></li>
+<li><a class="active" href="bioconductor.html"><span class="header-section-number">15</span> Bioconductor</a></li>
+<li><a class="" href="biostrings.html"><span class="header-section-number">16</span> Biostrings</a></li>
+<li><a class="" href="tools-for-sequences.html"><span class="header-section-number">17</span> Tools for sequences</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="bioconductor" class="section level1" number="15">
+<h1>
+<span class="header-section-number">15</span> Bioconductor<a class="anchor" aria-label="anchor" href="#bioconductor"><i class="fas fa-link"></i></a>
+</h1>
+<ul>
+<li><a href="https://www.bioconductor.org" class="uri">https://www.bioconductor.org</a></li>
+</ul>
+<p>Bioconductor는 바이오인포메틱스를 위한 R기반의 데이터, 메소드, 그리고 패키지들의 모음입니다. 2002년 microarray 데이터 분석을 위한 플랫폼으로 시작되었으며 현재 2000개 이상의 패키지로 구성되어 있습니다. R은 분산형 오픈소스이나 Bioconductor는 Full-time developer들에 의해서 유지되고 있습니다. <code>CRAN</code>에 배포되지 않고 <code>CRAN</code>에 비해 더 많은 필수 자료들 (vignettes 등)이 필요하며 높은 수준으로 quality control이 되고 있습니다.</p>
+<p>사용 가능한 패키지들은 <a href="http://bioconductor.org/packages/release/BiocViews.html#___Software">이곳</a>을 참고하시면 되겠습니다.</p>
+<div class="inline-figure"><img src="images/04/bioconductor.JPG" width="600"></div>
+<p>Bioconductor 코어 개발 그룹은 사용자들이 지놈스케일 데이터를 더 편리하게 다루룰 수 있도록 데이터의 구조를 개발하고 있습니다. Bioconductor의 주요 기능은 다음과 같습니다.</p>
+<ul>
+<li>지놈스케일의 서열이나 발현등 대용량 유전자형 데이터 <strong>관리</strong> 및 <strong>통계적 분석</strong>을 위한 툴 제공</li>
+<li>분자수준의 현상과 생장이나 질병 등 표현형수준의 관계를 규명하기 위한 정량 데이터 통합 및 관리</li>
+</ul>
+<div id="packages" class="section level2" number="15.1">
+<h2>
+<span class="header-section-number">15.1</span> Packages<a class="anchor" aria-label="anchor" href="#packages"><i class="fas fa-link"></i></a>
+</h2>
+<p>메인화면 &gt;&gt; Use &gt;&gt; Software, Annotation, Experiment</p>
+<ul>
+<li>Software: 데이터 분석을 위한 알고리즘/툴 모음</li>
+<li>Annotation: 유전자 symbol/ID mapping, gene ontology 기반 유전자 분류, 유전체상에서 exon, transcript, gene 등의 위치, 단백질 기능 등. Annotation &gt; Packagetype 참고</li>
+<li>Experiment data: 검증된 실험 데이터</li>
+<li>Workflow: 특정 데이터 분석을 위한 프로세스 모음 RNA-seq, ChIP seq, copy number analysis, microarray methylation, classic expression analysis, flow cytometry 등</li>
+</ul>
+<div class="inline-figure"><img src="images/bioconductor_list.PNG" width="600"></div>
+<p>Annotation 리소스는 다음과 같이 몇 단계의 레벨로 구분할 수 있습니다.</p>
+<ul>
+<li>ChipDb: 가장 낮은 단계, Affymatrix Chip 정보</li>
+<li>OrgDb: 특정 생물(Organism)의 기능적 annotations</li>
+<li>TxDb/EnsDb: 전사체 정보, 위치 정보</li>
+<li>OrganismDb: meta-packages for OrgDb, TxDb</li>
+<li>BSgenome 특정 생물의 실제 염기 정보</li>
+<li>Others GO.db; KEGG.db</li>
+<li>AnnotationHub:</li>
+<li>biomaRt:</li>
+</ul>
+<p><code>Bioconductor</code>에서 제공하는 패키지를 설치하기 위해서는 <code>BiocManager</code>를 먼저 설치하고 해당 패키지를 설치하시기 바랍니다. <code>BiocManager</code>에는 <code>available()</code>이라는 함수로 (특정 문자가 포함된) 사용 가능한 패키지를 검색할 수 도 있습니다. 예를 들어 <code>IRanges</code>라는 패키지를 설치할 경우 bioconductor 상단 오른쪽의 <code>Search</code> 나 <a href="https://www.bioconductor.org/packages/release/BiocViews.html#___Software">software package list</a>의 검색창에서 <code>IRanges</code>를 입력하여 해당 패키지를 찾고 다음과 같이 설치를 수행합니다.</p>
+<div class="sourceCode" id="cb349"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
+
+<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"IRanges"</span><span class="op">)</span>
+<span class="co">## .libPaths()</span></code></pre></div>
+<div class="rmdnote">
+<p><strong>Exercises </strong></p>
+<p>OrganismDb는 meta-package의 형태로 OrgDb, TxDb, 그리고 GO.db 패키지들을 포함하는 정보를 가지고 있음. OrganismDB 중 인간의 정보를 가진 <code>Homo.sapiens</code>를 찾아 설치하시오</p>
+</div>
+</div>
+<div id="learning-and-support" class="section level2" number="15.2">
+<h2>
+<span class="header-section-number">15.2</span> Learning and support<a class="anchor" aria-label="anchor" href="#learning-and-support"><i class="fas fa-link"></i></a>
+</h2>
+<p>각 패키지는 제목, 저자, 유지관리자, 설명, 참조, 설치법 등의 정보가 포함된 landing page가 있으며 패키지 내 함수들은 상세한 설명과 예제가 제공됩니다. 예를 들어 <a href="http://bioconductor.org/packages/release/bioc/html/IRanges.html">IRanges</a>의 landing page를 참고하세요. <code>vignettes</code>는 bioconductor의 중요한 특징 중 하나로 R 코드와 함께 패키지를 사용하는 방법에 대한 상세한 설명을 제공하는 문서입니다.</p>
+<div class="sourceCode" id="cb350"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/IRanges">IRanges</a></span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span><span class="op">(</span>package<span class="op">=</span><span class="st">"IRanges"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/browseVignettes.html">browseVignettes</a></span><span class="op">(</span><span class="st">"IRanges"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span><span class="op">(</span><span class="st">"IRangesOverview"</span>, package<span class="op">=</span><span class="st">"IRanges"</span><span class="op">)</span>
+
+<span class="va">ir1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/IRanges-constructor.html">IRanges</a></span><span class="op">(</span>start<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, width<span class="op">=</span><span class="fl">10</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
+<span class="va">ir1</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">ir1</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/methods.html">methods</a></span><span class="op">(</span>class<span class="op">=</span><span class="st">"IRanges"</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/utils/example.html">example</a></span><span class="op">(</span><span class="va">IRanges</span><span class="op">)</span>
+<span class="op">?</span><span class="va">IRanges</span>
+<span class="op">?</span><span class="op">?</span><span class="va">IRanges</span></code></pre></div>
+<p>메인페이지 &gt;&gt; Learn &gt;&gt; Support site 게시판에는 관련된 여러 QnA 들이 있어서 유사 문제에 대한 도움을 받을 수 있습니다.</p>
+</div>
+<div id="oop---class-object-and-method" class="section level2" number="15.3">
+<h2>
+<span class="header-section-number">15.3</span> OOP - Class, Object and Method<a class="anchor" aria-label="anchor" href="#oop---class-object-and-method"><i class="fas fa-link"></i></a>
+</h2>
+<p>객체지향프로그래밍 (OOP)은 복잡한 문제를 프로그래밍할 때 발생되는 코드의 복잡성을 해결할 수 있는 하나의 방안으로 1990년대부터 많이 사용되었습니다.</p>
+<p>R도 객체지향 프로그래밍 언어입니다. 그런데 R은 다른 언어들에 비해서 좀 어려운 (다른) 개념으로 사용됩니다. R에서 사용하는 Class에는 크게 base type, S3, S4, RC, 그리고 R6 등 다양한 타입이 있고 이 중 S3를 많이 사용해 왔으며 S3의 단점을 보완한 S4 형식의 class와 R6를 주로 사용합니다.<span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-AdvancedR" role="doc-biblioref"&gt;&lt;strong&gt;AdvancedR?&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;'><sup>1</sup></a></span> 본 강의에서는 S3 형식의 class만 다루도록 하겠습니다.</p>
+<p>클래스를 사용하는 이유는 여러가지가 있겠지만 복잡한 개념의 데이터를 구조화하고 쉽게 관리하기 위해서 사용한다고 보면 될 것 같습니다. 여러분이 알아야할 개념은 Class와 Object 그리고 Method 입니다. 사실 R의 모든것이 Object이고 이러한 Object들의 정의가 Class 입니다.</p>
+<div class="sourceCode" id="cb351"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>, y<span class="op">=</span><span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span>
+<span class="va">df</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></code></pre></div>
+<p>위에서 df는 변수라고 부르지만 object이기도 합니다. df의 class는 data.frame 입니다. 클래스는 누구든 원하는 만큼 얼마든지 만들 수 있습니다.</p>
+<div class="sourceCode" id="cb352"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"myclass"</span>
+<span class="va">df</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="st">"data.frame"</span>, <span class="st">"myclass"</span><span class="op">)</span>
+<span class="va">df</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></code></pre></div>
+<p>그런데 모든 object들이 OOP 유래는 아닙니다 base object들이 그 예입니다.</p>
+<div class="sourceCode" id="cb353"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"class"</span><span class="op">)</span>
+
+<span class="va">mtcars</span>
+<span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="st">"class"</span><span class="op">)</span></code></pre></div>
+<p>method는 위와 같은 클래스들에 특화된 어떤 기능을 하는 함수라고 생각하시면 됩니다.</p>
+<div class="sourceCode" id="cb354"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">9</span>, <span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span>
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">7</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">mt</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">mt</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
+
+
+<span class="va">diamonds</span> <span class="op">&lt;-</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="va"><a href="https://ggplot2.tidyverse.org/reference/diamonds.html">diamonds</a></span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">diamonds</span><span class="op">$</span><span class="va">carat</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">diamonds</span><span class="op">$</span><span class="va">cut</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/utils/methods.html">methods</a></span><span class="op">(</span>class<span class="op">=</span><span class="st">"data.frame"</span><span class="op">)</span></code></pre></div>
+<p>위 summary, str 등이 generic function이라 불리는 method들 입니다. class마다 사용 가능한 method가 어떠한 정보가 있는지 알기 위해서 <code><a href="https://rdrr.io/r/utils/methods.html">methods()</a></code>라는 함수를 사용합니다. R의 객체지향프로그래밍에 대한 상세한 내용은 <a href="https://adv-r.hadley.nz/s3.html">Advanced R</a>를 참고하세요.</p>
+<div class="rmdnote">
+<p><strong>Exercises </strong></p>
+<p>다음 두 종류의 객체에 대해서 class 가 <code>integer</code> 일 경우 평균을 계산하고 <code>character</code>일 경우 비율을 계산하는 (<code>table</code> 함수 사용) <code>mysummary</code> 함수를 만드시오</p>
+<div class="sourceCode" id="cb355"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"G"</span>, <span class="st">"G"</span>, <span class="st">"T"</span>, <span class="st">"A"</span><span class="op">)</span></code></pre></div>
+</div>
+</div>
+<div id="bioconductor의-oop" class="section level2" number="15.4">
+<h2>
+<span class="header-section-number">15.4</span> Bioconductor의 OOP<a class="anchor" aria-label="anchor" href="#bioconductor%EC%9D%98-oop"><i class="fas fa-link"></i></a>
+</h2>
+<p>bioconductor에서 다루는 genome 스케일의 <code>experiment</code>나 <code>annotation</code>은 대표적인 복잡한 데이터 중 하나 입니다. Bioconductor에서 OOP 개념은 다음과 같습니다.</p>
+<blockquote>
+<p>class - 복잡한 생물학적 데이터 구조의 틀 정의<br>
+object - 특정 클래스가 특정 구현된 실체<br>
+method - 특정 클래스에 대한 기능 수행</p>
+</blockquote>
+<p>예를 들어 앞에서 설치한 <code>Homo.sapience</code>의 class인 <code>OrganismDb</code> 살펴보면 다음과 같습니다.</p>
+<div class="sourceCode" id="cb356"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">Homo.sapiens</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">Homo.sapiens</span><span class="op">)</span>
+<span class="op">?</span><span class="va">OrganismDb</span></code></pre></div>
+<blockquote>
+<p>The OrganismDb class is a container for storing knowledge about existing Annotation packages and the relationships between these resources. The purpose of this object and it’s associated methods is to provide a means by which users can conveniently query for data from several different annotation resources at the same time using a familiar interface.</p>
+</blockquote>
+<div class="sourceCode" id="cb357"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">homo_seq</span> <span class="op">&lt;-</span> <span class="fu">seqinfo</span><span class="op">(</span><span class="va">Homo.sapiens</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">homo_seq</span><span class="op">)</span>
+<span class="op">?</span><span class="va">Seqinfo</span></code></pre></div>
+<blockquote>
+<p>A Seqinfo object is a table-like object that contains basic information about a set of genomic sequences. …</p>
+</blockquote>
+<div class="sourceCode" id="cb358"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">homo_seq</span><span class="op">)</span>
+<span class="fu">seqnames</span><span class="op">(</span><span class="va">homo_seq</span><span class="op">)</span></code></pre></div>
+<p>bioconductor에는 대용량 정보가 object 형태로 구조화되어 저장되어 있으며 <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>함수로 읽어올 수 있고 다양한 함수로 해당 object의 정보를 읽어올 수 있습니다.</p>
+<div class="rmdnote">
+<p><strong>Exercises </strong></p>
+<p><code>Homo.sapiens</code> 정보에서 상위 10개 유전자와 상위 10개 exon을 구하시오</p>
+</div>
+<hr>
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="크리에이티브 커먼즈 라이선스" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png"></a><br>이 저작물은 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제 라이선스</a>에 따라 이용할 수 있습니다.</p>
+
+</div>
+</div>
+
+  <div class="chapter-nav">
+<div class="prev"><a href="lecture-06-note.html"><span class="header-section-number">14</span> Lecture 06 Note</a></div>
+<div class="next"><a href="biostrings.html"><span class="header-section-number">16</span> Biostrings</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#bioconductor"><span class="header-section-number">15</span> Bioconductor</a></li>
+<li><a class="nav-link" href="#packages"><span class="header-section-number">15.1</span> Packages</a></li>
+<li><a class="nav-link" href="#learning-and-support"><span class="header-section-number">15.2</span> Learning and support</a></li>
+<li><a class="nav-link" href="#oop---class-object-and-method"><span class="header-section-number">15.3</span> OOP - Class, Object and Method</a></li>
+<li><a class="nav-link" href="#bioconductor%EC%9D%98-oop"><span class="header-section-number">15.4</span> Bioconductor의 OOP</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>2022년 한국생명공학연구원 연구데이터 분석과정 R</strong>" was written by 합성생물학전문연구소 김하성. It was last built on 2022-08-04.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
