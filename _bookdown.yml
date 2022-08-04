@@ -13,7 +13,8 @@ rmd_files: ["index.Rmd",
             "KRIBBR2022-Lecture6-haseong.Rmd",
             "08-bioconductor.Rmd",
             "09-Biostrings.Rmd",
-            "10-toolsforsequences.Rmd"
+            "10-toolsforsequences.Rmd", 
+            "KRIBBR2022-Lecture7-haseong.Rmd"
             ]
 book_filename: "kribbr2022"
 repo: https://github.com/greendaygh/kribbr2022/

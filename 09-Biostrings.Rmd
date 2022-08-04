@@ -398,6 +398,10 @@ mydat <- global_codon_usage2 %>%
 ggplot(mydat, aes(x=codon, y=freq)) +
   geom_bar(stat="identity") 
 
+mydat
+AMINO_ACID_CODE[mydat$codon]
+
+
 ```
 
 ::: rmdnote
@@ -406,6 +410,13 @@ ggplot(mydat, aes(x=codon, y=freq)) +
 `AMINO_ACID_CODE`를 이용해서 위 그래프의 1약자를 3약자로 변환, 라벨을 세로로 90도 회전, y축 라벨 "Frequency", x축 라벨 "Amino acid code", theme 옵션 "theme_bw" 등을 적용하여 다시 그림을 그리시오 (revisit ggplot2)
 
 :::
+
+```{r, eval=F}
+
+
+
+```
+
 
 
 

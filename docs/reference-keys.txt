@@ -157,3 +157,8 @@ sequences-from-ncbi
 align-two-sequences
 multiple-sequence-alignment
 phylogenetic-trees-with-clustering
+lecture-07-note
+class-01-2
+class-02-2
+class-03-2
+class-04-2
