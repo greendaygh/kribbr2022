@@ -4,20 +4,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 17 Tools for sequences | 2022년 한국생명공학연구원 연구데이터 분석과정 R</title>
+<title>Chapter 16 Tools for sequences | 2022년 한국생명공학연구원 연구데이터 분석과정 R</title>
 <meta name="author" content="합성생물학전문연구소 김하성">
-<meta name="description" content="17.1 Sequences from NCBI 전세계 연구자들이 서열 데이터를 분석하는데 가장 많이 이용하는 사이트 중 하나가 NCBI 이며 따라서 NCBI에서는 연구자들이 데이터베이스에 접근하기위한 편리한 방법을 제공하고 있고 그 중 하나가 Entrez 입니다. R에서도 Entrez 기능을 도입한 package들이 제공되고 있으며 그 중 하나가...">
+<meta name="description" content="16.1 Sequences from NCBI 전세계 연구자들이 서열 데이터를 분석하는데 가장 많이 이용하는 사이트 중 하나가 NCBI 이며 따라서 NCBI에서는 연구자들이 데이터베이스에 접근하기위한 편리한 방법을 제공하고 있고 그 중 하나가 Entrez 입니다. R에서도 Entrez 기능을 도입한 package들이 제공되고 있으며 그 중 하나가...">
 <meta name="generator" content="bookdown 0.26 with bs4_book()">
-<meta property="og:title" content="Chapter 17 Tools for sequences | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
+<meta property="og:title" content="Chapter 16 Tools for sequences | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="17.1 Sequences from NCBI 전세계 연구자들이 서열 데이터를 분석하는데 가장 많이 이용하는 사이트 중 하나가 NCBI 이며 따라서 NCBI에서는 연구자들이 데이터베이스에 접근하기위한 편리한 방법을 제공하고 있고 그 중 하나가 Entrez 입니다. R에서도 Entrez 기능을 도입한 package들이 제공되고 있으며 그 중 하나가...">
+<meta property="og:description" content="16.1 Sequences from NCBI 전세계 연구자들이 서열 데이터를 분석하는데 가장 많이 이용하는 사이트 중 하나가 NCBI 이며 따라서 NCBI에서는 연구자들이 데이터베이스에 접근하기위한 편리한 방법을 제공하고 있고 그 중 하나가 Entrez 입니다. R에서도 Entrez 기능을 도입한 package들이 제공되고 있으며 그 중 하나가...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 17 Tools for sequences | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
-<meta name="twitter:description" content="17.1 Sequences from NCBI 전세계 연구자들이 서열 데이터를 분석하는데 가장 많이 이용하는 사이트 중 하나가 NCBI 이며 따라서 NCBI에서는 연구자들이 데이터베이스에 접근하기위한 편리한 방법을 제공하고 있고 그 중 하나가 Entrez 입니다. R에서도 Entrez 기능을 도입한 package들이 제공되고 있으며 그 중 하나가...">
+<meta name="twitter:title" content="Chapter 16 Tools for sequences | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
+<meta name="twitter:description" content="16.1 Sequences from NCBI 전세계 연구자들이 서열 데이터를 분석하는데 가장 많이 이용하는 사이트 중 하나가 NCBI 이며 따라서 NCBI에서는 연구자들이 데이터베이스에 접근하기위한 편리한 방법을 제공하고 있고 그 중 하나가 Entrez 입니다. R에서도 Entrez 기능을 도입한 package들이 제공되고 있으며 그 중 하나가...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -42,39 +43,20 @@
 </form>
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
-<li><a class="" href="rrstudio-basics.html"><span class="header-section-number">2</span> R/Rstudio basics</a></li>
-<li><a class="" href="rmarkdown.html"><span class="header-section-number">3</span> Rmarkdown</a></li>
-<li><a class="" href="r-programming.html"><span class="header-section-number">4</span> R programming</a></li>
-<li><a class="" href="data-transformation.html"><span class="header-section-number">5</span> Data transformation</a></li>
-<li><a class="" href="lecture-02-note.html"><span class="header-section-number">6</span> Lecture 02 Note</a></li>
-<li><a class="" href="r-basic-graphics.html"><span class="header-section-number">7</span> R basic graphics</a></li>
-<li><a class="" href="tidyverse.html"><span class="header-section-number">8</span> tidyverse</a></li>
-<li><a class="" href="lecture-03-note.html"><span class="header-section-number">9</span> Lecture 03 Note</a></li>
-<li><a class="" href="lecture-04-note.html"><span class="header-section-number">10</span> Lecture 04 Note</a></li>
-<li><a class="" href="data-visualization.html"><span class="header-section-number">11</span> Data visualization</a></li>
-<li><a class="" href="ggplot2-examples.html"><span class="header-section-number">12</span> ggplot2 examples</a></li>
-<li><a class="" href="lecture-05-note.html"><span class="header-section-number">13</span> Lecture 05 Note</a></li>
-<li><a class="" href="lecture-06-note.html"><span class="header-section-number">14</span> Lecture 06 Note</a></li>
-<li><a class="" href="bioconductor.html"><span class="header-section-number">15</span> Bioconductor</a></li>
-<li><a class="" href="biostrings.html"><span class="header-section-number">16</span> Biostrings</a></li>
-<li><a class="active" href="tools-for-sequences.html"><span class="header-section-number">17</span> Tools for sequences</a></li>
-<li><a class="" href="lecture-07-note.html"><span class="header-section-number">18</span> Lecture 07 Note</a></li>
-</ul>
+        <ul class="book-toc list-unstyled"><li><a class="" href="index.html"><span class="header-section-number">Chapter 16</span> Tools for sequences</a></li></ul>
 
         <div class="book-extra">
           
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="tools-for-sequences" class="section level1" number="17">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="tools-for-sequences" class="section level1" number="16">
 <h1>
-<span class="header-section-number">17</span> Tools for sequences<a class="anchor" aria-label="anchor" href="#tools-for-sequences"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16</span> Tools for sequences<a class="anchor" aria-label="anchor" href="#tools-for-sequences"><i class="fas fa-link"></i></a>
 </h1>
-<div id="sequences-from-ncbi" class="section level2" number="17.1">
+<div id="sequences-from-ncbi" class="section level2" number="16.1">
 <h2>
-<span class="header-section-number">17.1</span> Sequences from NCBI<a class="anchor" aria-label="anchor" href="#sequences-from-ncbi"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.1</span> Sequences from NCBI<a class="anchor" aria-label="anchor" href="#sequences-from-ncbi"><i class="fas fa-link"></i></a>
 </h2>
 <p>전세계 연구자들이 서열 데이터를 분석하는데 가장 많이 이용하는 사이트 중 하나가 NCBI 이며 따라서 NCBI에서는 연구자들이 데이터베이스에 접근하기위한 편리한 방법을 제공하고 있고 그 중 하나가 Entrez 입니다.</p>
 <p>R에서도 Entrez 기능을 도입한 package들이 제공되고 있으며 그 중 하나가 <code>rentrez</code> 입니다. <a href="https://www.ncbi.nlm.nih.gov/books/NBK25500/" class="uri">https://www.ncbi.nlm.nih.gov/books/NBK25500/</a> 이 곳의 Downloading Full Records 를 참고하시면 좋습니다. Entrez는 대략적으로 다음 9개의 유틸리티를 제공합니다.</p>
@@ -89,13 +71,13 @@ EGQuery (global query)<br>
 ESpell (spelling suggestions)<br>
 ECitMatch (batch citation searching in PubMed)</p>
 </blockquote>
-<p>이 중 <code>ESerach</code>, <code>EPost</code>, <code>ESummary</code>, <code>EFetch</code> 등이 많이 사용하는 유틸이며 정보를 다운로드 받을 경우는 <code>EFetch</code> 를 주로 사용하게 됩니다. rentrez 는 위와 같은 NCBI Eutils API를 활용하여 R 환경에서 탐색이나 다운로드 등 NCBI 데이터베이스와 상호작용이 용이하도록 만들어 놓은 tool 입니다.</p>
-<div class="sourceCode" id="cb383"><pre class="downlit sourceCode r">
+<p>이 중 <code>ESerach</code>, <code>EPost</code>, <code>ESummary</code>, <code>EFetch</code> 등이 많이 사용하는 유틸이며 정보를 다운로드 받을 경우는 <code>EFetch</code> 를 주로 사용하게 됩니다. rentrez 는 위와 같은 NCBI Eutils API를 활용하여 R 환경에서 탐색이나 다운로드 등 NCBI 데이터베이스와 상호작용이 용이하도록 만들어 놓은 tool 입니다. <a href="https://cran.r-project.org/web/packages/rentrez/vignettes/rentrez_tutorial.html">rentrez landing page</a> <code>entrez_dbs</code>명령은 NCBI에서 제공하는 데이터베이스의 리스트를 볼 수 있으며 특정 DB에 대한 설명은 <code>entrez_db_summary</code>를 사용하면 되겠습니다. <code>entrez_search</code>는 각종 키워드를 사용한 검색 기능을 제공합니다.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/rentrez/">rentrez</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/Biostrings">Biostrings</a></span><span class="op">)</span>
 
 <span class="fu"><a href="https://docs.ropensci.org/rentrez/reference/entrez_dbs.html">entrez_dbs</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="https://docs.ropensci.org/rentrez/reference/entrez_db_summary.html">entrez_db_summary</a></span><span class="op">(</span><span class="st">"nuccore"</span><span class="op">)</span>
-
 
 <span class="va">covid_paper</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/rentrez/reference/entrez_search.html">entrez_search</a></span><span class="op">(</span>db<span class="op">=</span><span class="st">"pubmed"</span>, term<span class="op">=</span><span class="st">"covid19"</span><span class="op">)</span>
 <span class="va">covid_paper</span><span class="op">$</span><span class="va">ids</span>
@@ -108,8 +90,8 @@ ECitMatch (batch citation searching in PubMed)</p>
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">covid_link</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">covid_link</span><span class="op">$</span><span class="va">links</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">head</a></span><span class="op">(</span><span class="va">covid_link</span><span class="op">$</span><span class="va">links</span><span class="op">$</span><span class="va">pubmed_pubmed</span><span class="op">)</span></code></pre></div>
-<p>특정 균주에 대한 정보를 찾은 후 두 개의 loci에 대한 서열 정보를 다운로드 하는 코드입니다. rettype (return type) 등 자세한 정보는 <a href="https://www.ncbi.nlm.nih.gov/books/NBK25499/table/chapter4.T._valid_values_of__retmode_and/">Eutils table</a> 또는 <a href="https://www.ncbi.nlm.nih.gov/books/NBK25499/">NCBI Eutils</a> 페이지를 참고하시기 바랍니다.</p>
-<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
+<p><code>entrez_search</code>에서 검색어를 입력하는 방식은 <a href="https://cran.r-project.org/web/packages/rentrez/vignettes/rentrez_tutorial.html#building-search-terms">이곳</a>을 참고하세요. 검색으로 찾아진 특정 오브젝트(객체)에 대한 내용은 <code>entrez_summary</code> 함수를 사용하여 조회할 수 있으며 <code>extract_from_esummary</code>로 조회된 아이템들에 대한 정보를 추출할 수 있습니다. 특정 id에 대한 서열 등 다양한 타입의 데이터를 실제로 다운로드 받는 기능은 <code>entrez_fetch</code> 함수가 제공하고 있습니다. <code>entrez_fetch</code> 함수의 <code>rettype</code> 옵션에서 지원하는 데이터 타입을 다운로드 받을 수 있으며 rettype (return type)의 자세한 정보는 <a href="https://www.ncbi.nlm.nih.gov/books/NBK25499/table/chapter4.T._valid_values_of__retmode_and/">Eutils table</a> 또는 <a href="https://www.ncbi.nlm.nih.gov/books/NBK25499/">NCBI Eutils</a> 페이지를 참고하시기 바랍니다.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># popset database is a collection of related DNA sequences derived from population</span>
 <span class="va">katipo_search</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/rentrez/reference/entrez_search.html">entrez_search</a></span><span class="op">(</span>db<span class="op">=</span><span class="st">"popset"</span>, term<span class="op">=</span><span class="st">"Latrodectus katipo[Organism]"</span><span class="op">)</span>
 <span class="va">katipo_search</span><span class="op">$</span><span class="va">ids</span>
@@ -128,7 +110,7 @@ ECitMatch (batch citation searching in PubMed)</p>
 
 
 <span class="va">COI_ids</span> <span class="op">&lt;-</span> <span class="va">katipo_search</span><span class="op">$</span><span class="va">ids</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">6</span><span class="op">)</span><span class="op">]</span>
-<span class="va">trnL_ids</span> <span class="op">&lt;-</span> <span class="va">katipo_search</span><span class="op">$</span><span class="va">ids</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span>
+<span class="va">trnL_ids</span> <span class="op">&lt;-</span> <span class="va">katipo_search</span><span class="op">$</span><span class="va">ids</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span>
 <span class="va">COI</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/rentrez/reference/entrez_fetch.html">entrez_fetch</a></span><span class="op">(</span>db<span class="op">=</span><span class="st">"popset"</span>, id<span class="op">=</span><span class="va">COI_ids</span>, rettype<span class="op">=</span><span class="st">"fasta"</span><span class="op">)</span>
 <span class="va">trnL</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/rentrez/reference/entrez_fetch.html">entrez_fetch</a></span><span class="op">(</span>db<span class="op">=</span><span class="st">"popset"</span>, id<span class="op">=</span><span class="va">trnL_ids</span>, rettype<span class="op">=</span><span class="st">"fasta"</span><span class="op">)</span>
 
@@ -140,35 +122,311 @@ ECitMatch (batch citation searching in PubMed)</p>
 <span class="va">trnl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-io.html">readDNAStringSet</a></span><span class="op">(</span><span class="st">"trnl.fasta"</span><span class="op">)</span></code></pre></div>
 <div class="rmdnote">
 <p><strong>Exercises </strong></p>
+<p>뎅기바이러스 서열 4종에 대한 NCBI의 accession 번호가 다음과 같음 NC_001477, NC_001474, NC_001475, NC_002640 해당 DNA 서열을 fasta 형식으로 <code>nuccore</code> 데이터베이스에서 다운로드 하시오. (참고로 <code>strwrap</code> 함수 사용법을 익혀두면 좋습니다)</p>
+</div>
+<div class="rmdnote">
+<p><strong>Exercises </strong></p>
 <ol style="list-style-type: decimal">
-<li><p>뎅기바이러스 서열 4종에 대한 NCBI의 accession 번호가 다음과 같음 NC_001477, NC_001474, NC_001475, NC_002640 해당 DNA 서열을 fasta 형식으로 <code>nuccore</code> 데이터베이스에서 다운로드 하시오</p></li>
-<li><p>COVID-19 서열의 NCBI accession 번호를 찾고 <code>nuccore</code> 데이터베이스에서 <code>fasta</code> 포멧과 <code>genbank</code> 포멧의 정보를 다운로드 하고 파일에 저장하시오. 또한 이 파일들을 각각 <code>Biostrings</code> 패키지와 <code>genbankr</code> 패키지를 사용해서 읽어들이시오.</p></li>
+<li><p>popset 데이터베이스에서 “Covid-19” 단어가 들어간 유전자 40개를 찾고 (<code>entrez_search</code>에서 <code>retmax=40</code> 옵션 사용) 이들의 요약 정보 중 title 속성을 출력하시오 (<code>entrez_summary</code>와 <code>extract_from_esummary</code> 함수 사용).</p></li>
+<li><p>위 결과에서 찾아진 유전자들 각각이 몇 개의 서열 샘플에 (population) 대해서 연구된 것인지 각각의 서열을 fasta 형태로 다운로드 받고 샘플의 개수에 대한 <code>barplot</code>을 그리시오</p></li>
 </ol>
+<ul>
+<li>
+<code>summary_record</code> 결과를 받아서 <code>extract_from_esummary</code>로 title을 추출 후 <code>data.frame</code>으로 변환</li>
+<li>
+<code>tidyverse</code>의 <code>rownames_to_column()</code> 함수로 uid 정보 변수로 변환, mydata 이름으로 저장</li>
+<li>
+<code>entrez_fetch</code> 함수로 모든 uid에 대한 샘플 서열 <code>fasta</code> 파일 다운로드 후 파일 저장 (<code>write</code>함수 사용)</li>
+<li>
+<code>readDNAStringSet</code> 함수로 읽은 후 앞서 title 정보 비교를 통해서 앞서 mydata 와 병합</li>
+<li>각 uid 별로 몇 개의 서열 샘플이 있는지 정보를 추출 후 barplot 그리기</li>
+</ul>
+</div>
+<div class="rmdnote">
+<p><strong>Exercises </strong></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7938774/">Comparative sequence analysis of SARS-CoV-2 suggests its high transmissibility and pathogenicity</a> 논문을 참고하여 COVID-19 서열의 NCBI accession 번호를 찾고 <code>nuccore</code> 데이터베이스에서 <code>fasta</code> 포멧과 <code>genbank</code> 포멧의 정보를 다운로드 하겠습니다. 데이터는 “covid_table.csv” 파일에 저장되어 있습니다.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">covid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
+species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">rep</a></span><span class="op">(</span><span class="st">"Human"</span>, <span class="fl">7</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="st">"Civet"</span>, <span class="st">"Civet"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">rep</a></span><span class="op">(</span><span class="st">"Bat"</span>, <span class="fl">3</span><span class="op">)</span>, <span class="st">"Pangolin"</span><span class="op">)</span>,
+coronavirus <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="st">"SARS-CoV-2"</span>, <span class="st">"SARS-CoV-2"</span>, <span class="st">"SARS-CoV-1"</span>, <span class="st">"SARS-CoV-1"</span>, <span class="st">"SARS-CoV-1"</span>, <span class="st">"H-CoV-OC43"</span>, <span class="st">"MERS-CoV"</span>, <span class="st">"SARS-CoV"</span>, <span class="st">"SARS-CoV"</span>, <span class="st">"SL-CoV"</span>, <span class="st">"SL-CoV"</span>, <span class="st">"SL-CoV"</span>, <span class="st">"SL-CoV"</span><span class="op">)</span>,
+isolate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="st">"Wuhan Hu-1"</span>, <span class="st">"USA-WA-1"</span>, <span class="st">"Urbani"</span>, <span class="st">"Tor2"</span>, <span class="st">"GD03T10013"</span>, <span class="st">"UK/London"</span>,  <span class="st">"EMC-2012"</span>, <span class="st">"SZ3"</span>, <span class="st">"Civet007"</span>, <span class="st">"ZXC21"</span>, <span class="st">"WIV16"</span>, <span class="st">"RaTG13"</span>, <span class="st">"MP789"</span><span class="op">)</span>,
+year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="st">"2020"</span>, <span class="st">"2020"</span>, <span class="st">"2002"</span>, <span class="st">"2002"</span>, <span class="st">"2003"</span>, <span class="st">"2011"</span>, <span class="st">"2011"</span>, <span class="st">"2003"</span>, <span class="st">"2004"</span>, <span class="st">"2015"</span>, <span class="st">"2013"</span>, <span class="st">"2013"</span>, <span class="st">"2020"</span><span class="op">)</span>,
+gbacc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="st">"NC_045512.2"</span>, <span class="st">"MN985325.1"</span>, <span class="st">"AY278741.1"</span>, <span class="st">"AY274119.3"</span>, <span class="st">"AY525636.1"</span>, <span class="st">"KU131570.1"</span>, <span class="st">"NC_019843.3"</span>, <span class="st">"AY304486.1"</span>, <span class="st">"AY572034.1"</span>, <span class="st">"MG772934.1"</span>, <span class="st">"KT444582.1"</span>, <span class="st">"MN996532.1"</span>, <span class="st">"MT084071.1"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="va">covid</span>, file <span class="op">=</span> <span class="st">"covid_table.csv"</span>, quote <span class="op">=</span> <span class="cn">F</span>, row.names<span class="op">=</span><span class="cn">F</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/">kableExtra</a></span><span class="op">)</span>
+<span class="co">#&gt; Loading required package: kableExtra</span>
+<span class="va">covid19</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"covid_table.csv"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_classic.html">kable_classic</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">covid19</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-table"><table class=" lightable-classic" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; margin-left: auto; margin-right: auto;'>
+<thead><tr>
+<th style="text-align:left;">
+species
+</th>
+<th style="text-align:left;">
+coronavirus
+</th>
+<th style="text-align:left;">
+isolate
+</th>
+<th style="text-align:right;">
+year
+</th>
+<th style="text-align:left;">
+gbacc
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Human
+</td>
+<td style="text-align:left;">
+SARS-CoV-2
+</td>
+<td style="text-align:left;">
+Wuhan Hu-1
+</td>
+<td style="text-align:right;">
+2020
+</td>
+<td style="text-align:left;">
+NC_045512.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Human
+</td>
+<td style="text-align:left;">
+SARS-CoV-2
+</td>
+<td style="text-align:left;">
+USA-WA-1
+</td>
+<td style="text-align:right;">
+2020
+</td>
+<td style="text-align:left;">
+MN985325.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Human
+</td>
+<td style="text-align:left;">
+SARS-CoV-1
+</td>
+<td style="text-align:left;">
+Urbani
+</td>
+<td style="text-align:right;">
+2002
+</td>
+<td style="text-align:left;">
+AY278741.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Human
+</td>
+<td style="text-align:left;">
+SARS-CoV-1
+</td>
+<td style="text-align:left;">
+Tor2
+</td>
+<td style="text-align:right;">
+2002
+</td>
+<td style="text-align:left;">
+AY274119.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Human
+</td>
+<td style="text-align:left;">
+SARS-CoV-1
+</td>
+<td style="text-align:left;">
+GD03T10013
+</td>
+<td style="text-align:right;">
+2003
+</td>
+<td style="text-align:left;">
+AY525636.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Human
+</td>
+<td style="text-align:left;">
+H-CoV-OC43
+</td>
+<td style="text-align:left;">
+UK/London
+</td>
+<td style="text-align:right;">
+2011
+</td>
+<td style="text-align:left;">
+KU131570.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Human
+</td>
+<td style="text-align:left;">
+MERS-CoV
+</td>
+<td style="text-align:left;">
+EMC-2012
+</td>
+<td style="text-align:right;">
+2011
+</td>
+<td style="text-align:left;">
+NC_019843.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Civet
+</td>
+<td style="text-align:left;">
+SARS-CoV
+</td>
+<td style="text-align:left;">
+SZ3
+</td>
+<td style="text-align:right;">
+2003
+</td>
+<td style="text-align:left;">
+AY304486.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Civet
+</td>
+<td style="text-align:left;">
+SARS-CoV
+</td>
+<td style="text-align:left;">
+Civet007
+</td>
+<td style="text-align:right;">
+2004
+</td>
+<td style="text-align:left;">
+AY572034.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bat
+</td>
+<td style="text-align:left;">
+SL-CoV
+</td>
+<td style="text-align:left;">
+ZXC21
+</td>
+<td style="text-align:right;">
+2015
+</td>
+<td style="text-align:left;">
+MG772934.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bat
+</td>
+<td style="text-align:left;">
+SL-CoV
+</td>
+<td style="text-align:left;">
+WIV16
+</td>
+<td style="text-align:right;">
+2013
+</td>
+<td style="text-align:left;">
+KT444582.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bat
+</td>
+<td style="text-align:left;">
+SL-CoV
+</td>
+<td style="text-align:left;">
+RaTG13
+</td>
+<td style="text-align:right;">
+2013
+</td>
+<td style="text-align:left;">
+MN996532.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pangolin
+</td>
+<td style="text-align:left;">
+SL-CoV
+</td>
+<td style="text-align:left;">
+MP789
+</td>
+<td style="text-align:right;">
+2020
+</td>
+<td style="text-align:left;">
+MT084071.1
+</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 </div>
-<div id="align-two-sequences" class="section level2" number="17.2">
+<div id="align-two-sequences" class="section level2" number="16.2">
 <h2>
-<span class="header-section-number">17.2</span> Align two sequences<a class="anchor" aria-label="anchor" href="#align-two-sequences"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.2</span> Align two sequences<a class="anchor" aria-label="anchor" href="#align-two-sequences"><i class="fas fa-link"></i></a>
 </h2>
 <p>Biostrings 패키지에는 다음과 같이 local, global alignment를 수행할 수 있는 함수를 제공하고 있습니다. 첫 번째 파라메터는 pattern이며 두 번째는 subject 로서 pattern은 query로서 해당 서열이 subject (target)에 있는지를 보는 것과 같습니다.</p>
-<div class="sourceCode" id="cb385"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">coi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-io.html">readDNAStringSet</a></span><span class="op">(</span><span class="st">"COI.fasta"</span><span class="op">)</span>
-<span class="va">coi</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">covid19</span>
 
-<span class="va">aln</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/pairwiseAlignment.html">pairwiseAlignment</a></span><span class="op">(</span><span class="va">coi</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="va">coi</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
+<span class="va">aln</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/pairwiseAlignment.html">pairwiseAlignment</a></span><span class="op">(</span><span class="va">covid19</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="va">covid19</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
 <span class="va">alnseqs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/PairwiseAlignments-class.html">alignedPattern</a></span><span class="op">(</span><span class="va">aln</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/PairwiseAlignments-class.html">alignedSubject</a></span><span class="op">(</span><span class="va">aln</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">aln</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">alnseqs</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/methods.html">methods</a></span><span class="op">(</span>class<span class="op">=</span><span class="st">"PairwiseAlignmentsSingleSubject"</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/methods.html">methods</a></span><span class="op">(</span>class<span class="op">=</span><span class="st">"PairwiseAlignmentsSingleSubject"</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/PairwiseAlignments-io.html">writePairwiseAlignments</a></span><span class="op">(</span><span class="va">aln</span>, Matrix<span class="op">=</span><span class="st">"BLOSUM62"</span>, block.width<span class="op">=</span><span class="fl">10</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/Views-class.html">Views</a></span><span class="op">(</span><span class="va">aln</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="multiple-sequence-alignment" class="section level2" number="17.3">
+<div id="multiple-sequence-alignment" class="section level2" number="16.3">
 <h2>
-<span class="header-section-number">17.3</span> Multiple sequence alignment<a class="anchor" aria-label="anchor" href="#multiple-sequence-alignment"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.3</span> Multiple sequence alignment<a class="anchor" aria-label="anchor" href="#multiple-sequence-alignment"><i class="fas fa-link"></i></a>
 </h2>
 <p>Multiple sequence alignment(MSA) tool은 서열 데이터의 양과 계산량의 문제로 linux 기반 commandline 프로그램들이 많습니다. 대표적으로 <a href="https://www.ebi.ac.uk/Tools/msa/clustalo/">CLUSTAL-Omega</a>, <a href="https://www.ebi.ac.uk/Tools/msa/muscle/">MUSCLE</a>. window 기반 환경에서는 docker 등을 활용해서 관련 분석을 수행할 수 있습니다. 본 강의에서는 <code>DECIPHER</code> 패키지를 활용합니다.</p>
 <p><a href="https://www.bioconductor.org/packages/release/bioc/html/DECIPHER.html">DECIPHER</a> 패키지는 서열 alignment나 primer design 등을 수행할 수 있는 패키지로 다음과 같이 별도 메모리에 서열을 저장하고 빠르게 alignment를 수행할 수 있어서 중소 규모의 서열에 대한 분석으로 유용하게 사용될 수 있습니다.</p>
-<div class="sourceCode" id="cb386"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">DECIPHER</span><span class="op">)</span>
 <span class="va">dbConn</span> <span class="op">&lt;-</span> <span class="fu">dbConnect</span><span class="op">(</span><span class="fu"><a href="https://rsqlite.r-dbi.org/reference/SQLite.html">SQLite</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">":memory:"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/DECIPHER/man/Seqs2DB.html">Seqs2DB</a></span><span class="op">(</span><span class="va">coi</span>, <span class="st">"XStringSet"</span>, <span class="va">dbConn</span>, <span class="st">"coi"</span><span class="op">)</span>
@@ -187,7 +445,7 @@ ECitMatch (batch citation searching in PubMed)</p>
 
 <span class="fu">dbDisconnect</span><span class="op">(</span><span class="va">dbConn</span><span class="op">)</span></code></pre></div>
 <p>앞서 다운로드 받은 Latrodectus katipo 서열 데이터를 비교하는 코드입니다.</p>
-<div class="sourceCode" id="cb387"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">coi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-io.html">readDNAStringSet</a></span><span class="op">(</span><span class="st">"COI.fasta"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/DECIPHER/man/BrowseSeqs.html">BrowseSeqs</a></span><span class="op">(</span><span class="va">coi</span><span class="op">)</span>
 <span class="va">alignedcoi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/DECIPHER/man/AlignSeqs.html">AlignSeqs</a></span><span class="op">(</span><span class="va">coi</span><span class="op">)</span>
@@ -196,17 +454,17 @@ ECitMatch (batch citation searching in PubMed)</p>
 
 <span class="va">conseq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/DECIPHER/man/ConsensusSequence.html">ConsensusSequence</a></span><span class="op">(</span><span class="va">alignedcoi</span><span class="op">)</span>
 <span class="va">IUPAC_CODE_MAP</span></code></pre></div>
-<div class="sourceCode" id="cb388"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/DECIPHER/man/BrowseSeqs.html">BrowseSeqs</a></span><span class="op">(</span><span class="va">alnseqs</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/DECIPHER/man/BrowseSeqs.html">BrowseSeqs</a></span><span class="op">(</span><span class="va">alnseqs</span>, colWidth<span class="op">=</span><span class="fl">200</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/DECIPHER/man/BrowseSeqs.html">BrowseSeqs</a></span><span class="op">(</span><span class="va">alnseqs</span>, colWidth<span class="op">=</span><span class="fl">200</span>, patterns <span class="op">=</span> <span class="st">"TCCTGCCCGGGGCCT"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="phylogenetic-trees-with-clustering" class="section level2" number="17.4">
+<div id="phylogenetic-trees-with-clustering" class="section level2" number="16.4">
 <h2>
-<span class="header-section-number">17.4</span> Phylogenetic trees with clustering<a class="anchor" aria-label="anchor" href="#phylogenetic-trees-with-clustering"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.4</span> Phylogenetic trees with clustering<a class="anchor" aria-label="anchor" href="#phylogenetic-trees-with-clustering"><i class="fas fa-link"></i></a>
 </h2>
 <p>DECIPHER 패키지에는 XStringSet 서열의 거리를 계산해주는 <code>DistanceMatrix</code> 함수가 있습니다. 이 함수를 이용하면 역시 같은 패키지에서 제공하는 <code>IdClusters</code> 함수를 이용해서 유사한 서열끼리 묶어주는 tree 를 만들 수 있습니다.</p>
-<div class="sourceCode" id="cb389"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/DECIPHER/man/DistanceMatrix.html">DistanceMatrix</a></span><span class="op">(</span><span class="va">alignedcoi</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">dm</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">dm</span><span class="op">)</span>
@@ -221,17 +479,11 @@ ECitMatch (batch citation searching in PubMed)</p>
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="biostrings.html"><span class="header-section-number">16</span> Biostrings</a></div>
-<div class="next"><a href="lecture-07-note.html"><span class="header-section-number">18</span> Lecture 07 Note</a></div>
+<div class="empty"></div>
+<div class="empty"></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#tools-for-sequences"><span class="header-section-number">17</span> Tools for sequences</a></li>
-<li><a class="nav-link" href="#sequences-from-ncbi"><span class="header-section-number">17.1</span> Sequences from NCBI</a></li>
-<li><a class="nav-link" href="#align-two-sequences"><span class="header-section-number">17.2</span> Align two sequences</a></li>
-<li><a class="nav-link" href="#multiple-sequence-alignment"><span class="header-section-number">17.3</span> Multiple sequence alignment</a></li>
-<li><a class="nav-link" href="#phylogenetic-trees-with-clustering"><span class="header-section-number">17.4</span> Phylogenetic trees with clustering</a></li>
-</ul>
+      <div id="book-on-this-page"></div>
 
       <div class="book-extra">
         <ul class="list-unstyled">
@@ -255,34 +507,6 @@ ECitMatch (batch citation searching in PubMed)</p>
   </div>
 
 </div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
-  }
-}
-</script>
+</footer>
 </body>
 </html>

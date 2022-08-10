@@ -18,15 +18,15 @@ R에서도 Entrez 기능을 도입한 package들이 제공되고 있으며 그 �
 > ESpell (spelling suggestions)  
 > ECitMatch (batch citation searching in PubMed)  
 
-이 중 `ESerach`, `EPost`, `ESummary`, `EFetch` 등이 많이 사용하는 유틸이며 정보를 다운로드 받을 경우는 `EFetch` 를 주로 사용하게 됩니다. rentrez 는 위와 같은 NCBI Eutils API를 활용하여 R 환경에서 탐색이나 다운로드 등 NCBI 데이터베이스와 상호작용이 용이하도록 만들어 놓은 tool 입니다. 
+이 중 `ESerach`, `EPost`, `ESummary`, `EFetch` 등이 많이 사용하는 유틸이며 정보를 다운로드 받을 경우는 `EFetch` 를 주로 사용하게 됩니다. rentrez 는 위와 같은 NCBI Eutils API를 활용하여 R 환경에서 탐색이나 다운로드 등 NCBI 데이터베이스와 상호작용이 용이하도록 만들어 놓은 tool 입니다. [rentrez landing page](https://cran.r-project.org/web/packages/rentrez/vignettes/rentrez_tutorial.html) `entrez_dbs`명령은 NCBI에서 제공하는 데이터베이스의 리스트를 볼 수 있으며 특정 DB에 대한 설명은 `entrez_db_summary`를 사용하면 되겠습니다. `entrez_search`는 각종 키워드를 사용한 검색 기능을 제공합니다. 
 
 
 ```r
 library(rentrez)
+require(Biostrings)
 
 entrez_dbs()
 entrez_db_summary("nuccore")
-
 
 covid_paper <- entrez_search(db="pubmed", term="covid19")
 covid_paper$ids
@@ -42,8 +42,7 @@ head(covid_link$links$pubmed_pubmed)
 
 ```
 
-
-특정 균주에 대한 정보를 찾은 후 두 개의 loci에 대한 서열 정보를 다운로드 하는 코드입니다. rettype (return type) 등 자세한 정보는 [Eutils table](https://www.ncbi.nlm.nih.gov/books/NBK25499/table/chapter4.T._valid_values_of__retmode_and/) 또는 [NCBI Eutils](https://www.ncbi.nlm.nih.gov/books/NBK25499/) 페이지를 참고하시기 바랍니다. 
+`entrez_search`에서 검색어를 입력하는 방식은 [이곳](https://cran.r-project.org/web/packages/rentrez/vignettes/rentrez_tutorial.html#building-search-terms)을 참고하세요. 검색으로 찾아진 특정 오브젝트(객체)에 대한 내용은 `entrez_summary` 함수를 사용하여 조회할 수 있으며 `extract_from_esummary`로 조회된 아이템들에 대한 정보를 추출할 수 있습니다. 특정 id에 대한 서열 등 다양한 타입의 데이터를 실제로 다운로드 받는 기능은 `entrez_fetch` 함수가 제공하고 있습니다.  `entrez_fetch` 함수의 `rettype` 옵션에서 지원하는 데이터 타입을 다운로드 받을 수 있으며  rettype (return type)의 자세한 정보는 [Eutils table](https://www.ncbi.nlm.nih.gov/books/NBK25499/table/chapter4.T._valid_values_of__retmode_and/) 또는 [NCBI Eutils](https://www.ncbi.nlm.nih.gov/books/NBK25499/) 페이지를 참고하시기 바랍니다. 
 
 
 
@@ -66,7 +65,7 @@ katipo_summs$`1790798044`$gi
 
 
 COI_ids <- katipo_search$ids[c(2,6)]
-trnL_ids <- katipo_search$ids[5]
+trnL_ids <- katipo_search$ids[4]
 COI <- entrez_fetch(db="popset", id=COI_ids, rettype="fasta")
 trnL <- entrez_fetch(db="popset", id=trnL_ids, rettype="fasta")
 
@@ -83,18 +82,175 @@ trnl <- readDNAStringSet("trnl.fasta")
 **Exercises **
 
 
-1. 뎅기바이러스 서열 4종에 대한 NCBI의 accession 번호가 다음과 같음 NC_001477, NC_001474, NC_001475, NC_002640 해당 DNA 서열을 fasta 형식으로 `nuccore` 데이터베이스에서 다운로드 하시오
-
-
-
-
-
-2. COVID-19 서열의 NCBI accession 번호를 찾고 `nuccore` 데이터베이스에서 `fasta` 포멧과 `genbank` 포멧의 정보를 다운로드 하고 파일에 저장하시오. 또한 이 파일들을 각각 `Biostrings` 패키지와 `genbankr` 패키지를 사용해서 읽어들이시오. 
+뎅기바이러스 서열 4종에 대한 NCBI의 accession 번호가 다음과 같음 NC_001477, NC_001474, NC_001475, NC_002640 해당 DNA 서열을 fasta 형식으로 `nuccore` 데이터베이스에서 다운로드 하시오. (참고로 `strwrap` 함수 사용법을 익혀두면 좋습니다)
 
 
 
 
 :::
+
+
+::: rmdnote
+**Exercises **
+
+1. popset 데이터베이스에서 "Covid-19" 단어가 들어간 유전자 40개를 찾고 (`entrez_search`에서 `retmax=40` 옵션 사용) 이들의 요약 정보 중 title 속성을 출력하시오 (`entrez_summary`와 `extract_from_esummary` 함수 사용). 
+
+
+
+
+
+
+2. 위 결과에서 찾아진 유전자들 각각이 몇 개의 서열 샘플에 (population) 대해서 연구된 것인지 각각의 서열을 fasta 형태로 다운로드 받고 샘플의 개수에 대한 `barplot`을 그리시오
+
+- `summary_record` 결과를 받아서 `extract_from_esummary`로 title을 추출 후 `data.frame`으로 변환 
+- `tidyverse`의 `rownames_to_column()` 함수로 uid 정보 변수로 변환, mydata 이름으로  저장
+- `entrez_fetch` 함수로 모든 uid에 대한 샘플 서열 `fasta` 파일 다운로드 후 파일 저장 (`write`함수 사용)
+- `readDNAStringSet` 함수로 읽은 후 앞서 title 정보 비교를 통해서 앞서 mydata 와 병합
+- 각 uid 별로 몇 개의 서열 샘플이 있는지 정보를 추출 후 barplot 그리기 
+
+
+
+
+
+:::
+
+
+::: rmdnote
+**Exercises **
+
+[Comparative sequence analysis of SARS-CoV-2 suggests its high transmissibility and pathogenicity](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7938774/) 논문을 참고하여 COVID-19 서열의 NCBI accession 번호를 찾고 `nuccore` 데이터베이스에서 `fasta` 포멧과 `genbank` 포멧의 정보를 다운로드 하겠습니다. 데이터는 "covid_table.csv" 파일에 저장되어 있습니다.  
+
+
+```r
+covid <- data.frame(
+species = c(rep("Human", 7), c("Civet", "Civet"), rep("Bat", 3), "Pangolin"),
+coronavirus = c("SARS-CoV-2", "SARS-CoV-2", "SARS-CoV-1", "SARS-CoV-1", "SARS-CoV-1", "H-CoV-OC43", "MERS-CoV", "SARS-CoV", "SARS-CoV", "SL-CoV", "SL-CoV", "SL-CoV", "SL-CoV"),
+isolate = c("Wuhan Hu-1", "USA-WA-1", "Urbani", "Tor2", "GD03T10013", "UK/London",	"EMC-2012", "SZ3", "Civet007", "ZXC21",	"WIV16", "RaTG13", "MP789"),
+year = c("2020", "2020", "2002", "2002", "2003", "2011", "2011", "2003", "2004", "2015", "2013", "2013", "2020"),
+gbacc = c("NC_045512.2", "MN985325.1", "AY278741.1", "AY274119.3", "AY525636.1", "KU131570.1", "NC_019843.3", "AY304486.1", "AY572034.1", "MG772934.1", "KT444582.1", "MN996532.1", "MT084071.1"))
+write.csv(covid, file = "covid_table.csv", quote = F, row.names=F)
+```
+
+
+
+
+```r
+require(kableExtra)
+#> Loading required package: kableExtra
+covid19 <- read.csv("covid_table.csv")
+kable_classic(kable(covid19))
+```
+
+<table class=" lightable-classic" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; margin-left: auto; margin-right: auto;'>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> species </th>
+   <th style="text-align:left;"> coronavirus </th>
+   <th style="text-align:left;"> isolate </th>
+   <th style="text-align:right;"> year </th>
+   <th style="text-align:left;"> gbacc </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Human </td>
+   <td style="text-align:left;"> SARS-CoV-2 </td>
+   <td style="text-align:left;"> Wuhan Hu-1 </td>
+   <td style="text-align:right;"> 2020 </td>
+   <td style="text-align:left;"> NC_045512.2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Human </td>
+   <td style="text-align:left;"> SARS-CoV-2 </td>
+   <td style="text-align:left;"> USA-WA-1 </td>
+   <td style="text-align:right;"> 2020 </td>
+   <td style="text-align:left;"> MN985325.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Human </td>
+   <td style="text-align:left;"> SARS-CoV-1 </td>
+   <td style="text-align:left;"> Urbani </td>
+   <td style="text-align:right;"> 2002 </td>
+   <td style="text-align:left;"> AY278741.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Human </td>
+   <td style="text-align:left;"> SARS-CoV-1 </td>
+   <td style="text-align:left;"> Tor2 </td>
+   <td style="text-align:right;"> 2002 </td>
+   <td style="text-align:left;"> AY274119.3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Human </td>
+   <td style="text-align:left;"> SARS-CoV-1 </td>
+   <td style="text-align:left;"> GD03T10013 </td>
+   <td style="text-align:right;"> 2003 </td>
+   <td style="text-align:left;"> AY525636.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Human </td>
+   <td style="text-align:left;"> H-CoV-OC43 </td>
+   <td style="text-align:left;"> UK/London </td>
+   <td style="text-align:right;"> 2011 </td>
+   <td style="text-align:left;"> KU131570.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Human </td>
+   <td style="text-align:left;"> MERS-CoV </td>
+   <td style="text-align:left;"> EMC-2012 </td>
+   <td style="text-align:right;"> 2011 </td>
+   <td style="text-align:left;"> NC_019843.3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Civet </td>
+   <td style="text-align:left;"> SARS-CoV </td>
+   <td style="text-align:left;"> SZ3 </td>
+   <td style="text-align:right;"> 2003 </td>
+   <td style="text-align:left;"> AY304486.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Civet </td>
+   <td style="text-align:left;"> SARS-CoV </td>
+   <td style="text-align:left;"> Civet007 </td>
+   <td style="text-align:right;"> 2004 </td>
+   <td style="text-align:left;"> AY572034.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Bat </td>
+   <td style="text-align:left;"> SL-CoV </td>
+   <td style="text-align:left;"> ZXC21 </td>
+   <td style="text-align:right;"> 2015 </td>
+   <td style="text-align:left;"> MG772934.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Bat </td>
+   <td style="text-align:left;"> SL-CoV </td>
+   <td style="text-align:left;"> WIV16 </td>
+   <td style="text-align:right;"> 2013 </td>
+   <td style="text-align:left;"> KT444582.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Bat </td>
+   <td style="text-align:left;"> SL-CoV </td>
+   <td style="text-align:left;"> RaTG13 </td>
+   <td style="text-align:right;"> 2013 </td>
+   <td style="text-align:left;"> MN996532.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Pangolin </td>
+   <td style="text-align:left;"> SL-CoV </td>
+   <td style="text-align:left;"> MP789 </td>
+   <td style="text-align:right;"> 2020 </td>
+   <td style="text-align:left;"> MT084071.1 </td>
+  </tr>
+</tbody>
+</table>
+
+:::
+
+
+
+
 
 
 ## Align two sequences
@@ -103,15 +259,17 @@ Biostrings 패키지에는 다음과 같이 local, global alignment를 수행할
 
 
 ```r
-coi <- readDNAStringSet("COI.fasta")
-coi
+covid19
 
-aln <- pairwiseAlignment(coi[[1]], coi[[2]])
+aln <- pairwiseAlignment(covid19[[1]], covid19[[2]])
 alnseqs <- c(alignedPattern(aln), alignedSubject(aln))
 class(aln)
 class(alnseqs)
-
 methods(class="PairwiseAlignmentsSingleSubject")
+
+writePairwiseAlignments(aln, Matrix="BLOSUM62", block.width=10)
+
+Views(aln)
 
 ```
 
