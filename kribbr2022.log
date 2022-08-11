@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2022.5.11)  11 AUG 2022 12:43
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2022.5.11)  11 AUG 2022 12:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -3376,7 +3376,7 @@ Underfull \vbox (badness 1173) has occurred while \output is active []
 [203] [204] [205] [206]
 Chapter 19.
 
-Underfull \hbox (badness 4634) in paragraph at lines 10979--10983
+Underfull \hbox (badness 4634) in paragraph at lines 10978--10982
 \TU/lmtt/m/n/10 entrez_fetch \TU/NanumGothic(0)/m/sl/10 함수를 사용하여 \TU/lmtt/m/n/1
 0 nuccore \TU/NanumGothic(0)/m/sl/10 데이터베이스에서 genbank
  []
@@ -3384,47 +3384,52 @@ Underfull \hbox (badness 4634) in paragraph at lines 10979--10983
 [207
 
 ]
-Underfull \hbox (badness 1178) in paragraph at lines 11030--11033
+Underfull \hbox (badness 1178) in paragraph at lines 11031--11034
 []\TU/NanumGothic(0)/m/sl/10 IRange 객체로부터 몇몇 함수를 사용하여 정보를 추출할 수 있습니다. Rle
  []
 
 [208]
-Underfull \hbox (badness 1033) in paragraph at lines 11076--11079
+Underfull \hbox (badness 1033) in paragraph at lines 11077--11080
 []\TU/NanumGothic(0)/m/sl/10 GenomicRanges[]는 지놈상의 위치정보와 Bioconductor에서 제공하는 다양
 한
  []
 
 
-Overfull \hbox (7.25pt too wide) in paragraph at lines 11110--11113
+Overfull \hbox (7.25pt too wide) in paragraph at lines 11111--11114
 []\TU/NanumGothic(0)/m/sl/10 GRanges 함수를 이용해서 생성할 수 있으며 \TU/lmtt/m/n/10 browseV
 ignettes("GenomicRanges")
  []
 
 
-Overfull \vbox (0.36998pt too high) detected at line 11140
+Overfull \vbox (0.36998pt too high) detected at line 11143
  []
 
 [209]
-Underfull \hbox (badness 10000) in paragraph at lines 11181--11183
+Underfull \hbox (badness 1097) in paragraph at lines 11173--11175
+[]\TU/NanumGothic(0)/m/sl/10 위에서 계산된 GC 비율로 bar 그래프를 그래되 product를 라벨로 지정하여
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11178--11180
 []\TU/NanumGothic(0)/m/sl/10 이 저작물은 크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제
  []
 
 [210] [211] [212
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 11185.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 11185.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 11182.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 11182.
 (./kribbr2022.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 11185.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 11185.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 11182.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 11182.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
  20719 strings out of 479819
- 362215 string characters out of 5895846
- 812715 words of memory out of 5000000
+ 362209 string characters out of 5895846
+ 812709 words of memory out of 5000000
  37430 multiletter control sequences out of 15000+600000
  539023 words of font info for 94 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
