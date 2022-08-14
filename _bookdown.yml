@@ -15,7 +15,8 @@ rmd_files: ["index.Rmd",
             "09-Biostrings.Rmd",
             "10-toolsforsequences.Rmd", 
             "KRIBBR2022-Lecture7-haseong.Rmd",
-            "11-tools-for-genome-analysis.Rmd"
+            "11-tools-for-genome-analysis.Rmd", 
+            "KRIBBR2022-Lecture8-haseong.Rmd"
             ]
 book_filename: "kribbr2022"
 repo: https://github.com/greendaygh/kribbr2022/

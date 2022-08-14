@@ -2,6 +2,49 @@
 [참고사이트](http://bioconductor.org/help/course-materials/2015/LearnBioconductorFeb2015/A01.3_BioconductorForSequenceAnalysis.html)
 
 
+# rtracklayer
+
+https://www.bioconductor.org/packages/release/bioc/vignettes/rtracklayer/inst/doc/rtracklayer.pdf
+
+
+rtracklayer: UCSC web-based genome browser
+
+# ggbio
+
+Make gene model from OrganismDb object
+
+```{r, eval=F}
+
+library(ggbio)
+library(Homo.sapiens)
+class(Homo.sapiens)
+
+data(genesymbol, package = "biovizBase")
+wh <- genesymbol[c("BRCA1", "NBR1")]
+wh <- range(wh, ignore.strand = TRUE)
+
+p.txdb <- autoplot(Homo.sapiens, which = wh)
+p.txdb
+```
+
+```{r, eval=F}
+
+
+library(org.EcK12.eg.db)
+class(org.EcK12.eg.db)
+methods(class="OrgDb")
+columns(org.EcK12.eg.db)
+keys(org.EcK12.eg.db)
+tmp <- AnnotationDbi::select(org.EcK12.eg.db, keys(org.EcK12.eg.db), "ACCNUM")
+org.EcK12.eg.db$ACCNUM
+
+
+?Ideogram()
+
+```
+
+
+
 
 # Practice for review {#day4-exercise}
 

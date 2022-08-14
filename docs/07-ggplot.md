@@ -549,15 +549,15 @@ ggplot(myiris, aes(x=Petal.Length, y=Petal.Width)) +
 
 1) age와 circumference 를 각각 x와 y축으로 하는 산점도를 그리는 코드를 작성하시오 (ggplot 이용, 나무별로 다른 색 사용) 
 
-![](07-ggplot_files/figure-latex/unnamed-chunk-41-1.pdf)<!-- --> 
+<img src="07-ggplot_files/figure-html/unnamed-chunk-41-1.png" width="672" />
 
 2) 나무별로 다른 켄버스에 age와 circumference를 x와 y축으로 하는 산점도를 그리는 코드를 작성하시오 (ggplot, facet_grid이용)
 
-![](07-ggplot_files/figure-latex/unnamed-chunk-42-1.pdf)<!-- --> 
+<img src="07-ggplot_files/figure-html/unnamed-chunk-42-1.png" width="672" />
 
 3) 2)에서 그려진 나무별 산점도에 다음과 같이 선분을 추가한 그래프를 그리는 코드를 작성 하시오 
 
-![](07-ggplot_files/figure-latex/unnamed-chunk-43-1.pdf)<!-- --> 
+<img src="07-ggplot_files/figure-html/unnamed-chunk-43-1.png" width="672" />
 
 :::
 
@@ -566,7 +566,7 @@ ggplot(myiris, aes(x=Petal.Length, y=Petal.Width)) +
 
 `InsectSprays`는 제초제의 효능에 관한 데이터이다. 다음과 같은 plot을 그리는 코드를 작성 하시오
 
-![](07-ggplot_files/figure-latex/unnamed-chunk-44-1.pdf)<!-- --> 
+<img src="07-ggplot_files/figure-html/unnamed-chunk-44-1.png" width="672" />
 
 :::
 

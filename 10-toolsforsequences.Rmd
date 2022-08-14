@@ -111,6 +111,8 @@ summary_record <- entrez_summary(db="popset", id=search_result$ids)
 extract_title <- extract_from_esummary(summary_record, "title")
 extract_title
 
+summary_record$`2279969783`$statistics
+
 
 ```
 
@@ -529,6 +531,7 @@ ggtree(tree) +
 
 ```{r, eval=F}
 dm <- DistanceMatrix(alignedseq)
+dm <- dist(alignedseq)
 tree <- IdClusters(dm, cutoff=10, method="NJ", showPlot=TRUE, type="dendrogram")
 
 ggtree(tree, layout="circular") +
@@ -548,7 +551,7 @@ dendrogram class를 hclust를 거처 phylo class 형태로 변환할 수도 있�
 
 ```{r, eval=F}
 ## convert to dendrogram -> hclust -> phylo 
-
+cl <- hclust(dm)
 cl <- as.hclust(tree)
 py <- as.phylo(cl)
 class(py)

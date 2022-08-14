@@ -144,40 +144,110 @@ covid19 <- read.csv("covid_table2.csv")
 kable_classic(kable(covid19))
 ```
 
-\begin{table}
-\centering
-\begin{tabular}{l|l|l|r|l}
-\hline
-species & coronavirus & isolate & year & gbacc\\
-\hline
-Human & SARS-CoV-2 & Wuhan Hu-1 & 2020 & NC\_045512.2\\
-\hline
-Human & SARS-CoV-2 & USA-WA-1 & 2020 & MN985325.1\\
-\hline
-Human & SARS-CoV-1 & Urbani & 2002 & AY278741.1\\
-\hline
-Human & SARS-CoV-1 & Tor2 & 2002 & AY274119.3\\
-\hline
-Human & SARS-CoV-1 & GD03T10013 & 2003 & AY525636.1\\
-\hline
-Human & H-CoV-OC43 & UK/London & 2011 & KU131570.1\\
-\hline
-Human & MERS-CoV & EMC-2012 & 2011 & NC\_019843.3\\
-\hline
-Civet & SARS-CoV & SZ3 & 2003 & AY304486.1\\
-\hline
-Civet & SARS-CoV & Civet007 & 2004 & AY572034.1\\
-\hline
-Bat & SL-CoV & ZXC21 & 2015 & MG772934.1\\
-\hline
-Bat & SL-CoV & WIV16 & 2013 & KT444582.1\\
-\hline
-Bat & SL-CoV & RaTG13 & 2013 & MN996532.1\\
-\hline
-Pangolin & SL-CoV & MP789 & 2020 & MT084071.1\\
-\hline
-\end{tabular}
-\end{table}
+<table class=" lightable-classic" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; margin-left: auto; margin-right: auto;'>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> species </th>
+   <th style="text-align:left;"> coronavirus </th>
+   <th style="text-align:left;"> isolate </th>
+   <th style="text-align:right;"> year </th>
+   <th style="text-align:left;"> gbacc </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Human </td>
+   <td style="text-align:left;"> SARS-CoV-2 </td>
+   <td style="text-align:left;"> Wuhan Hu-1 </td>
+   <td style="text-align:right;"> 2020 </td>
+   <td style="text-align:left;"> NC_045512.2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Human </td>
+   <td style="text-align:left;"> SARS-CoV-2 </td>
+   <td style="text-align:left;"> USA-WA-1 </td>
+   <td style="text-align:right;"> 2020 </td>
+   <td style="text-align:left;"> MN985325.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Human </td>
+   <td style="text-align:left;"> SARS-CoV-1 </td>
+   <td style="text-align:left;"> Urbani </td>
+   <td style="text-align:right;"> 2002 </td>
+   <td style="text-align:left;"> AY278741.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Human </td>
+   <td style="text-align:left;"> SARS-CoV-1 </td>
+   <td style="text-align:left;"> Tor2 </td>
+   <td style="text-align:right;"> 2002 </td>
+   <td style="text-align:left;"> AY274119.3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Human </td>
+   <td style="text-align:left;"> SARS-CoV-1 </td>
+   <td style="text-align:left;"> GD03T10013 </td>
+   <td style="text-align:right;"> 2003 </td>
+   <td style="text-align:left;"> AY525636.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Human </td>
+   <td style="text-align:left;"> H-CoV-OC43 </td>
+   <td style="text-align:left;"> UK/London </td>
+   <td style="text-align:right;"> 2011 </td>
+   <td style="text-align:left;"> KU131570.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Human </td>
+   <td style="text-align:left;"> MERS-CoV </td>
+   <td style="text-align:left;"> EMC-2012 </td>
+   <td style="text-align:right;"> 2011 </td>
+   <td style="text-align:left;"> NC_019843.3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Civet </td>
+   <td style="text-align:left;"> SARS-CoV </td>
+   <td style="text-align:left;"> SZ3 </td>
+   <td style="text-align:right;"> 2003 </td>
+   <td style="text-align:left;"> AY304486.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Civet </td>
+   <td style="text-align:left;"> SARS-CoV </td>
+   <td style="text-align:left;"> Civet007 </td>
+   <td style="text-align:right;"> 2004 </td>
+   <td style="text-align:left;"> AY572034.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Bat </td>
+   <td style="text-align:left;"> SL-CoV </td>
+   <td style="text-align:left;"> ZXC21 </td>
+   <td style="text-align:right;"> 2015 </td>
+   <td style="text-align:left;"> MG772934.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Bat </td>
+   <td style="text-align:left;"> SL-CoV </td>
+   <td style="text-align:left;"> WIV16 </td>
+   <td style="text-align:right;"> 2013 </td>
+   <td style="text-align:left;"> KT444582.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Bat </td>
+   <td style="text-align:left;"> SL-CoV </td>
+   <td style="text-align:left;"> RaTG13 </td>
+   <td style="text-align:right;"> 2013 </td>
+   <td style="text-align:left;"> MN996532.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Pangolin </td>
+   <td style="text-align:left;"> SL-CoV </td>
+   <td style="text-align:left;"> MP789 </td>
+   <td style="text-align:right;"> 2020 </td>
+   <td style="text-align:left;"> MT084071.1 </td>
+  </tr>
+</tbody>
+</table>
 
 
 
@@ -490,6 +560,7 @@ ggtree(tree) +
 
 ```r
 dm <- DistanceMatrix(alignedseq)
+dm <- dist(alignedseq)
 tree <- IdClusters(dm, cutoff=10, method="NJ", showPlot=TRUE, type="dendrogram")
 
 ggtree(tree, layout="circular") +
@@ -510,7 +581,7 @@ dendrogram class를 hclust를 거처 phylo class 형태로 변환할 수도 있�
 
 ```r
 ## convert to dendrogram -> hclust -> phylo 
-
+cl <- hclust(dm)
 cl <- as.hclust(tree)
 py <- as.phylo(cl)
 class(py)
