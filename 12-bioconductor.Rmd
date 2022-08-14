@@ -29,7 +29,7 @@ p.txdb
 
 ```{r, eval=F}
 
-
+# orgDB
 library(org.EcK12.eg.db)
 class(org.EcK12.eg.db)
 methods(class="OrgDb")
@@ -38,9 +38,76 @@ keys(org.EcK12.eg.db)
 tmp <- AnnotationDbi::select(org.EcK12.eg.db, keys(org.EcK12.eg.db), "ACCNUM")
 org.EcK12.eg.db$ACCNUM
 
+```
 
-?Ideogram()
+- BSgenome DB 보다 최신 정보를 얻기 위해서는 NCBI 직접 다운로드 
 
+```{r, eval=F}
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("BSgenome.Ecoli.NCBI.20080805")
+
+library(BSgenome.Ecoli.NCBI.20080805)
+?BSgenome.Ecoli.NCBI.20080805
+genome <- BSgenome.Ecoli.NCBI.20080805
+seqlengths(genome)
+available.genomes()
+genome$NC_008253 
+
+
+library(rentrez)
+library(genbankr)
+
+tmps <- entrez_fetch("nuccore", id="NC_000913.3", rettype="gbwithparts")
+write(tmps, "ecoli-mg1655.gb")
+ecoligb <- readGenBank("ecoli-mg1655.gb")
+
+ecoli_cds <- cds(ecoligb)
+ecoli_cds
+
+```
+
+
+
+```{r, eval=F}
+
+p.txdb <- autoplot(ecoli_cds)
+p.txdb
+
+#library(igvR)
+ecoli_cds
+ggbio() + 
+  circle(ecoli_cds, geom = "ideo", fill = "gray70") +
+  circle(ecoli_cds, geom = "scale", size = 5) +
+  circle(ecoli_cds, geom = "text", aes(label = locus_tag), vjust = 0, size = 3) +
+  theme(
+    axis.text.x = element_text(angle=90)
+  )
+
+gr1 <- granges(ecoli_cds)
+gr2 <- granges(ecoli_cds)
+mcols(gr2)$test <- rnorm(length(ecoli_cds))
+ggplot() + 
+  layout_circle(ecoli_cds, geom = "ideo", fill = "gray70", radius = 9, trackWidth = 1) +
+  layout_circle(ecoli_cds, geom = "scale", size = 3, trackWidth = 1, scale.n=20) +
+  layout_circle(gr1, geom = "rect", color = "steelblue",  radius = 5) +
+  layout_circle(gr2, geom = "bar", aes(y=test), size = 3, trackWidth = 1, scale.n=20, radius = 4) 
+  
+
+
+```
+
+
+```{r, eval=F}
+library(igvR)
+
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("igvR")
+
+igv <- igvR()
+setGenome(igv, "hg38")
 ```
 
 

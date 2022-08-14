@@ -38,6 +38,7 @@ mainfont : NanumGothic
 - 강사: 한국생명공학연구원 합성생물학전문연구단 김하성
 - 연락처: 042-860-4372, haseong@kribb.re.kr 
 - 강의자료: https://greendaygh.github.io/kribbr2022/
+- 강의관련 게시판: https://github.com/greendaygh/kribbr2022/issues
 
 
 ## 강의 계획 {#Schedule}
