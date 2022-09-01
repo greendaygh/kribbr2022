@@ -228,8 +228,66 @@
 <p><strong>Exercises </strong></p>
 <p>위에서 받은 <code>NC_045512.2</code>는 우한에서 발생한 코로나바이러스 서열에 대한 CDS 추출, 서열 비교, 가시화 등을 수행하시오</p>
 </div>
-<p>다음은 대장균 지놈 NC_000913.3 gb 파일을 다운로드 받고 지놈 전체를 가시화 하는 코드입니다.</p>
+</div>
+<div id="plyragnes" class="section level2" number="19.4">
+<h2>
+<span class="header-section-number">19.4</span> plyragnes<a class="anchor" aria-label="anchor" href="#plyragnes"><i class="fas fa-link"></i></a>
+</h2>
+<p>위 GenomicRanges 데이터를 dplyr 형태로 좀 더 쉽게 다루기 위한 패키지가 <code>plyragnes</code> 입니다.</p>
 <div class="sourceCode" id="cb436"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">plyranges</span><span class="op">)</span>
+
+<span class="va">covid19cds</span>
+<span class="va">gcr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/colSums.html">rowSums</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/letterFrequency.html">letterFrequency</a></span><span class="op">(</span><span class="va">cdsseqs</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="st">"G"</span>, <span class="st">"C"</span><span class="op">)</span>, as.prob<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">covid19cds</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">gene</span>, <span class="va">product</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">mutate</a></span><span class="op">(</span>gc <span class="op">=</span> <span class="va">gcr</span><span class="op">)</span> <span class="co">#%&gt;%</span>
+  <span class="co">#filter(grepl(pattern = "ORF", gene)) </span></code></pre></div>
+<div class="rmdnote">
+<p><strong>Exercises </strong></p>
+<p>위에서 계산된 GC 비율로 bar 그래프를 그리되 product를 라벨로 지정하여 그리시오</p>
+</div>
+</div>
+<div id="visualization" class="section level2" number="19.5">
+<h2>
+<span class="header-section-number">19.5</span> Visualization<a class="anchor" aria-label="anchor" href="#visualization"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb437"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://wilkox.org/gggenes/">gggenes</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va">plyranges</span><span class="op">)</span>
+
+<span class="va">targetr</span> <span class="op">&lt;-</span> <span class="va">covid19cds</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">mcols</a></span><span class="op">(</span><span class="va">targetr</span><span class="op">)</span><span class="op">$</span><span class="va">gene</span>
+ 
+<span class="fu">plyranges</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">summarise</a></span><span class="op">(</span><span class="va">targetr</span><span class="op">)</span>
+
+<span class="va">plotdf1</span> <span class="op">&lt;-</span>   <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>molecule<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/GenomeInfoDb/man/seqinfo.html">seqnames</a></span><span class="op">(</span><span class="va">targetr</span><span class="op">)</span>,
+                         gene<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">mcols</a></span><span class="op">(</span><span class="va">targetr</span><span class="op">)</span><span class="op">$</span><span class="va">gene</span>,
+                         start<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/start.html">start</a></span><span class="op">(</span><span class="va">targetr</span><span class="op">)</span>,
+                         end<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/start.html">end</a></span><span class="op">(</span><span class="va">targetr</span><span class="op">)</span>,
+                         strand<span class="op">=</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span>
+                                  <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/as.vector.html">as.vector</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/strand.html">strand</a></span><span class="op">(</span><span class="va">targetr</span><span class="op">)</span><span class="op">)</span><span class="op">==</span><span class="st">"+"</span><span class="op">~</span> <span class="cn">TRUE</span>,
+                                  <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/as.vector.html">as.vector</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/strand.html">strand</a></span><span class="op">(</span><span class="va">targetr</span><span class="op">)</span><span class="op">)</span><span class="op">==</span><span class="st">"-"</span><span class="op">~</span> <span class="cn">FALSE</span>
+                                <span class="op">)</span>
+                         <span class="op">)</span>
+
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">plotdf1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>xmin <span class="op">=</span> <span class="va">start</span>, xmax <span class="op">=</span> <span class="va">end</span>, y <span class="op">=</span> <span class="va">molecule</span>, label<span class="op">=</span><span class="va">gene</span>, fill <span class="op">=</span> <span class="va">gene</span>, forward <span class="op">=</span> <span class="va">strand</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://wilkox.org/gggenes/reference/geom_gene_arrow.html">geom_gene_arrow</a></span><span class="op">(</span>
+    <span class="co">#arrowhead_height = unit(3, "mm"), </span>
+    <span class="co">#arrowhead_width = unit(1, "mm")</span>
+    arrowhead_height <span class="op">=</span> <span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">12</span>, <span class="st">"mm"</span><span class="op">)</span>,
+    arrowhead_width <span class="op">=</span> <span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">6</span>, <span class="st">"mm"</span><span class="op">)</span>,
+    arrow_body_height <span class="op">=</span> <span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">12</span>, <span class="st">"mm"</span><span class="op">)</span>
+    <span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://wilkox.org/gggenes/reference/geom_gene_label.html">geom_gene_label</a></span><span class="op">(</span>align <span class="op">=</span> <span class="st">"left"</span>, height <span class="op">=</span> <span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">19</span>, <span class="st">"mm"</span><span class="op">)</span>, grow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://wilkox.org/gggenes/reference/theme_genes.html">theme_genes</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position<span class="op">=</span><span class="st">"none"</span><span class="op">)</span></code></pre></div>
+<p>다음은 대장균 지놈 NC_000913.3 gb 파일을 다운로드 받고 지놈 전체를 가시화 하는 코드입니다.</p>
+<div class="sourceCode" id="cb438"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/rentrez/">rentrez</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">genbankr</span><span class="op">)</span>
 
@@ -240,7 +298,7 @@
 <span class="va">ecoli_cds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicFeatures/man/transcripts.html">cds</a></span><span class="op">(</span><span class="va">ecoligb</span><span class="op">)</span>
 <span class="va">ecoli_cds</span>
 
-<span class="va">p.txdb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/autoplot-method.html">autoplot</a></span><span class="op">(</span><span class="va">ecoli_cds</span><span class="op">)</span>
+<span class="va">p.txdb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">ecoli_cds</span><span class="op">)</span>
 <span class="va">p.txdb</span>
 
 <span class="co">#library(igvR)</span>
@@ -262,30 +320,6 @@
   <span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/layout_circle-method.html">layout_circle</a></span><span class="op">(</span><span class="va">gr1</span>, geom <span class="op">=</span> <span class="st">"rect"</span>, color <span class="op">=</span> <span class="st">"steelblue"</span>,  radius <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/layout_circle-method.html">layout_circle</a></span><span class="op">(</span><span class="va">gr2</span>, geom <span class="op">=</span> <span class="st">"bar"</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y<span class="op">=</span><span class="va">test</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">3</span>, trackWidth <span class="op">=</span> <span class="fl">1</span>, scale.n<span class="op">=</span><span class="fl">20</span>, radius <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> 
   </code></pre></div>
-</div>
-<div id="plyragnes" class="section level2" number="19.4">
-<h2>
-<span class="header-section-number">19.4</span> plyragnes<a class="anchor" aria-label="anchor" href="#plyragnes"><i class="fas fa-link"></i></a>
-</h2>
-<p>위 GenomicRanges 데이터를 dplyr 형태로 좀 더 쉽게 다루기 위한 패키지가 <code>plyragnes</code> 입니다.</p>
-<div class="sourceCode" id="cb437"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">plyranges</span><span class="op">)</span>
-
-<span class="va">covid19</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genbankr/man/readGenBank.html">readGenBank</a></span><span class="op">(</span><span class="st">"covid19wuhan.gb"</span><span class="op">)</span>
-<span class="va">covid19seq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/getSeq.html">getSeq</a></span><span class="op">(</span><span class="va">covid19</span><span class="op">)</span>
-<span class="va">covid19cds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicFeatures/man/transcripts.html">cds</a></span><span class="op">(</span><span class="va">covid19</span><span class="op">)</span>
-<span class="va">covidcdsseq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/getSeq.html">getSeq</a></span><span class="op">(</span><span class="va">covid19seq</span>, <span class="va">covid19cds</span><span class="op">)</span>
-
-<span class="va">gcr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/colSums.html">rowSums</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/letterFrequency.html">letterFrequency</a></span><span class="op">(</span><span class="va">covidcdsseq</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="st">"G"</span>, <span class="st">"C"</span><span class="op">)</span>, as.prob<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">covid19cds</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">gene</span>, <span class="va">product</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">mutate</a></span><span class="op">(</span>gc <span class="op">=</span> <span class="va">gcr</span><span class="op">)</span> <span class="co">#%&gt;%</span>
-  <span class="co">#filter(grepl(pattern = "ORF", gene)) </span></code></pre></div>
-<div class="rmdnote">
-<p><strong>Exercises </strong></p>
-<p>위에서 계산된 GC 비율로 bar 그래프를 그래되 product를 라벨로 지정하여 그리시오</p>
-</div>
 <hr>
 <p><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="크리에이티브 커먼즈 라이선스" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png"></a><br>이 저작물은 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제 라이선스</a>에 따라 이용할 수 있습니다.</p>
 
@@ -303,6 +337,7 @@
 <li><a class="nav-link" href="#iranges"><span class="header-section-number">19.2</span> IRanges</a></li>
 <li><a class="nav-link" href="#genomicranges"><span class="header-section-number">19.3</span> GenomicRanges</a></li>
 <li><a class="nav-link" href="#plyragnes"><span class="header-section-number">19.4</span> plyragnes</a></li>
+<li><a class="nav-link" href="#visualization"><span class="header-section-number">19.5</span> Visualization</a></li>
 </ul>
 
       <div class="book-extra">

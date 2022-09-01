@@ -171,6 +171,7 @@ genbank-file
 iranges
 genomicranges
 plyragnes
+visualization
 lecture-08-note
 class-01-3
 class-02-3

@@ -234,6 +234,76 @@ autoplot(covid19cds)
 :::
 
 
+## plyragnes
+
+위 GenomicRanges 데이터를 dplyr 형태로 좀 더 쉽게 다루기 위한 패키지가 `plyragnes` 입니다. 
+
+
+```{r, eval=F}
+library(plyranges)
+
+covid19cds
+gcr <- rowSums(letterFrequency(cdsseqs, c("G", "C"), as.prob=T))
+
+covid19cds %>% 
+  dplyr::select(gene, product) %>% 
+  mutate(gc = gcr) #%>%
+  #filter(grepl(pattern = "ORF", gene)) 
+
+```
+
+
+::: rmdnote
+**Exercises **
+ 
+위에서 계산된 GC 비율로 bar 그래프를 그리되 product를 라벨로 지정하여 그리시오 
+
+:::
+
+
+
+
+
+## Visualization
+
+
+```{r, eval=F}
+require(ggplot2)
+require(gggenes)
+require(plyranges)
+
+targetr <- covid19cds
+
+mcols(targetr)$gene
+ 
+plyranges::summarise(targetr)
+
+plotdf1 <-   data.frame(molecule=seqnames(targetr),
+                         gene=mcols(targetr)$gene,
+                         start=start(targetr),
+                         end=end(targetr),
+                         strand=case_when(
+                                  as.vector(strand(targetr))=="+"~ TRUE,
+                                  as.vector(strand(targetr))=="-"~ FALSE
+                                )
+                         )
+
+
+ggplot(plotdf1, aes(xmin = start, xmax = end, y = molecule, label=gene, fill = gene, forward = strand)) +
+  geom_gene_arrow(
+    #arrowhead_height = unit(3, "mm"), 
+    #arrowhead_width = unit(1, "mm")
+    arrowhead_height = grid::unit(12, "mm"),
+    arrowhead_width = grid::unit(6, "mm"),
+    arrow_body_height = grid::unit(12, "mm")
+    ) +
+  geom_gene_label(align = "left", height = grid::unit(19, "mm"), grow=TRUE) +
+  theme_genes() +
+  theme(legend.position="none")
+
+```
+
+
 
 다음은 대장균 지놈 NC_000913.3 gb 파일을 다운로드 받고 지놈 전체를 가시화 하는 코드입니다. 
 
@@ -277,36 +347,6 @@ ggplot() +
 
 
 
-
-## plyragnes
-
-위 GenomicRanges 데이터를 dplyr 형태로 좀 더 쉽게 다루기 위한 패키지가 `plyragnes` 입니다. 
-
-
-```{r, eval=F}
-library(plyranges)
-
-covid19 <- readGenBank("covid19wuhan.gb")
-covid19seq <- getSeq(covid19)
-covid19cds <- cds(covid19)
-covidcdsseq <- getSeq(covid19seq, covid19cds)
-
-gcr <- rowSums(letterFrequency(covidcdsseq, c("G", "C"), as.prob=T))
-
-covid19cds %>% 
-  dplyr::select(gene, product) %>% 
-  mutate(gc = gcr) #%>%
-  #filter(grepl(pattern = "ORF", gene)) 
-
-```
-
-
-::: rmdnote
-**Exercises **
- 
-위에서 계산된 GC 비율로 bar 그래프를 그래되 product를 라벨로 지정하여 그리시오 
-
-:::
 
 
 ---
