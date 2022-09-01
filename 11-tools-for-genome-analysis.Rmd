@@ -20,6 +20,8 @@ write(recs, file="covid19wuhan.gb")
 
 :::
 
+genbank 파일은 DNA 및 단백질 서열을 저장하는데 사용되는 서열 파일 포맷으로서 하나 이상의 시퀀스에 대한 정보와, 주석, 특정 서열 구간의 feature 정보와 메타 데이터도 포함합니다. NCBI에서 개발했으며 표준 DNA 및 단백질 서열 파일 형식으로 공공 데이터베이스 등 널리 사용되고 있습니다. R의 `genbankr` 패키지는 genbank 타입의 데이터를 읽는 `readGenBank` 함수를 제공합니다. 
+
 
 
 ```{r, eval=FALSE}
@@ -56,50 +58,8 @@ methods(class="IRanges")
 
 ```
 
-IRange 객체로부터 몇몇 함수를 사용하여 정보를 추출할 수 있습니다. Rle (run-length encoding format) class 를 사용하며 Rle는 후에 좀 더 자세히 알아보겠습니다. 
 
-```{r, eval=F}
-ir <- IRanges(start = c(1,3), end = c(4,5))
-ir
-
-start(ir)
-end(ir)
-width(ir)
-disjointBins(ir)
-
-ir <- IRanges(start = c(1,3,6), end = c(4,5,7))
-ir
-bins <- disjointBins(ir)
-bins
-ir2 <- disjoin(ir)
-Rle(1:10, 1:10)
-
-reduce(ir)
-```
-
-
-이러한 정보를 가시화하는 가장 간단한 방법은 `ggbio`라는 패키지를 사용하는 것 입니다. 
-
-
-```{r, eval=F}
-library(ggbio)
-
-autoplot(ir) 
-autoplot(ir2) 
-
-autoplot(ir) + 
-  theme_bw()
-
-autoplot(ir, aes(fill=width)) +
-  theme_bw()
-```
-
-
-## Genomic ranges
-
-[GenomicRanges](https://bioconductor.org/packages/release/bioc/html/GenomicRanges.html)는 지놈상의 위치정보와 Bioconductor에서 제공하는 다양한 high-throughput 정보들을 같이 표현하기 위해서 만들어진 패키지입니다. 
-
-먼저 Rle (Run-length encoding) 개념을 알아봅니다. Rle는 런 렝스 부호화라고 하며 일종의 압축 방법입니다. 예를 들어 GATTGCCCCCCTAG 라는 서열이 있다고 하면 이를 그대로 text 파일에 저장하지 않고 GAT2GC6TAG 라고 표현함으로써 용량을 줄이는 압축의 기능을 합니다. GenomicRange는 이러한 Rle 개념을 사용하기 위해서 `Rle`라는 기본 함수를 사용합니다. 
+IRange 는 Rle (run-length encoding format, 런 렝스 부호화) class 를 사용하며 일종의 압축 방법입니다. 예를 들어 GATTGCCCCCCTAG 라는 서열이 있다고 하면 이를 그대로 text 파일에 저장하지 않고 GAT2GC6TAG 라고 표현함으로써 용량을 줄이는 압축의 기능을 합니다. GenomicRange는 이러한 Rle 개념을 사용하기 위해서 `Rle`라는 기본 함수를 사용합니다. 
 
 ```{r, eval=F}
 library(IRanges)
@@ -124,12 +84,93 @@ xrange
 
 ```
 
+
+IRange 생성과는 반대로 IRange 객체로부터 몇몇 함수를 사용하여 정보를 추출할 수 있습니다. 
+
+```{r, eval=F}
+ir <- IRanges(start = c(1,3), end = c(4,5))
+ir
+
+start(ir)
+end(ir)
+width(ir)
+disjointBins(ir)
+
+ir <- IRanges(start = c(1,3,6), end = c(4,5,7))
+ir
+bins <- disjointBins(ir)
+bins
+
+```
+
+
+이러한 정보를 가시화하는 가장 간단한 방법은 `ggbio`라는 패키지를 사용하는 것 입니다. 
+
+
+```{r, eval=F}
+library(ggbio)
+
+autoplot(ir) 
+
+autoplot(ir) + 
+  theme_bw()
+
+autoplot(ir, aes(fill=width)) +
+  theme_bw()
+```
+특히 `disjoin`과 `reduce` 함수는 overlap 되어 있는 구간의 분석을 수행하는데 유용하게 활용 됩니다. 
+
+```{r, eval=F}
+ir2 <- disjoin(ir)
+ir2
+autoplot(ir)
+autoplot(ir2) 
+
+ir3 <- IRanges::reduce(ir)
+ir3
+autoplot(ir3) 
+
+```
+
+::: rmdnote
+**Exercises **
+
+1) 구간의 길이가 각각 100, 15, 30, 45 인  IRange 객체를 만드시오
+
+2) 1부터 100까지의 전체 구간에서 시작 위치가 각각 1, 15, 30, 60 이면서 길이가 20 인 IRange 객체를 만드시오 
+
+:::
+
+
+
+## GenomicRanges
+
+[GenomicRanges](https://bioconductor.org/packages/release/bioc/html/GenomicRanges.html)는 지놈상의 위치정보와 Bioconductor에서 제공하는 다양한 high-throughput 정보들을 같이 표현하기 위해서 만들어진 패키지입니다. 
+
+
 GRanges 함수를 이용해서 생성할 수 있으며 `browseVignettes("GenomicRanges")` 나 `methods()` 함수를 이용해서 관련된 기능을 찾아서 사용할 수 있습니다.  
 
 
 ```{r, eval=F}
 library(GenomicRanges)
 
+
+gr <- GRanges(
+  seqnames = "chr1", 
+  ranges = IRanges(1:10, 101:110),
+  strand = rep("+", 10)
+)
+gr
+class(gr)
+
+```
+
+
+
+
+다양한 함수 사용법을 보여줍니다. 
+
+```{r, eval=F}
 gr <- GRanges(
     seqnames = Rle(c("chr1", "chr2", "chr1", "chr3"), c(1, 3, 2, 4)),
     ranges = IRanges(101:110, end = 111:120, names = head(letters, 10)),
@@ -137,7 +178,6 @@ gr <- GRanges(
     score = 1:10,
     GC = seq(1, 0, length=10))
 gr
-class(gr)
 
 seqnames(gr)
 ranges(gr)
@@ -145,22 +185,34 @@ strand(gr)
 
 granges(gr) 
 mcols(gr) #meta data
+seqlengths(gr)
 
 seqlengths(gr) <- c(249250621, 243199373, 198022430)
-seqlengths(gr)
 names(gr)
-
-sp <- split(gr, rep(1:2, each=5))
-
-autoplot(gr)
 ```
+
+ggbio의 autoplot을 사용하여 IRange와 같이 가시화 할 수 있으며 split 함수를 사용하면 지정된 규칙에 따라 Grange를 나눌 수 있습니다. 
+
+```{r, eval=F}
+autoplot(gr)
+sp <- split(gr, rep(1:2, each=5))
+```
+
+
+::: rmdnote
+**Exercises **
+ 
+위 결과에서 chromosome 별로 항목을 나눈 Grange list를 만드시오 
+
+:::
+
 
 
 
 ::: rmdnote
 **Exercises **
  
-코로나 바이러스서열들의 genbank 파일을 모두 다운로드 하고 각 바이러스별로 CDS 추출, 서열 비교, 가시화 등을 수행하시오 
+위에서 받은 `NC_045512.2`는 우한에서 발생한 코로나바이러스 서열에 대한 CDS 추출, 서열 비교, 가시화 등을 수행하시오 
 
 
 ```{r, eval=F, echo=F}
@@ -168,13 +220,12 @@ library(genbankr)
 library(ggbio)
 library(DECIPHER)
 
-covid19 <- readGenBank("covid19.gb")
+covid19 <- readGenBank("covid19wuhan.gb")
 covid19seq <- getSeq(covid19)
 covid19cds <- cds(covid19)
-covidseq <- covid19@sequence
 
-covidseq <- getSeq(covidseq, covid19cds)
-BrowseSeqs(covidseq, colWidth = 200)
+cdsseqs <- getSeq(covid19seq, covid19cds)
+BrowseSeqs(cdsseqs, colWidth = 200)
 
 autoplot(covid19cds)
 
@@ -183,6 +234,51 @@ autoplot(covid19cds)
 :::
 
 
+
+다음은 대장균 지놈 NC_000913.3 gb 파일을 다운로드 받고 지놈 전체를 가시화 하는 코드입니다. 
+
+```{r, eval=F}
+library(rentrez)
+library(genbankr)
+
+tmps <- entrez_fetch("nuccore", id="NC_000913.3", rettype="gbwithparts")
+write(tmps, "ecoli-mg1655.gb")
+ecoligb <- readGenBank("ecoli-mg1655.gb")
+
+ecoli_cds <- cds(ecoligb)
+ecoli_cds
+
+p.txdb <- autoplot(ecoli_cds)
+p.txdb
+
+#library(igvR)
+ecoli_cds
+ggbio() + 
+  circle(ecoli_cds, geom = "ideo", fill = "gray70") +
+  circle(ecoli_cds, geom = "scale", size = 5) +
+  circle(ecoli_cds, geom = "text", aes(label = locus_tag), vjust = 0, size = 3) +
+  theme(
+    axis.text.x = element_text(angle=90)
+  )
+
+gr1 <- granges(ecoli_cds)
+gr2 <- granges(ecoli_cds)
+mcols(gr2)$test <- rnorm(length(ecoli_cds))
+ggplot() + 
+  layout_circle(ecoli_cds, geom = "ideo", fill = "gray70", radius = 9, trackWidth = 1) +
+  layout_circle(ecoli_cds, geom = "scale", size = 3, trackWidth = 1, scale.n=20) +
+  layout_circle(gr1, geom = "rect", color = "steelblue",  radius = 5) +
+  layout_circle(gr2, geom = "bar", aes(y=test), size = 3, trackWidth = 1, scale.n=20, radius = 4) 
+  
+
+
+```
+
+
+
+
+
+## plyragnes
 
 위 GenomicRanges 데이터를 dplyr 형태로 좀 더 쉽게 다루기 위한 패키지가 `plyragnes` 입니다. 
 

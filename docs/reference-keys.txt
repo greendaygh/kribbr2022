@@ -156,8 +156,11 @@ tools-for-sequences
 sequences-from-ncbi
 align-two-sequences
 multiple-sequence-alignment
-blast-result-analysis
+msa
+decipher
 phylogenetic-trees-with-clustering
+facet-utilities
+blast-result-analysis
 lecture-07-note
 class-01-2
 class-02-2
@@ -166,7 +169,8 @@ class-04-2
 tools-for-genome-analysis
 genbank-file
 iranges
-genomic-ranges
+genomicranges
+plyragnes
 lecture-08-note
 class-01-3
 class-02-3

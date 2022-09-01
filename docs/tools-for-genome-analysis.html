@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 19 Tools for genome analysis | 2022년 한국생명공학연구원 연구데이터 분석과정 R</title>
 <meta name="author" content="합성생물학전문연구소 김하성">
-<meta name="description" content="19.1 genbank file  Exercises NC_045512.2는 우한에서 발생한 코로나바이러스의 accession number임. entrez_fetch 함수를 사용하여 nuccore 데이터베이스에서 genbank 정보를 다운로드 받으시오 받은 택스트를 covid19wohan.gb라는 파일로 저장하시오 require(genbankr)...">
+<meta name="description" content="19.1 genbank file  Exercises NC_045512.2는 우한에서 발생한 코로나바이러스의 accession number임. entrez_fetch 함수를 사용하여 nuccore 데이터베이스에서 genbank 정보를 다운로드 받으시오 받은 택스트를 covid19wohan.gb라는 파일로 저장하시오 genbank 파일은 DNA 및...">
 <meta name="generator" content="bookdown 0.26 with bs4_book()">
 <meta property="og:title" content="Chapter 19 Tools for genome analysis | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="19.1 genbank file  Exercises NC_045512.2는 우한에서 발생한 코로나바이러스의 accession number임. entrez_fetch 함수를 사용하여 nuccore 데이터베이스에서 genbank 정보를 다운로드 받으시오 받은 택스트를 covid19wohan.gb라는 파일로 저장하시오 require(genbankr)...">
+<meta property="og:description" content="19.1 genbank file  Exercises NC_045512.2는 우한에서 발생한 코로나바이러스의 accession number임. entrez_fetch 함수를 사용하여 nuccore 데이터베이스에서 genbank 정보를 다운로드 받으시오 받은 택스트를 covid19wohan.gb라는 파일로 저장하시오 genbank 파일은 DNA 및...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 19 Tools for genome analysis | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
-<meta name="twitter:description" content="19.1 genbank file  Exercises NC_045512.2는 우한에서 발생한 코로나바이러스의 accession number임. entrez_fetch 함수를 사용하여 nuccore 데이터베이스에서 genbank 정보를 다운로드 받으시오 받은 택스트를 covid19wohan.gb라는 파일로 저장하시오 require(genbankr)...">
+<meta name="twitter:description" content="19.1 genbank file  Exercises NC_045512.2는 우한에서 발생한 코로나바이러스의 accession number임. entrez_fetch 함수를 사용하여 nuccore 데이터베이스에서 genbank 정보를 다운로드 받으시오 받은 택스트를 covid19wohan.gb라는 파일로 저장하시오 genbank 파일은 DNA 및...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -86,7 +86,8 @@
 <li><p>받은 택스트를 <code>covid19wohan.gb</code>라는 파일로 저장하시오</p></li>
 </ol>
 </div>
-<div class="sourceCode" id="cb421"><pre class="downlit sourceCode r">
+<p>genbank 파일은 DNA 및 단백질 서열을 저장하는데 사용되는 서열 파일 포맷으로서 하나 이상의 시퀀스에 대한 정보와, 주석, 특정 서열 구간의 feature 정보와 메타 데이터도 포함합니다. NCBI에서 개발했으며 표준 DNA 및 단백질 서열 파일 형식으로 공공 데이터베이스 등 널리 사용되고 있습니다. R의 <code>genbankr</code> 패키지는 genbank 타입의 데이터를 읽는 <code>readGenBank</code> 함수를 제공합니다.</p>
+<div class="sourceCode" id="cb427"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va">genbankr</span><span class="op">)</span>
 
 <span class="va">covid19</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genbankr/man/readGenBank.html">readGenBank</a></span><span class="op">(</span><span class="st">"covid19wuhan.gb"</span><span class="op">)</span>
@@ -103,7 +104,7 @@
 </h2>
 <p>유전체 데이터의 대부분을 차지하는 정보는 전체 지놈 서열 중 어디서 어디까지가 유전자 또는 coding sequence 이고 그 번역된 정보가 무엇인지 설명하는 정보 입니다. 즉, 일련의 feature에 대한 위치와 특성 정보를 분석하는 것이 효율적인 지놈을 분석하기 위해 필수입니다. <code>bioconductor</code> 에서는 이러한 유전체 정보를 효율적으로 분석하고 가시화 하기위한 방법들이 다양하게 개발되어 왔으며 <code>IRanges</code> 와 <code>GenomicRanges</code> 라는 패키지가 대표적으로 사용될 수 있습니다.</p>
 <p>IRanges는 간격을 나타내는 임의의 숫자 세트이며 지놈상에 위치한 특정 feature들의 간격이나 통계적 수치들을 효율적으로 나타내기 위해서 만들어진 패키지 입니다.<span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-Lawrence2013" role="doc-biblioref"&gt;&lt;strong&gt;Lawrence2013?&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;'><sup>3</sup></a></span> 임의의 feature에 대한 시작, 끝, 넓이를 나타내는 숫자들이 리스트로 이루어져 있습니다.</p>
-<div class="sourceCode" id="cb422"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb428"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/IRanges">IRanges</a></span><span class="op">)</span>
 
 <span class="va">ir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/IRanges-constructor.html">IRanges</a></span><span class="op">(</span>start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">5</span><span class="op">)</span>, end <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">7</span><span class="op">)</span><span class="op">)</span>
@@ -114,44 +115,8 @@
 <span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">ir</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/methods.html">methods</a></span><span class="op">(</span>class<span class="op">=</span><span class="st">"IRanges"</span><span class="op">)</span>
 <span class="op">?</span><span class="va">IRanges</span></code></pre></div>
-<p>IRange 객체로부터 몇몇 함수를 사용하여 정보를 추출할 수 있습니다. Rle (run-length encoding format) class 를 사용하며 Rle는 후에 좀 더 자세히 알아보겠습니다.</p>
-<div class="sourceCode" id="cb423"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/IRanges-constructor.html">IRanges</a></span><span class="op">(</span>start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>, end <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span>
-<span class="va">ir</span>
-
-<span class="fu"><a href="https://rdrr.io/r/stats/start.html">start</a></span><span class="op">(</span><span class="va">ir</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/start.html">end</a></span><span class="op">(</span><span class="va">ir</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/IPosRanges-class.html">width</a></span><span class="op">(</span><span class="va">ir</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/inter-range-methods.html">disjointBins</a></span><span class="op">(</span><span class="va">ir</span><span class="op">)</span>
-
-<span class="va">ir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/IRanges-constructor.html">IRanges</a></span><span class="op">(</span>start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">6</span><span class="op">)</span>, end <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">7</span><span class="op">)</span><span class="op">)</span>
-<span class="va">ir</span>
-<span class="va">bins</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/inter-range-methods.html">disjointBins</a></span><span class="op">(</span><span class="va">ir</span><span class="op">)</span>
-<span class="va">bins</span>
-<span class="va">ir2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/inter-range-methods.html">disjoin</a></span><span class="op">(</span><span class="va">ir</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Rle-class.html">Rle</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/inter-range-methods.html">reduce</a></span><span class="op">(</span><span class="va">ir</span><span class="op">)</span></code></pre></div>
-<p>이러한 정보를 가시화하는 가장 간단한 방법은 <code>ggbio</code>라는 패키지를 사용하는 것 입니다.</p>
-<div class="sourceCode" id="cb424"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lawremi.github.io/ggbio/">ggbio</a></span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/autoplot-method.html">autoplot</a></span><span class="op">(</span><span class="va">ir</span><span class="op">)</span> 
-<span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/autoplot-method.html">autoplot</a></span><span class="op">(</span><span class="va">ir2</span><span class="op">)</span> 
-
-<span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/autoplot-method.html">autoplot</a></span><span class="op">(</span><span class="va">ir</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/autoplot-method.html">autoplot</a></span><span class="op">(</span><span class="va">ir</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="va">width</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-</div>
-<div id="genomic-ranges" class="section level2" number="19.3">
-<h2>
-<span class="header-section-number">19.3</span> Genomic ranges<a class="anchor" aria-label="anchor" href="#genomic-ranges"><i class="fas fa-link"></i></a>
-</h2>
-<p><a href="https://bioconductor.org/packages/release/bioc/html/GenomicRanges.html">GenomicRanges</a>는 지놈상의 위치정보와 Bioconductor에서 제공하는 다양한 high-throughput 정보들을 같이 표현하기 위해서 만들어진 패키지입니다.</p>
-<p>먼저 Rle (Run-length encoding) 개념을 알아봅니다. Rle는 런 렝스 부호화라고 하며 일종의 압축 방법입니다. 예를 들어 GATTGCCCCCCTAG 라는 서열이 있다고 하면 이를 그대로 text 파일에 저장하지 않고 GAT2GC6TAG 라고 표현함으로써 용량을 줄이는 압축의 기능을 합니다. GenomicRange는 이러한 Rle 개념을 사용하기 위해서 <code>Rle</code>라는 기본 함수를 사용합니다.</p>
-<div class="sourceCode" id="cb425"><pre class="downlit sourceCode r">
+<p>IRange 는 Rle (run-length encoding format, 런 렝스 부호화) class 를 사용하며 일종의 압축 방법입니다. 예를 들어 GATTGCCCCCCTAG 라는 서열이 있다고 하면 이를 그대로 text 파일에 저장하지 않고 GAT2GC6TAG 라고 표현함으로써 용량을 줄이는 압축의 기능을 합니다. GenomicRange는 이러한 Rle 개념을 사용하기 위해서 <code>Rle</code>라는 기본 함수를 사용합니다.</p>
+<div class="sourceCode" id="cb429"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/IRanges">IRanges</a></span><span class="op">)</span>
 
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="st">"GATTGCCCCCCTAG"</span>
@@ -171,18 +136,75 @@
 <span class="co"># convert Rle to IRanges</span>
 <span class="va">xrange</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/IRanges-constructor.html">IRanges</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/start.html">start</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/start.html">end</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>
 <span class="va">xrange</span></code></pre></div>
+<p>IRange 생성과는 반대로 IRange 객체로부터 몇몇 함수를 사용하여 정보를 추출할 수 있습니다.</p>
+<div class="sourceCode" id="cb430"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/IRanges-constructor.html">IRanges</a></span><span class="op">(</span>start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>, end <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span>
+<span class="va">ir</span>
+
+<span class="fu"><a href="https://rdrr.io/r/stats/start.html">start</a></span><span class="op">(</span><span class="va">ir</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/start.html">end</a></span><span class="op">(</span><span class="va">ir</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/IPosRanges-class.html">width</a></span><span class="op">(</span><span class="va">ir</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/inter-range-methods.html">disjointBins</a></span><span class="op">(</span><span class="va">ir</span><span class="op">)</span>
+
+<span class="va">ir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/IRanges-constructor.html">IRanges</a></span><span class="op">(</span>start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">6</span><span class="op">)</span>, end <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">7</span><span class="op">)</span><span class="op">)</span>
+<span class="va">ir</span>
+<span class="va">bins</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/inter-range-methods.html">disjointBins</a></span><span class="op">(</span><span class="va">ir</span><span class="op">)</span>
+<span class="va">bins</span></code></pre></div>
+<p>이러한 정보를 가시화하는 가장 간단한 방법은 <code>ggbio</code>라는 패키지를 사용하는 것 입니다.</p>
+<div class="sourceCode" id="cb431"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lawremi.github.io/ggbio/">ggbio</a></span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/autoplot-method.html">autoplot</a></span><span class="op">(</span><span class="va">ir</span><span class="op">)</span> 
+
+<span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/autoplot-method.html">autoplot</a></span><span class="op">(</span><span class="va">ir</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/autoplot-method.html">autoplot</a></span><span class="op">(</span><span class="va">ir</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="va">width</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>특히 <code>disjoin</code>과 <code>reduce</code> 함수는 overlap 되어 있는 구간의 분석을 수행하는데 유용하게 활용 됩니다.</p>
+<div class="sourceCode" id="cb432"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ir2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/inter-range-methods.html">disjoin</a></span><span class="op">(</span><span class="va">ir</span><span class="op">)</span>
+<span class="va">ir2</span>
+<span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/autoplot-method.html">autoplot</a></span><span class="op">(</span><span class="va">ir</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/autoplot-method.html">autoplot</a></span><span class="op">(</span><span class="va">ir2</span><span class="op">)</span> 
+
+<span class="va">ir3</span> <span class="op">&lt;-</span> <span class="fu">IRanges</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/inter-range-methods.html">reduce</a></span><span class="op">(</span><span class="va">ir</span><span class="op">)</span>
+<span class="va">ir3</span>
+<span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/autoplot-method.html">autoplot</a></span><span class="op">(</span><span class="va">ir3</span><span class="op">)</span> </code></pre></div>
+<div class="rmdnote">
+<p><strong>Exercises </strong></p>
+<ol style="list-style-type: decimal">
+<li><p>구간의 길이가 각각 100, 15, 30, 45 인 IRange 객체를 만드시오</p></li>
+<li><p>1부터 100까지의 전체 구간에서 시작 위치가 각각 1, 15, 30, 60 이면서 길이가 20 인 IRange 객체를 만드시오</p></li>
+</ol>
+</div>
+</div>
+<div id="genomicranges" class="section level2" number="19.3">
+<h2>
+<span class="header-section-number">19.3</span> GenomicRanges<a class="anchor" aria-label="anchor" href="#genomicranges"><i class="fas fa-link"></i></a>
+</h2>
+<p><a href="https://bioconductor.org/packages/release/bioc/html/GenomicRanges.html">GenomicRanges</a>는 지놈상의 위치정보와 Bioconductor에서 제공하는 다양한 high-throughput 정보들을 같이 표현하기 위해서 만들어진 패키지입니다.</p>
 <p>GRanges 함수를 이용해서 생성할 수 있으며 <code>browseVignettes("GenomicRanges")</code> 나 <code><a href="https://rdrr.io/r/utils/methods.html">methods()</a></code> 함수를 이용해서 관련된 기능을 찾아서 사용할 수 있습니다.</p>
-<div class="sourceCode" id="cb426"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb433"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/GenomicRanges">GenomicRanges</a></span><span class="op">)</span>
 
+
 <span class="va">gr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html">GRanges</a></span><span class="op">(</span>
+  seqnames <span class="op">=</span> <span class="st">"chr1"</span>, 
+  ranges <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/IRanges-constructor.html">IRanges</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">101</span><span class="op">:</span><span class="fl">110</span><span class="op">)</span>,
+  strand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">rep</a></span><span class="op">(</span><span class="st">"+"</span>, <span class="fl">10</span><span class="op">)</span>
+<span class="op">)</span>
+<span class="va">gr</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">gr</span><span class="op">)</span></code></pre></div>
+<p>다양한 함수 사용법을 보여줍니다.</p>
+<div class="sourceCode" id="cb434"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html">GRanges</a></span><span class="op">(</span>
     seqnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Rle-class.html">Rle</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="st">"chr1"</span>, <span class="st">"chr2"</span>, <span class="st">"chr1"</span>, <span class="st">"chr3"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>,
     ranges <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/IRanges-constructor.html">IRanges</a></span><span class="op">(</span><span class="fl">101</span><span class="op">:</span><span class="fl">110</span>, end <span class="op">=</span> <span class="fl">111</span><span class="op">:</span><span class="fl">120</span>, names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">head</a></span><span class="op">(</span><span class="va">letters</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span>,
     strand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Rle-class.html">Rle</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/strand.html">strand</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="st">"-"</span>, <span class="st">"+"</span>, <span class="st">"*"</span>, <span class="st">"+"</span>, <span class="st">"-"</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>,
     score <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,
     GC <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span>, length<span class="op">=</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span>
 <span class="va">gr</span>
-<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">gr</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/pkg/GenomeInfoDb/man/seqinfo.html">seqnames</a></span><span class="op">(</span><span class="va">gr</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/range-squeezers.html">ranges</a></span><span class="op">(</span><span class="va">gr</span><span class="op">)</span>
@@ -190,20 +212,63 @@
 
 <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/genomic-range-squeezers.html">granges</a></span><span class="op">(</span><span class="va">gr</span><span class="op">)</span> 
 <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">mcols</a></span><span class="op">(</span><span class="va">gr</span><span class="op">)</span> <span class="co">#meta data</span>
+<span class="fu"><a href="https://rdrr.io/pkg/GenomeInfoDb/man/seqinfo.html">seqlengths</a></span><span class="op">(</span><span class="va">gr</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/pkg/GenomeInfoDb/man/seqinfo.html">seqlengths</a></span><span class="op">(</span><span class="va">gr</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">249250621</span>, <span class="fl">243199373</span>, <span class="fl">198022430</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/GenomeInfoDb/man/seqinfo.html">seqlengths</a></span><span class="op">(</span><span class="va">gr</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">gr</span><span class="op">)</span>
-
-<span class="va">sp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/splitAsList.html">split</a></span><span class="op">(</span><span class="va">gr</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, each<span class="op">=</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/autoplot-method.html">autoplot</a></span><span class="op">(</span><span class="va">gr</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">gr</span><span class="op">)</span></code></pre></div>
+<p>ggbio의 autoplot을 사용하여 IRange와 같이 가시화 할 수 있으며 split 함수를 사용하면 지정된 규칙에 따라 Grange를 나눌 수 있습니다.</p>
+<div class="sourceCode" id="cb435"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/autoplot-method.html">autoplot</a></span><span class="op">(</span><span class="va">gr</span><span class="op">)</span>
+<span class="va">sp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/splitAsList.html">split</a></span><span class="op">(</span><span class="va">gr</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, each<span class="op">=</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="rmdnote">
 <p><strong>Exercises </strong></p>
-<p>코로나 바이러스서열들의 genbank 파일을 모두 다운로드 하고 각 바이러스별로 CDS 추출, 서열 비교, 가시화 등을 수행하시오</p>
+<p>위 결과에서 chromosome 별로 항목을 나눈 Grange list를 만드시오</p>
 </div>
+<div class="rmdnote">
+<p><strong>Exercises </strong></p>
+<p>위에서 받은 <code>NC_045512.2</code>는 우한에서 발생한 코로나바이러스 서열에 대한 CDS 추출, 서열 비교, 가시화 등을 수행하시오</p>
+</div>
+<p>다음은 대장균 지놈 NC_000913.3 gb 파일을 다운로드 받고 지놈 전체를 가시화 하는 코드입니다.</p>
+<div class="sourceCode" id="cb436"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/rentrez/">rentrez</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">genbankr</span><span class="op">)</span>
+
+<span class="va">tmps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/rentrez/reference/entrez_fetch.html">entrez_fetch</a></span><span class="op">(</span><span class="st">"nuccore"</span>, id<span class="op">=</span><span class="st">"NC_000913.3"</span>, rettype<span class="op">=</span><span class="st">"gbwithparts"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/write.html">write</a></span><span class="op">(</span><span class="va">tmps</span>, <span class="st">"ecoli-mg1655.gb"</span><span class="op">)</span>
+<span class="va">ecoligb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genbankr/man/readGenBank.html">readGenBank</a></span><span class="op">(</span><span class="st">"ecoli-mg1655.gb"</span><span class="op">)</span>
+
+<span class="va">ecoli_cds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicFeatures/man/transcripts.html">cds</a></span><span class="op">(</span><span class="va">ecoligb</span><span class="op">)</span>
+<span class="va">ecoli_cds</span>
+
+<span class="va">p.txdb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/autoplot-method.html">autoplot</a></span><span class="op">(</span><span class="va">ecoli_cds</span><span class="op">)</span>
+<span class="va">p.txdb</span>
+
+<span class="co">#library(igvR)</span>
+<span class="va">ecoli_cds</span>
+<span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/ggbio-class.html">ggbio</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/layout_circle-method.html">circle</a></span><span class="op">(</span><span class="va">ecoli_cds</span>, geom <span class="op">=</span> <span class="st">"ideo"</span>, fill <span class="op">=</span> <span class="st">"gray70"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/layout_circle-method.html">circle</a></span><span class="op">(</span><span class="va">ecoli_cds</span>, geom <span class="op">=</span> <span class="st">"scale"</span>, size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/layout_circle-method.html">circle</a></span><span class="op">(</span><span class="va">ecoli_cds</span>, geom <span class="op">=</span> <span class="st">"text"</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">locus_tag</span><span class="op">)</span>, vjust <span class="op">=</span> <span class="fl">0</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>
+    axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle<span class="op">=</span><span class="fl">90</span><span class="op">)</span>
+  <span class="op">)</span>
+
+<span class="va">gr1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/genomic-range-squeezers.html">granges</a></span><span class="op">(</span><span class="va">ecoli_cds</span><span class="op">)</span>
+<span class="va">gr2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/genomic-range-squeezers.html">granges</a></span><span class="op">(</span><span class="va">ecoli_cds</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">mcols</a></span><span class="op">(</span><span class="va">gr2</span><span class="op">)</span><span class="op">$</span><span class="va">test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">ecoli_cds</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/layout_circle-method.html">layout_circle</a></span><span class="op">(</span><span class="va">ecoli_cds</span>, geom <span class="op">=</span> <span class="st">"ideo"</span>, fill <span class="op">=</span> <span class="st">"gray70"</span>, radius <span class="op">=</span> <span class="fl">9</span>, trackWidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/layout_circle-method.html">layout_circle</a></span><span class="op">(</span><span class="va">ecoli_cds</span>, geom <span class="op">=</span> <span class="st">"scale"</span>, size <span class="op">=</span> <span class="fl">3</span>, trackWidth <span class="op">=</span> <span class="fl">1</span>, scale.n<span class="op">=</span><span class="fl">20</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/layout_circle-method.html">layout_circle</a></span><span class="op">(</span><span class="va">gr1</span>, geom <span class="op">=</span> <span class="st">"rect"</span>, color <span class="op">=</span> <span class="st">"steelblue"</span>,  radius <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/layout_circle-method.html">layout_circle</a></span><span class="op">(</span><span class="va">gr2</span>, geom <span class="op">=</span> <span class="st">"bar"</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y<span class="op">=</span><span class="va">test</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">3</span>, trackWidth <span class="op">=</span> <span class="fl">1</span>, scale.n<span class="op">=</span><span class="fl">20</span>, radius <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> 
+  </code></pre></div>
+</div>
+<div id="plyragnes" class="section level2" number="19.4">
+<h2>
+<span class="header-section-number">19.4</span> plyragnes<a class="anchor" aria-label="anchor" href="#plyragnes"><i class="fas fa-link"></i></a>
+</h2>
 <p>위 GenomicRanges 데이터를 dplyr 형태로 좀 더 쉽게 다루기 위한 패키지가 <code>plyragnes</code> 입니다.</p>
-<div class="sourceCode" id="cb427"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb437"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">plyranges</span><span class="op">)</span>
 
 <span class="va">covid19</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genbankr/man/readGenBank.html">readGenBank</a></span><span class="op">(</span><span class="st">"covid19wuhan.gb"</span><span class="op">)</span>
@@ -236,7 +301,8 @@
 <li><a class="nav-link" href="#tools-for-genome-analysis"><span class="header-section-number">19</span> Tools for genome analysis</a></li>
 <li><a class="nav-link" href="#genbank-file"><span class="header-section-number">19.1</span> genbank file</a></li>
 <li><a class="nav-link" href="#iranges"><span class="header-section-number">19.2</span> IRanges</a></li>
-<li><a class="nav-link" href="#genomic-ranges"><span class="header-section-number">19.3</span> Genomic ranges</a></li>
+<li><a class="nav-link" href="#genomicranges"><span class="header-section-number">19.3</span> GenomicRanges</a></li>
+<li><a class="nav-link" href="#plyragnes"><span class="header-section-number">19.4</span> plyragnes</a></li>
 </ul>
 
       <div class="book-extra">
@@ -253,7 +319,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>2022년 한국생명공학연구원 연구데이터 분석과정 R</strong>" was written by 합성생물학전문연구소 김하성. It was last built on 2022-08-14.</p>
+    <p>"<strong>2022년 한국생명공학연구원 연구데이터 분석과정 R</strong>" was written by 합성생물학전문연구소 김하성. It was last built on 2022-09-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

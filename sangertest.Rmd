@@ -1,0 +1,31 @@
+---
+title: "sanger"
+output: html_document
+date: '2022-08-24'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(sangeranalyseR)
+library(kableExtra)
+```
+
+# Sanger
+
+```{r, eval=F}
+
+my_aligned_contigs <- SangerAlignment(ABIF_Directory      = "./my_data/",
+                                      fastaFileName = "",
+                                      REGEX_SuffixForward = "_[0-9]*_F.ab1$",
+                                      REGEX_SuffixReverse = "_[0-9]*_R.ab1$")
+
+writeFasta(my_aligned_contigs)
+generateReport(my_aligned_contigs)
+launchApp(my_aligned_contigs)
+
+
+```
+
+# preparing input files
+
+

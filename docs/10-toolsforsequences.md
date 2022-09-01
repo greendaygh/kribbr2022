@@ -321,6 +321,57 @@ writePairwiseAlignments(aln, block.width=50)
 
 Multiple sequence alignment(MSA) tool은 서열 데이터의 양과 계산량의 문제로 linux 기반 commandline 프로그램들이 많습니다. 대표적으로 [CLUSTAL-Omega](https://www.ebi.ac.uk/Tools/msa/clustalo/), [MUSCLE](https://www.ebi.ac.uk/Tools/msa/muscle/). window 기반 환경에서는 docker 등을 활용해서 관련 분석을 수행할 수 있습니다. 
 
+
+### msa
+
+[msa](https://www.bioconductor.org/packages/release/bioc/html/msa.html) 패키지는 위 Clustal나 MUSCLE 등의 프로그램에 대한 R 인터페이스를 제공하며 Linux 뿐만 아니라 모든 운영체제에서 수행될 수 있도록 만들어 둔 패키지 입니다. 
+
+
+
+
+
+```r
+library(msa)
+
+alnmsa <- msa(subcovid19seq)
+class(alnmsa)
+alnmsa
+
+print(alnmsa, show="complete")
+?msaPrettyPrint
+msaPrettyPrint(alnmsa, output="pdf", showNames="none", showLogo="top", askForOverwrite=FALSE, verbose=FALSE)
+myconseq <- msaConsensusSequence(alnmsa)
+
+```
+참고로 정렬된 서열 출력물에 표시되는 ?는 판단하기 모호한 위치를 나타냅니다. 예를 들어 A와 T 가 5:5로 나타난 위치는 ?로 표시됩니다.
+
+
+`MsaDNAMultipleAlignment` class는 Biostring 패키지의 `DNAString` class를 상속받은 클래스로서 다음과 같이 `DNAStringSet` class로 변환해서 분석도 가능합니다. 
+
+
+```r
+alnseq <- DNAStringSet(aln)
+class(alnseq)
+alnseq
+myconseq2 <- ConsensusSequence(alnseq)
+```
+
+
+위 alignment 결과에서 관심있는 특정 위치만을 선택해서 임의의 분석을 수행하고 싶은 경우 마스킹 함수를 사용할 수 있습니다. 이 기능 역시 `MsaDNAMultipleAlignment` class는 `Biostring` 패키지의 `DNAString` class 모두에 적용이 가능합니다. IRanges 함수는 뒤에서 더 상세히 설명하도록 하겠습니다. 
+
+
+
+```r
+colM <- IRanges(start=1, end=300)
+colmask(alnmsa) <- colM
+alnmsa
+msaConsensusSequence(alnmsa)
+alphabetFrequency(alnmsa)
+
+alphabetFrequency(unmasked(alnmsa))
+```
+### DECIPHER 
+
 [DECIPHER](https://www.bioconductor.org/packages/release/bioc/html/DECIPHER.html) 패키지는 서열 alignment나 primer design 등을 수행할 수 있는 패키지로 다음과 같이 별도 메모리에 서열을 저장하고 빠르게 alignment를 수행할 수 있어서 중소 규모의 서열에 대한 분석으로 유용하게 사용될 수 있습니다. 다음은 관련 서열을 SQLite 데이터베이스에 저장하고 그 내용을 쉽게 볼 수 있는 기능들 입니다. `dbDisconnect` 함수를 실행하면 모든 저장된 데이터가 사라지며 매모리는 다시 사용할 수 있게 됩니다. 
 
 
@@ -359,6 +410,7 @@ covid19seq2 <- SearchDB(dbConn, identifier = "covid19")
 subcovid19seq <- subseq(covid19seq2, 1, 2000)
 aln <- AlignSeqs(subcovid19seq)
 aln
+class(aln)
 
 BrowseSeqs(aln, colWidth = 100)
 BrowseSeqs(aln, colWidth = 100, patterns=DNAStringSet(c("ACTG", "CSC")))
@@ -372,7 +424,11 @@ BrowseSeqs(aln2, colWidth = 100, highlight=1)
 ```
 
 
-DECIPHER 패키지의 `DigestDNA`함수를 이용하면 enzyme digestion을 시뮬레이션할 수 있는 기능을 활용할 수 있습니다. 단 숫자 등 필요없는 문자를 제거하기 위해서 stringr 패키지를 사용합니다. 
+`AlignSeqs`함수의 결과가 `DNAStringSet` 클래스이므로 앞서 수행한 마스킹 등의 기능을 동일하게 적용 가능합니다. 
+
+
+
+`DECIPHER` 패키지의 `DigestDNA`함수를 이용하면 enzyme digestion을 시뮬레이션할 수 있는 기능을 활용할 수 있습니다. 단 숫자 등 필요없는 문자를 제거하기 위해서 stringr 패키지를 사용합니다. 
 
 
 ```r
@@ -427,65 +483,16 @@ BrowseSeqs(covid19seq2[1], colWidth = 100, patterns=c(rsite2, rsite3))
 ![](images/aaacode.png)
 
 
-
-## BLAST result analysis
-
-BLAST를 로컬컴퓨터에 설치하거나 docker를 이용해서 활용할 수 있으나 본 강의에서는 직접 BLAST를 수행하는 대신 NCBI에서 실행한 BLAST 출력물을 분석하는 경우에 대해서 설명을 진행하겠습니다. 예시로는 PET를 분해하는 단백질로 알려진 IsPETase의 서열과 유사한 서열을 찾아서 분석해 보겠습니다. IsPETase 정보는 다음과 같습니다 Genes encoding I. sakaiensis 201-F6 IsPETase (WT PETase) (accession number: A0A0K8P6T7). 
-
-
-::: rmdnote
-**Exercises **
-
-1) NCBI BLAST 사이트에서 A0A0K8P6T7 단백질에 대한 BLASTp를 수행하시오 (db: nr)
-
-2) 결과물을 (100개) 다운로드 하고 (fasta와 hit table 각 1개 파일씩) 작업디렉토리로 복사하시오
-
-3) fasta 와 hit 데이터를 각각 읽어들이시오 
-
-
-
-4) 100개의 서열을 DECIPHER 패키지를 활용해서 정렬하고 100bp 단위로 출력해보시오 
-
-
-
-
-5) align된 결과에서 consensus 서열을 추출하고 각 위치별로 어떤 아미노산이 많은지 bar 그래프를 그려보시오 
-
-
-
-:::
-
-
-
 ## Phylogenetic trees with clustering
 
-DECIPHER 패키지에는 XStringSet 서열의 거리를 계산해주는 `DistanceMatrix` 함수가 있습니다. 이 함수를 이용하면 역시 같은 패키지에서 제공하는 `IdClusters` 함수를 이용해서 유사한 서열끼리 묶어주는 tree 를 만들 수 있습니다. 
 
-
-
-```r
-dm <- DistanceMatrix(alignedseq)
-class(dm)
-dim(dm)
-dm[1:2,1:2]
-
-tree <- IdClusters(dm, cutoff=10, method="NJ", showPlot=TRUE, type="dendrogram")
-class(tree)
-methods(class="dendrogram")
-plot(tree)
-
-str(tree)
-
-```
-
-
-계통학 등에서 tree 형태의 가시화를 위해 다양한 포멧의 파일이 개발되었고 `treeio`는 이들 다양한 포맷의 파일을 쉽게 변환하기 위해 만들어진 패키지 입니다. 다음은 Newick tree 포멧의 예 입니다. 
+다중서열비교 결과는 계통학에서 널리 쓰이며  `msa`나 `DECIPHER` 패키지에서 얻어진 결과를 계통학의 tree 형태로 가시화할 수 있습니다. tree 형태의 가시화를 위해 다양한 포멧의 파일이 개발되었고 `treeio` 패키지는 이들 다양한 포맷의 파일을 쉽게 변환하기 위해 만들어진 패키지 입니다. 다음은 Newick tree 포멧의 예 입니다. 
 
 ~~~
     ((t2:0.04,t1:0.34):0.89,(t5:0.37,(t4:0.03,t3:0.67):0.9):0.59); 
 ~~~
 
-가장 널리 사용되는 포멧은 `phylo` 형태로서 이는 `ape`라는 phylogenetic 분석의 대표적인 패키지에서 처음 제안되어 사용되고 있습니다. 최근 ggplot 형태의 [ggtree](https://yulab-smu.top/treedata-book/chapter12.html), [reference](https://www.molecularecologist.com/2017/02/08/phylogenetic-trees-in-r-using-ggtree/)이 개발되어 계통도를 좀더 세밀하게 그릴 수 있으며 ggtree는 `phylo` 형태의 포맷을 주로 사용하지만 `dendrogram` class도 사용할 수 있습니다. 
+가장 널리 사용되는 포멧은 `phylo` 형태로서 이는 `ape`라는 phylogenetic 분석의 대표적인 패키지에서 처음 제안되어 사용되고 있습니다. 최근 ggplot 형태의 [ggtree](https://yulab-smu.top/treedata-book/chapter12.html), [reference](https://www.molecularecologist.com/2017/02/08/phylogenetic-trees-in-r-using-ggtree/)이 개발되어 계통도를 좀더 세밀하게 그릴 수 있으며 ggtree는 `phylo` 형태의 포맷을 주로 사용합니다. 
 
 
 
@@ -494,16 +501,68 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
 BiocManager::install("ggtree")
-BiocManager::install("treeio")
+#BiocManager::install("treeio")
 
-library(ggtree)
-library(treeio)
-library(tidytree)
+```
+
+
+Phylogenetic tree는 서열간의 유사도(거리)를 기반으로 분석할 수 있습니다. 앞서 사용한 `mas`나 `DECIPHER` 패키지로 얻어진 MSA 결과는 모두 `Biostrings` 패키지의  `XStringSet` (`DNAStringSet`,  `AAStringSet` 등) 클래스 입니다. 따라서 XStringSet의 거리를 계산해주는 `Biostrings::stringDist` 함수나 `DECIPHER::DistanceMatrix`가 사용될 수 있습니다. 참고로 `phylo` class는  `as.tibble` 함수를 이용해서 테이블 형태로 변환, 활용할 수 있습니다. 
+
+
+
+```r
 library(ape)
+library(ggtree)
 
+alnmsa <- msa(subcovid19seq)
+mydist <- stringDist(DNAStringSet(alnmsa))
+clust <- hclust(mydist)
+class(clust)
+
+mytree <- as.phylo(clust)
+ggtree(mytree, layout="circular") +
+  geom_tiplab()
+
+as.tibble(mytree)
+```
+
+
+`DECIPHER` 패키지에는 `XStringSet` 서열의 거리를 계산해주는 `DistanceMatrix` 함수가 있습니다. 이 함수를 이용하면 역시 같은 패키지에서 제공하는 `IdClusters` 함수를 이용해서 유사한 서열끼리 묶어주는 tree 를 만들 수 있습니다.  `dendrogram`는 `str` 함수 활용이 가능합니다. 
+
+
+
+```r
+dm <- DistanceMatrix(subcovid19seq)
+class(dm)
+
+clust <- IdClusters(dm, cutoff=10, method="NJ", showPlot=F, type="dendrogram")
+class(clust)
+methods(class="dendrogram")
+plot(clust)
+str(clust)
+
+```
+
+`dendrogram` class는 `hclust`를 거처 `phylo` class 형태로 변환 후 `ggtree` 패키지를 활용할 수 있습니다. 
+
+
+
+```r
+## convert to dendrogram -> hclust -> phylo 
+cl <- as.hclust(clust)
+py <- as.phylo(cl)
+class(py)
+ggtree(py)
+as.tibble(py)
+```
+
+
+ggtree를 활용하면 다양한 레이아웃을 활용할 수 있고 레이아웃에 대한 정보는 [Layouts of a phylogenetic tree](https://yulab-smu.top/treedata-book/chapter4.html#tree-layouts) 이 곳을 참고하시면 되겠습니다. 
+
+
+
+```r
 tree <- rtree(n = 20)
-class(tree)           
-methods(class="phylo")
 ggtree(tree)
 
 ggplot(tree) +
@@ -513,17 +572,49 @@ ggplot(tree) +
 ggtree(tree, branch.length="none")
 
 ggtree(tree, layout="circular") +
+  geom_tiplab(color="firebrick")
+
+ggtree(tree, layout="circular") +
   geom_tiplab(size=3, aes(angle=angle))
 
 ggtree(tree, layout="circular", branch.length="none") +
   geom_tiplab(size=3, aes(angle=angle))
 
 ggtree(tree) +
-  theme_tree2()
+  theme_tree2() 
+
+ggtree(tree, layout="circular") +
+  geom_tiplab() + 
+  theme(plot.margin = unit(c(100,30,100,30), "mm"))
+
+ggsave("myphylo.pdf", width = 50, height = 50, units = "cm", limitsize = FALSE)
 
 ```
 
-다양한 레이아웃에 대한 정보는 [Layouts of a phylogenetic tree](https://yulab-smu.top/treedata-book/chapter4.html#tree-layouts) 이 곳을 참고하시면 되겠습니다. 
+covid19 example
+
+
+
+```r
+
+covid19seq <- readDNAStringSet("covid19.fasta", format="fasta")[1:6]
+subcovid19seq <- subseq(covid19seq, 1, 2000)
+names(subcovid19seq)  <- sapply(strsplit(names(subcovid19seq), " "), function(x){return(x[1])})
+  
+alnmsa <- msa(subcovid19seq)
+mydist <- stringDist(DNAStringSet(alnmsa))
+clust <- hclust(mydist)
+mytree <- as.phylo(clust)
+
+ggtree(mytree, layout="circular") +
+  geom_tiplab(color="firebrick", size=3)
+
+ggtree(mytree) +
+  geom_tiplab(color="firebrick", size=3) +
+  theme_tree2(scale=0.1) 
+
+```
+
 
 
 특정 그룹을 highlight 하기 위해서 `geom_hilight` 함수를 사용합니다. 
@@ -553,41 +644,63 @@ ggtree(tree) +
   scale_fill_manual(values=c("steelblue", "darkgreen"))
 
 ```
+### Facet Utilities
 
-앞서 우리가 수행한 `dendrogram` class도 적용 가능하며 `phylo`로 변환 후 분석을 수행할 수도 있습니다. 
-
+geom_facet 와 facet_widths 를 사용하면 추가 판넬에 tree를 그릴 수 있습니다. 
 
 
 ```r
-dm <- DistanceMatrix(alignedseq)
-dm <- dist(alignedseq)
-tree <- IdClusters(dm, cutoff=10, method="NJ", showPlot=TRUE, type="dendrogram")
+tree <- rtree(30)
 
-ggtree(tree, layout="circular") +
-  geom_tiplab()
-
-ggtree(tree, layout="circular") +
+p <- ggtree(tree, branch.length = "none") + 
   geom_tiplab() + 
-  theme(plot.margin = unit(c(100,30,100,30), "mm"))
+  theme(legend.position='none')
 
-ggsave("myphylo.pdf", width = 50, height = 50, units = "cm", limitsize = FALSE)
+a <- runif(30, 0,1)
+b <- 1 - a
+df <- data.frame(tree$tip.label, a, b)
+df2 <- pivot_longer(df, -tree.tip.label)
 
+p2 <- p + geom_facet(panel = 'bar', data = df2, geom = geom_bar, 
+                 mapping = aes(x = value, fill = as.factor(name)), 
+                 orientation = 'y', width = 0.8, stat='identity') + 
+        xlim_tree(9)
+
+facet_widths(p2, widths = c(1, 2))
 ```
 
 
-dendrogram class를 hclust를 거처 phylo class 형태로 변환할 수도 있으며 이 때는 tidytree 패키지를 활용할 수 있다는 장점이 있습니다.  
+
+
+## BLAST result analysis
+
+BLAST를 로컬컴퓨터에 설치하거나 docker를 이용해서 활용할 수 있으나 본 강의에서는 직접 BLAST를 수행하는 대신 NCBI에서 실행한 BLAST 출력물을 분석하는 경우에 대해서 설명을 진행하겠습니다. 예시로는 PET를 분해하는 단백질로 알려진 IsPETase의 서열과 유사한 서열을 찾아서 분석해 보겠습니다. IsPETase 정보는 다음과 같습니다 Genes encoding I. sakaiensis 201-F6 IsPETase (WT PETase) (accession number: A0A0K8P6T7). 
+
+
+::: rmdnote
+**Exercises **
+
+1) NCBI BLAST 사이트에서 A0A0K8P6T7 단백질에 대한 BLASTp를 수행하시오 (db: nr)
+
+2) 결과물을 (100개) 다운로드 하고 (fasta와 hit table 각 1개 파일씩) 작업디렉토리로 복사하시오
+
+3) fasta 와 hit 데이터를 각각 읽어들이시오 
 
 
 
-```r
-## convert to dendrogram -> hclust -> phylo 
-cl <- hclust(dm)
-cl <- as.hclust(tree)
-py <- as.phylo(cl)
-class(py)
-ggtree(py)
-as.tibble(py)
-```
+4) 100개의 서열을 DECIPHER 패키지를 활용해서 정렬하고 100bp 단위로 출력해보시오 
+
+
+
+
+5) align된 결과에서 consensus 서열을 추출하고 각 위치별로 어떤 아미노산이 많은지 bar 그래프를 그려보시오 
+
+
+
+
+6) align된 결과를 `ggtree` 패키지를 사용해서 phylogenetic를 그리시오 
+
+:::
 
 
 ---
