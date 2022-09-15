@@ -1,8 +1,6 @@
-# Lecture 09 Note
+## Lecture 09 (0901)
 
-- 20220901
-
-## class 01
+**class 01**
 
 - msa 
 - `NC_045512.2` NCBI 다운로드 
@@ -99,7 +97,7 @@ BrowseSeqs(aln, colWidth = 100)
 
 ```
 
-## class 02
+**class 02**
 
 - ggtree (bioconductor), treeio (Bioconductor), ape (CRAN) 설치 
 - 1) MSA - 2) Distance - 3) clustering - 4) Tree
@@ -237,7 +235,7 @@ cdsseq <- getSeq(covidseq, cds(covidgb))
 class(covidseq)
 ```
 
-##  class 03
+**class 03**
 
 
 ```{r, eval=F}
@@ -350,7 +348,7 @@ split(gr3, c(rep("a", 10), rep("b", 10)))
 - reduce 
 
 
-##  class 04
+**class 04**
 
 - 대장균 지놈 plot 
 

@@ -1,8 +1,6 @@
-# Lecture 07 Note
+## Lecture 07 (0804)
 
-- 20220804
-
-## class 01
+**class 01**
 
 
 - 프로젝트 만들기 
@@ -121,7 +119,7 @@ gaps(myexons)
 
 
 
-## class 02
+**class 02**
 
 - Biostrings 설치 
 
@@ -317,7 +315,7 @@ successiveViews(x[[1]], width=rep(40, nchar(x[[1]])/40))
 ```
 
 
-## class 03
+**class 03**
 
 - DNA sequence read and write
 
@@ -378,7 +376,7 @@ ggplot(df, aes(x=rowname, y=whole_codon)) +
 ```
 
 
-## class 04
+**class 04**
 
 - 코돈 아미노산 변환, barplot 그리기
 - [data analysis with tidyverse](https://greendaygh.github.io/kribbr2022/tidyverse.html#dplyr)

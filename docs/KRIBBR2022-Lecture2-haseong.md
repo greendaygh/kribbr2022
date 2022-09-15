@@ -1,8 +1,10 @@
-# Lecture 02 Note
+# Lecture Note
+
+## Lecture 02 (0526)
 
 설명이나 실습을 위해 `R 사용법 및 데이터 분석 기초 5.19(목), 5.26(목)` 강의를 진행하며 작성한 코드입니다.
 
-## numeric vector
+**numeric vector**
 
 -   Ctrl + Alt + i 누르면 코드청크 생성
 -   커서를 해당 라인에 두구 Ctrl + Enter 누르면 해당 라인 실행
@@ -268,7 +270,7 @@ table(z)
 
 ```
 
-## matrix
+**matrix**
 
 -   연습문제 풀이 성적별 테이블 정렬
 
@@ -293,7 +295,7 @@ o
 score[o,]
 ```
 
-## data.frame
+**data.frame**
 
 
 ```r
@@ -317,7 +319,7 @@ score[o,]
 
 ```
 
-## list
+**list**
 
 
 ```r
@@ -365,7 +367,7 @@ codon <- c("UUU", "UUC", "UUA", "UUG", "CUA", "CUU", "CUG", "CUC")
 data.frame(aa, codon)
 ```
 
-## functions
+**functions**
 
 
 
@@ -444,7 +446,7 @@ for(i in 1:3){
 y
 ```
 
-## for
+**for**
 
 
 ```r
@@ -492,7 +494,7 @@ myseq
 
 ```
 
-## Data transformation 
+**Data transformation**
 
 - `UsingR` 패키지의 babies 데이터셋을 적절히 변환하는 예제. `with`와 `within` 활용법 알아두기 (설명 안 함)
 

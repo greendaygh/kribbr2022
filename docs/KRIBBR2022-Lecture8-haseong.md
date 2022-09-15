@@ -1,8 +1,6 @@
-# Lecture 08 Note
+## Lecture 08 (0811)
 
-- 20220811
-
-## class 01
+**class 01**
 
 - `rentrez` 패키지를 사용한 NCBID 데이터 다운로드 
 
@@ -104,7 +102,7 @@ names(covid19seq)
 ```
 
 
-## class 02
+**class 02**
 
 - `popset` 데이터베이스에서 선택한 각 아이템 (스터디별) 사용한 샘플 수 구하기
 - `sapply` 및 사용자 정의 함수 `extract_statistics_count` 사용한 barplot 그리기 
@@ -230,7 +228,7 @@ aln <- pairwiseAlignment(covid19seqs[1], covid19seqs[2])
 writePairwiseAlignments(aln, block.width=50)
 ```
 
-## class 03
+**class 03**
 
 - `DECIPHER` 패키지 활용한 다중 서열 정렬 
 
@@ -337,7 +335,7 @@ dim(myconm)
 myconm[1:10, 1:10]
 ```
 
-## class 04
+**class 04**
 
 - ggtree 활용
 

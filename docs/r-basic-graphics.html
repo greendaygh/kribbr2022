@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 7 R basic graphics | 2022년 한국생명공학연구원 연구데이터 분석과정 R</title>
+<title>Chapter 6 R basic graphics | 2022년 한국생명공학연구원 연구데이터 분석과정 R</title>
 <meta name="author" content="합성생물학전문연구소 김하성">
-<meta name="description" content="7.1 scatter plot R에서 plot 함수는 가장 기본이 되는 그래프 함수 입니다. 아래는 산포도를 그려주는 코드로서 myxy가 두 개의 변수(x1과 y1)를 가지고 있으므로 아래 명령들은 모두 같은 그림을 그려주게 됩니다. x &lt;- c(1:100) y &lt;- x*2 + rnorm(100) myxy &lt;- data.frame(x,y)...">
+<meta name="description" content="6.1 scatter plot R에서 plot 함수는 가장 기본이 되는 그래프 함수 입니다. 아래는 산포도를 그려주는 코드로서 myxy가 두 개의 변수(x1과 y1)를 가지고 있으므로 아래 명령들은 모두 같은 그림을 그려주게 됩니다. x &lt;- c(1:100) y &lt;- x*2 + rnorm(100) myxy &lt;- data.frame(x,y)...">
 <meta name="generator" content="bookdown 0.26 with bs4_book()">
-<meta property="og:title" content="Chapter 7 R basic graphics | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
+<meta property="og:title" content="Chapter 6 R basic graphics | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="7.1 scatter plot R에서 plot 함수는 가장 기본이 되는 그래프 함수 입니다. 아래는 산포도를 그려주는 코드로서 myxy가 두 개의 변수(x1과 y1)를 가지고 있으므로 아래 명령들은 모두 같은 그림을 그려주게 됩니다. x &lt;- c(1:100) y &lt;- x*2 + rnorm(100) myxy &lt;- data.frame(x,y)...">
+<meta property="og:description" content="6.1 scatter plot R에서 plot 함수는 가장 기본이 되는 그래프 함수 입니다. 아래는 산포도를 그려주는 코드로서 myxy가 두 개의 변수(x1과 y1)를 가지고 있으므로 아래 명령들은 모두 같은 그림을 그려주게 됩니다. x &lt;- c(1:100) y &lt;- x*2 + rnorm(100) myxy &lt;- data.frame(x,y)...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 7 R basic graphics | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
-<meta name="twitter:description" content="7.1 scatter plot R에서 plot 함수는 가장 기본이 되는 그래프 함수 입니다. 아래는 산포도를 그려주는 코드로서 myxy가 두 개의 변수(x1과 y1)를 가지고 있으므로 아래 명령들은 모두 같은 그림을 그려주게 됩니다. x &lt;- c(1:100) y &lt;- x*2 + rnorm(100) myxy &lt;- data.frame(x,y)...">
+<meta name="twitter:title" content="Chapter 6 R basic graphics | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
+<meta name="twitter:description" content="6.1 scatter plot R에서 plot 함수는 가장 기본이 되는 그래프 함수 입니다. 아래는 산포도를 그려주는 코드로서 myxy가 두 개의 변수(x1과 y1)를 가지고 있으므로 아래 명령들은 모두 같은 그림을 그려주게 됩니다. x &lt;- c(1:100) y &lt;- x*2 + rnorm(100) myxy &lt;- data.frame(x,y)...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -49,25 +49,17 @@
 <li><a class="" href="rmarkdown.html"><span class="header-section-number">3</span> Rmarkdown</a></li>
 <li><a class="" href="r-programming.html"><span class="header-section-number">4</span> R programming</a></li>
 <li><a class="" href="data-transformation.html"><span class="header-section-number">5</span> Data transformation</a></li>
-<li><a class="" href="lecture-02-note.html"><span class="header-section-number">6</span> Lecture 02 Note</a></li>
-<li><a class="active" href="r-basic-graphics.html"><span class="header-section-number">7</span> R basic graphics</a></li>
-<li><a class="" href="tidyverse.html"><span class="header-section-number">8</span> tidyverse</a></li>
-<li><a class="" href="lecture-03-note.html"><span class="header-section-number">9</span> Lecture 03 Note</a></li>
-<li><a class="" href="lecture-04-note.html"><span class="header-section-number">10</span> Lecture 04 Note</a></li>
-<li><a class="" href="data-visualization.html"><span class="header-section-number">11</span> Data visualization</a></li>
-<li><a class="" href="ggplot2-examples.html"><span class="header-section-number">12</span> ggplot2 examples</a></li>
-<li><a class="" href="lecture-05-note.html"><span class="header-section-number">13</span> Lecture 05 Note</a></li>
-<li><a class="" href="lecture-06-note.html"><span class="header-section-number">14</span> Lecture 06 Note</a></li>
-<li><a class="" href="bioconductor.html"><span class="header-section-number">15</span> Bioconductor</a></li>
-<li><a class="" href="biostrings.html"><span class="header-section-number">16</span> Biostrings</a></li>
-<li><a class="" href="tools-for-sequences.html"><span class="header-section-number">17</span> Tools for sequences</a></li>
-<li><a class="" href="lecture-07-note.html"><span class="header-section-number">18</span> Lecture 07 Note</a></li>
-<li><a class="" href="tools-for-genome-analysis.html"><span class="header-section-number">19</span> Tools for genome analysis</a></li>
-<li><a class="" href="lecture-08-note.html"><span class="header-section-number">20</span> Lecture 08 Note</a></li>
-<li><a class="" href="lecture-09-note.html"><span class="header-section-number">21</span> Lecture 09 Note</a></li>
-<li><a class="" href="tools-for-high-throughput-data.html"><span class="header-section-number">22</span> Tools for High-throughput data</a></li>
-<li><a class="" href="statistical-inference.html"><span class="header-section-number">23</span> Statistical inference</a></li>
-<li><a class="" href="significance-test.html"><span class="header-section-number">24</span> Significance test</a></li>
+<li><a class="active" href="r-basic-graphics.html"><span class="header-section-number">6</span> R basic graphics</a></li>
+<li><a class="" href="tidyverse.html"><span class="header-section-number">7</span> tidyverse</a></li>
+<li><a class="" href="data-visualization.html"><span class="header-section-number">8</span> Data visualization</a></li>
+<li><a class="" href="ggplot2-examples.html"><span class="header-section-number">9</span> ggplot2 examples</a></li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">10</span> Bioconductor</a></li>
+<li><a class="" href="biostrings.html"><span class="header-section-number">11</span> Biostrings</a></li>
+<li><a class="" href="tools-for-sequences.html"><span class="header-section-number">12</span> Tools for sequences</a></li>
+<li><a class="" href="tools-for-genome-analysis.html"><span class="header-section-number">13</span> Tools for genome analysis</a></li>
+<li><a class="" href="high-throughput-data-i.html"><span class="header-section-number">14</span> High-throughput data I</a></li>
+<li><a class="" href="inference-and-test.html"><span class="header-section-number">15</span> Inference and test</a></li>
+<li><a class="" href="lecture-note.html"><span class="header-section-number">16</span> Lecture Note</a></li>
 </ul>
 
         <div class="book-extra">
@@ -75,16 +67,16 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="r-basic-graphics" class="section level1" number="7">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="r-basic-graphics" class="section level1" number="6">
 <h1>
-<span class="header-section-number">7</span> R basic graphics<a class="anchor" aria-label="anchor" href="#r-basic-graphics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6</span> R basic graphics<a class="anchor" aria-label="anchor" href="#r-basic-graphics"><i class="fas fa-link"></i></a>
 </h1>
-<div id="scatter-plot" class="section level2" number="7.1">
+<div id="scatter-plot" class="section level2" number="6.1">
 <h2>
-<span class="header-section-number">7.1</span> scatter plot<a class="anchor" aria-label="anchor" href="#scatter-plot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.1</span> scatter plot<a class="anchor" aria-label="anchor" href="#scatter-plot"><i class="fas fa-link"></i></a>
 </h2>
 <p>R에서 <code>plot</code> 함수는 가장 기본이 되는 그래프 함수 입니다. 아래는 산포도를 그려주는 코드로서 myxy가 두 개의 변수(x1과 y1)를 가지고 있으므로 아래 명령들은 모두 같은 그림을 그려주게 됩니다.</p>
-<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span>
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">*</span><span class="fl">2</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>
 <span class="va">myxy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span>
@@ -93,17 +85,17 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">myxy</span><span class="op">$</span><span class="va">x</span>, y<span class="op">=</span><span class="va">myxy</span><span class="op">$</span><span class="va">y</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">y</span><span class="op">~</span><span class="va">x</span>, data<span class="op">=</span><span class="va">myxy</span><span class="op">)</span></code></pre></div>
 <p>가장 마지막 명령은 <code>formula</code>를 사용한 plot으로 첫번째 파라메터 인자로 <code>formula</code> 타입이 전달되면 plot.formula 함수가 실행되며 x, y 값이 전달될 경우 <code>plot.default</code> 함수가 수행됩니다. R에서는 이렇게 전달되는 파라메터의 타입에 따라서 다른 기능을 하는 함수를 <code>Generic function</code> 이라고 합니다. 만약 기존 그림에 추가 데이터의 산포를 그리고 싶은 경우 <code>points</code>라는 함수를 사용합니다.</p>
-<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span>, <span class="fl">100</span>, replace <span class="op">=</span><span class="cn">T</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">z</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">z</span>, col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="histogram" class="section level2" number="7.2">
+<div id="histogram" class="section level2" number="6.2">
 <h2>
-<span class="header-section-number">7.2</span> histogram<a class="anchor" aria-label="anchor" href="#histogram"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.2</span> histogram<a class="anchor" aria-label="anchor" href="#histogram"><i class="fas fa-link"></i></a>
 </h2>
 <p><code>hist</code> 함수는 데이터들의 분포를 히스토그램으로 그려주는 함수입니다. 히스토그램은 데이터들이 갖는 값을 특정 구간으로 나누고 각 구간에 해당하는 데이터가 몇 개인지 빈도수를 계산하여 막대그래프로 보여줍니다.</p>
-<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">x</span>, br<span class="op">=</span><span class="fl">20</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span>, main<span class="op">=</span><span class="st">"Main text"</span>, xlab<span class="op">=</span><span class="st">"X label"</span><span class="op">)</span>
 
@@ -111,12 +103,12 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">airquality</span><span class="op">$</span><span class="va">Wind</span>, br<span class="op">=</span><span class="fl">50</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">airquality</span><span class="op">$</span><span class="va">Wind</span>, br<span class="op">=</span><span class="fl">10</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="boxplot" class="section level2" number="7.3">
+<div id="boxplot" class="section level2" number="6.3">
 <h2>
-<span class="header-section-number">7.3</span> boxplot<a class="anchor" aria-label="anchor" href="#boxplot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.3</span> boxplot<a class="anchor" aria-label="anchor" href="#boxplot"><i class="fas fa-link"></i></a>
 </h2>
 <p>boxplot (상자 수염 그림)은 데이터의 여러가지 대표값 (중간값 median, 첫번째 사분위수 1st quantile, 세번째 사분위수 3rd quantile, 최소 minimum, 최대값 maximum) 등을 한눈에 볼 수 있도록 만들어놓은 그래프 입니다. 수염이 나타내는 값은 최소값이나 최대값이 될 수 있고 또는 하위 1.5 IQR 에서 최소 데이터와 상위 1.5 IQR 내에 최고 데이터를 나타낼 수 있으며 이 경우 그 외에 존재하는 값들은 outlier가 됩니다.</p>
-<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 
@@ -139,7 +131,7 @@
   <span class="va">Wind</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">Wind</span> <span class="op">&gt;</span> <span class="va">val</span><span class="op">)</span><span class="op">]</span>
 <span class="op">}</span><span class="op">)</span></code></pre></div>
 <p>data.frame 타입의 오브젝트에 대해서 boxplot을 그릴 경우 여러 변수의 데이터들의 분포를 한눈에 비교할 수 있읍니다.</p>
-<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>
 <span class="co">#boxplot(y)</span>
 <span class="va">xy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>
@@ -152,12 +144,12 @@
 <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">mymat</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">mymat</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="barplot" class="section level2" number="7.4">
+<div id="barplot" class="section level2" number="6.4">
 <h2>
-<span class="header-section-number">7.4</span> barplot<a class="anchor" aria-label="anchor" href="#barplot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.4</span> barplot<a class="anchor" aria-label="anchor" href="#barplot"><i class="fas fa-link"></i></a>
 </h2>
 <p>막대그래프는 각 값들을 막대 형태로 나란히 배치하여 서로 비교가 용이하도록 만든 그래프 입니다. <code>table</code> 함수는 같은 값을 갖는 데이터들이 몇 개나 있는지 테이블을 만들어주는 함수 입니다. rbind는 두 변수를 row를 기준으로 붙여주는 역할의 함수입니다.</p>
-<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">12</span>, <span class="fl">200</span>, replace <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
 <span class="va">tab_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">12</span>, <span class="fl">200</span>, replace <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
@@ -184,26 +176,26 @@
 </ol>
 </div>
 </div>
-<div id="draw-multiple-graphs-in-the-same-plot" class="section level2" number="7.5">
+<div id="draw-multiple-graphs-in-the-same-plot" class="section level2" number="6.5">
 <h2>
-<span class="header-section-number">7.5</span> Draw multiple graphs in the same plot<a class="anchor" aria-label="anchor" href="#draw-multiple-graphs-in-the-same-plot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.5</span> Draw multiple graphs in the same plot<a class="anchor" aria-label="anchor" href="#draw-multiple-graphs-in-the-same-plot"><i class="fas fa-link"></i></a>
 </h2>
 <p>위 예제들에서 사용한 high level function들을 low level function (<code>lines</code>, <code>points</code>, <code>ablines</code>, <code>axis</code> 등)들과 함께 사용함으로써 원하는 도표 대부분을 그려낼 수 있습니다. 최근 널리 사용되는 <code>ggplot2</code> 패키지를 이용한 그래프 사용법 강의에서는 오늘 배우는 그래픽 명령어는 거의 사용하지 않습니다. 그러나 위 함수들은 R의 기본 그래프 함수들로서 단순한 도표에서부터 복잡한 그래픽까지 구현할 수 있는 다양한 유연성을 제공하므로 기본적인 사용법을 정확히 이해하는 것이 좋습니다.</p>
 <p>아래 도표는 평균 0, 분산 1인 분포에서 500개의 랜덤한 수를 뽑아 x에 저장하고 x의 분포를 히스토그램으로 표현한 것 입니다. 그리고 x 값들과 상관성이 있는 y값들을 (x에 2를 곱하고 평균 5, 분산 1인 랜덤하게 뽑힌 수를 노이즈로 더함) 생성하고 모든 1000개 값들의 분포를 그린 히스토그램 입니다.</p>
-<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">500</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">100</span><span class="op">)</span>
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">*</span><span class="va">x</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">500</span>, mean<span class="op">=</span><span class="fl">5</span>, sd<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
 <span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">z</span>, br<span class="op">=</span><span class="fl">100</span><span class="op">)</span></code></pre></div>
 <p>이제 위 histogram 그래프에 <code>density</code> 함수와 <code>lines</code> 함수를 조합하여 확률밀도함수 커브를 그려 넣을 수 있습니다. 이 때 <code>hist</code> 함수에 <code>probability=T</code> 옵션을 넣어 y축의 스케일을 확률밀도함수의 y 스케일과 맞춰주어 같은 화면에 그려지도록 했습니다.</p>
-<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">z</span>, br<span class="op">=</span><span class="fl">100</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">z</span>, br<span class="op">=</span><span class="fl">100</span>, probability <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
 <span class="va">zd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">zd</span><span class="op">)</span></code></pre></div>
 <p>또한 아래 그래프는 위에서 생성한 x, y 값의 산포도를 그리고 x축과 y축 범위를 xlim, ylim 파라메터로 조절하는 예제 입니다. ?pch 도움말을 참고하여 다양한 포인트 모양을 선택할 수 있으며 x 값이 0 보다 작은 경우의 index를 뽑아 해당되는 x 값들과 그 값들의 짝이 되는 y값들에 대해서만 다시 포인트 그림을 red 색상으로 그려 넣었습니다. lm 은 linear model의 약자로 회귀 곡선을 구할 때 사용하는 함수이며 이 함수를 abline과 조합하여 회귀 직선을 그릴 수 있습니다.</p>
-<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">15</span><span class="op">)</span>, pch<span class="op">=</span><span class="fl">3</span><span class="op">)</span>
 <span class="va">idx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">x</span><span class="op">&lt;</span><span class="fl">0</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="va">idx</span><span class="op">]</span>, <span class="va">y</span><span class="op">[</span><span class="va">idx</span><span class="op">]</span>, col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span>
@@ -218,7 +210,7 @@
 <li>x, y 좌표 평면에 xcoord와 ycoord 값을 이용하여 좌표를 (산포도) 그리되 x와 y의 범위가 모두 -10부터 110까지 되도록 지정 하시오 (plot 이용)</li>
 <li>앞서 문제와 같은 plot에 x가 50보다 크고 y가 50보다 큰 곳에 있는 좌표들에 red closed circle로 표현하시오 (which, points, pch parameter 등 이용, 아래 참고)</li>
 </ul>
-<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">idx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">xcoord</span><span class="op">&gt;</span><span class="fl">50</span> <span class="op">&amp;</span> <span class="va">ycoord</span><span class="op">&gt;</span><span class="fl">50</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">xcoord</span><span class="op">[</span><span class="va">idx</span><span class="op">]</span>, y<span class="op">=</span><span class="va">ycoord</span><span class="op">[</span><span class="va">idx</span><span class="op">]</span>, col<span class="op">=</span><span class="st">"red"</span>, pch<span class="op">=</span><span class="fl">19</span><span class="op">)</span></code></pre></div>
 <ul>
@@ -227,11 +219,11 @@
 </ul>
 </div>
 </div>
-<div id="usuful-functions-ii" class="section level2" number="7.6">
+<div id="usuful-functions-ii" class="section level2" number="6.6">
 <h2>
-<span class="header-section-number">7.6</span> Usuful functions II<a class="anchor" aria-label="anchor" href="#usuful-functions-ii"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.6</span> Usuful functions II<a class="anchor" aria-label="anchor" href="#usuful-functions-ii"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#match(), %in%, intersect()</span>
 
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>
@@ -312,18 +304,18 @@
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="lecture-02-note.html"><span class="header-section-number">6</span> Lecture 02 Note</a></div>
-<div class="next"><a href="tidyverse.html"><span class="header-section-number">8</span> tidyverse</a></div>
+<div class="prev"><a href="data-transformation.html"><span class="header-section-number">5</span> Data transformation</a></div>
+<div class="next"><a href="tidyverse.html"><span class="header-section-number">7</span> tidyverse</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#r-basic-graphics"><span class="header-section-number">7</span> R basic graphics</a></li>
-<li><a class="nav-link" href="#scatter-plot"><span class="header-section-number">7.1</span> scatter plot</a></li>
-<li><a class="nav-link" href="#histogram"><span class="header-section-number">7.2</span> histogram</a></li>
-<li><a class="nav-link" href="#boxplot"><span class="header-section-number">7.3</span> boxplot</a></li>
-<li><a class="nav-link" href="#barplot"><span class="header-section-number">7.4</span> barplot</a></li>
-<li><a class="nav-link" href="#draw-multiple-graphs-in-the-same-plot"><span class="header-section-number">7.5</span> Draw multiple graphs in the same plot</a></li>
-<li><a class="nav-link" href="#usuful-functions-ii"><span class="header-section-number">7.6</span> Usuful functions II</a></li>
+<li><a class="nav-link" href="#r-basic-graphics"><span class="header-section-number">6</span> R basic graphics</a></li>
+<li><a class="nav-link" href="#scatter-plot"><span class="header-section-number">6.1</span> scatter plot</a></li>
+<li><a class="nav-link" href="#histogram"><span class="header-section-number">6.2</span> histogram</a></li>
+<li><a class="nav-link" href="#boxplot"><span class="header-section-number">6.3</span> boxplot</a></li>
+<li><a class="nav-link" href="#barplot"><span class="header-section-number">6.4</span> barplot</a></li>
+<li><a class="nav-link" href="#draw-multiple-graphs-in-the-same-plot"><span class="header-section-number">6.5</span> Draw multiple graphs in the same plot</a></li>
+<li><a class="nav-link" href="#usuful-functions-ii"><span class="header-section-number">6.6</span> Usuful functions II</a></li>
 </ul>
 
       <div class="book-extra">
@@ -340,7 +332,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>2022년 한국생명공학연구원 연구데이터 분석과정 R</strong>" was written by 합성생물학전문연구소 김하성. It was last built on 2022-09-15.</p>
+    <p>"<strong>2022년 한국생명공학연구원 연구데이터 분석과정 R</strong>" was written by 합성생물학전문연구소 김하성. It was last built on 2022-09-16.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -1,6 +1,6 @@
-# Lecture 04 Note
+## Lecture 04 (0616)
 
-## Class 1
+**Class 1**
 
 - 강의노트 주소 https://greendaygh.github.io/kribbr2022/index.html
 - Rmarkdown 사용시 코드 청크 입력 Ctrl + Alt + i
@@ -203,7 +203,7 @@ newbabies %>%
 ```
 
 
-## Class 2
+**Class 2**
 
 - random sequence 생성 grep, grepl 실습
 

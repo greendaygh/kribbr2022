@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 24 Significance test | 2022년 한국생명공학연구원 연구데이터 분석과정 R</title>
+<title>Chapter 16 Significance test | 2022년 한국생명공학연구원 연구데이터 분석과정 R</title>
 <meta name="author" content="합성생물학전문연구소 김하성">
 <meta name="description" content="유의성 검정은 분포를 가정한 상태에서 모수에 대한 특정 값을 추정한 후 (점추정) 해당 값이 가정된 분포로부터 관측될 확률을 계산하여 가설에 대한 판단을 수행합니다. 유의성검정을 재판 과정의 검사와 배심원 입장으로 생각하면 이해가 쉬울 수 있습니다. 검사는 피의자가 유죄임을 주장하며 배심원들을 설득합니다. 배심원들은 피의자가 유죄라는 확정적 증거가...">
 <meta name="generator" content="bookdown 0.26 with bs4_book()">
-<meta property="og:title" content="Chapter 24 Significance test | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
+<meta property="og:title" content="Chapter 16 Significance test | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
 <meta property="og:type" content="book">
 <meta property="og:description" content="유의성 검정은 분포를 가정한 상태에서 모수에 대한 특정 값을 추정한 후 (점추정) 해당 값이 가정된 분포로부터 관측될 확률을 계산하여 가설에 대한 판단을 수행합니다. 유의성검정을 재판 과정의 검사와 배심원 입장으로 생각하면 이해가 쉬울 수 있습니다. 검사는 피의자가 유죄임을 주장하며 배심원들을 설득합니다. 배심원들은 피의자가 유죄라는 확정적 증거가...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 24 Significance test | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
+<meta name="twitter:title" content="Chapter 16 Significance test | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
 <meta name="twitter:description" content="유의성 검정은 분포를 가정한 상태에서 모수에 대한 특정 값을 추정한 후 (점추정) 해당 값이 가정된 분포로부터 관측될 확률을 계산하여 가설에 대한 판단을 수행합니다. 유의성검정을 재판 과정의 검사와 배심원 입장으로 생각하면 이해가 쉬울 수 있습니다. 검사는 피의자가 유죄임을 주장하며 배심원들을 설득합니다. 배심원들은 피의자가 유죄라는 확정적 증거가...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -49,25 +49,18 @@
 <li><a class="" href="rmarkdown.html"><span class="header-section-number">3</span> Rmarkdown</a></li>
 <li><a class="" href="r-programming.html"><span class="header-section-number">4</span> R programming</a></li>
 <li><a class="" href="data-transformation.html"><span class="header-section-number">5</span> Data transformation</a></li>
-<li><a class="" href="lecture-02-note.html"><span class="header-section-number">6</span> Lecture 02 Note</a></li>
-<li><a class="" href="r-basic-graphics.html"><span class="header-section-number">7</span> R basic graphics</a></li>
-<li><a class="" href="tidyverse.html"><span class="header-section-number">8</span> tidyverse</a></li>
-<li><a class="" href="lecture-03-note.html"><span class="header-section-number">9</span> Lecture 03 Note</a></li>
-<li><a class="" href="lecture-04-note.html"><span class="header-section-number">10</span> Lecture 04 Note</a></li>
-<li><a class="" href="data-visualization.html"><span class="header-section-number">11</span> Data visualization</a></li>
-<li><a class="" href="ggplot2-examples.html"><span class="header-section-number">12</span> ggplot2 examples</a></li>
-<li><a class="" href="lecture-05-note.html"><span class="header-section-number">13</span> Lecture 05 Note</a></li>
-<li><a class="" href="lecture-06-note.html"><span class="header-section-number">14</span> Lecture 06 Note</a></li>
-<li><a class="" href="bioconductor.html"><span class="header-section-number">15</span> Bioconductor</a></li>
-<li><a class="" href="biostrings.html"><span class="header-section-number">16</span> Biostrings</a></li>
-<li><a class="" href="tools-for-sequences.html"><span class="header-section-number">17</span> Tools for sequences</a></li>
-<li><a class="" href="lecture-07-note.html"><span class="header-section-number">18</span> Lecture 07 Note</a></li>
-<li><a class="" href="tools-for-genome-analysis.html"><span class="header-section-number">19</span> Tools for genome analysis</a></li>
-<li><a class="" href="lecture-08-note.html"><span class="header-section-number">20</span> Lecture 08 Note</a></li>
-<li><a class="" href="lecture-09-note.html"><span class="header-section-number">21</span> Lecture 09 Note</a></li>
-<li><a class="" href="tools-for-high-throughput-data.html"><span class="header-section-number">22</span> Tools for High-throughput data</a></li>
-<li><a class="" href="statistical-inference.html"><span class="header-section-number">23</span> Statistical inference</a></li>
-<li><a class="active" href="significance-test.html"><span class="header-section-number">24</span> Significance test</a></li>
+<li><a class="" href="r-basic-graphics.html"><span class="header-section-number">6</span> R basic graphics</a></li>
+<li><a class="" href="tidyverse.html"><span class="header-section-number">7</span> tidyverse</a></li>
+<li><a class="" href="data-visualization.html"><span class="header-section-number">8</span> Data visualization</a></li>
+<li><a class="" href="ggplot2-examples.html"><span class="header-section-number">9</span> ggplot2 examples</a></li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">10</span> Bioconductor</a></li>
+<li><a class="" href="biostrings.html"><span class="header-section-number">11</span> Biostrings</a></li>
+<li><a class="" href="tools-for-sequences.html"><span class="header-section-number">12</span> Tools for sequences</a></li>
+<li><a class="" href="tools-for-genome-analysis.html"><span class="header-section-number">13</span> Tools for genome analysis</a></li>
+<li><a class="" href="high-throughput-data-i.html"><span class="header-section-number">14</span> High-throughput data I</a></li>
+<li><a class="" href="statistical-inference.html"><span class="header-section-number">15</span> Statistical inference</a></li>
+<li><a class="active" href="significance-test.html"><span class="header-section-number">16</span> Significance test</a></li>
+<li><a class="" href="lecture-note.html"><span class="header-section-number">17</span> Lecture Note</a></li>
 </ul>
 
         <div class="book-extra">
@@ -75,18 +68,18 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="significance-test" class="section level1" number="24">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="significance-test" class="section level1" number="16">
 <h1>
-<span class="header-section-number">24</span> Significance test<a class="anchor" aria-label="anchor" href="#significance-test"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16</span> Significance test<a class="anchor" aria-label="anchor" href="#significance-test"><i class="fas fa-link"></i></a>
 </h1>
 <p>유의성 검정은 분포를 가정한 상태에서 모수에 대한 특정 값을 추정한 후 (점추정) 해당 값이 가정된 분포로부터 관측될 확률을 계산하여 가설에 대한 판단을 수행합니다.</p>
 <p>유의성검정을 재판 과정의 검사와 배심원 입장으로 생각하면 이해가 쉬울 수 있습니다. 검사는 피의자가 유죄임을 주장하며 배심원들을 설득합니다. 배심원들은 피의자가 유죄라는 확정적 증거가 없는 한 무고하다는 가정을 하고 있으며 증거가 많아질수록 자신들이 가정한 무죄가 아닐 확률은 점점 적어집니다. 즉, 확률이 충분히 작으면 무죄라는 가정을 버리고 검사의 주장을 받아들이게 됩니다.</p>
-<div id="errors-in-significance-tests" class="section level2" number="24.1">
+<div id="errors-in-significance-tests" class="section level2" number="16.1">
 <h2>
-<span class="header-section-number">24.1</span> Errors in significance tests<a class="anchor" aria-label="anchor" href="#errors-in-significance-tests"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.1</span> Errors in significance tests<a class="anchor" aria-label="anchor" href="#errors-in-significance-tests"><i class="fas fa-link"></i></a>
 </h2>
 <p>다른 예를 들어봅시다. 어떤 영업사원이 A 회사에서 판매하는 기계의 영점이 평균 0으로 맞춰저 있다고 주장을 하며 해당 기계를 팔고 있습니다. 실제로 판매하는 기계의 영점이 0으로 맞춰져 있을 때 (0이 참) 우리 입장에서는 영업사원의 말은 당장 증명할 수 없는 가설일 뿐입니다. 그래도 그 가설을 믿고 (채택하고) 기계를 구입할 경우 오류 없는 정상적인 거래가 됩니다. 그런데 우리가 영점이 2라고 의심을 하며 영업사원의 말을 믿지 않고 (가설을 기각하고) 기계를 구입하지 않는다면 오류가 발생한 것입니다. 이 상황을 그래프로 알아봅니다 (편의상 기계 영점의 분산은 1이라고 가정).</p>
-<div class="sourceCode" id="cb503"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb312"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">6</span>, <span class="fl">6</span>, by<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span>
 <span class="va">y1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x1</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>
@@ -102,7 +95,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span><span class="st">"text"</span>, x<span class="op">=</span><span class="fl">3</span>, y<span class="op">=</span><span class="fl">0.1</span>, label<span class="op">=</span><span class="va">pval</span><span class="op">)</span> </code></pre></div>
 <p>위 그래프에서 실제 기계들의 평균 영점이 0임인 분포만을 생각하면 면적의 넓이 0.0228은 2보다 큰 영점을 가지는 기계가 생산될 확률입니다. 이 실제 사실에 더하여 “영점이 0이다”라는 가설의 분포를 생각하면 (가설과 사실의 분포가 겹쳐있음) 면적의 넓이 0.0228 부분은 2를 기준으로 가설을 받아들이지 않는 (기각하는) 경우로 볼 수 있으며 결국 실제 사실도 받아들이지 않는 오류를 범할 확률을 나타냅니다. 이 오류를 우리는 “제1종오류 (<span class="math inline">\(\alpha\)</span>)” 라고 합니다.</p>
 <p>이제 영업사원의 가설이 거짓일 경우를 생각해 봅니다. 즉, 어떤 이유로 A회사 기계의 영점이 평균 3일 경우 영업사원의 “영점이 0이다”라는 주장은 거짓이 됩니다. 이 상황에서도 우리는 두 가지 경우를 생각할 수 있습니다. 영업사원의 가설을 믿고 (채택하고) 기계를 구입할 경우는 오류가 발생하는 상황과 영점이 2라는 의심으로 영업사원의 가설을 믿지않고 (기각하고) 기계를 구입하지 않는 올바른 판단을 한 상황 입니다.</p>
-<div class="sourceCode" id="cb504"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb313"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">6</span>, <span class="fl">6</span>, by<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span>
 <span class="va">y1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x1</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>
@@ -129,9 +122,9 @@
 \text{p-value} = P(\text{test statistic is the observed value or is more extreme}|H_0)
 \]</span></p>
 <p>p-value의 크고 작음을 판단하는 대략적인 범위는 다음과 같습니다.</p>
-<div class="inline-figure"><img src="images/09/01.png" width="700"></div>
+<div class="inline-figure"><img src="images/09/01.png" width="600"></div>
 <p>유의성검정에서는 <span class="math inline">\(H_0\)</span>가 참인지 거짓인지 판별하기 보다는 유의수준(significance level, <span class="math inline">\(\alpha\)</span>)이라는 기준에 따라서 H0를 기각할지 안할지를 판단하게 됩니다. 위 영점 예제에서 제1종오류 <span class="math inline">\(alpha\)</span>가 유의수준과 같은 의미 입니다. 일반적인 유의수준은 0.01, 0.05, 0.1 정도로 p-value가 이들 값보다 작게 나오면 <span class="math inline">\(H_0\)</span>를 기각합니다. 앞서 기계 영점에 대한 예제에서와 같이 <span class="math inline">\(\alpha\)</span>를 기준으로 <span class="math inline">\(H_0\)</span>를 기각 할 경우 두 가지 오류, 제1종오류 (type-I error)와 제2종오류 (type-II error)가 발생할 수 있습니다.</p>
-<div class="inline-figure"><img src="images/09/02.png" width="700"></div>
+<div class="inline-figure"><img src="images/09/02.png" width="600"></div>
 <p>귀무가설 참 –&gt; 채택 (o)<br>
 귀무가설 참 –&gt; 기각 (오류)<br>
 귀무가설 거짓 –&gt; 채택 (오류)<br>
@@ -141,9 +134,9 @@
 <p><span class="math display">\[
 H_0: \mu = 0 \text{ vs } H_1: \mu = 1
 \]</span></p>
-<div class="inline-figure"><img src="images/09/03.png" width="700"></div>
+<div class="inline-figure"><img src="images/09/03.png" width="600"></div>
 <p>만약 영점이 맞춰진 상태에서 관측된 값이라면 <span class="math inline">\(Z = {0.7-\mu}/sd = 0.7\)</span> 이므로 p-value는 <code>1-pnorm(0.7, 0, 1)=0.2419</code> 이므로 가설을 기각할만한 증거가 충분치 않습니다. 즉, <span class="math inline">\(H_0: \mu=0\)</span>를 받아들이는 상황인 것인데 그렇지만 0.7은 분명히 0보다는 1에 가까운 (<span class="math inline">\(H_1\)</span>) 값입니다. 이러한 경우에 1 sd 대신 1/sqrt(10) 값을 사용하면 훨씬더 명확한 판단을 내릴 수 있습니다.</p>
-<div class="sourceCode" id="cb505"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb314"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">0.7</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>즉, p-value가 충분히 작으므로 귀무가설 <span class="math inline">\(H_0\)</span>를 기각하고 대립가설을 지지하게 됩니다. 1 standard deviation unit 대신 1/10 unit을 사용함므로써 더욱 명확한 판단을 내릴 수 있게 된 것입니다.</p>
@@ -158,9 +151,9 @@ H_0: \mu = 0 \text{ vs } H_1: \mu = 1
 </ul>
 <p>유의성 검정의 목적은 추정한 모수가 얼마나 통계적으로 유의한지를 판단하기 위한 것 입니다. 모형에 (분포) 따라서 모수가 달라지므로 다음과 같이 몇 가지 경우에 대한 유의성 검정 방법들이 있습니다.</p>
 </div>
-<div id="significance-test-for-the-mean-t-test" class="section level2" number="24.2">
+<div id="significance-test-for-the-mean-t-test" class="section level2" number="16.2">
 <h2>
-<span class="header-section-number">24.2</span> Significance test for the mean (t-test)<a class="anchor" aria-label="anchor" href="#significance-test-for-the-mean-t-test"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.2</span> Significance test for the mean (t-test)<a class="anchor" aria-label="anchor" href="#significance-test-for-the-mean-t-test"><i class="fas fa-link"></i></a>
 </h2>
 <p>이번에는 미지의 모평균에 대한 검정을 수행하는 방법을 알아봅니다. 검정 방법은 앞서 배운 검정 과정과 유사하며 통계량은 신뢰구간을 학습할 때 배웠던 t통계량과 같습니다.</p>
 <p><span class="math display">\[
@@ -174,10 +167,10 @@ T = \frac{\bar{x} - E(\bar{x}|H_0)}{SE(\bar{x}|H_0)} = \frac{\bar{x} - \mu_0}{s 
 \]</span></p>
 <p>이제 데이터 <span class="math inline">\(x_1, x_2, ..., x_n\)</span>을 얻고 이로부터 <span class="math inline">\(t = (\bar{x}-\mu_0)/(s/\sqrt{n})\)</span>을 구할 경우 p-value는 다음과 같습니다.</p>
 <div class="figure">
-<img src="images/09/06.png" alt=""><p class="caption">page304</p>
+<img src="images/09/06.png" width="500" alt=""><p class="caption">page304</p>
 </div>
 <p><strong>[Example]</strong> 새 SUV 자동차의 연비가 17miles / gallon 으로 알려져 있다. 소비자 그룹에서는 그러나 이보다 낮은 것으로 의심하고 있다. 다음 데이터들이 관측 되었을 때 해당 신차의 연비가 17mile 보다 작은지 검정하시오.</p>
-<div class="sourceCode" id="cb506"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb315"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">11.4</span>, <span class="fl">13.1</span>, <span class="fl">14.7</span>, <span class="fl">14.7</span>, <span class="fl">15</span>, <span class="fl">15.5</span>, <span class="fl">15.6</span>, <span class="fl">15.9</span>, <span class="fl">16</span>, <span class="fl">16.8</span><span class="op">)</span>
 <span class="va">xbar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/mean.html">mean</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span>
 <span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/var.html">sd</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span>
@@ -192,7 +185,7 @@ T = \frac{\bar{x} - E(\bar{x}|H_0)}{SE(\bar{x}|H_0)} = \frac{\bar{x} - \mu_0}{s 
 T &amp;= \frac{14.87 - 17}{1.582 / 3.162} =  -4.284
 \end{split}
 \]</span></p>
-<div class="sourceCode" id="cb507"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb316"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span>, length<span class="op">=</span><span class="fl">100</span><span class="op">)</span>
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">dt</a></span><span class="op">(</span><span class="va">x</span>, df<span class="op">=</span><span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span>
 <span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>
@@ -201,29 +194,21 @@ T &amp;= \frac{14.87 - 17}{1.582 / 3.162} =  -4.284
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">tstat</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">pt</a></span><span class="op">(</span><span class="va">tstat</span>, df<span class="op">=</span><span class="fl">9</span>, lower.tail<span class="op">=</span><span class="cn">T</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb508"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb317"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">pt</a></span><span class="op">(</span><span class="va">tstat</span>, df<span class="op">=</span><span class="fl">9</span>, lower.tail<span class="op">=</span><span class="cn">T</span><span class="op">)</span></code></pre></div>
 <p><strong>[EXERCISE]</strong> 위 예제를 <code>t.test</code> 를 사용해서 구현하시오</p>
 
 </div>
 </div>
-
-
-
-
-
-
-
-
   <div class="chapter-nav">
-<div class="prev"><a href="statistical-inference.html"><span class="header-section-number">23</span> Statistical inference</a></div>
-<div class="empty"></div>
+<div class="prev"><a href="statistical-inference.html"><span class="header-section-number">15</span> Statistical inference</a></div>
+<div class="next"><a href="lecture-note.html"><span class="header-section-number">17</span> Lecture Note</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#significance-test"><span class="header-section-number">24</span> Significance test</a></li>
-<li><a class="nav-link" href="#errors-in-significance-tests"><span class="header-section-number">24.1</span> Errors in significance tests</a></li>
-<li><a class="nav-link" href="#significance-test-for-the-mean-t-test"><span class="header-section-number">24.2</span> Significance test for the mean (t-test)</a></li>
+<li><a class="nav-link" href="#significance-test"><span class="header-section-number">16</span> Significance test</a></li>
+<li><a class="nav-link" href="#errors-in-significance-tests"><span class="header-section-number">16.1</span> Errors in significance tests</a></li>
+<li><a class="nav-link" href="#significance-test-for-the-mean-t-test"><span class="header-section-number">16.2</span> Significance test for the mean (t-test)</a></li>
 </ul>
 
       <div class="book-extra">

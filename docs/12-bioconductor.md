@@ -173,6 +173,14 @@ mypdata <- pData(mygse)
 myfdata <- fData(mygse)
 myexdata <- exprs(mygse)
 
+
+
+## rownames , data.frame
+as.data.frame(myexdata)
+
+## filtering
+table(mypdata$description)
+
 ```
 
 
@@ -192,85 +200,61 @@ gds <- getGEO(filename=system.file("extdata/GDS507.soft.gz",package="GEOquery"))
 class(gds)
 eset <- GDS2eSet(gds, do.log2=TRUE)
 eset
-
+pData(eset)
 ```
 
+## ExpressionSet Example 
+
+다음 예제는 GEOquery 패키지에 있는 데이터셋을 활용하여 간단한 DEG 분석을 수행하는 코드로서 DEG 분석의 원리 이해와 해석을 위해 학습하는 예제로 볼 수 있습니다. 다음 장에 소개되는 통계(추정과 검정)을 먼저 참고하고 실습해 보아도 좋겠습니다. 
 
 
-## SummarizedExperiment Class
-
-ExpressionSet은 일반적으로 행이 feature (유전자) 인 마이크로어레이 기반 실험 및 유전자 발현 데이터에 사용되었습니다. 그러나 유전체 분석을 위해서는 유전자 정보 외에도 유전체상의 위치 정보 등이 필요하며 이는 앞서 배운  GenomicRanges 형태의 데이터가 필요합니다. 따라서 최근에는 새로운 버전인 SummarizedExperiment class가  [SummarizedExperiment](https://bioconductor.org/packages/release/bioc/html/SummarizedExperiment.html) 개발되어 사용되고 있습니다.
+`GEOquery` 패지키에 포함된 GDS507 dataset을 읽어서 ExpressionSet으로 변환합니다. ExpressionSet class를 활용하는 edgeR, DESeq2 등의 패키지를 사용하지는 않지만 변환 후 필요한 데이터를 추출해서 사용하겠습니다. 
 
 
-![](images/summarizedexp.PNG)
+```r
+gds <- getGEO(filename = system.file("extdata/GDS507.soft.gz",package="GEOquery"))
+gds
+eset <- GDS2eSet(gds, do.log2=TRUE)
+eset
+
+myexp <- data.frame(exprs(eset))
+myfeature <- fData(eset)
+mypheno <- pData(eset)
+```
+
 
 
 
 ```r
-library(SummarizedExperiment)
+table(mypheno$disease.state)
 
-#if (!requireNamespace("BiocManager", quietly = TRUE))
-#    install.packages("BiocManager")
+class(myexp)
 
-#BiocManager::install("airway")
+## transformation
+mydat1 <- myexp %>% 
+  rownames_to_column() %>% 
+  pivot_longer(cols = -rowname) %>% 
+  pivot_wider(names_from = rowname, values_from = value)  
 
-library(airway)
-data(airway, package="airway")
-se <- airway
-se
-?RangedSummarizedExperiment 
-
-# Row (features)
-rowRanges(se)
-
-# Column (sample)
-colData(se)
-
-# Experiment-wide metadata
-metadata(se)
-
-```
+mydat2 <- mypheno %>% 
+  dplyr::select(sample, disease.state) %>% 
+  left_join(mydat1, by = c("sample" = "name"))
 
 
-`SummarizedExperiment` 생성
+mymean <- mydat2 %>% 
+  group_by(disease.state) %>% 
+  summarise(across(where(is.numeric), mean))
 
 
 
-```r
-nrows <- 200
-ncols <- 6
-counts <- matrix(runif(nrows * ncols, 1, 1e4), nrows)
-rowRanges <- GRanges(rep(c("chr1", "chr2"), c(50, 150)),
-                     IRanges(floor(runif(200, 1e5, 1e6)), width=100),
-                     strand=sample(c("+", "-"), 200, TRUE),
-                     feature_id=sprintf("ID%03d", 1:200))
-colData <- DataFrame(Treatment=rep(c("ChIP", "Input"), 3),
-                     row.names=LETTERS[1:6])
+mymean2 <- mymean %>% 
+  pivot_longer(-disease.state) %>% 
+  pivot_wider(names_from=disease.state, values_from = value)
 
-se <- SummarizedExperiment(assays=list(counts=counts),
-                     rowRanges=rowRanges, colData=colData)
-
-# Row (regions-of-interest) data
-rowRanges(se)
-
-# Column (sample) data
-colData(se)
-
-# Experiment-wide metadata
-metadata(se)
+ggplot(mymean2, aes(x=normal, y=RCC)) +
+  geom_point()
 
 ```
-
-
-
-## High-throughput genomic data analysis
-
-
-![](images/12/htanalysis.png){width=700}
-
-
-- Bioconductor에는 RNA-seq를 포함한 대규모 high-throughput 서열 데이터의 분석을 지원하는 많은 패키지가 있습니다. 
-
 
 
 

@@ -1,4 +1,80 @@
-# last
+# High-throughput data II
+
+## SummarizedExperiment Class
+
+ExpressionSet은 일반적으로 행이 feature (유전자) 인 마이크로어레이 기반 실험 및 유전자 발현 데이터에 사용되었습니다. 그러나 유전체 분석을 위해서는 유전자 정보 외에도 유전체상의 위치 정보 등이 필요하며 이는 앞서 배운  GenomicRanges 형태의 데이터가 필요합니다. 따라서 최근에는 새로운 버전인 SummarizedExperiment class가  [SummarizedExperiment](https://bioconductor.org/packages/release/bioc/html/SummarizedExperiment.html) 개발되어 사용되고 있습니다.
+
+
+![](images/summarizedexp.PNG)
+
+
+```{r, eval=F}
+library(SummarizedExperiment)
+
+#if (!requireNamespace("BiocManager", quietly = TRUE))
+#    install.packages("BiocManager")
+
+#BiocManager::install("airway")
+
+library(airway)
+data(airway, package="airway")
+se <- airway
+se
+?RangedSummarizedExperiment 
+
+# Row (features)
+rowRanges(se)
+
+# Column (sample)
+colData(se)
+
+# Experiment-wide metadata
+metadata(se)
+
+```
+
+
+`SummarizedExperiment` 생성
+
+
+```{r, eval=F}
+nrows <- 200
+ncols <- 6
+counts <- matrix(runif(nrows * ncols, 1, 1e4), nrows)
+rowRanges <- GRanges(rep(c("chr1", "chr2"), c(50, 150)),
+                     IRanges(floor(runif(200, 1e5, 1e6)), width=100),
+                     strand=sample(c("+", "-"), 200, TRUE),
+                     feature_id=sprintf("ID%03d", 1:200))
+colData <- DataFrame(Treatment=rep(c("ChIP", "Input"), 3),
+                     row.names=LETTERS[1:6])
+
+se <- SummarizedExperiment(assays=list(counts=counts),
+                     rowRanges=rowRanges, colData=colData)
+
+# Row (regions-of-interest) data
+rowRanges(se)
+
+# Column (sample) data
+colData(se)
+
+# Experiment-wide metadata
+metadata(se)
+
+```
+
+
+
+## High-throughput genomic data analysis
+
+
+![](images/12/htanalysis.png){width=600}
+
+
+- Bioconductor에는 RNA-seq를 포함한 대규모 high-throughput 서열 데이터의 분석을 지원하는 많은 패키지가 있습니다. 
+
+
+
+
 
 본 학습에서는 아래 소개된 분석 예제를 통해 RNA-Seq 데이터 분석의 기술을 익히도록 합니다. [RNA-Seq CSAMA 2022](https://www.bioconductor.org/help/course-materials/2022/CSAMA/lab/2-tuesday/lab-03-rnaseq/rnaseqGene_CSAMA2022.html). 사용되는 데이터는 `airway2` 에 저장된 8개의 RNA-seq 샘플에 (1차 인간 기도 평활근 세포주 4개 처리군, 4개 대조군) 대한 정량 데이터가 되겠으며 PMID: 24926665. GEO: GSE52778 및 다음 논문을 참고하시면 되겠습니다. (Himes BE, Jiang X, Wagner P, Hu R, Wang Q, Klanderman B, Whitaker RM, Duan Q, Lasky-Su J, Nikolos C, Jester W, Johnson M, Panettieri R Jr, Tantisira KG, Weiss ST, Lu Q. 'RNA-Seq Transcriptome Profiling Identifies CRISPLD2 as a Glucocorticoid Responsive Gene that Modulates Cytokine Function in Airway Smooth Muscle Cells.' PLoS One. 2014 Jun 13;9(6):e99625)
 

@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 16 Biostrings | 2022년 한국생명공학연구원 연구데이터 분석과정 R</title>
+<title>Chapter 11 Biostrings | 2022년 한국생명공학연구원 연구데이터 분석과정 R</title>
 <meta name="author" content="합성생물학전문연구소 김하성">
-<meta name="description" content="High-throughput sequencing 데이터를 포함한 DNA나 Amino acid와 같은 생물학적 서열은 Bioconductor의 다양한 패키지들에 의해서 분석될 수 있으며 특히 Biostrings 패키지는 생물학적 서열을 효과적으로 활용하기 위한 핵심 도구로 활용됩니다.  16.1 Working with sequences...">
+<meta name="description" content="High-throughput sequencing 데이터를 포함한 DNA나 Amino acid와 같은 생물학적 서열은 Bioconductor의 다양한 패키지들에 의해서 분석될 수 있으며 특히 Biostrings 패키지는 생물학적 서열을 효과적으로 활용하기 위한 핵심 도구로 활용됩니다.  11.1 Working with sequences...">
 <meta name="generator" content="bookdown 0.26 with bs4_book()">
-<meta property="og:title" content="Chapter 16 Biostrings | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
+<meta property="og:title" content="Chapter 11 Biostrings | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="High-throughput sequencing 데이터를 포함한 DNA나 Amino acid와 같은 생물학적 서열은 Bioconductor의 다양한 패키지들에 의해서 분석될 수 있으며 특히 Biostrings 패키지는 생물학적 서열을 효과적으로 활용하기 위한 핵심 도구로 활용됩니다.  16.1 Working with sequences...">
+<meta property="og:description" content="High-throughput sequencing 데이터를 포함한 DNA나 Amino acid와 같은 생물학적 서열은 Bioconductor의 다양한 패키지들에 의해서 분석될 수 있으며 특히 Biostrings 패키지는 생물학적 서열을 효과적으로 활용하기 위한 핵심 도구로 활용됩니다.  11.1 Working with sequences...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 16 Biostrings | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
-<meta name="twitter:description" content="High-throughput sequencing 데이터를 포함한 DNA나 Amino acid와 같은 생물학적 서열은 Bioconductor의 다양한 패키지들에 의해서 분석될 수 있으며 특히 Biostrings 패키지는 생물학적 서열을 효과적으로 활용하기 위한 핵심 도구로 활용됩니다.  16.1 Working with sequences...">
+<meta name="twitter:title" content="Chapter 11 Biostrings | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
+<meta name="twitter:description" content="High-throughput sequencing 데이터를 포함한 DNA나 Amino acid와 같은 생물학적 서열은 Bioconductor의 다양한 패키지들에 의해서 분석될 수 있으며 특히 Biostrings 패키지는 생물학적 서열을 효과적으로 활용하기 위한 핵심 도구로 활용됩니다.  11.1 Working with sequences...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -49,25 +49,17 @@
 <li><a class="" href="rmarkdown.html"><span class="header-section-number">3</span> Rmarkdown</a></li>
 <li><a class="" href="r-programming.html"><span class="header-section-number">4</span> R programming</a></li>
 <li><a class="" href="data-transformation.html"><span class="header-section-number">5</span> Data transformation</a></li>
-<li><a class="" href="lecture-02-note.html"><span class="header-section-number">6</span> Lecture 02 Note</a></li>
-<li><a class="" href="r-basic-graphics.html"><span class="header-section-number">7</span> R basic graphics</a></li>
-<li><a class="" href="tidyverse.html"><span class="header-section-number">8</span> tidyverse</a></li>
-<li><a class="" href="lecture-03-note.html"><span class="header-section-number">9</span> Lecture 03 Note</a></li>
-<li><a class="" href="lecture-04-note.html"><span class="header-section-number">10</span> Lecture 04 Note</a></li>
-<li><a class="" href="data-visualization.html"><span class="header-section-number">11</span> Data visualization</a></li>
-<li><a class="" href="ggplot2-examples.html"><span class="header-section-number">12</span> ggplot2 examples</a></li>
-<li><a class="" href="lecture-05-note.html"><span class="header-section-number">13</span> Lecture 05 Note</a></li>
-<li><a class="" href="lecture-06-note.html"><span class="header-section-number">14</span> Lecture 06 Note</a></li>
-<li><a class="" href="bioconductor.html"><span class="header-section-number">15</span> Bioconductor</a></li>
-<li><a class="active" href="biostrings.html"><span class="header-section-number">16</span> Biostrings</a></li>
-<li><a class="" href="tools-for-sequences.html"><span class="header-section-number">17</span> Tools for sequences</a></li>
-<li><a class="" href="lecture-07-note.html"><span class="header-section-number">18</span> Lecture 07 Note</a></li>
-<li><a class="" href="tools-for-genome-analysis.html"><span class="header-section-number">19</span> Tools for genome analysis</a></li>
-<li><a class="" href="lecture-08-note.html"><span class="header-section-number">20</span> Lecture 08 Note</a></li>
-<li><a class="" href="lecture-09-note.html"><span class="header-section-number">21</span> Lecture 09 Note</a></li>
-<li><a class="" href="tools-for-high-throughput-data.html"><span class="header-section-number">22</span> Tools for High-throughput data</a></li>
-<li><a class="" href="statistical-inference.html"><span class="header-section-number">23</span> Statistical inference</a></li>
-<li><a class="" href="significance-test.html"><span class="header-section-number">24</span> Significance test</a></li>
+<li><a class="" href="r-basic-graphics.html"><span class="header-section-number">6</span> R basic graphics</a></li>
+<li><a class="" href="tidyverse.html"><span class="header-section-number">7</span> tidyverse</a></li>
+<li><a class="" href="data-visualization.html"><span class="header-section-number">8</span> Data visualization</a></li>
+<li><a class="" href="ggplot2-examples.html"><span class="header-section-number">9</span> ggplot2 examples</a></li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">10</span> Bioconductor</a></li>
+<li><a class="active" href="biostrings.html"><span class="header-section-number">11</span> Biostrings</a></li>
+<li><a class="" href="tools-for-sequences.html"><span class="header-section-number">12</span> Tools for sequences</a></li>
+<li><a class="" href="tools-for-genome-analysis.html"><span class="header-section-number">13</span> Tools for genome analysis</a></li>
+<li><a class="" href="high-throughput-data-i.html"><span class="header-section-number">14</span> High-throughput data I</a></li>
+<li><a class="" href="inference-and-test.html"><span class="header-section-number">15</span> Inference and test</a></li>
+<li><a class="" href="lecture-note.html"><span class="header-section-number">16</span> Lecture Note</a></li>
 </ul>
 
         <div class="book-extra">
@@ -75,27 +67,27 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="biostrings" class="section level1" number="16">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="biostrings" class="section level1" number="11">
 <h1>
-<span class="header-section-number">16</span> Biostrings<a class="anchor" aria-label="anchor" href="#biostrings"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11</span> Biostrings<a class="anchor" aria-label="anchor" href="#biostrings"><i class="fas fa-link"></i></a>
 </h1>
 <p>High-throughput sequencing 데이터를 포함한 DNA나 Amino acid와 같은 생물학적 서열은 <code>Bioconductor</code>의 다양한 패키지들에 의해서 분석될 수 있으며 특히 <code>Biostrings</code> 패키지는 생물학적 서열을 효과적으로 활용하기 위한 핵심 도구로 활용됩니다.</p>
-<div id="working-with-sequences" class="section level2" number="16.1">
+<div id="working-with-sequences" class="section level2" number="11.1">
 <h2>
-<span class="header-section-number">16.1</span> Working with sequences<a class="anchor" aria-label="anchor" href="#working-with-sequences"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.1</span> Working with sequences<a class="anchor" aria-label="anchor" href="#working-with-sequences"><i class="fas fa-link"></i></a>
 </h2>
 <p><code>Biostrings</code>는 DNA, RNA, amino acids와 같은 생물학적 string을 다루기 위한 다양한 함수를 제공하는 패키지 입니다. 특히 서열에서의 패턴 탐색이나 Smith-Waterman local alignments, Needleman-Wunsch global alignments 등의 서열 비교함수를 제공하여 간단한 서열 분석에 자주 활용되는 패키지 입니다.<span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-sippl1999biological" role="doc-biblioref"&gt;&lt;strong&gt;sippl1999biological?&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;'><sup>2</sup></a></span> <code>Biostrings</code> 패키지의 설치 방법은 아래와 같습니다.</p>
-<div class="sourceCode" id="cb359"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
     <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
 
 <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"Biostrings"</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb360"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb227"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/Biostrings">Biostrings</a></span><span class="op">)</span></code></pre></div>
 <p>Biostrings 패키지는 기본적으로 <code>XString, XStringSet, XStringViews</code> 3가지의 class를 정의하고 있습니다. <code>XString</code>은 DNA나 RNA, AA 등 생물학적 서열 한 가닥을 다루기위한 클래스이며 <code>XStringSet</code>은 여러 가닥을 다루기위한 클래스 입니다.</p>
 <div class="inline-figure"><img src="images/04/biostrings.JPG"></div>
 <p><code>DNAString</code> 함수를 이용해서 객체를 만들어낼 수 있으며 ‘A’, ‘C’, ‘G’, ‘T’ 외에 ‘-’ (insertion), ‘N’ 을 허용합니다.</p>
-<div class="sourceCode" id="cb361"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dna1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/DNAString-class.html">DNAString</a></span><span class="op">(</span><span class="st">"ACGT?"</span><span class="op">)</span>
 <span class="va">dna1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/DNAString-class.html">DNAString</a></span><span class="op">(</span><span class="st">"ACGT-N"</span><span class="op">)</span>
 <span class="va">dna1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
@@ -106,14 +98,14 @@
 <span class="va">dna2</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
 <span class="va">dna2</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></code></pre></div>
 <p>다음 내장변수 들은 <code>Biostrings</code> 패키지를 로드하면 자동으로 저장되는 변수들로 생물학적 서열을 미리 정의해 놓았습니다. IUPAC (International Union of Pure and Applied Chemistry, 국제 순수·응용 화학 연합)</p>
-<div class="sourceCode" id="cb362"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb229"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">DNA_BASES</span>
 <span class="va">DNA_ALPHABET</span>
 <span class="va">IUPAC_CODE_MAP</span>
 <span class="va">GENETIC_CODE</span></code></pre></div>
 <div class="inline-figure"><img src="images/rna-codon-chart.jpg" width="400"></div>
 <p>위 변수들을 이용하면 다음처럼 <code><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample()</a></code> 함수를 이용해서 랜덤하게 DNA 서열을 얻을 수 있습니다. <code>DNA_BASES</code>가 4개 길이를 갖는 벡터인데 이 중 10개를 뽑으려면 <code>replace=T</code>로 해야 합니다.</p>
-<div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="va">DNA_BASES</span>, <span class="fl">10</span>, replace <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
 <span class="va">x0</span>
 <span class="va">s1</span> <span class="op">&lt;-</span> <span class="st">"ATG"</span>
@@ -123,12 +115,12 @@
 <span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/paste.html">paste</a></span><span class="op">(</span><span class="va">x0</span>, collapse<span class="op">=</span><span class="st">""</span><span class="op">)</span>
 <span class="va">x1</span></code></pre></div>
 <p>관련 함수는 <a href="http://bioconductor.org/packages/release/bioc/vignettes/Biostrings/inst/doc/BiostringsQuickOverview.pdf">Cheat sheat</a> 참고</p>
-<div id="xstring" class="section level3" number="16.1.1">
+<div id="xstring" class="section level3" number="11.1.1">
 <h3>
-<span class="header-section-number">16.1.1</span> XString<a class="anchor" aria-label="anchor" href="#xstring"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.1.1</span> XString<a class="anchor" aria-label="anchor" href="#xstring"><i class="fas fa-link"></i></a>
 </h3>
 <p><code>XString</code> 클래스는 <code>DNAString</code>과 <code>RNAString</code>, <code>AAString</code>의 subclass로 나눌 수 있습니다. <code>DNAString</code> class에서 <code>length</code> 함수는 핵산의 갯수를 (<code>DNAStringSet</code> 타입의 변수에서 length는 DNA 가닥의 갯수) 계산하며 핵산의 갯수는 <code>nchar</code>함수로 얻어낼 수 있습니다. <code>toString</code>은 DNAString 타입을 단순 문자열로 변환해주는 함수이며 상보서열, 역상보서열 등의 정보도 <code>complement</code>, <code>reverseComplement</code> 등을 사용하여 찾아낼 수 있습니다.</p>
-<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="va">DNA_BASES</span>, <span class="fl">10</span>, replace <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>, collapse<span class="op">=</span><span class="st">""</span><span class="op">)</span>
 <span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/DNAString-class.html">DNAString</a></span><span class="op">(</span><span class="va">x0</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">x0</span><span class="op">)</span>
@@ -139,7 +131,7 @@
 <span class="fu">Biostrings</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/reverseComplement.html">complement</a></span><span class="op">(</span><span class="va">x1</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/reverseComplement.html">reverseComplement</a></span><span class="op">(</span><span class="va">x1</span><span class="op">)</span></code></pre></div>
 <p><code>DNAString</code>의 인덱싱은 vector (string)과 같으며 <code>DNAStringSet</code>은 list의 인덱싱과 같습니다.</p>
-<div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## indexing</span>
 <span class="va">x1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
 <span class="va">x1</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>
@@ -157,12 +149,12 @@
 </ol>
 </div>
 </div>
-<div id="xstringset" class="section level3" number="16.1.2">
+<div id="xstringset" class="section level3" number="11.1.2">
 <h3>
-<span class="header-section-number">16.1.2</span> XStringSet<a class="anchor" aria-label="anchor" href="#xstringset"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.1.2</span> XStringSet<a class="anchor" aria-label="anchor" href="#xstringset"><i class="fas fa-link"></i></a>
 </h3>
 <p><code>XStringSet</code>역시 <code>DNAStringSet</code>, <code>RNAStringSet</code>, 그리고 <code>AAStringSet</code>으로 나눌 수 있으며 <code>DNAStringSet</code> class는 여러개의 <code>DNAString</code> 을 모아 놓은 집합이라고 보면 됩니다. <code>length</code> 함수는 DNA string의 갯수이며 <code>width</code> 또는 <code>nchar</code> 함수로 각 string의 길이를 구할 수 있으며 이 외 대부분의 <code>DNAString</code> 에서 사용되는 함수가 동일하게 사용될 수 있습니다.</p>
-<div class="sourceCode" id="cb366"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb233"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">x0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="st">"CTC-NACCAGTAT"</span>, <span class="st">"TTGA"</span>, <span class="st">"TACCTAGAG"</span><span class="op">)</span>
 <span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-class.html">DNAStringSet</a></span><span class="op">(</span><span class="va">x0</span><span class="op">)</span>
@@ -186,7 +178,7 @@
 <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/colSums.html">rowSums</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/letterFrequency.html">letterFrequency</a></span><span class="op">(</span><span class="va">x1</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="st">"G"</span>, <span class="st">"C"</span><span class="op">)</span>, as.prob<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/XVector/man/XVector-class.html">subseq</a></span><span class="op">(</span><span class="va">x4</span>, <span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span></code></pre></div>
 <p>RNA나 아미노산 역시 동일한 방식으로 적용 가능하며 <code>c</code> 함수를 이용해서 XStringSet으로 변환 가능합니다.</p>
-<div class="sourceCode" id="cb367"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="va">AA_ALPHABET</span>, <span class="fl">10</span>, replace <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>, collapse<span class="op">=</span><span class="st">""</span><span class="op">)</span>
 <span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="va">AA_ALPHABET</span>, <span class="fl">10</span>, replace<span class="op">=</span><span class="cn">T</span><span class="op">)</span>, collapse<span class="op">=</span><span class="st">""</span><span class="op">)</span>
@@ -203,7 +195,7 @@
 <li><p>위와 같은 랜덤서열 10개 만들어서 DNAStringSet으로 변환하시오</p></li>
 </ol>
 <p>아래는 가장 직관적으로 생각할 수 있는 <code>for</code>를 이용한 방법입니다. 즉, 10개 저장소를 갖는 x0 변수를 미리 생성해 두고 for 문을 돌면서 서열을 하나씩 만들어 저장하는 방법입니다.</p>
-<div class="sourceCode" id="cb368"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb235"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">rep</a></span><span class="op">(</span><span class="st">""</span>, <span class="fl">10</span><span class="op">)</span>
 <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x0</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
   <span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="va">DNA_BASES</span>, <span class="fl">30</span>, replace <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>, collapse<span class="op">=</span><span class="st">""</span><span class="op">)</span>
@@ -211,7 +203,7 @@
 <span class="op">}</span>
 <span class="va">x0</span></code></pre></div>
 <p>위 코드를 함수로 만들어 보겠습니다. random dna를 만들 때 길이만 다를뿐 같은 코드를 반복해서 사용하고 있습니다. 이럴 경우 DNA 길이를 사용자가 정해주도록 input parameter로 하고 해당 파라메터를 받아 DNA를 만들어 주는 함수를 만들어 사용하면 편리합니다.</p>
-<div class="sourceCode" id="cb369"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">DNA_BASES</span><span class="op">)</span>
 <span class="va">random_dna</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">len</span><span class="op">)</span><span class="op">{</span>
   <span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="va">DNA_BASES</span>, <span class="va">len</span>, replace <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>, collapse<span class="op">=</span><span class="st">""</span><span class="op">)</span>
@@ -222,14 +214,14 @@
 <span class="fu">random_dna</span><span class="op">(</span>len<span class="op">=</span><span class="fl">40</span><span class="op">)</span></code></pre></div>
 <p>파라메터로 넘겨진 len 값이 sample 함수의 len에 사용된 것을 참고하세요.</p>
 <p>이제 길이 30bp짜리 10개의 서열을 반복해서 만들 때 위 함수를 앞서와 같이 for문을 이용하여 10번 반복해서 실행해 주면 같은 결과를 얻습니다. 위와 같이 함수를 만들어 두면 언제든 DNA 서열을 만들 때 재사용 할 수 있습니다.</p>
-<div class="sourceCode" id="cb370"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">rep</a></span><span class="op">(</span><span class="st">""</span>, <span class="fl">10</span><span class="op">)</span>
 <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x0</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
   <span class="va">x0</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu">random_dna</span><span class="op">(</span><span class="fl">30</span><span class="op">)</span>
 <span class="op">}</span>
 <span class="va">x0</span></code></pre></div>
 <p>그런데 R에는 <code>apply</code> 와 같은 행렬연산 함수가 있어서 for문을 사용하지 않고 편리하게 반복문을 실행할 수 있습니다. <code>replicate</code> 함수는 <code>apply</code>와 같은 기능으로 list나 vector 변수에 대해서 사용할 수 있습니다. 즉, 다음과 같이 사용자가 원하는 함수를 반복해서 실행하고 반복 수 만큼의 길이를 갖는 결과를 반환합니다.</p>
-<div class="sourceCode" id="cb371"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">replicate</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fu">random_dna</span><span class="op">(</span><span class="fl">30</span><span class="op">)</span><span class="op">)</span>
 <span class="va">x0</span>
 <span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-class.html">DNAStringSet</a></span><span class="op">(</span><span class="va">x0</span><span class="op">)</span>
@@ -239,7 +231,7 @@
 </ol>
 <p>위 x0 스트링들을 XStringSet으로 바꾸고 GC 비율을 구한 후 bargraph를 그리겠습니다. gc_ratio가 G와 C의 비율값을 저장한 10x2 테이블이므로 x축에 10개의 서열과 각 서열의 GC비율을 나타내고 y축에 비율 값을 그리는 것으로 생각한 후 ggplot의 aes와 파라메터를 적절히 지정해 줍니다.</p>
 <p><a href="https://greendaygh.github.io/kribbr2022/data-visualization.html#bar-graph">bar plot using ggplto2</a></p>
-<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-class.html">DNAStringSet</a></span><span class="op">(</span><span class="va">x0</span><span class="op">)</span>
 <span class="va">gc_ratio1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/letterFrequency.html">letterFrequency</a></span><span class="op">(</span><span class="va">x1</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="st">"G"</span>, <span class="st">"C"</span><span class="op">)</span>, as.prob<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
 <span class="va">gc_ratio2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">gc_ratio1</span><span class="op">)</span>
@@ -257,12 +249,12 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="xstringview" class="section level3" number="16.1.3">
+<div id="xstringview" class="section level3" number="11.1.3">
 <h3>
-<span class="header-section-number">16.1.3</span> XStringView<a class="anchor" aria-label="anchor" href="#xstringview"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.1.3</span> XStringView<a class="anchor" aria-label="anchor" href="#xstringview"><i class="fas fa-link"></i></a>
 </h3>
 <p><code>Biostrings</code>의 또 다른 class인 <code>XStringView</code>는 <code>XString</code> class의 DNA, RNA, AA서열을 사용자가 원하는대로 볼 수 있는 인터페이스를 제공합니다. 사용법은 다음과 같습니다.</p>
-<div class="sourceCode" id="cb373"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x2</span> <span class="op">&lt;-</span> <span class="va">x1</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
 <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/Views-class.html">Views</a></span><span class="op">(</span><span class="va">x2</span>, start<span class="op">=</span><span class="fl">1</span>, width<span class="op">=</span><span class="fl">20</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/Views-class.html">Views</a></span><span class="op">(</span><span class="va">x2</span>, start<span class="op">=</span><span class="fl">1</span>, end<span class="op">=</span><span class="fl">4</span><span class="op">)</span>
@@ -271,7 +263,7 @@
 <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/Views-class.html">Views</a></span><span class="op">(</span><span class="va">x2</span>, start<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span>, width<span class="op">=</span><span class="fl">20</span><span class="op">)</span>
 <span class="va">i</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/Views-class.html">Views</a></span><span class="op">(</span><span class="va">x2</span>, start<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span>, width<span class="op">=</span><span class="fl">20</span><span class="op">)</span></code></pre></div>
 <p>다음과 같이 한 서열에 대한 여러 부분의 서열 조각도 볼 수 있으며 <code>gaps</code> 함수는 매개변수로 주어진 서열 view의 구간을 제외한 나머지 구간의 서열을 보여주는 함수입니다. <code>successiveviews</code> 함수는 처음 서열부터 매개변수 width에 주어진 갯수 만큼의 서열을 보여주며 <code><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">rep()</a></code> 함수를 이용해서 서열의 처음부터 끝까지 보여주는 기능을 합니다.</p>
-<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/Views-class.html">Views</a></span><span class="op">(</span><span class="va">x2</span>, start<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">10</span><span class="op">)</span>, end<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">15</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/inter-range-methods.html">gaps</a></span><span class="op">(</span><span class="va">v</span><span class="op">)</span>
 
@@ -287,12 +279,12 @@
 </div>
 </div>
 </div>
-<div id="sequence-read-and-write" class="section level2" number="16.2">
+<div id="sequence-read-and-write" class="section level2" number="11.2">
 <h2>
-<span class="header-section-number">16.2</span> Sequence read and write<a class="anchor" aria-label="anchor" href="#sequence-read-and-write"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.2</span> Sequence read and write<a class="anchor" aria-label="anchor" href="#sequence-read-and-write"><i class="fas fa-link"></i></a>
 </h2>
 <p>Biostrings 패키지의 <code>readDNAStringSet</code>이나 <code>writeXStringSet</code>을 사용하면 기본 DNA/RNA/AA 서열의 읽고 쓰기가 가능하며 fasta와 fastq 등의 파일타입으로 적용이 가능합니다.</p>
-<div class="sourceCode" id="cb375"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-class.html">DNAStringSet</a></span><span class="op">(</span><span class="va">x0</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-io.html">writeXStringSet</a></span><span class="op">(</span><span class="va">x1</span>, <span class="st">"myfastaseq.fasta"</span>, format<span class="op">=</span><span class="st">"fasta"</span><span class="op">)</span>
 
@@ -302,18 +294,18 @@
 <span class="va">myseq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-io.html">readDNAStringSet</a></span><span class="op">(</span><span class="st">"myfastaseq.fasta"</span>, format<span class="op">=</span><span class="st">"fasta"</span><span class="op">)</span>
 <span class="va">myseq</span></code></pre></div>
 <p><code>successiveViews</code>로 나눈 여러개의 DNA 조각을 <code>myfastaseqs.fasta</code>에 저장하고 다시 읽을 수 있습니다.</p>
-<div class="sourceCode" id="cb376"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">myseqs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-class.html">DNAStringSet</a></span><span class="op">(</span><span class="va">sv</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">myseqs</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/paste.html">paste</a></span><span class="op">(</span><span class="st">"myseqs"</span>, <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">myseqs</span><span class="op">)</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-io.html">writeXStringSet</a></span><span class="op">(</span><span class="va">myseqs</span>, <span class="st">"myfastaseqs.fasta"</span>, format<span class="op">=</span><span class="st">"fasta"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="sequence-statistics" class="section level2" number="16.3">
+<div id="sequence-statistics" class="section level2" number="11.3">
 <h2>
-<span class="header-section-number">16.3</span> Sequence statistics<a class="anchor" aria-label="anchor" href="#sequence-statistics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.3</span> Sequence statistics<a class="anchor" aria-label="anchor" href="#sequence-statistics"><i class="fas fa-link"></i></a>
 </h2>
 <p><code>oligonucleotideFrequency</code> 는 width와 step 이라는 옵션에 따라서 해당 서열의 모든 핵산의 수를 세어주는 합수입니다. 다음에 사용되는 yeastSEQCHR1는 Biostrings 패키지에 포함된 내장 데이터로서 yeast의 첫 번째 염색체 정보를 담고 있습니다.</p>
-<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">yeastSEQCHR1</span><span class="op">)</span> <span class="co">#Biostrings</span>
 <span class="va">yeast1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/DNAString-class.html">DNAString</a></span><span class="op">(</span><span class="va">yeastSEQCHR1</span><span class="op">)</span>
 
@@ -325,7 +317,7 @@
 <span class="va">tri</span></code></pre></div>
 <p>아미노산 정보를 얻기 위해서 ORF를 찾아보겠습니다. yeast의 첫 번째 염색체에 대한 정보는 annotation이 되어 있지만 학습을 위해 툴을 사용하겠습니다. 이미 많은 종류의 ORF 탐색 툴이 나와있지만 본 강의에서는 NCBI에서 제공하는 <code>orffinder</code>를 사용하도록 하겠습니다.</p>
 <div class="inline-figure"><img src="images/orffinder.PNG"></div>
-<div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">my_ORFs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-io.html">readDNAStringSet</a></span><span class="op">(</span><span class="st">"yeast1orf.cds"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="va">my_ORFs</span><span class="op">)</span>, br<span class="op">=</span><span class="fl">100</span><span class="op">)</span>
 <span class="va">codon_usage</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/nucleotideFrequency.html">trinucleotideFrequency</a></span><span class="op">(</span><span class="va">my_ORFs</span>, step<span class="op">=</span><span class="fl">3</span><span class="op">)</span>
@@ -336,7 +328,7 @@
 <span class="va">codonusage2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/splitAsList.html">split</a></span><span class="op">(</span><span class="va">global_codon_usage</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">global_codon_usage</span><span class="op">)</span><span class="op">)</span>
 <span class="va">global_codon_usage2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html">sapply</a></span><span class="op">(</span><span class="va">codonusage2</span>, <span class="va">sum</span><span class="op">)</span> </code></pre></div>
 <p>yeast 첫 번째 염색체에 대한 정보는 <a href="http://bioconductor.org/packages/release/BiocViews.html#___OrgDb">bioconductor annotationData OrgDb</a> 또는 <a href="https://www.bioconductor.org/packages/release/BiocViews.html#___TxDb">bioconductor annotationData TxDb</a> 에서 찾아볼 수 있습니다.</p>
-<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#BiocManager::install("org.Sc.sgd.db")</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">org.Sc.sgd.db</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">org.Sc.sgd.db</span><span class="op">)</span>
@@ -349,7 +341,7 @@
                       columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="st">"ORF"</span>,<span class="st">"DESCRIPTION"</span><span class="op">)</span>,
                       keytype<span class="op">=</span><span class="st">"ENTREZID"</span><span class="op">)</span></code></pre></div>
 <p>TxDb</p>
-<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"TxDb.Scerevisiae.UCSC.sacCer3.sgdGene"</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">TxDb.Scerevisiae.UCSC.sacCer3.sgdGene</span><span class="op">)</span>
@@ -357,7 +349,7 @@
 <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/AnnotationDb-class.html">columns</a></span><span class="op">(</span><span class="va">TxDb.Scerevisiae.UCSC.sacCer3.sgdGene</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/methods.html">methods</a></span><span class="op">(</span>class<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">TxDb.Scerevisiae.UCSC.sacCer3.sgdGene</span><span class="op">)</span><span class="op">)</span>
 <span class="va">ygenes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicFeatures/man/transcripts.html">genes</a></span><span class="op">(</span><span class="va">TxDb.Scerevisiae.UCSC.sacCer3.sgdGene</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 
 <span class="va">mydat</span> <span class="op">&lt;-</span> <span class="va">global_codon_usage2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
@@ -375,12 +367,12 @@
 <p><code>AMINO_ACID_CODE</code>를 이용해서 위 그래프의 1약자를 3약자로 변환, 라벨을 세로로 90도 회전, y축 라벨 “Frequency”, x축 라벨 “Amino acid code”, theme 옵션 “theme_bw” 등을 적용하여 다시 그림을 그리시오 (revisit ggplot2)</p>
 </div>
 </div>
-<div id="pattern-matching" class="section level2" number="16.4">
+<div id="pattern-matching" class="section level2" number="11.4">
 <h2>
-<span class="header-section-number">16.4</span> Pattern matching<a class="anchor" aria-label="anchor" href="#pattern-matching"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.4</span> Pattern matching<a class="anchor" aria-label="anchor" href="#pattern-matching"><i class="fas fa-link"></i></a>
 </h2>
 <p><code>Biostrings</code> 패키지에는 하나의 subject 서열에 특정 pattern이 존재하는지 탐색하는 <code>matchPattern</code>함수를 제공합니다. 만약 여러개의 subject 서열에서 하나의 pattern을 찾을 경우에는 <code>vmatchPattern</code>함수를 사용하고 하나의 subject 서열에 여러개의 pattern을 찾는 경우에는 <code>matchPDict</code> 함수를 사용합니다.</p>
-<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">coi</span><span class="op">)</span>
 <span class="va">hits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/matchPattern.html">matchPattern</a></span><span class="op">(</span><span class="st">"ATG"</span>, <span class="va">yeast1</span>, min.mismatch<span class="op">=</span><span class="fl">0</span>, max.mismatch<span class="op">=</span><span class="fl">0</span><span class="op">)</span>
@@ -398,22 +390,22 @@
 </div>
 
   <div class="chapter-nav">
-<div class="prev"><a href="bioconductor.html"><span class="header-section-number">15</span> Bioconductor</a></div>
-<div class="next"><a href="tools-for-sequences.html"><span class="header-section-number">17</span> Tools for sequences</a></div>
+<div class="prev"><a href="bioconductor.html"><span class="header-section-number">10</span> Bioconductor</a></div>
+<div class="next"><a href="tools-for-sequences.html"><span class="header-section-number">12</span> Tools for sequences</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#biostrings"><span class="header-section-number">16</span> Biostrings</a></li>
+<li><a class="nav-link" href="#biostrings"><span class="header-section-number">11</span> Biostrings</a></li>
 <li>
-<a class="nav-link" href="#working-with-sequences"><span class="header-section-number">16.1</span> Working with sequences</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#xstring"><span class="header-section-number">16.1.1</span> XString</a></li>
-<li><a class="nav-link" href="#xstringset"><span class="header-section-number">16.1.2</span> XStringSet</a></li>
-<li><a class="nav-link" href="#xstringview"><span class="header-section-number">16.1.3</span> XStringView</a></li>
+<a class="nav-link" href="#working-with-sequences"><span class="header-section-number">11.1</span> Working with sequences</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#xstring"><span class="header-section-number">11.1.1</span> XString</a></li>
+<li><a class="nav-link" href="#xstringset"><span class="header-section-number">11.1.2</span> XStringSet</a></li>
+<li><a class="nav-link" href="#xstringview"><span class="header-section-number">11.1.3</span> XStringView</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#sequence-read-and-write"><span class="header-section-number">16.2</span> Sequence read and write</a></li>
-<li><a class="nav-link" href="#sequence-statistics"><span class="header-section-number">16.3</span> Sequence statistics</a></li>
-<li><a class="nav-link" href="#pattern-matching"><span class="header-section-number">16.4</span> Pattern matching</a></li>
+<li><a class="nav-link" href="#sequence-read-and-write"><span class="header-section-number">11.2</span> Sequence read and write</a></li>
+<li><a class="nav-link" href="#sequence-statistics"><span class="header-section-number">11.3</span> Sequence statistics</a></li>
+<li><a class="nav-link" href="#pattern-matching"><span class="header-section-number">11.4</span> Pattern matching</a></li>
 </ul>
 
       <div class="book-extra">
@@ -430,7 +422,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>2022년 한국생명공학연구원 연구데이터 분석과정 R</strong>" was written by 합성생물학전문연구소 김하성. It was last built on 2022-09-15.</p>
+    <p>"<strong>2022년 한국생명공학연구원 연구데이터 분석과정 R</strong>" was written by 합성생물학전문연구소 김하성. It was last built on 2022-09-16.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -1,13 +1,13 @@
 {
     "sortOrder": [
         {
-            "columnIndex": 2,
-            "ascending": true
-        },
-        {
             "columnIndex": 4,
             "ascending": false
+        },
+        {
+            "columnIndex": 2,
+            "ascending": true
         }
     ],
-    "path": "~/2022/class/kribbr2022/images/12"
+    "path": "~/2022/class/kribbr2022/docs"
 }

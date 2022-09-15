@@ -1,9 +1,9 @@
-# Tools for High-throughput data
+# High-throughput data I
 
 
-## High-throughput genomic data
+## NGS data
 
-![](images/12/ngs.png){width=700}
+![](images/12/ngs.png){width=600}
 
 
 **Sequence Read Archive**
@@ -16,7 +16,7 @@
 
 데이터를 다운로드 할 수 있는 [NCBI SRA Toolkit](https://github.com/ncbi/sra-tools/wiki/01.-Downloading-SRA-Toolkit)을 제공하며 이 중 [MS Windows 64 bit architecture](https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/3.0.0/sratoolkit.3.0.0-win64.zip) 를 다운로드 받아 압축을 풀고 사용할 적절한 디렉토리로 옮겨 줍니다. 여기서는 `D:\sratoolkit.3.0.0-win64`이 곳에 이동해 두었고 전체 디렉토리 구성은 다음과 같습니다. 
 
-![](images/12/env0.png)
+![](images/12/env0.png){width=600}
 
 명령을 어느 디렉토리에서나 사용하고 싶다면 위 경로의 `bin` 디렉토리를 `path`로 잡아주는 과정이 필요합니다. 다음 위치로 이동 후 "내PC > 속성 > 고급 시스템 설정 > 환경변수" 를 클릭하면 다음 창이 생성됩니다. 
 
@@ -31,7 +31,7 @@ Path를 선택후 편집을 클릭하면 다음 화면이 생성되고 새로만
 
 fastq-dump.exe를 사용해서 다운로드 받을 수 있으며 최근에는 [fasterq-dump](https://github.com/ncbi/sra-tools/wiki/HowTo:-fasterq-dump)를 사용해서 더욱 빠르게 다운로드를 받을 수 있습니다. 
 
-![](images/12/sra.png)
+![](images/12/sra.png){width=600}
 
 뒤에서 설명할 GEO 데이터베이스에서 [GSE148719](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE148719) 데이터를 다운로드 해보겠습니다. 위 링크를 클릭해서 들어가면 화면 하단의 SRA Run Selector 라는 링크가 있고 이를 클릭하면 다음과 같은 화면이 보입니다. 
 
@@ -77,7 +77,7 @@ GEO는 microarray, next-generation sequencing 등의 high-throughput 유전체 �
 Platform, Sample, Series로 구성되어 있으며 Platform은 사용된 어레이 플랫폼에 대한 설명과 데이터 테이블로 구성되어 있습니다. GPLXXX 형태의 GEO 액세스 번호가 할당되며 하나의 플랫폼은 많은 샘플들에 사용될 수 있습니다. Sample은 개별 샘플이 처리된 조건 등의 설명이 있는 테이블로 구성되며 GSMxxx 형태의 GEO 등록 번호가 할당됩니다. Sample은 하나의 Platform만 참조 가능하며 여러 Series에 포함될 수 있습니다. Series는 관련된 샘플을 그룹화하고 전체 연구의 주요 설명을 제공합니다. GEO 등록 번호 GSExxx가 할당됩니다.
 
 
-![](images/04/geo_overview.jpg){width=700}
+![](images/04/geo_overview.jpg){width=600}
 
 
 
@@ -148,7 +148,7 @@ class(gpl)
 
 `Biobase` 패키지는 지놈 데이터를 관리하기 위한 표준화된 데이터 구조 class인 `ExpressionSet`를 제공합니다. ExpressionSet은 HT assay 데이터와 실험 meta를 포함하고 있습니다.
 
-![](images/12/ExpressionSet.png){width=700}
+![](images/12/ExpressionSet.png){width=600}
 출처[BS831 lecture note](https://montilab.github.io/BS831/articles/docs/ExpressionSet.html)
 
 
@@ -168,6 +168,14 @@ myfdata <- fData(mygse)
 myexdata <- exprs(mygse)
 
 
+
+## rownames , data.frame
+as.data.frame(myexdata)
+
+## filtering
+table(mypdata$description)
+
+
 ```
 
 
@@ -185,87 +193,108 @@ gds <- getGEO(filename=system.file("extdata/GDS507.soft.gz",package="GEOquery"))
 class(gds)
 eset <- GDS2eSet(gds, do.log2=TRUE)
 eset
+pData(eset)
+```
+
+## ExpressionSet Example 
+
+다음 예제는 GEOquery 패키지에 있는 데이터셋을 활용하여 간단한 DEG 분석을 수행하는 코드로서 DEG 분석의 원리 이해와 해석을 위해 학습하는 예제입니다. 다음 장에 소개되는 통계(추정과 검정)을 먼저 참고하고 실습해 보아도 좋겠습니다. 
+
+
+`GEOquery` 패지키에 포함된 GDS507 dataset을 읽어서 ExpressionSet으로 변환합니다. ExpressionSet class를 활용하는 edgeR, DESeq2 등의 패키지를 사용하지는 않지만 변환 후 필요한 데이터를 추출해서 사용하겠습니다. 
+
+```{r, eval=F}
+gds <- getGEO(filename = system.file("extdata/GDS507.soft.gz",package="GEOquery"))
+gds
+eset <- GDS2eSet(gds, do.log2=TRUE)
+eset
+
+myexp <- data.frame(exprs(eset))
+myfeature <- fData(eset)
+mypheno <- pData(eset)
+```
+
+위 세 종류의 데이터 테이블을 추출한 후 샘플들 두 그룹별로 평균을 계산하기 위해서 matrix transpose가 필요합니다. tidyverse는 (대부분의 통계 데이터는) row에 샘플이 위치하고 column에 feature (변수)가 있는 반면 위 myexp는 (ExpressionSet) 특성상 샘플이 컬럼에 위치하므로 transpose 수행 후 평균을 계산할 필요가 있습니다. 
+
+```{r, eval=F}
+table(mypheno$disease.state)
+
+## transpose
+mydat1 <- myexp %>% 
+  rownames_to_column() %>% 
+  pivot_longer(cols = -rowname) %>% 
+  pivot_wider(names_from = rowname, values_from = value)  
+
+mydat2 <- mypheno %>% 
+  dplyr::select(sample, disease.state) %>% 
+  left_join(mydat1, by = c("sample" = "name"))
 
 ```
 
+이 후 그룹별로 평균을 계산후 다시 transpose 시켜줍니다. 
+
+```{r, eval=F}
+mymean <- mydat2 %>% 
+  group_by(disease.state) %>% 
+  summarise(across(where(is.numeric), mean))
+
+mymean2 <- mymean %>% 
+  pivot_longer(-disease.state) %>% 
+  pivot_wider(names_from=disease.state, values_from = value)
+```
+
+두 그룹의 평균 값에 대한 각 유전자(feature)들의 산포도를 그릴 수 있습니다. 
+
+```{r, eval=F}
+ggplot(mymean2, aes(x=normal, y=RCC)) +
+  geom_point()
 
 
-## SummarizedExperiment Class
+```
+위 데이터는 feature 별로 normal과 RCC 값들의 평균을 가지고 있습니다. 유사한 방법으로 표준편차 값을 구한 후 t값을 계산할 수 있으나 코드가 길어지게 됩니다. 기존 lecture에서는 apply 함수를 활용해서 t.test를 수행하여 p-value를 구할 수 있었으나 더 간단히 아래와 같이 tidyverse 타입의 함수를 사용해서 t.test 를 사용할 수도 있습니다. 
 
-ExpressionSet은 일반적으로 행이 feature (유전자) 인 마이크로어레이 기반 실험 및 유전자 발현 데이터에 사용되었습니다. 그러나 유전체 분석을 위해서는 유전자 정보 외에도 유전체상의 위치 정보 등이 필요하며 이는 앞서 배운  GenomicRanges 형태의 데이터가 필요합니다. 따라서 최근에는 새로운 버전인 SummarizedExperiment class가  [SummarizedExperiment](https://bioconductor.org/packages/release/bioc/html/SummarizedExperiment.html) 개발되어 사용되고 있습니다.
+```{r, eval=F}
+ttestval <- mydat2 %>%
+  #dplyr::select(1:10) %>% 
+  summarise(across(where(is.numeric), function(x){
+    z <- t.test(x[disease.state=="normal"], x[disease.state=="RCC"])
+    c(z$p.value, z$statistic)
+    }))
 
+ttestval
+```
 
-![](images/summarizedexp.PNG)
+평균값과 pvalue, tstatistic 등의 값들을 하나의 테이블로 만들기 위해서 위 ttestval 데이터를 transpose 시킨 후 mymean2 데이터와 병합합니다. 
+
+```{r, eval=F}
+
+ttestvalt <- ttestval %>% 
+  mutate(rnames = c("pvalue", "tstat")) %>% 
+  #column_to_rownames(var="rnames") %>% 
+  pivot_longer(-rnames) %>% 
+  pivot_wider(names_from = rnames)
+
+finaldat <- mymean2 %>% left_join(ttestvalt, by="name")
+finaldat
+```
+유의한 데이터를 선별하고 가시화 합니다. 
 
 
 ```{r, eval=F}
-library(SummarizedExperiment)
 
-#if (!requireNamespace("BiocManager", quietly = TRUE))
-#    install.packages("BiocManager")
+sigdat <- finaldat %>% 
+  filter(pvalue < 0.001)
 
-#BiocManager::install("airway")
-
-library(airway)
-data(airway, package="airway")
-se <- airway
-se
-?RangedSummarizedExperiment 
-
-# Row (features)
-rowRanges(se)
-
-# Column (sample)
-colData(se)
-
-# Experiment-wide metadata
-metadata(se)
+ggplot(finaldat, aes(x=normal, y=RCC)) +
+  geom_point(alpha=0.2, color="#999999") +
+  geom_point(data=sigdat, aes(x=normal, y=RCC), color="blue", alpha=0.5, shape=20) +
+  theme_bw()
 
 ```
 
+참고로 아래 결과는 p-value 가 0.001 이하인 probe들을 표현한 결과로서 정확한 결과 도출을 위해서는 multiple testing correction을 수행 후 수정된 유의확율을 이용할 필요가 있습니다. 
 
-`SummarizedExperiment` 생성
-
-
-```{r, eval=F}
-nrows <- 200
-ncols <- 6
-counts <- matrix(runif(nrows * ncols, 1, 1e4), nrows)
-rowRanges <- GRanges(rep(c("chr1", "chr2"), c(50, 150)),
-                     IRanges(floor(runif(200, 1e5, 1e6)), width=100),
-                     strand=sample(c("+", "-"), 200, TRUE),
-                     feature_id=sprintf("ID%03d", 1:200))
-colData <- DataFrame(Treatment=rep(c("ChIP", "Input"), 3),
-                     row.names=LETTERS[1:6])
-
-se <- SummarizedExperiment(assays=list(counts=counts),
-                     rowRanges=rowRanges, colData=colData)
-
-# Row (regions-of-interest) data
-rowRanges(se)
-
-# Column (sample) data
-colData(se)
-
-# Experiment-wide metadata
-metadata(se)
-
-```
-
-
-
-## High-throughput genomic data analysis
-
-
-![](images/12/htanalysis.png){width=700}
-
-
-- Bioconductor에는 RNA-seq를 포함한 대규모 high-throughput 서열 데이터의 분석을 지원하는 많은 패키지가 있습니다. 
-
-
-
-
-
+![](images/12/000024.png){width=500}
 
 
 ---

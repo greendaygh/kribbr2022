@@ -1,14 +1,10 @@
-# Lecture 05 Note
+## Lecture 05 (0707)
 
-- 20220707
-
-
-## Class 01
+**Class 01**
 
 - 수업 전 확인사항 `tidyverse` 로딩 --> 권한 문제로 인한 설치 에러는 조사 후 업데이트 예정 
 - 아래 `https://greendaygh.github.io/kribbr2022/` 코드 다운로드 
-
-### basic
+- basic
 
 
 ```r
@@ -57,8 +53,7 @@ ggplot(iris, aes(x=Petal.Length,
   geom_point(color="black")
 ```
 
-### bargraph
-
+- bargraph
 - geom_bar 기본 설정 stat = "count"
 
 
@@ -127,7 +122,7 @@ ggplot(dat, aes(x=x1, y=y1, fill=x1)) +
 ```
 
 
-## Class 02
+**Class 02**
 
 
 - 그룹별로 각 유전자의 발현의 평균을 bar 그래프로 비교 
@@ -140,8 +135,7 @@ myexp
 ```
 
 
-### Case1 (고전적 프로그래밍 방법)
-
+- Case1 (고전적 프로그래밍 방법)
 - for문 사용 (느림), 저장공간 미리 준비
 - 각 데이터들마다 동일한 코드 반복, 데이터 바뀔시 재사용성 낮음
 
@@ -156,8 +150,7 @@ for(i in 1:5){
 ```
 
 
-### Case 2 (apply)
-
+- Case 2 (apply)
 - 비교적 빠른 처리 가능
 - 통계량 계산 후 그래프용 데이터 재구성 필요
 - apply 함수는 익숙해질 필요 있음
@@ -170,8 +163,7 @@ mymean1
 
 ```
 
-### Case 3 (tidyverse)
-
+- Case 3 (tidyverse)
 - 가장 지향하는 방식 
 - 분석 목적에 따른 샘플, 변수, 값 구분하기
 - 목적: 그룹별로 각 유전자의 발현의 평균을 bar 그래프로 비교
@@ -241,7 +233,7 @@ ggplot(myplotdata, aes(x=name, y=value, fill=group_name)) +
 ```
 
 
-## Class 03
+**Class 03**
 
 - error bar 그리기
 
@@ -351,7 +343,7 @@ ggplot(mydata, aes(x=heights, y=weights)) +
   geom_smooth()
 ```
 
-## Class 04
+**Class 04**
 
 - 두 그룹의 프루브들에 대해서 산포도를 그리기 
 

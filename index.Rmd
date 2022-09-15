@@ -43,12 +43,18 @@ mainfont : NanumGothic
 
 ## 강의 계획 {#Schedule}
 
-1. R 사용법 및 데이터 분석 기초 	5.19(목), 5.26(목)
-2. R/Tidyverse 데이터 분석 중급 	6.9(목), 6.16(목)
-3. R/Tidyverse 활용 데이터 가시화 	7.7(목), 7.14(목)
-4. R/Bioconductor 활용한 바이오데이터 분석 기초	8.4(목), 8.11(목)
-5. R/Bioconductor 활용한 NGS 데이터 분석 기초	9.1(목), 9.15(목)
-6. R/Bioconductor 활용한 NGS 데이터 분석 및 Workflow 	10.6(목), 10.13(목)
+1. (05.19, 13:30~17:30) [R/Rstudio] 사용법 및 데이터 구조
+2. (05.26, 13:30~17:30) [R/Rstudio] 프로그래밍 기초 
+3. (06.09, 13:30~17:30) [R/Tidyverse] 데이터 분석 기초 
+4. (06.16, 13:30~17:30) [R/Tidyverse] 데이터 분석 중급  
+5. (07.07, 13:30~17:30) [R/Tidyverse] 데이터 가시화 
+6. (07.14, 13:30~17:30) [R/Tidyverse] 데이터 가시화 활용 
+7. (08.04, 13:30~17:30) [R/Bioconductor] 바이오 데이터 분석 기초
+8. (08.11, 13:30~17:30) [R/Bioconductor] 서열 비교 및 계통 분석 
+9. (09.01, 13:30~17:30) [R/Bioconductor] 지놈 스케일 바이오 데이터 분석 
+10. (09.15, 13:30~17:30) [R/Bioconductor] NGS 데이터 소개 및 통계 기초
+11. (10.06, 13:30~17:30) [R/Bioconductor] NGS 기반 Differentially Expressed Genes 분석 
+12. (10.20, 13:30~17:30) [R/Bioconductor] NGS 기반 Gene Set Enrichment Analysis 
 
 
 ## 참고 자료 {#References}

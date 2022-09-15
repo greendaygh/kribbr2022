@@ -1,9 +1,8 @@
-# Lecture 03 Note
+## Lecture 03 (0609)
 
-## Class 1
+**Class 01**
 
-### file write
-
+- file write
 - package 설치 
 - package 사용하기 위해서는 `library` 로 불러와야 함
 - ctrl + enter 누르면 코드청크 코드 실행 (커서가 위치한)
@@ -46,7 +45,6 @@ write.table(mydata,
 
 ```
 
-### file read
 
 - file read
 
@@ -91,10 +89,9 @@ class(mydf)
 mydf$playerID
 ```
 
-## Class 2
+**Class 2**
 
-### apply
-
+- apply
 - 반복작업
 
 
@@ -217,10 +214,9 @@ lapply(airlist, myozone)
 
 ```
 
-## Class 3
+**Class 3**
 
-### graphics 
-
+- graphics 
 - 산포도 
 
 
@@ -330,8 +326,7 @@ abline(fit)
 
 
 
-### tidyverse
-
+- tidyverse
 - 우선 필요한 패키지 설치 및 로딩
 
 

@@ -1,15 +1,8 @@
----
-output:
-  word_document: default
-  html_document: default
----
-# Lecture 06 Note
+## Lecture 06 (0714)
 
-- 20220714
+**Class 01**
 
-## Class 01
-
-###  확인사항
+- 확인사항
 - 1) package install (tidyverse) 가능여부 확인, 설치가 되지 않을경우 (https://cran.rstudio.com/ blablabla 접근 에러) 아래와 같이 `options`에 repos 변수 CRAN을 "http://" 로 바꿔줌
 
 
@@ -113,7 +106,7 @@ ggplot(myplotdata, aes(x=name, y=value, fill=name)) +
 ```
 
 
-## Class 02
+**Class 02**
 
 - 산포도
 
@@ -178,7 +171,7 @@ ggplot(mydata, aes(x=displ, y=value, size=value, fill=name)) +
   theme_bw()
 ```
 
-## Class 03
+**Class 03**
 
 - expression data 두 그룹의 평균 발현양 비교 
 - x: normal group mean vs. y: treatment group  mean
@@ -390,7 +383,7 @@ ggplot(mydata, aes(x=name, y=value.x, fill=group_name)) +
 
 ```
 
-## Class 04
+**Class 04**
 
 - heat map 
 

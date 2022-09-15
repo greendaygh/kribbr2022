@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 12 ggplot2 examples | 2022년 한국생명공학연구원 연구데이터 분석과정 R</title>
+<title>Chapter 9 ggplot2 examples | 2022년 한국생명공학연구원 연구데이터 분석과정 R</title>
 <meta name="author" content="합성생물학전문연구소 김하성">
 <meta name="description" content="인터넷에서 찾은 다음 사이트의 예제를 보면서 다양한 그래프 예제를 실행해 보겠습니다. 코드는 조금씩 변형된 부분이 있으니 참고 부탁 드립니다. https://www.r-graph-gallery.com/ggplot2-package.html...">
 <meta name="generator" content="bookdown 0.26 with bs4_book()">
-<meta property="og:title" content="Chapter 12 ggplot2 examples | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
+<meta property="og:title" content="Chapter 9 ggplot2 examples | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
 <meta property="og:type" content="book">
 <meta property="og:description" content="인터넷에서 찾은 다음 사이트의 예제를 보면서 다양한 그래프 예제를 실행해 보겠습니다. 코드는 조금씩 변형된 부분이 있으니 참고 부탁 드립니다. https://www.r-graph-gallery.com/ggplot2-package.html...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 12 ggplot2 examples | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
+<meta name="twitter:title" content="Chapter 9 ggplot2 examples | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
 <meta name="twitter:description" content="인터넷에서 찾은 다음 사이트의 예제를 보면서 다양한 그래프 예제를 실행해 보겠습니다. 코드는 조금씩 변형된 부분이 있으니 참고 부탁 드립니다. https://www.r-graph-gallery.com/ggplot2-package.html...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -49,25 +49,17 @@
 <li><a class="" href="rmarkdown.html"><span class="header-section-number">3</span> Rmarkdown</a></li>
 <li><a class="" href="r-programming.html"><span class="header-section-number">4</span> R programming</a></li>
 <li><a class="" href="data-transformation.html"><span class="header-section-number">5</span> Data transformation</a></li>
-<li><a class="" href="lecture-02-note.html"><span class="header-section-number">6</span> Lecture 02 Note</a></li>
-<li><a class="" href="r-basic-graphics.html"><span class="header-section-number">7</span> R basic graphics</a></li>
-<li><a class="" href="tidyverse.html"><span class="header-section-number">8</span> tidyverse</a></li>
-<li><a class="" href="lecture-03-note.html"><span class="header-section-number">9</span> Lecture 03 Note</a></li>
-<li><a class="" href="lecture-04-note.html"><span class="header-section-number">10</span> Lecture 04 Note</a></li>
-<li><a class="" href="data-visualization.html"><span class="header-section-number">11</span> Data visualization</a></li>
-<li><a class="active" href="ggplot2-examples.html"><span class="header-section-number">12</span> ggplot2 examples</a></li>
-<li><a class="" href="lecture-05-note.html"><span class="header-section-number">13</span> Lecture 05 Note</a></li>
-<li><a class="" href="lecture-06-note.html"><span class="header-section-number">14</span> Lecture 06 Note</a></li>
-<li><a class="" href="bioconductor.html"><span class="header-section-number">15</span> Bioconductor</a></li>
-<li><a class="" href="biostrings.html"><span class="header-section-number">16</span> Biostrings</a></li>
-<li><a class="" href="tools-for-sequences.html"><span class="header-section-number">17</span> Tools for sequences</a></li>
-<li><a class="" href="lecture-07-note.html"><span class="header-section-number">18</span> Lecture 07 Note</a></li>
-<li><a class="" href="tools-for-genome-analysis.html"><span class="header-section-number">19</span> Tools for genome analysis</a></li>
-<li><a class="" href="lecture-08-note.html"><span class="header-section-number">20</span> Lecture 08 Note</a></li>
-<li><a class="" href="lecture-09-note.html"><span class="header-section-number">21</span> Lecture 09 Note</a></li>
-<li><a class="" href="tools-for-high-throughput-data.html"><span class="header-section-number">22</span> Tools for High-throughput data</a></li>
-<li><a class="" href="statistical-inference.html"><span class="header-section-number">23</span> Statistical inference</a></li>
-<li><a class="" href="significance-test.html"><span class="header-section-number">24</span> Significance test</a></li>
+<li><a class="" href="r-basic-graphics.html"><span class="header-section-number">6</span> R basic graphics</a></li>
+<li><a class="" href="tidyverse.html"><span class="header-section-number">7</span> tidyverse</a></li>
+<li><a class="" href="data-visualization.html"><span class="header-section-number">8</span> Data visualization</a></li>
+<li><a class="active" href="ggplot2-examples.html"><span class="header-section-number">9</span> ggplot2 examples</a></li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">10</span> Bioconductor</a></li>
+<li><a class="" href="biostrings.html"><span class="header-section-number">11</span> Biostrings</a></li>
+<li><a class="" href="tools-for-sequences.html"><span class="header-section-number">12</span> Tools for sequences</a></li>
+<li><a class="" href="tools-for-genome-analysis.html"><span class="header-section-number">13</span> Tools for genome analysis</a></li>
+<li><a class="" href="high-throughput-data-i.html"><span class="header-section-number">14</span> High-throughput data I</a></li>
+<li><a class="" href="inference-and-test.html"><span class="header-section-number">15</span> Inference and test</a></li>
+<li><a class="" href="lecture-note.html"><span class="header-section-number">16</span> Lecture Note</a></li>
 </ul>
 
         <div class="book-extra">
@@ -75,9 +67,9 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="ggplot2-examples" class="section level1" number="12">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="ggplot2-examples" class="section level1" number="9">
 <h1>
-<span class="header-section-number">12</span> ggplot2 examples<a class="anchor" aria-label="anchor" href="#ggplot2-examples"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9</span> ggplot2 examples<a class="anchor" aria-label="anchor" href="#ggplot2-examples"><i class="fas fa-link"></i></a>
 </h1>
 <p>인터넷에서 찾은 다음 사이트의 예제를 보면서 다양한 그래프 예제를 실행해 보겠습니다. 코드는 조금씩 변형된 부분이 있으니 참고 부탁 드립니다.</p>
 <ul>
@@ -85,15 +77,15 @@
 <li><a href="http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html" class="uri">http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html</a></li>
 <li><a href="https://www.datanovia.com/en/blog/ggplot-examples-best-reference/" class="uri">https://www.datanovia.com/en/blog/ggplot-examples-best-reference/</a></li>
 </ul>
-<div id="violin-plot" class="section level2" number="12.1">
+<div id="violin-plot" class="section level2" number="9.1">
 <h2>
-<span class="header-section-number">12.1</span> Violin plot<a class="anchor" aria-label="anchor" href="#violin-plot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.1</span> Violin plot<a class="anchor" aria-label="anchor" href="#violin-plot"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li><a href="https://www.r-graph-gallery.com/violin_and_boxplot_ggplot2.html" class="uri">https://www.r-graph-gallery.com/violin_and_boxplot_ggplot2.html</a></li>
 </ul>
 <div class="inline-figure"><img src="images/10/000013.png"></div>
-<div class="sourceCode" id="cb279"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://sjmgarnier.github.io/viridis/">viridis</a></span><span class="op">)</span>
 
@@ -131,35 +123,35 @@
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"A Violin wrapping a boxplot"</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">""</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="bubble-plot" class="section level2" number="12.2">
+<div id="bubble-plot" class="section level2" number="9.2">
 <h2>
-<span class="header-section-number">12.2</span> Bubble plot<a class="anchor" aria-label="anchor" href="#bubble-plot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.2</span> Bubble plot<a class="anchor" aria-label="anchor" href="#bubble-plot"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li><a href="https://www.r-graph-gallery.com/320-the-basis-of-bubble-plot.html" class="uri">https://www.r-graph-gallery.com/320-the-basis-of-bubble-plot.html</a></li>
 </ul>
 <div class="inline-figure"><img src="images/10/000049.png"></div>
-<div class="sourceCode" id="cb280"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mpg</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">str</span>
 
 <span class="co"># Most basic bubble plot</span>
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">cty</span>, y<span class="op">=</span><span class="va">displ</span>, size <span class="op">=</span> <span class="va">hwy</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>alpha<span class="op">=</span><span class="fl">0.7</span>, position<span class="op">=</span><span class="st">"jitter"</span><span class="op">)</span> </code></pre></div>
-<div class="sourceCode" id="cb281"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">cty</span>, y<span class="op">=</span><span class="va">displ</span>, size <span class="op">=</span> <span class="va">hwy</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>alpha<span class="op">=</span><span class="fl">0.3</span>, position<span class="op">=</span><span class="st">"jitter"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_size.html">scale_size</a></span><span class="op">(</span>range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.1</span>, <span class="fl">7</span><span class="op">)</span>, name<span class="op">=</span><span class="st">""</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">cty</span>, y<span class="op">=</span><span class="va">displ</span>, size <span class="op">=</span> <span class="va">hwy</span>, color<span class="op">=</span><span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>alpha<span class="op">=</span><span class="fl">0.3</span>, position<span class="op">=</span><span class="st">"jitter"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_size.html">scale_size</a></span><span class="op">(</span>range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.1</span>, <span class="fl">7</span><span class="op">)</span>, name<span class="op">=</span><span class="st">""</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb283"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mpg</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>yearf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">cty</span>, y<span class="op">=</span><span class="va">displ</span>, size<span class="op">=</span><span class="va">hwy</span>, color<span class="op">=</span><span class="va">yearf</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>alpha<span class="op">=</span><span class="fl">0.3</span>, position<span class="op">=</span><span class="st">"jitter"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_size.html">scale_size</a></span><span class="op">(</span>range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.1</span>, <span class="fl">7</span><span class="op">)</span>, name<span class="op">=</span><span class="st">""</span><span class="op">)</span> </code></pre></div>
-<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mpg</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>yearf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">cty</span>, y<span class="op">=</span><span class="va">displ</span>, size<span class="op">=</span><span class="va">hwy</span>, fill<span class="op">=</span><span class="va">yearf</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -171,12 +163,12 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"City miles per gallon"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="barplot-with-errorbars" class="section level2" number="12.3">
+<div id="barplot-with-errorbars" class="section level2" number="9.3">
 <h2>
-<span class="header-section-number">12.3</span> Barplot with errorbars<a class="anchor" aria-label="anchor" href="#barplot-with-errorbars"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.3</span> Barplot with errorbars<a class="anchor" aria-label="anchor" href="#barplot-with-errorbars"><i class="fas fa-link"></i></a>
 </h2>
 <div class="inline-figure"><img src="images/10/00000e.png"></div>
-<div class="sourceCode" id="cb285"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ToothGrowth</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">str</span>
 
 <span class="va">df</span> <span class="op">&lt;-</span> <span class="va">ToothGrowth</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
@@ -194,12 +186,12 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span>, color <span class="op">=</span> <span class="st">"black"</span>, width <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>ymin <span class="op">=</span> <span class="va">len</span>, ymax <span class="op">=</span> <span class="va">len</span><span class="op">+</span><span class="va">sd</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> </code></pre></div>
 </div>
-<div id="horizontal-barplot" class="section level2" number="12.4">
+<div id="horizontal-barplot" class="section level2" number="9.4">
 <h2>
-<span class="header-section-number">12.4</span> horizontal barplot<a class="anchor" aria-label="anchor" href="#horizontal-barplot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.4</span> horizontal barplot<a class="anchor" aria-label="anchor" href="#horizontal-barplot"><i class="fas fa-link"></i></a>
 </h2>
 <div class="inline-figure"><img src="images/10/00000b.png"></div>
-<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb205"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">df</span> <span class="op">&lt;-</span> <span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
@@ -215,15 +207,15 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_d</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="circular-barplot" class="section level2" number="12.5">
+<div id="circular-barplot" class="section level2" number="9.5">
 <h2>
-<span class="header-section-number">12.5</span> Circular barplot<a class="anchor" aria-label="anchor" href="#circular-barplot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.5</span> Circular barplot<a class="anchor" aria-label="anchor" href="#circular-barplot"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li><a href="https://www.r-graph-gallery.com/297-circular-barplot-with-groups.html" class="uri">https://www.r-graph-gallery.com/297-circular-barplot-with-groups.html</a></li>
 </ul>
 <div class="inline-figure"><img src="images/10/000002.png"></div>
-<div class="sourceCode" id="cb287"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Create dataset</span>
 <span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">70</span>
 <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
@@ -259,7 +251,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">label_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">id</span>, y<span class="op">=</span><span class="va">value</span><span class="op">+</span><span class="fl">10</span>, label<span class="op">=</span><span class="va">individual</span>, hjust<span class="op">=</span><span class="va">hjust</span><span class="op">)</span>, color<span class="op">=</span><span class="st">"black"</span>, fontface<span class="op">=</span><span class="st">"bold"</span>, alpha<span class="op">=</span><span class="fl">0.6</span>, size<span class="op">=</span><span class="fl">2.5</span>, angle<span class="op">=</span> <span class="va">label_data</span><span class="op">$</span><span class="va">angle</span>, inherit.aes <span class="op">=</span> <span class="cn">FALSE</span> <span class="op">)</span> </code></pre></div>
 <p>데이터 정렬 후 plot</p>
 <div class="inline-figure"><img src="images/10/000008.png"></div>
-<div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb207"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">data2</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">group</span>, <span class="va">value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
@@ -286,15 +278,15 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_polar.html">coord_polar</a></span><span class="op">(</span>start <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">label_data2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">id2</span>, y<span class="op">=</span><span class="va">value</span><span class="op">+</span><span class="fl">10</span>, label<span class="op">=</span><span class="va">individual</span>, hjust<span class="op">=</span><span class="va">hjust</span><span class="op">)</span>, color<span class="op">=</span><span class="st">"black"</span>, fontface<span class="op">=</span><span class="st">"bold"</span>,alpha<span class="op">=</span><span class="fl">0.6</span>, size<span class="op">=</span><span class="fl">2.5</span>, angle<span class="op">=</span> <span class="va">label_data</span><span class="op">$</span><span class="va">angle</span>, inherit.aes <span class="op">=</span> <span class="cn">FALSE</span> <span class="op">)</span> </code></pre></div>
 </div>
-<div id="stacked-area-chart" class="section level2" number="12.6">
+<div id="stacked-area-chart" class="section level2" number="9.6">
 <h2>
-<span class="header-section-number">12.6</span> Stacked area chart<a class="anchor" aria-label="anchor" href="#stacked-area-chart"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.6</span> Stacked area chart<a class="anchor" aria-label="anchor" href="#stacked-area-chart"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li><a href="https://www.data-to-viz.com/caveat/stacking.html" class="uri">https://www.data-to-viz.com/caveat/stacking.html</a></li>
 </ul>
 <div class="inline-figure"><img src="images/10/000009a.png"></div>
-<div class="sourceCode" id="cb289"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hadley/babynames">babynames</a></span><span class="op">)</span>
 
 <span class="va">babynames</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">str</span>
@@ -316,15 +308,15 @@
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Number of babies"</span><span class="op">)</span>
 <span class="va">p</span></code></pre></div>
 <div class="inline-figure"><img src="images/10/000006.png"></div>
-<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">name</span>, scale<span class="op">=</span><span class="st">"free_y"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="density-plot" class="section level2" number="12.7">
+<div id="density-plot" class="section level2" number="9.7">
 <h2>
-<span class="header-section-number">12.7</span> Density plot<a class="anchor" aria-label="anchor" href="#density-plot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.7</span> Density plot<a class="anchor" aria-label="anchor" href="#density-plot"><i class="fas fa-link"></i></a>
 </h2>
 <div class="inline-figure"><img src="images/10/000003.png"></div>
-<div class="sourceCode" id="cb291"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Plot</span>
 <span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">cty</span><span class="op">)</span><span class="op">)</span>
 <span class="va">g</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span><span class="op">)</span>, alpha<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span> 
@@ -334,14 +326,14 @@
          x<span class="op">=</span><span class="st">"City Mileage"</span>,
          fill<span class="op">=</span><span class="st">"# Cylinders"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="waffle-chart" class="section level2" number="12.8">
+<div id="waffle-chart" class="section level2" number="9.8">
 <h2>
-<span class="header-section-number">12.8</span> Waffle chart<a class="anchor" aria-label="anchor" href="#waffle-chart"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.8</span> Waffle chart<a class="anchor" aria-label="anchor" href="#waffle-chart"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li><a href="http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html#Waffle%20Chart" class="uri">http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html#Waffle%20Chart</a></li>
 </ul>
-<div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">var</span> <span class="op">&lt;-</span> <span class="va">mpg</span><span class="op">$</span><span class="va">class</span>  <span class="co"># the categorical data </span>
 
 <span class="co">## Prep data (nothing to change here)</span>
@@ -359,7 +351,7 @@
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span>, fill <span class="op">=</span> <span class="va">category</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html">geom_tile</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span>, size <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> </code></pre></div>
 <div class="inline-figure"><img src="images/10/00000a.png"></div>
-<div class="sourceCode" id="cb293"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span>, fill <span class="op">=</span> <span class="va">category</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html">geom_tile</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span>, size <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span>
         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -374,12 +366,12 @@
               legend.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,
               legend.position <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="marginal-histogram" class="section level2" number="12.9">
+<div id="marginal-histogram" class="section level2" number="9.9">
 <h2>
-<span class="header-section-number">12.9</span> Marginal histogram<a class="anchor" aria-label="anchor" href="#marginal-histogram"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.9</span> Marginal histogram<a class="anchor" aria-label="anchor" href="#marginal-histogram"><i class="fas fa-link"></i></a>
 </h2>
 <div class="inline-figure"><img src="images/10/000046.png"></div>
-<div class="sourceCode" id="cb294"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/daattali/ggExtra">ggExtra</a></span><span class="op">)</span>
 
 <span class="co"># Scatterplot</span>
@@ -396,7 +388,7 @@
 <span class="fu">ggMarginal</span><span class="op">(</span><span class="va">p</span>, type <span class="op">=</span> <span class="st">"histogram"</span>, fill<span class="op">=</span><span class="st">"transparent"</span><span class="op">)</span> 
 <span class="fu">ggMarginal</span><span class="op">(</span><span class="va">p</span>, type <span class="op">=</span> <span class="st">"density"</span>, fill<span class="op">=</span><span class="st">"transparent"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="images/10/000005.png"></div>
-<div class="sourceCode" id="cb295"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/ggpubr/">ggpubr</a></span><span class="op">)</span>
 <span class="co"># Grouped Scatter plot with marginal density plots</span>
 <span class="fu">ggscatterhist</span><span class="op">(</span>
@@ -410,12 +402,12 @@
   margin.params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"Species"</span>, color <span class="op">=</span> <span class="st">"black"</span>, size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span>
   <span class="op">)</span></code></pre></div>
 </div>
-<div id="density-ridgeline-plots" class="section level2" number="12.10">
+<div id="density-ridgeline-plots" class="section level2" number="9.10">
 <h2>
-<span class="header-section-number">12.10</span> Density ridgeline plots<a class="anchor" aria-label="anchor" href="#density-ridgeline-plots"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.10</span> Density ridgeline plots<a class="anchor" aria-label="anchor" href="#density-ridgeline-plots"><i class="fas fa-link"></i></a>
 </h2>
 <div class="inline-figure"><img src="images/10/000004.png"></div>
-<div class="sourceCode" id="cb296"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/ggridges/">ggridges</a></span><span class="op">)</span>
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>, y <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -426,22 +418,22 @@
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="data-visualization.html"><span class="header-section-number">11</span> Data visualization</a></div>
-<div class="next"><a href="lecture-05-note.html"><span class="header-section-number">13</span> Lecture 05 Note</a></div>
+<div class="prev"><a href="data-visualization.html"><span class="header-section-number">8</span> Data visualization</a></div>
+<div class="next"><a href="bioconductor.html"><span class="header-section-number">10</span> Bioconductor</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#ggplot2-examples"><span class="header-section-number">12</span> ggplot2 examples</a></li>
-<li><a class="nav-link" href="#violin-plot"><span class="header-section-number">12.1</span> Violin plot</a></li>
-<li><a class="nav-link" href="#bubble-plot"><span class="header-section-number">12.2</span> Bubble plot</a></li>
-<li><a class="nav-link" href="#barplot-with-errorbars"><span class="header-section-number">12.3</span> Barplot with errorbars</a></li>
-<li><a class="nav-link" href="#horizontal-barplot"><span class="header-section-number">12.4</span> horizontal barplot</a></li>
-<li><a class="nav-link" href="#circular-barplot"><span class="header-section-number">12.5</span> Circular barplot</a></li>
-<li><a class="nav-link" href="#stacked-area-chart"><span class="header-section-number">12.6</span> Stacked area chart</a></li>
-<li><a class="nav-link" href="#density-plot"><span class="header-section-number">12.7</span> Density plot</a></li>
-<li><a class="nav-link" href="#waffle-chart"><span class="header-section-number">12.8</span> Waffle chart</a></li>
-<li><a class="nav-link" href="#marginal-histogram"><span class="header-section-number">12.9</span> Marginal histogram</a></li>
-<li><a class="nav-link" href="#density-ridgeline-plots"><span class="header-section-number">12.10</span> Density ridgeline plots</a></li>
+<li><a class="nav-link" href="#ggplot2-examples"><span class="header-section-number">9</span> ggplot2 examples</a></li>
+<li><a class="nav-link" href="#violin-plot"><span class="header-section-number">9.1</span> Violin plot</a></li>
+<li><a class="nav-link" href="#bubble-plot"><span class="header-section-number">9.2</span> Bubble plot</a></li>
+<li><a class="nav-link" href="#barplot-with-errorbars"><span class="header-section-number">9.3</span> Barplot with errorbars</a></li>
+<li><a class="nav-link" href="#horizontal-barplot"><span class="header-section-number">9.4</span> horizontal barplot</a></li>
+<li><a class="nav-link" href="#circular-barplot"><span class="header-section-number">9.5</span> Circular barplot</a></li>
+<li><a class="nav-link" href="#stacked-area-chart"><span class="header-section-number">9.6</span> Stacked area chart</a></li>
+<li><a class="nav-link" href="#density-plot"><span class="header-section-number">9.7</span> Density plot</a></li>
+<li><a class="nav-link" href="#waffle-chart"><span class="header-section-number">9.8</span> Waffle chart</a></li>
+<li><a class="nav-link" href="#marginal-histogram"><span class="header-section-number">9.9</span> Marginal histogram</a></li>
+<li><a class="nav-link" href="#density-ridgeline-plots"><span class="header-section-number">9.10</span> Density ridgeline plots</a></li>
 </ul>
 
       <div class="book-extra">
@@ -458,7 +450,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>2022년 한국생명공학연구원 연구데이터 분석과정 R</strong>" was written by 합성생물학전문연구소 김하성. It was last built on 2022-09-15.</p>
+    <p>"<strong>2022년 한국생명공학연구원 연구데이터 분석과정 R</strong>" was written by 합성생물학전문연구소 김하성. It was last built on 2022-09-16.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
