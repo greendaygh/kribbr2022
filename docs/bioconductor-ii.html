@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 21 Bioconductor II | 2022년 한국생명공학연구원 연구데이터 분석과정 R</title>
+<meta name="author" content="합성생물학전문연구소 김하성">
+<meta name="description" content="21.1 High-throughput genomic data Sequence Read Archive SRA SRA (Sequence Read Archive)는 High-throughput 시퀀싱 데이터의 공개 데이터베이스 중 가장 큰 규모의 미국 국립 보건원(NIH)의 1차 데이터베이스로서 서열데이터 뿐만 아니라 메타데이터, 유전체, 및 환경...">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta property="og:title" content="Chapter 21 Bioconductor II | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
+<meta property="og:type" content="book">
+<meta property="og:description" content="21.1 High-throughput genomic data Sequence Read Archive SRA SRA (Sequence Read Archive)는 High-throughput 시퀀싱 데이터의 공개 데이터베이스 중 가장 큰 규모의 미국 국립 보건원(NIH)의 1차 데이터베이스로서 서열데이터 뿐만 아니라 메타데이터, 유전체, 및 환경...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 21 Bioconductor II | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
+<meta name="twitter:description" content="21.1 High-throughput genomic data Sequence Read Archive SRA SRA (Sequence Read Archive)는 High-throughput 시퀀싱 데이터의 공개 데이터베이스 중 가장 큰 규모의 미국 국립 보건원(NIH)의 1차 데이터베이스로서 서열데이터 뿐만 아니라 메타데이터, 유전체, 및 환경...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">2022년 한국생명공학연구원 연구데이터 분석과정 R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled"><li><a class="" href="index.html"><span class="header-section-number">Chapter 21</span> Bioconductor II</a></li></ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="bioconductor-ii" class="section level1" number="21">
+<h1>
+<span class="header-section-number">21</span> Bioconductor II<a class="anchor" aria-label="anchor" href="#bioconductor-ii"><i class="fas fa-link"></i></a>
+</h1>
+<div id="high-throughput-genomic-data" class="section level2" number="21.1">
+<h2>
+<span class="header-section-number">21.1</span> High-throughput genomic data<a class="anchor" aria-label="anchor" href="#high-throughput-genomic-data"><i class="fas fa-link"></i></a>
+</h2>
+<p><strong>Sequence Read Archive</strong></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/sra">SRA</a> SRA (Sequence Read Archive)는 High-throughput 시퀀싱 데이터의 공개 데이터베이스 중 가장 큰 규모의 미국 국립 보건원(NIH)의 1차 데이터베이스로서 서열데이터 뿐만 아니라 메타데이터, 유전체, 및 환경 데이터를 포함합니다. NCBI와 EBI(European Bioinformatics Institute), DDBJ(DNA Database of Japan) 간 국제적 제휴를 통해 세 기관에서 제출 받은 데이터는 서로 공유되고 있습니다.</p>
+<p>간략한 사용법은 <a href="https://www.ncbi.nlm.nih.gov/books/NBK569238/">NBK569238</a> 또는 <a href="https://www.ncbi.nlm.nih.gov/sra/docs/sradownload/">SRA download 문서</a> 이곳을 참고하시기 바랍니다.</p>
+<p>데이터를 다운로드 할 수 있는 <a href="https://github.com/ncbi/sra-tools/wiki/01.-Downloading-SRA-Toolkit">NCBI SRA Toolkit</a>을 제공하며 이 중 <a href="https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/3.0.0/sratoolkit.3.0.0-win64.zip">MS Windows 64 bit architecture</a> 를 다운로드 받아 압축을 풀고 사용할 적절한 디렉토리로 옮겨 줍니다. 여기서는 <code>D:\sratoolkit.3.0.0-win64</code>이 곳에 이동해 두었고 전체 디렉토리 구성은 다음과 같습니다.</p>
+<div class="inline-figure"><img src="images/12/env0.png"></div>
+<p>명령을 어느 디렉토리에서나 사용하고 싶다면 위 경로의 <code>bin</code> 디렉토리를 <code>path</code>로 잡아주는 과정이 필요합니다. 다음 위치로 이동 후 “내PC &gt; 속성 &gt; 고급 시스템 설정 &gt; 환경변수” 를 클릭하면 다음 창이 생성됩니다.</p>
+<div class="inline-figure"><img src="images/12/env1.png"></div>
+<p>Path를 선택후 편집을 클릭하면 다음 화면이 생성되고 새로만들기를 누른 후 <code>D:\sratoolkit.3.0.0-win64\bin</code>라고 입력해주고 모든 창에서 <code>확인</code>을 눌러주면 되겠습니다.</p>
+<div class="inline-figure"><img src="images/12/env2.png"></div>
+<p>이제 파일 탐색기로 파일을 다운로드 받을 작업 디렉토리로 이동한 후 주소창에 <code>cmd</code>이라고 입력해서 프롬프트가 있는 명령창을 실행합니다.</p>
+<p>fastq-dump.exe를 사용해서 다운로드 받을 수 있으며 최근에는 <a href="https://github.com/ncbi/sra-tools/wiki/HowTo:-fasterq-dump">fasterq-dump</a>를 사용해서 더욱 빠르게 다운로드를 받을 수 있습니다.</p>
+<div class="inline-figure"><img src="images/12/sra.png"></div>
+<p>뒤에서 설명할 GEO 데이터베이스에서 <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE148719">GSE148719</a> 데이터를 다운로드 해보겠습니다. 위 링크를 클릭해서 들어가면 화면 하단의 SRA Run Selector 라는 링크가 있고 이를 클릭하면 다음과 같은 화면이 보입니다.</p>
+<div class="inline-figure"><img src="images/sra.PNG" width="600"></div>
+<p>Metadata (SraRunTable.txt) 와 Accession list (SRR_Acc_List.txt)를 파일 형태로 다운로드 받은 후 적절한 전처리 후 사용하면 되겠습니다.</p>
+<pre><code>prefetch --option-file SRR_Acc_List.txt</code></pre>
+<p>만약 하나의 fastq 데이터만 다운로드 받을 경우 다음과 같습니다.</p>
+<pre><code>prefetch SRR11549076</code></pre>
+<p>이후 fasta 파일로 변환해 줍니다</p>
+<pre><code>fasterq-dump --split-files SRR11549076</code></pre>
+<p>100000개 read만 별도로 저장</p>
+<pre><code>fastq-dump -X 100000 --split-files SRR11549076</code></pre>
+<p><strong>Gene expression omnibus (GEO)</strong></p>
+<p>GEO는 microarray, next-generation sequencing 등의 high-throughput 유전체 데이터를 보유한 공공 저장소입니다.</p>
+<ul>
+<li>대규모 기능유전체 데이터베이스</li>
+<li>데이터 기탁 쉽게 만들고 고수준 QC 유지</li>
+<li>사용하기 쉬운 인터페이스 유지</li>
+</ul>
+<p><a href="https://www.ncbi.nlm.nih.gov/geo/">GEO</a></p>
+<p>Platform, Sample, Series로 구성되어 있으며 Platform은 사용된 어레이 플랫폼에 대한 설명과 데이터 테이블로 구성되어 있습니다. GPLXXX 형태의 GEO 액세스 번호가 할당되며 하나의 플랫폼은 많은 샘플들에 사용될 수 있습니다. Sample은 개별 샘플이 처리된 조건 등의 설명이 있는 테이블로 구성되며 GSMxxx 형태의 GEO 등록 번호가 할당됩니다. Sample은 하나의 Platform만 참조 가능하며 여러 Series에 포함될 수 있습니다. Series는 관련된 샘플을 그룹화하고 전체 연구의 주요 설명을 제공합니다. GEO 등록 번호 GSExxx가 할당됩니다.</p>
+<div class="inline-figure"><img src="images/04/geo_overview.jpg" width="700"></div>
+<p>위 세 가지 타입 외에 Datasets 이 있으며 Datasets은 GDSxxx 아이디를 가집니다. 앞서 Series (GSExxx) 데이터가 연구자들이 업로드한 raw 데이터라고 한다면 Datasets (GDSxxx)는 관리자들에 의해 큐레이션된 데이터로 볼 수 있습니다. <a href="https://www.ncbi.nlm.nih.gov/geo/summary/">브라우져</a>를 통해 쉽게 검색할 수 있습니다. Bioconductor에서는 <code>GEOquery</code>라는 패키지로 관련 파일들을 다운로드 받을 수 있습니다.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
+
+<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"GEOquery"</span><span class="op">)</span>
+
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/seandavi/GEOquery">GEOquery</a></span><span class="op">)</span>
+<span class="co">#browseVignettes("GEOquery")</span></code></pre></div>
+<p>The <code>GDS</code> class</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/getGEO.html">getGEO</a></span><span class="op">(</span>filename<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/GDS507.soft.gz"</span>,package<span class="op">=</span><span class="st">"GEOquery"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">gds</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/methods.html">methods</a></span><span class="op">(</span>class<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">gds</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/GEOData-accessors.html">Table</a></span><span class="op">(</span><span class="va">gds</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/GEOData-accessors.html">Columns</a></span><span class="op">(</span><span class="va">gds</span><span class="op">)</span></code></pre></div>
+<p>The <code>GSM</code> class - 샘플의 실제 측정값과 실험 조건 등 샘플별 정보 포함. 참고로 MAS 5.0 알고리즘은 서열의 Perfect-Match (PM)과 Mismatch (MM)를 이용해서 유전자의 발현을 정량화 하는 방법으로 (logged) PM-MM의 평균으로 계산함.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gsm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/getGEO.html">getGEO</a></span><span class="op">(</span>filename<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/GSM11805.txt.gz"</span>,package<span class="op">=</span><span class="st">"GEOquery"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/methods.html">methods</a></span><span class="op">(</span>class<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">gsm</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/GEOData-accessors.html">Meta</a></span><span class="op">(</span><span class="va">gsm</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/GEOData-accessors.html">Table</a></span><span class="op">(</span><span class="va">gsm</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/GEOData-accessors.html">Columns</a></span><span class="op">(</span><span class="va">gsm</span><span class="op">)</span></code></pre></div>
+<p>The <code>GPL</code> class - 사용된 칩의 기본 Annotation 정보</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gpl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/getGEO.html">getGEO</a></span><span class="op">(</span>filename<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/GPL97.annot.gz"</span>,package<span class="op">=</span><span class="st">"GEOquery"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">gpl</span></code></pre></div>
+<p>The <code>GSE</code> class - 관련된 샘플, annotation 들의 집합 (실험)</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/getGEO.html">getGEO</a></span><span class="op">(</span>filename<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/GSE781_family.soft.gz"</span>,package<span class="op">=</span><span class="st">"GEOquery"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/methods.html">methods</a></span><span class="op">(</span>class<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">gse</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/GEOData-accessors.html">Meta</a></span><span class="op">(</span><span class="va">gse</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/GEOData-accessors.html">GSMList</a></span><span class="op">(</span><span class="va">gse</span><span class="op">)</span><span class="op">)</span>
+<span class="va">gsm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/GEOData-accessors.html">GSMList</a></span><span class="op">(</span><span class="va">gse</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/GEOData-accessors.html">Meta</a></span><span class="op">(</span><span class="va">gsm</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/GEOData-accessors.html">Table</a></span><span class="op">(</span><span class="va">gsm</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/GEOData-accessors.html">Columns</a></span><span class="op">(</span><span class="va">gsm</span><span class="op">)</span>
+
+
+<span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/GEOData-accessors.html">GPLList</a></span><span class="op">(</span><span class="va">gse</span><span class="op">)</span>
+<span class="va">gpl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/GEOData-accessors.html">GPLList</a></span><span class="op">(</span><span class="va">gse</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">gpl</span><span class="op">)</span></code></pre></div>
+<p><strong>ExpressionSet class</strong></p>
+<p><img src="images/12/ExpressionSet.png">
+출처<a href="https://montilab.github.io/BS831/articles/docs/ExpressionSet.html">BS831</a></p>
+<p>GES 데이터 받기 <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE2553">GSE2553</a></p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gse2553</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/getGEO.html">getGEO</a></span><span class="op">(</span><span class="st">'GSE2553'</span>,GSEMatrix<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">gse2553</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">gse2553</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">gse2553</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
+<span class="va">mygse</span> <span class="op">&lt;-</span> <span class="va">gse2553</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
+<span class="op">?</span><span class="va">ExpressionSet</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/methods.html">methods</a></span><span class="op">(</span>class<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">mygse</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/phenoData.html">pData</a></span><span class="op">(</span><span class="va">mygse</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/assayData.html">assayData</a></span><span class="op">(</span><span class="va">mygse</span><span class="op">)</span></code></pre></div>
+<p>GDS 데이터를 ExpressionSet class로 변환하기</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/getGEO.html">getGEO</a></span><span class="op">(</span>filename<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/GDS507.soft.gz"</span>,package<span class="op">=</span><span class="st">"GEOquery"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">gds</span><span class="op">)</span>
+<span class="va">eset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/coercion.html">GDS2eSet</a></span><span class="op">(</span><span class="va">gds</span>, do.log2<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">eset</span></code></pre></div>
+<p>급성 림프구성 백혈병 데이터 (Annotation)</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">ALL</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">ALL</span><span class="op">)</span>
+<span class="va">ALL</span>
+<span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/featureData.html">featureData</a></span><span class="op">(</span><span class="va">ALL</span><span class="op">)</span>
+
+<span class="co">## </span>
+<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
+<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"hgu95av2.db"</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">hgu95av2.db</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/utils/browseVignettes.html">browseVignettes</a></span><span class="op">(</span><span class="st">"hgu95av2.db"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/help.html">help</a></span><span class="op">(</span>package<span class="op">=</span><span class="st">"hgu95av2.db"</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/featureNames.html">featureNames</a></span><span class="op">(</span><span class="va">ALL</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>
+<span class="va">ids</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/featureNames.html">featureNames</a></span><span class="op">(</span><span class="va">ALL</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="va">hgu95av2ENTREZID</span><span class="op">[</span><span class="va">ids</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="high-throughput-genomic-data-analysis" class="section level2" number="21.2">
+<h2>
+<span class="header-section-number">21.2</span> High-throughput genomic data analysis<a class="anchor" aria-label="anchor" href="#high-throughput-genomic-data-analysis"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Bioconductor에는 RNA-seq를 포함한 대규모 high-throughput 서열 데이터의 분석을 지원하는 많은 패키지가 있습니다. 본 학습에서는 아래 소개된 분석 예제를 통해 RNA-Seq 데이터 분석의 기술을 익히도록 합니다. <a href="https://www.bioconductor.org/help/course-materials/2022/CSAMA/lab/2-tuesday/lab-03-rnaseq/rnaseqGene_CSAMA2022.html">RNA-Seq CSAMA 2022</a>. 사용되는 데이터는 <code>airway2</code> 에 저장된 8개의 RNA-seq 샘플에 (1차 인간 기도 평활근 세포주 4개 처리군, 4개 대조군) 대한 정량 데이터가 되겠으며 PMID: 24926665. GEO: GSE52778 및 다음 논문을 참고하시면 되겠습니다. (Himes BE, Jiang X, Wagner P, Hu R, Wang Q, Klanderman B, Whitaker RM, Duan Q, Lasky-Su J, Nikolos C, Jester W, Johnson M, Panettieri R Jr, Tantisira KG, Weiss ST, Lu Q. ‘RNA-Seq Transcriptome Profiling Identifies CRISPLD2 as a Glucocorticoid Responsive Gene that Modulates Cytokine Function in Airway Smooth Muscle Cells.’ PLoS One. 2014 Jun 13;9(6):e99625)</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">airway</span><span class="op">)</span>
+<span class="va">dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"airway"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="va">dir</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">dir</span>, <span class="st">"quants"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="summarizedexperiment-class" class="section level2" number="21.3">
+<h2>
+<span class="header-section-number">21.3</span> SummarizedExperiment Class<a class="anchor" aria-label="anchor" href="#summarizedexperiment-class"><i class="fas fa-link"></i></a>
+</h2>
+<p><code>Biobase</code> 패키지는 지놈 데이터를 관리하기 위한 표준화된 데이터 구조 class인 <code>ExpressionSet</code>를 제공합니다. ExpressionSet은 HT assay 데이터와 실험 meta를 포함하고 있습니다. 많은 데이터가 ExpressionSet 형식으로 만들어져 관리되고 있지만 최근에는 새로운 버전인 <a href="https://bioconductor.org/packages/release/bioc/html/SummarizedExperiment.html">SummarizedExperiment</a> class를 이용합니다.</p>
+<div class="inline-figure"><img src="images/summarizedexp.PNG"></div>
+<p>다음 예제는 <a href="https://bioconductor.org/packages/release/bioc/vignettes/SummarizedExperiment/inst/doc/SummarizedExperiment.html">SummarizedExperiment</a>의 내용과 같습니다.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/SummarizedExperiment">SummarizedExperiment</a></span><span class="op">)</span>
+
+<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
+
+<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"airway"</span><span class="op">)</span>
+
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">airway</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">airway</span>, package<span class="op">=</span><span class="st">"airway"</span><span class="op">)</span>
+<span class="va">se</span> <span class="op">&lt;-</span> <span class="va">airway</span>
+<span class="va">se</span>
+
+<span class="co"># Row (regions-of-interest) data</span>
+<span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/RangedSummarizedExperiment-class.html">rowRanges</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span>
+
+<span class="co"># Column (sample) data</span>
+<span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">colData</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span>
+
+<span class="co"># Experiment-wide metadata</span>
+<span class="fu">metadata</span><span class="op">(</span><span class="va">se</span><span class="op">)</span></code></pre></div>
+<p><code>SummarizedExperiment</code> 생성</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">nrows</span> <span class="op">&lt;-</span> <span class="fl">200</span>
+<span class="va">ncols</span> <span class="op">&lt;-</span> <span class="fl">6</span>
+<span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">nrows</span> <span class="op">*</span> <span class="va">ncols</span>, <span class="fl">1</span>, <span class="fl">1e4</span><span class="op">)</span>, <span class="va">nrows</span><span class="op">)</span>
+<span class="va">rowRanges</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html">GRanges</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"chr1"</span>, <span class="st">"chr2"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">150</span><span class="op">)</span><span class="op">)</span>,
+                     <span class="fu">IRanges</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">200</span>, <span class="fl">1e5</span>, <span class="fl">1e6</span><span class="op">)</span><span class="op">)</span>, width<span class="op">=</span><span class="fl">100</span><span class="op">)</span>,
+                     strand<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"+"</span>, <span class="st">"-"</span><span class="op">)</span>, <span class="fl">200</span>, <span class="cn">TRUE</span><span class="op">)</span>,
+                     feature_id<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"ID%03d"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">200</span><span class="op">)</span><span class="op">)</span>
+<span class="va">colData</span> <span class="op">&lt;-</span> <span class="fu">DataFrame</span><span class="op">(</span>Treatment<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ChIP"</span>, <span class="st">"Input"</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span>,
+                     row.names<span class="op">=</span><span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span><span class="op">)</span>
+
+<span class="va">se</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/RangedSummarizedExperiment-class.html">SummarizedExperiment</a></span><span class="op">(</span>assays<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>counts<span class="op">=</span><span class="va">counts</span><span class="op">)</span>,
+                     rowRanges<span class="op">=</span><span class="va">rowRanges</span>, colData<span class="op">=</span><span class="va">colData</span><span class="op">)</span>
+
+<span class="co"># Row (regions-of-interest) data</span>
+<span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/RangedSummarizedExperiment-class.html">rowRanges</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span>
+
+<span class="co"># Column (sample) data</span>
+<span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">colData</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span>
+
+<span class="co"># Experiment-wide metadata</span>
+<span class="fu">metadata</span><span class="op">(</span><span class="va">se</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">se</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>
+<span class="va">se</span><span class="op">[</span>, <span class="va">se</span><span class="op">$</span><span class="va">cell</span> <span class="op">==</span> <span class="st">"N61311"</span><span class="op">]</span>
+
+<span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">3</span>, dimnames<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, <span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/RangedSummarizedExperiment-class.html">SummarizedExperiment</a></span><span class="op">(</span>assays<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>counts<span class="op">=</span><span class="va">counts</span><span class="op">)</span>,
+                              rowData<span class="op">=</span><span class="fu">DataFrame</span><span class="op">(</span>month<span class="op">=</span><span class="va">month.name</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, day<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># Subset all January assays</span>
+<span class="va">dates</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">rowData</a></span><span class="op">(</span><span class="va">dates</span><span class="op">)</span><span class="op">$</span><span class="va">month</span> <span class="op">==</span> <span class="st">"January"</span>, <span class="op">]</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">assays</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span>
+
+<span class="va">roi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html">GRanges</a></span><span class="op">(</span>seqnames<span class="op">=</span><span class="st">"1"</span>, ranges<span class="op">=</span><span class="fl">100000</span><span class="op">:</span><span class="fl">1100000</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/findOverlaps-methods.html">subsetByOverlaps</a></span><span class="op">(</span><span class="va">se</span>, <span class="va">roi</span><span class="op">)</span></code></pre></div>
+<p><a href="http://bioconductor.org/help/course-materials/2015/LearnBioconductorFeb2015/A01.3_BioconductorForSequenceAnalysis.html">참고사이트</a></p>
+</div>
+<div id="rtracklayer" class="section level2" number="21.4">
+<h2>
+<span class="header-section-number">21.4</span> rtracklayer<a class="anchor" aria-label="anchor" href="#rtracklayer"><i class="fas fa-link"></i></a>
+</h2>
+<p><a href="https://www.bioconductor.org/packages/release/bioc/vignettes/rtracklayer/inst/doc/rtracklayer.pdf" class="uri">https://www.bioconductor.org/packages/release/bioc/vignettes/rtracklayer/inst/doc/rtracklayer.pdf</a></p>
+<p>rtracklayer: UCSC web-based genome browser</p>
+</div>
+<div id="ggbio" class="section level2" number="21.5">
+<h2>
+<span class="header-section-number">21.5</span> ggbio<a class="anchor" aria-label="anchor" href="#ggbio"><i class="fas fa-link"></i></a>
+</h2>
+<p>Make gene model from OrganismDb object</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lawremi.github.io/ggbio/">ggbio</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">Homo.sapiens</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">Homo.sapiens</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">genesymbol</span>, package <span class="op">=</span> <span class="st">"biovizBase"</span><span class="op">)</span>
+<span class="va">wh</span> <span class="op">&lt;-</span> <span class="va">genesymbol</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"BRCA1"</span>, <span class="st">"NBR1"</span><span class="op">)</span><span class="op">]</span>
+<span class="va">wh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/inter-range-methods.html">range</a></span><span class="op">(</span><span class="va">wh</span>, ignore.strand <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+
+<span class="va">p.txdb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/autoplot-method.html">autoplot</a></span><span class="op">(</span><span class="va">Homo.sapiens</span>, which <span class="op">=</span> <span class="va">wh</span><span class="op">)</span>
+<span class="va">p.txdb</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co"># orgDB</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">org.EcK12.eg.db</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">org.EcK12.eg.db</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/methods.html">methods</a></span><span class="op">(</span>class<span class="op">=</span><span class="st">"OrgDb"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/AnnotationDb-class.html">columns</a></span><span class="op">(</span><span class="va">org.EcK12.eg.db</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/AnnotationDb-class.html">keys</a></span><span class="op">(</span><span class="va">org.EcK12.eg.db</span><span class="op">)</span>
+<span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu">AnnotationDbi</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/AnnotationDb-class.html">select</a></span><span class="op">(</span><span class="va">org.EcK12.eg.db</span>, <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/AnnotationDb-class.html">keys</a></span><span class="op">(</span><span class="va">org.EcK12.eg.db</span><span class="op">)</span>, <span class="st">"ACCNUM"</span><span class="op">)</span>
+<span class="va">org.EcK12.eg.db</span><span class="op">$</span><span class="va">ACCNUM</span></code></pre></div>
+<ul>
+<li>BSgenome DB 보다 최신 정보를 얻기 위해서는 NCBI 직접 다운로드</li>
+</ul>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
+
+<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"BSgenome.Ecoli.NCBI.20080805"</span><span class="op">)</span>
+
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">BSgenome.Ecoli.NCBI.20080805</span><span class="op">)</span>
+<span class="op">?</span><span class="va">BSgenome.Ecoli.NCBI.20080805</span>
+<span class="va">genome</span> <span class="op">&lt;-</span> <span class="va">BSgenome.Ecoli.NCBI.20080805</span>
+<span class="fu">seqlengths</span><span class="op">(</span><span class="va">genome</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/BSgenome/man/available.genomes.html">available.genomes</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">genome</span><span class="op">$</span><span class="va">NC_008253</span> 
+
+
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/rentrez/">rentrez</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">genbankr</span><span class="op">)</span>
+
+<span class="va">tmps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/rentrez/reference/entrez_fetch.html">entrez_fetch</a></span><span class="op">(</span><span class="st">"nuccore"</span>, id<span class="op">=</span><span class="st">"NC_000913.3"</span>, rettype<span class="op">=</span><span class="st">"gbwithparts"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/write.html">write</a></span><span class="op">(</span><span class="va">tmps</span>, <span class="st">"ecoli-mg1655.gb"</span><span class="op">)</span>
+<span class="va">ecoligb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genbankr/man/readGenBank.html">readGenBank</a></span><span class="op">(</span><span class="st">"ecoli-mg1655.gb"</span><span class="op">)</span>
+
+<span class="va">ecoli_cds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicFeatures/man/transcripts.html">cds</a></span><span class="op">(</span><span class="va">ecoligb</span><span class="op">)</span>
+<span class="va">ecoli_cds</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">p.txdb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/autoplot-method.html">autoplot</a></span><span class="op">(</span><span class="va">ecoli_cds</span><span class="op">)</span>
+<span class="va">p.txdb</span>
+
+<span class="co">#library(igvR)</span>
+<span class="va">ecoli_cds</span>
+<span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/ggbio-class.html">ggbio</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/layout_circle-method.html">circle</a></span><span class="op">(</span><span class="va">ecoli_cds</span>, geom <span class="op">=</span> <span class="st">"ideo"</span>, fill <span class="op">=</span> <span class="st">"gray70"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/layout_circle-method.html">circle</a></span><span class="op">(</span><span class="va">ecoli_cds</span>, geom <span class="op">=</span> <span class="st">"scale"</span>, size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/layout_circle-method.html">circle</a></span><span class="op">(</span><span class="va">ecoli_cds</span>, geom <span class="op">=</span> <span class="st">"text"</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">locus_tag</span><span class="op">)</span>, vjust <span class="op">=</span> <span class="fl">0</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>
+    axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle<span class="op">=</span><span class="fl">90</span><span class="op">)</span>
+  <span class="op">)</span>
+
+<span class="va">gr1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/genomic-range-squeezers.html">granges</a></span><span class="op">(</span><span class="va">ecoli_cds</span><span class="op">)</span>
+<span class="va">gr2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/genomic-range-squeezers.html">granges</a></span><span class="op">(</span><span class="va">ecoli_cds</span><span class="op">)</span>
+<span class="fu">mcols</span><span class="op">(</span><span class="va">gr2</span><span class="op">)</span><span class="op">$</span><span class="va">test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">ecoli_cds</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/layout_circle-method.html">layout_circle</a></span><span class="op">(</span><span class="va">ecoli_cds</span>, geom <span class="op">=</span> <span class="st">"ideo"</span>, fill <span class="op">=</span> <span class="st">"gray70"</span>, radius <span class="op">=</span> <span class="fl">9</span>, trackWidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/layout_circle-method.html">layout_circle</a></span><span class="op">(</span><span class="va">ecoli_cds</span>, geom <span class="op">=</span> <span class="st">"scale"</span>, size <span class="op">=</span> <span class="fl">3</span>, trackWidth <span class="op">=</span> <span class="fl">1</span>, scale.n<span class="op">=</span><span class="fl">20</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/layout_circle-method.html">layout_circle</a></span><span class="op">(</span><span class="va">gr1</span>, geom <span class="op">=</span> <span class="st">"rect"</span>, color <span class="op">=</span> <span class="st">"steelblue"</span>,  radius <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggbio/man/layout_circle-method.html">layout_circle</a></span><span class="op">(</span><span class="va">gr2</span>, geom <span class="op">=</span> <span class="st">"bar"</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y<span class="op">=</span><span class="va">test</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">3</span>, trackWidth <span class="op">=</span> <span class="fl">1</span>, scale.n<span class="op">=</span><span class="fl">20</span>, radius <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> 
+  </code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://paul-shannon.github.io/igvR/">igvR</a></span><span class="op">)</span>
+
+<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
+<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"igvR"</span><span class="op">)</span>
+
+<span class="va">igv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paul-shannon.github.io/igvR/reference/igvR-class.html">igvR</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu"><a href="https://paul-shannon.github.io/igvR/reference/setGenome.html">setGenome</a></span><span class="op">(</span><span class="va">igv</span>, <span class="st">"hg38"</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="day4-exercise" class="section level2" number="21.6">
+<h2>
+<span class="header-section-number">21.6</span> Practice for review<a class="anchor" aria-label="anchor" href="#day4-exercise"><i class="fas fa-link"></i></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li><p><a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000913.3">NC_000913.3</a>은 미생물 연구에서 잘 알려진 Escherichia coli str. K-12 substr. MG1655 균주의 Reference sequence 입니다. 해당 지놈 서열의 <code>fasta</code>와 <code>gb</code> 형태의 포맷으로 <code>rentrez</code> 패키지를 사용해서 다운로드 하고 <code>ecoli-k12.fasta</code>, <code>ecoli-k12.gb</code> 파일로 각각 저장하시오. 참고로 genbank 포맷의 full version은 <code>rettype=</code> 옵션을 <code>gbwithparts</code>로 해야함.</p></li>
+<li><p><code>genbankr</code> 패키지를 사용해서 <code>ecoli-k12.gb</code> 파일을 읽어들이고 Coding sequence 를 추출해서 <code>ecolicds</code> 라는 변수에 저장하시오</p></li>
+<li><p><code>plyranges</code>패키지의 filter 함수를 이용해서 ompR 이라는 유전자가 있는지 찾으시오</p></li>
+<li><p>ecolicds에서 다음 12개의 TF에 대한 정보를 추출하시오</p></li>
+</ol>
+<pre><code>"araC" "sgrR" "leuO" "cra"  "mraZ" "pdhR" "cdaR" "rclR" "betI" "pdeL" "cynR" "lacI"</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>
+<a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_010572.1?from=5569768&amp;to=5570805&amp;report=genbank">NC_010572.1</a>는 celR이라는 전사인자 단백질로서 cellulase 분해 유전자들의 발현을 제어함. 다음 서열을 <code>celR.fasta</code> 파일로 저장하고 <code>Biostrings</code> 패키지를 사용해서 읽어들이시오.</li>
+</ol>
+<pre><code>&gt;NC_010572.1 celR Streptomyces griseus subsp.
+ATGGCGGCATCGCGAGTACGGAACGGCGGGCGGCCCACGCTCGAAGAGGTCGCGGCACGGGCCGGGGTCG
+GCCGGGGCACCGCCTCACGGGTCATCAACGGCTCGCCCCGGGTCAGCGACGCCACCCGGCAGGCCGTCGA
+GGCGGCCGTCGCCGAACTGGGGTACGTCCCCAACCGCGCCGCCCGCGCCCTGGCGGGCAACCGCACCGAC
+GCCATCGCGCTGGTGGTCCCCGAGCCGGAGACCCGCTTCTTCGCCGAGCCCTACTTCTCCGCCATAGTGC
+GCGGTGTCGGGGCGGCCCTGGCCGACACCGAGATGCAGCTGCTCCTCACCCTCGTCGGCAACGACCGCGA
+GCGCCGCAGGCTCGCCCAGTACCTCACCGCCCACCGCGTCGACGGGGTCCTCCTGGTCGCCGTGCACGCC
+GATGACCCGCTGCCGGAGCTCCTGGAGCAGCTGGGCATGCCCTGCGTGATCAGCGGCGCCCGGCACGCGG
+CCGAGACGCTGCCCTCGGTCGACTCCGACAACTTCGAGGGCGCGCGGGCCGCCGTGGAGCACCTGGTCTC
+CCGGGGCCGCCGCCAGGTGGCCACCATCACCGGCCGCCTGGAGGTCTACGGCGCCCAGCGCCGCCTGGAC
+GGCTACCGCGCCGCGGTCTCCGCCGCCGGCCTGGCCCCCGACGAGCGCCTGATCGCCCCGGCCGACTTCA
+CCGAGGAGGGCGGCGCCCGGGCCATGCGCGACCTCCTGGCCCGCCGCCCCGGCCTCGACGCCGTCTTCGT
+GGCCTCCGACGTGATGGCCGCGGGCGCCCGCCAGGTCCTGCGCGAGGCGGACCGCCGCATCCCCGAGGAC
+GTGGCCCTGATCGGCTTCGACGACTCGGTGGTCGCCCGCCACATGCACCCGGCCCTCACCAGCGTCCGCC
+AGCCCATCGAGGAGATGGGCCGCCGGATGGCCCAGCTCCTCCTGGACGAGATCGCGGGCCGGGCCCCGGG
+CGACGAGCGCCCCTCGGTGGTCCTGCCCACGGAGCTGGTGGTCCGCGACTCGTCGTGA</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>앞서 ecoli의 전체 지놈 서열을 추출하고 ecoli 지놈에 celr 서열과 유사 서열이 있는지 <code>Biostrings</code>의 <code>pairwiseAlignment</code> 함수를 이용해서 탐색하시오</li>
+</ol>
+</div>
+<div id="blast-on-local-machine" class="section level2" number="21.7">
+<h2>
+<span class="header-section-number">21.7</span> BLAST on local machine<a class="anchor" aria-label="anchor" href="#blast-on-local-machine"><i class="fas fa-link"></i></a>
+</h2>
+<p>일반적으로 유사 서열을 탐색할 경우 ncbi의 blast을 사용합니다. rBLAST는 BLAST local을 설치한 컴퓨터에서 R을 활용해서 blast를 수행할 수 있게 만든 패키지입니다. local blast 설치는 <a href="https://www.ncbi.nlm.nih.gov/books/NBK279690/">BLAST Command Line Applications User Manual</a>을 참고하거나 <a href="https://hub.docker.com/r/ncbi/blast">docker 이미지</a>, <a href="https://github.com/ncbi/blast_plus_docs">docker blast manual</a>을 사용해도 되겠습니다.</p>
+<pre><code>docker pull ncbi/blast
+docker images</code></pre>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/Biostrings">Biostrings</a></span><span class="op">)</span>
+<span class="va">dbfile</span> <span class="op">&lt;-</span> <span class="st">"ecolicdsseq.fasta"</span>
+<span class="va">ecolicdssec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/getSeq.html">getSeq</a></span><span class="op">(</span><span class="va">ecoliseq</span>, <span class="va">ecolicds</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-io.html">writeXStringSet</a></span><span class="op">(</span><span class="va">ecolicdssec</span>, <span class="va">dbfile</span><span class="op">)</span>
+
+<span class="va">targetfile</span> <span class="op">&lt;-</span> <span class="st">"celrseq.fasta"</span>
+<span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-io.html">writeXStringSet</a></span><span class="op">(</span><span class="va">celr</span>, <span class="va">targetfile</span><span class="op">)</span></code></pre></div>
+<p>파일탐색기에서 working directory로 이동한 후 cmd 실행. 다음 명령어로 blastn 실행 가능.</p>
+<pre><code>docker run --rm -v %cd%:/myhome ncbi/blast blastn </code></pre>
+<p>데이터베이스 만들기, dbtype은 핵산의 경우에는 ‘nucl’, 단백질의 경우에는 ‘prot’. <code>%cd%</code>는 윈도우 cmd 환경에서 현재 디렉토리를 나타내는 문자</p>
+<pre><code>docker run --rm -v %cd%:/myhome -w /myhome ncbi/blast makeblastdb -in ecolicdsseq.fasta -dbtype nucl -out ecoli</code></pre>
+<p>blastn 수행</p>
+<pre><code>docker run --rm -v %cd%:/myhome -w /myhome ncbi/blast blastn -query celrseq.fasta -db ecoli -out blast_output.txt</code></pre>
+<p>다음 서열을 ribosomalprot.fasta 파일로 저장</p>
+<pre><code>&gt;X02130.1 E. coli genes rpsI and rplM for ribosomal proteins S9 and L13
+AACACTCGTCCGAGAATAACGAGTGGATCTTTGACCCCGACTTCTCTATAATCCTGCGACCCCACGTTAC
+AAGAAAGTTTTTTTCCCAAAACTTTTTGTGTGCTGGCATAGGCTATTCGAAGGGGTAGGTTTGCCGGACT
+TTGTCGTGTGAACCTCAACAATTGAAGACGTTTGGGTGTTCACCAACGTGTAACTATTTATTGGGTAAGC
+TTTTAATGAAAACTTTTACAGCTAAACCAGAAACCGTAAAACGCGACTGGTATGTTGTTGACGCGACCGG
+TAAAACTCTGGGCCGTCTGGCTACTGAACTGGCTCGTCGCCTGCGCGGTAAGCACAAAGCGGAATACACT
+CCGCACGTAGATACCGGTGATTACATCATCGTTCTGAACGCTGACAAAGTTGCTGTAACCGGCAACAAGC
+GTACTGACAAAGTGTACTATCACCACACCGGCCACATCGGTGGTATCAAACAAGCGACCTTTGAAGAGAT
+GATTGCTCGCCGTCCTGAGCGTGTGATTGAAATCGCGGTTAAAGGCATGTTGCCAAAAGGCCCGCTGGGT
+CGTGCTATGTTCCGTAAACTGAAAGTTTACGCGGGTAACGAGCACAACCACGCGGCACAGCAACCGCAAG
+TTCTTGACATCTAATCGGATTATAGGCAATGGCTGAAAATCAATACTACGGCACTGGTCGCCGCAAAAGT
+TCCGCAGCTCGCGTTTTCATCAAACCGGGCAACGGTAAAATCGTAATCAACCAACGTTCTCTGGAACAGT
+ACTTCGGTCGTGAAACTGCCCGCATGGTAGTTCGTCAGCCGCTGGAACTGGTCGACATGGTTGAGAAACT
+GGACCTGTACATCACCGTTAAAGGTGGTGGTATCTCTGGTCAGGCTGGTGCGATCCGTCACGGTATCACC
+CGCGCTCTGATGGAATACGACGAGTCCCTGCGTTCTGAACTGCGTAAAGCTGGCTTCGTTACTCGTGACG
+CTCGTCAGGTTGAACGTAAGAAAGTCGGTCTGCGTAAAGCACGTCGTCGTCCGCAGTTCTCCAAACGTTA
+ATTGGCTTCTGCTCCGGCAGAAAACAATTTTCGAAAAAACCCGCTTCGGCGGGTTTTTTTATAGGGAAGG
+TGCGAACAAGTCCCTGATATGAGATCATGTTTGTCATCTGGAGCCATAGAACAGGGTTCATCAT
+
+&gt;X04022.1 E. coli genes rpsF, rpsR and rplI for ribosomal proteins S6, S18, L9
+CAAGCTTTGCACATCGTCCATATTTCTGGCCTGGTGGTTATTAATTTCAATGGCTGCCCATGTATTTGCA
+CTTAGCAAAAGCACAGCCAGAAGGGCTAAAACACGACTGAACATAGATACCTCCTCGACGGCTGACTTTG
+TGTGCTCTCCTTCCTCGTGATGATCTTCTCGATTTAATTTTAATCAATGATAAAGAAGTTGATGGTGACC
+ATTTCTGATGCAGTTGTTCAAAAAAACCACCATGATGAAGTGTGATGAACTTCAAATCAGCGTGTTAGAG
+GTTAATTGCGAAAGGGGAGATTTATTTCGGCTCTGCCCTTGAGTTTAGCGAGGCATACAAGTACTATAAC
+GGCGTCATTTTTCAGCCGACCTTTAACACGTTCCTTGCCTCCCCGGGATTCGGCTGACCCAGACAGGAGG
+CGTGAATAATCCGTAAGGAGCAATTCGATGCGTCATTACGAAATCGTTTTTATGGTCCATCCTGATCAGA
+GCGAACAGGTTCCGGGCATGATCGAGCGCTACACTGCTGCCATCACTGGTGCAGAAGGCAAGATCCACCG
+TCTGGAAGACTGGGGCCGCCGTCAGCTGGCTTACCCGATCAACAAACTGCACAAAGCACACTACGTTTTG
+ATGAATGTTGAAGCTCCGCAGGAAGTGATCGATGAGCTGGAAACTACCTTCCGCTTCAACGATGCCGTTA
+TCCGCAGCATGGTTATGCGTACCAAGCACGCTGTTACCGAAGCATCTCCGATGGTTAAAGCGAAAGACGA
+GCGCCGTGAGCGTCGCGATGATTTCGCAAACGAAACCGCTGATGATGCTGAAGCTGGGGATTCTGAAGAG
+TAATTTCTGATGACCAACCGTCTGGTGTTGTCCGGCACCGTGTGCAGGGCTCCCCTTCGAAAGGTCAGTC
+CATCAGGAATTCCTCACTGCCAGTTCGTGCTTGAGCATCGTTCTGTGCAGGAGGAAGCCGGCTTTCACCG
+GCAGGCGTGGTGTCAAATGCCCGTTATTGTTAGCGGACACGAAAACCAGGCCATTACTCACAGTATAACG
+GTCGGCAGTCGCATAACCGTTCAGGGGTTCATTTCATGCCACAAGGCAAAGAACGGACTGAGCAAAATGG
+TTTTGCATGCCGAGCAGATTGAATTGATAGATTCTGGAGACTAGCCATATGGCACGTTATTTCCGTCGTC
+GCAAGTTCTGCCGTTTCACCGCGGAAGGCGTTCAAGAGATCGACTATAAAGATATCGCTACGCTGAAAAA
+CTACATCACCGAAAGCGGTAAGATTGTCCCAAGCCGTATCACCGGTACCCGTGCAAAATACCAGCGTCAG
+CTGGCTCGCGCTATCAAACGCGCTCGCTACCTGTCCCTGCTGCCGTACACTGATCGCCATCAGTAATCGG
+TCACAGGTCCATTAATACGACTTTGAGAGGATAAGGTAATGCAAGTTATTCTGCTTGATAAAGTAGCAAA
+CCTGGGTAGCCTGGGTGATCAGGTAAACGTTAAAGCGGGCTATGCTCGTAACTTCCTGGTACCGCAGGGT
+AAAGCTGTTCCAGCTACCAAGAAAAACATTGAATTCTTCGAAGCTCGTCGCGCTGAACTGGAAGCTAAAC
+TGGCTGAAGTTCTGGCAGCTGCTAATGCTCGCGCTGAGAAAATCAATGCACTGGAAACTGTTACCATCGC
+GTCTAAAGCTGGCGACGAAGGTAAACTGTTCGGTTCCATCGGTACTCGCGACATCGCTGACGCTGTAACT
+GCAGCTGGCGTTGAAGTGGCTAAGAGCGAAGTTCGTCTGCCGAACGGCGTTCTGCGTACCACTGGCGAAC
+ACGAAGTGAGCTTCCAGGTTCACAGCGAAGTATTCGCGAAAGTGATCGTAAACGTAGTAGCTGAATAATT
+CGTTATTCAACGAGACGTAAAAAGCGCCCGACCATTGGTCGGCGTTTTGCTTTCTATTTTTCGTCAGGTA
+TTAGTTTCGCAAGTAGATC
+
+&gt;J01677.1 E.coli rpmB and rpmG genes coding for ribosomal proteins L28 and L33
+GGATTTAACCCGCTATGCGCGATCCTTCGGGATCTTTGTCTGTTCGGGACTTGAGCACATCGCTGAGTCA
+GCGTATACTACGCCACCTTTGAGAATCTCGGGTTTGGCATTTGGGCCTGGCAATCGAGAGTTCACAGAAC
+TGCGATGACCGGGCTGTAAAGACCTGACGAGGCGCCAATACCCCATACGAAGCTCGAGCTAATTTGATTT
+TTGGAGAATAGACATGTCCCGAGTCTGCCAAGTTACTGGCAAGCGTCCGGTGACCGGTAACAACCGTTCC
+CACGCACTGAACGCGACTAAACGCCGTTTCCTGCCGAACCTGCACTCTCACCGTTTCTGGGTTGAGAGCG
+AGAAGCGTTTTGTCACCCTGCGCGTATCTGCTAAAGGCATGCGTGTAATCGATAAAAAAGGCATCGATAC
+AGTTCTGGCTGAACTGCGTGCCCGTGGCGAAAAGTACTAAGTACTTAGAGGAAATAAATCATGGCTAAAG
+GTATTCGTGAGAAAATCAAGCTGGTTTCTTCTGCTGGTACTGGTCACTTCTATACCACTACGAAGAACAA
+ACGTACTAAGCCGGAAAAACTGGAACTGAAAAAATTCGATCCAGTTGTTCGCCAGCACGTGATCTACAAA
+GAAGCGAAAATCAAATAATTCTCGCTTTGATGTAACAAAAAACCCCGCCCCGGCGGGGTTTTTTGTTATC
+TGCTTGCCCCCATATTGACTGCATCTGTTCATTCCTGGAGATGCTATGCCTGAATTACCCGAAG</code></pre>
+<pre><code>docker run --rm -v %cd%:/myhome -w /myhome ncbi/blast blastn -query ribosomalprot.fasta -db ecoli -out blast_output.txt</code></pre>
+<p>출력물 분석위한 옵션 설정</p>
+<pre><code>docker run --rm -v %cd%:/myhome -w /myhome ncbi/blast blastn -query ribosomalprot.fasta -db ecoli -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue stitle" -out blast_output.txt</code></pre>
+<p>출력물을 읽어들여 아래와 같이 각 hit (서열) 별로 서열 및 관련 단백질 title 정리</p>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+
+<span class="va">blastout</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span><span class="st">"blast_output.txt"</span>, header <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
+
+<span class="va">tmplist</span> <span class="op">&lt;-</span> <span class="va">blastout</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>query<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">V1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">query</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html">group_split</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="va">seqid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html">lapply</a></span><span class="op">(</span><span class="va">tmplist</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/paste.html">paste</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">unlist</span>
+<span class="va">hit_seqid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html">lapply</a></span><span class="op">(</span><span class="va">tmplist</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/paste.html">paste</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">unlist</span>
+<span class="va">hit_evalue</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html">lapply</a></span><span class="op">(</span><span class="va">tmplist</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/paste.html">paste</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">11</span><span class="op">]</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">unlist</span>
+<span class="va">hit_prot_title</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html">lapply</a></span><span class="op">(</span><span class="va">tmplist</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/paste.html">paste</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">12</span><span class="op">]</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">unlist</span>
+
+<span class="va">hitdat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">seqid</span>, <span class="va">hit_seqid</span>, <span class="va">hit_prot_title</span>, <span class="va">hit_evalue</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="va">hitdat</span>, file <span class="op">=</span> <span class="st">"target_blastout_table.tab"</span>, sep<span class="op">=</span><span class="st">"\t"</span>, quote <span class="op">=</span> <span class="cn">F</span>, row.names <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="bioconductor-workflow-link" class="section level2" number="21.8">
+<h2>
+<span class="header-section-number">21.8</span> Bioconductor Workflow (link)<a class="anchor" aria-label="anchor" href="#bioconductor-workflow-link"><i class="fas fa-link"></i></a>
+</h2>
+<p>Bioconductor에서는 다양한 생물학적 데이터를 분석하기 위한 툴이 개발되고 있으며 이러한 툴들은 RNA-seq과 같은 특정 목적을 위해 반복적으로 또는 순차적으로 수행되어야 하고 이러한 일련의 툴 사용 방법을 workflow로 만들어 제공하고 있습니다. 일부 워크플로에 대해서 간단히 리뷰하며 마치도록 하겠습니다.</p>
+<p><a href="http://bioconductor.org/packages/release/BiocViews.html#___Workflow">workflow</a></p>
+<hr>
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="크리에이티브 커먼즈 라이선스" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png"></a><br>이 저작물은 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제 라이선스</a>에 따라 이용할 수 있습니다.</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="empty"></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <div id="book-on-this-page"></div>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>2022년 한국생명공학연구원 연구데이터 분석과정 R</strong>" was written by 합성생물학전문연구소 김하성. It was last built on 2022-09-15.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

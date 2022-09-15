@@ -132,7 +132,7 @@
 
 \title{2022년 한국생명공학연구원 연구데이터 분석과정 R}
 \author{합성생물학전문연구소 김하성}
-\date{2022-09-01}
+\date{2022-09-15}
 
 \begin{document}
 \maketitle
@@ -228,6 +228,10 @@
   \href{https://web.stanford.edu/class/bios221/labs/}{bios221}
 \item
   \href{https://jmacdon.github.io/Bioc2021Anno/articles/AnnotationWorkshop.html\#summarizedexperiment-objects-1}{Annotation Workshop 2021}
+\item
+  \href{https://www.bioconductor.org/help/course-materials/2022/CSAMA/}{CSAMA 2022}
+\item
+  \href{https://www.bioconductor.org/help/course-materials/2022/CSAMA/lab/2-tuesday/lab-03-rnaseq/rnaseqGene_CSAMA2022.html}{RNA-Seq CSAMA 2022}
 \item
   \href{https://bioconductor.org/help/course-materials/2015/BioC2015/Annotation_Resources.html}{Annotation\_Resources 2015}
 \item
@@ -7879,7 +7883,7 @@ Theme은 data관련 요소들 외의 것들에 대한 설정을 위해서 사용
   \url{https://www.bioconductor.org}
 \end{itemize}
 
-Bioconductor는 바이오인포메틱스를 위한 R기반의 데이터, 메소드, 그리고 패키지들의 모음입니다. 2002년 microarray 데이터 분석을 위한 플랫폼으로 시작되었으며 현재 2000개 이상의 패키지로 구성되어 있습니다. R은 분산형 오픈소스이나 Bioconductor는 Full-time developer들에 의해서 유지되고 있습니다. \texttt{CRAN}에 배포되지 않고 \texttt{CRAN}에 비해 더 많은 필수 자료들 (vignettes 등)이 필요하며 높은 수준으로 quality control이 되고 있습니다.
+Bioconductor는 바이오인포메틱스를 위한 R기반의 데이터, 메소드, 그리고 패키지들의 모음입니다. 2002년 microarray 데이터 분석을 위한 플랫폼으로 시작되었으며 현재 2000개 이상의 패키지로 구성되어 있습니다. R은 분산형 오픈소스이나 Bioconductor는 Full-time developer들에 의해서 유지되고 있습니다. \texttt{CRAN}에 배포되지 않고 \texttt{CRAN}에 비해 더 많은 필수 자료들 (vignettes 등)이 필요하며 높은 수준으로 quality control이 되고 있습니다. Bioconductor는 6개월마다 예정된 릴리스를 통해 모든 bioconductor 패키지가 충돌없이 조화롭게 작동하도록 유지되고 있습니다.
 
 사용 가능한 패키지들은 \href{http://bioconductor.org/packages/release/BiocViews.html\#___Software}{이곳}을 참고하시면 되겠습니다.
 
@@ -10511,6 +10515,544 @@ ggbio의 autoplot을 사용하여 IRange와 같이 가시화 할 수 있으며 s
 \NormalTok{cdsrng}
 \NormalTok{cdsseq }\OtherTok{\textless{}{-}} \FunctionTok{getSeq}\NormalTok{(chrseq, cdsrng)}
 \NormalTok{cdsseq}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{lecture-09-note}{%
+\chapter{Lecture 09 Note}\label{lecture-09-note}}
+
+\begin{itemize}
+\tightlist
+\item
+  20220901
+\end{itemize}
+
+\hypertarget{class-01-4}{%
+\section{class 01}\label{class-01-4}}
+
+\begin{itemize}
+\tightlist
+\item
+  msa
+\item
+  \texttt{NC\_045512.2} NCBI 다운로드
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(Biostrings)}
+\FunctionTok{library}\NormalTok{(rentrez)}
+
+\FunctionTok{entrez\_dbs}\NormalTok{()}
+\NormalTok{tmps }\OtherTok{\textless{}{-}} \FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db=}\StringTok{"nuccore"}\NormalTok{, }\AttributeTok{id =} \StringTok{"NC\_045512.2"}\NormalTok{, }\AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)}
+\NormalTok{tmps}
+\FunctionTok{write.table}\NormalTok{(tmps, }\StringTok{"covid19yu.fasta"}\NormalTok{, }\AttributeTok{quote =}\NormalTok{ F, }\AttributeTok{row.names =}\NormalTok{ F, }\AttributeTok{col.names =}\NormalTok{ F)}
+
+\FunctionTok{download.file}\NormalTok{(}\AttributeTok{url =} \StringTok{"https://raw.githubusercontent.com/greendaygh/kribbr2022/main/covid\_table.csv"}\NormalTok{, }\AttributeTok{destfile =} \StringTok{"covid\_table2.csv"}\NormalTok{)}
+
+\NormalTok{covid19 }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"covid\_table2.csv"}\NormalTok{)}
+\NormalTok{selid }\OtherTok{\textless{}{-}}\NormalTok{ covid19}\SpecialCharTok{$}\NormalTok{gbacc[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{]}
+
+\NormalTok{tmps }\OtherTok{\textless{}{-}} \FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db=}\StringTok{"nuccore"}\NormalTok{, }\AttributeTok{id =}\NormalTok{ selid, }\AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)}
+\FunctionTok{write.table}\NormalTok{(tmps, }\StringTok{"covid19.fasta"}\NormalTok{, }\AttributeTok{quote =}\NormalTok{ F, }\AttributeTok{row.names =}\NormalTok{ F, }\AttributeTok{col.names =}\NormalTok{ F)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  msa 설치
+\item
+  Bioconductor landing page (구글에서 bioconductor msa)
+\item
+  installation 코드 복사 후 콘솔에서 붙여넣기
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# install }
+\CommentTok{\# if (!require("BiocManager", quietly = TRUE))}
+\CommentTok{\#     install.packages("BiocManager")}
+\CommentTok{\# }
+\CommentTok{\# BiocManager::install("msa")}
+
+
+\FunctionTok{library}\NormalTok{(msa)}
+
+
+\NormalTok{mycovidseq }\OtherTok{\textless{}{-}} \FunctionTok{readDNAStringSet}\NormalTok{(}\StringTok{"covid19.fasta"}\NormalTok{) }
+\FunctionTok{class}\NormalTok{(mycovidseq)}
+\NormalTok{mycovidseq}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  일부 서열만 가지고 실습
+\item
+  (팁) 블럭지정 후 ctrl + enter 블럭만 실행
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#subseq}
+\CommentTok{\#substr}
+
+
+\NormalTok{mycovidsubseq }\OtherTok{\textless{}{-}} \FunctionTok{subseq}\NormalTok{(mycovidseq, }\DecValTok{1}\NormalTok{, }\DecValTok{2000}\NormalTok{)}
+
+\NormalTok{aln }\OtherTok{\textless{}{-}} \FunctionTok{msa}\NormalTok{(mycovidsubseq, }\AttributeTok{method=}\StringTok{"Muscle"}\NormalTok{)}
+\NormalTok{aln}
+\FunctionTok{DNAStringSet}\NormalTok{(aln)}
+
+\NormalTok{?msa}
+
+\FunctionTok{print}\NormalTok{(aln, }\AttributeTok{show=}\StringTok{"complete"}\NormalTok{)}
+\CommentTok{\#msaPrettyPrint(aln, output = "pdf")}
+
+\FunctionTok{alphabetFrequency}\NormalTok{(aln)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  IRanges 설치Bioconductor landing page (구글에서 bioconductor IRanges 검색 ) installation 코드 복사 후 콘솔에서 붙여넣기
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(IRanges)}
+\FunctionTok{nchar}\NormalTok{(}\FunctionTok{consensusString}\NormalTok{(aln))}
+
+\NormalTok{mym }\OtherTok{\textless{}{-}} \FunctionTok{IRanges}\NormalTok{(}\AttributeTok{start=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{73}\NormalTok{), }\AttributeTok{end=}\FunctionTok{c}\NormalTok{(}\DecValTok{36}\NormalTok{, }\FunctionTok{nchar}\NormalTok{(}\FunctionTok{consensusString}\NormalTok{(aln))))}
+\FunctionTok{colmask}\NormalTok{(aln) }\OtherTok{\textless{}{-}}\NormalTok{ mym}
+\FunctionTok{print}\NormalTok{(aln, }\AttributeTok{show=}\StringTok{"complete"}\NormalTok{)}
+
+\FunctionTok{alphabetFrequency}\NormalTok{(aln)}
+\FunctionTok{unmasked}\NormalTok{(aln)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  DECIPHER
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(DECIPHER)}
+
+\NormalTok{aln }\OtherTok{\textless{}{-}} \FunctionTok{AlignSeqs}\NormalTok{(mycovidsubseq)}
+\FunctionTok{BrowseSeqs}\NormalTok{(aln)}
+\FunctionTok{BrowseSeqs}\NormalTok{(aln, }\AttributeTok{colWidth =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{class-02-4}{%
+\section{class 02}\label{class-02-4}}
+
+\begin{itemize}
+\item
+  ggtree (bioconductor), treeio (Bioconductor), ape (CRAN) 설치
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi})}
+  \tightlist
+  \item
+    MSA - 2) Distance - 3) clustering - 4) Tree
+  \end{enumerate}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{aln }\OtherTok{\textless{}{-}} \FunctionTok{msa}\NormalTok{(mycovidsubseq, }\AttributeTok{method=}\StringTok{"Muscle"}\NormalTok{)}
+\FunctionTok{class}\NormalTok{(aln)}
+
+\NormalTok{?stringDist}
+
+\NormalTok{mydist }\OtherTok{\textless{}{-}} \FunctionTok{stringDist}\NormalTok{(}\FunctionTok{DNAStringSet}\NormalTok{(aln))}
+\FunctionTok{class}\NormalTok{(mydist)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  label 축소
+\item
+  treeio error 발생시, ggtree 패키지 unload (detach(``package:ggtree'', unload = TRUE)) 후에 treeio, ggtree 순서로 로딩
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(treeio)}
+\FunctionTok{library}\NormalTok{(ggtree)}
+
+
+\NormalTok{tmps }\OtherTok{\textless{}{-}} \FunctionTok{strsplit}\NormalTok{(}\FunctionTok{names}\NormalTok{(mycovidsubseq), }\AttributeTok{split=}\StringTok{" "}\NormalTok{)}
+\NormalTok{mynames }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(tmps, }\ControlFlowTok{function}\NormalTok{(x)\{x[}\DecValTok{1}\NormalTok{]\})}
+\FunctionTok{names}\NormalTok{(mycovidsubseq) }\OtherTok{\textless{}{-}}\NormalTok{ mynames}
+\NormalTok{mycovidsubseq}
+
+\NormalTok{aln }\OtherTok{\textless{}{-}} \FunctionTok{msa}\NormalTok{(mycovidsubseq)}
+\NormalTok{mydist }\OtherTok{\textless{}{-}} \FunctionTok{stringDist}\NormalTok{(}\FunctionTok{DNAStringSet}\NormalTok{(aln))}
+\NormalTok{myclust }\OtherTok{\textless{}{-}} \FunctionTok{hclust}\NormalTok{(mydist)}
+\FunctionTok{plot}\NormalTok{(myclust)}
+
+\NormalTok{myphylo }\OtherTok{\textless{}{-}} \FunctionTok{as.phylo}\NormalTok{(myclust)}
+
+\FunctionTok{ggtree}\NormalTok{(myphylo)  }\SpecialCharTok{+}
+  \FunctionTok{geom\_tiplab}\NormalTok{(}\AttributeTok{color=}\StringTok{"firebrick"}\NormalTok{)}
+
+\FunctionTok{ggtree}\NormalTok{(myphylo, }\AttributeTok{layout=}\StringTok{"circular"}\NormalTok{)  }\SpecialCharTok{+}
+  \FunctionTok{geom\_tiplab}\NormalTok{(}\AttributeTok{color=}\StringTok{"firebrick"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  DECIPHER 버전업 되면서 바뀐부분 체크
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{aln }\OtherTok{\textless{}{-}} \FunctionTok{AlignSeqs}\NormalTok{(mycovidsubseq)}
+\CommentTok{\#mydist \textless{}{-} DistanceMatrix(aln)}
+\CommentTok{\# myclust \textless{}{-} IdClusters(aln, cutoff=10, method="NJ", type="dendrogram")}
+\CommentTok{\# class(mydist)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  as.tibbe
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+
+\FunctionTok{as.tibble}\NormalTok{(myphylo)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  여러 그림 그리기
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{mytree }\OtherTok{\textless{}{-}} \FunctionTok{rtree}\NormalTok{(}\DecValTok{30}\NormalTok{)}
+\FunctionTok{class}\NormalTok{(mytree)}
+
+\NormalTok{p }\OtherTok{\textless{}{-}} \FunctionTok{ggtree}\NormalTok{(mytree) }\SpecialCharTok{+}
+  \FunctionTok{geom\_tiplab}\NormalTok{()}
+
+\NormalTok{p}
+
+\NormalTok{a }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(}\DecValTok{30}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{b }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ a}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(mytree}\SpecialCharTok{$}\NormalTok{tip.label, a, b)}
+\NormalTok{df2 }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_longer}\NormalTok{(df, }\SpecialCharTok{{-}}\NormalTok{mytree.tip.label)}
+
+\NormalTok{p2 }\OtherTok{\textless{}{-}}\NormalTok{ p }\SpecialCharTok{+} \FunctionTok{geom\_facet}\NormalTok{(}\AttributeTok{panel=}\StringTok{"bar"}\NormalTok{, }
+                     \AttributeTok{data=}\NormalTok{df2, }
+                     \AttributeTok{geom=}\NormalTok{geom\_bar, }
+                     \AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ value, }\AttributeTok{fill =} \FunctionTok{as.factor}\NormalTok{(name)),}
+                     \AttributeTok{orientation =} \StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{, }
+                     \AttributeTok{width=}\FloatTok{0.8}\NormalTok{,}
+                     \AttributeTok{stat =} \StringTok{\textquotesingle{}identity\textquotesingle{}}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{xlim\_tree}\NormalTok{(}\DecValTok{9}\NormalTok{)}
+
+\FunctionTok{facet\_widths}\NormalTok{(p2, }\AttributeTok{widths =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  Genome 분석\\
+\item
+  \texttt{NC\_045512.2} NCBI 다운로드
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(Biostrings)}
+\FunctionTok{library}\NormalTok{(rentrez)}
+
+
+\NormalTok{tmps }\OtherTok{\textless{}{-}} \FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db=}\StringTok{"nuccore"}\NormalTok{, }\AttributeTok{id =} \StringTok{"NC\_045512.2"}\NormalTok{, }\AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)}
+\NormalTok{tmps}
+\FunctionTok{write.table}\NormalTok{(tmps, }\StringTok{"covid19yu.fasta"}\NormalTok{, }\AttributeTok{quote =}\NormalTok{ F, }\AttributeTok{row.names =}\NormalTok{ F, }\AttributeTok{col.names =}\NormalTok{ F)}
+
+\NormalTok{covid19seq }\OtherTok{\textless{}{-}} \FunctionTok{readDNAStringSet}\NormalTok{(}\StringTok{"covid19yu.fasta"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  read genbank
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{require}\NormalTok{(genbankr)}
+
+\NormalTok{tmps }\OtherTok{\textless{}{-}} \FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db=}\StringTok{"nuccore"}\NormalTok{, }\AttributeTok{id =} \StringTok{"NC\_045512.2"}\NormalTok{, }\AttributeTok{rettype =} \StringTok{"gb"}\NormalTok{)}
+\NormalTok{tmps}
+\FunctionTok{write.table}\NormalTok{(tmps, }\StringTok{"covid19yu.gb"}\NormalTok{, }\AttributeTok{quote =}\NormalTok{ F, }\AttributeTok{row.names =}\NormalTok{ F, }\AttributeTok{col.names =}\NormalTok{ F)}
+
+\NormalTok{covidgb }\OtherTok{\textless{}{-}} \FunctionTok{readGenBank}\NormalTok{(}\StringTok{"covid19yu.gb"}\NormalTok{)}
+\NormalTok{covidgb}
+
+\FunctionTok{cds}\NormalTok{(covidgb)}
+\FunctionTok{class}\NormalTok{(covidgb)}
+\FunctionTok{methods}\NormalTok{(}\AttributeTok{class=}\StringTok{"GenBankRecord"}\NormalTok{)}
+
+\NormalTok{covidseq }\OtherTok{\textless{}{-}} \FunctionTok{getSeq}\NormalTok{(covidgb)}
+\FunctionTok{class}\NormalTok{(covidgb)}
+
+\NormalTok{cdsseq }\OtherTok{\textless{}{-}} \FunctionTok{getSeq}\NormalTok{(covidseq, }\FunctionTok{cds}\NormalTok{(covidgb))}
+\FunctionTok{class}\NormalTok{(covidseq)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{class-03-4}{%
+\section{class 03}\label{class-03-4}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(IRanges)}
+
+\NormalTok{ir }\OtherTok{\textless{}{-}} \FunctionTok{IRanges}\NormalTok{(}\AttributeTok{start =} \DecValTok{1}\NormalTok{, }\AttributeTok{end =} \DecValTok{10}\NormalTok{)}
+\NormalTok{ir}
+
+\NormalTok{ir }\OtherTok{\textless{}{-}} \FunctionTok{IRanges}\NormalTok{(}\AttributeTok{start =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{, }\AttributeTok{width =} \DecValTok{10}\SpecialCharTok{:}\DecValTok{1}\NormalTok{)}
+\NormalTok{ir}
+\FunctionTok{class}\NormalTok{(ir)}
+
+\NormalTok{x }\OtherTok{\textless{}{-}} \StringTok{"GATTGCCCCCCTAG"}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{unlist}\NormalTok{(}\FunctionTok{strsplit}\NormalTok{(x, }\AttributeTok{split=}\StringTok{""}\NormalTok{))}
+\NormalTok{z }\OtherTok{\textless{}{-}} \FunctionTok{Rle}\NormalTok{(y)}
+\FunctionTok{write.table}\NormalTok{(z, }\StringTok{"tmp.txt"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cds}\NormalTok{(covidgb)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggbio)}
+
+\NormalTok{ir }\OtherTok{\textless{}{-}} \FunctionTok{ranges}\NormalTok{(}\FunctionTok{cds}\NormalTok{(covidgb))}
+\NormalTok{ir}
+
+\FunctionTok{start}\NormalTok{(ir)}
+\FunctionTok{end}\NormalTok{(ir)}
+\FunctionTok{width}\NormalTok{(ir)}
+
+\FunctionTok{autoplot}\NormalTok{(ir) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+
+\FunctionTok{autoplot}\NormalTok{(ir, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{fill=}\NormalTok{width)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+
+
+
+
+\NormalTok{ir }\OtherTok{\textless{}{-}} \FunctionTok{IRanges}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{100}\NormalTok{), }\AttributeTok{end=}\FunctionTok{c}\NormalTok{(}\DecValTok{20}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{110}\NormalTok{))}
+\FunctionTok{autoplot}\NormalTok{(ir)}
+
+
+\FunctionTok{disjointBins}\NormalTok{(ir)}
+\FunctionTok{autoplot}\NormalTok{(}\FunctionTok{disjoin}\NormalTok{(ir))}
+\FunctionTok{autoplot}\NormalTok{(IRanges}\SpecialCharTok{::}\FunctionTok{reduce}\NormalTok{(ir))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  ggbio 설치
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\FunctionTok{IRanges}\NormalTok{(}\AttributeTok{start =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{), }\AttributeTok{width =} \FunctionTok{c}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{4}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(GenomicRanges)}
+\FunctionTok{cds}\NormalTok{(covidgb)}
+
+\NormalTok{gr }\OtherTok{\textless{}{-}} \FunctionTok{GRanges}\NormalTok{(}\AttributeTok{seqnames =} \StringTok{"chr1"}\NormalTok{, }
+              \AttributeTok{ranges =} \FunctionTok{IRanges}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{, }\DecValTok{21}\SpecialCharTok{:}\DecValTok{30}\NormalTok{),}
+              \AttributeTok{strand =} \StringTok{"+"}\NormalTok{)}
+\NormalTok{gr}
+
+
+\NormalTok{gr }\OtherTok{\textless{}{-}} \FunctionTok{GRanges}\NormalTok{(}\AttributeTok{seqnames =} \StringTok{"chr1"}\NormalTok{, }
+              \AttributeTok{ranges =} \FunctionTok{IRanges}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{, }\DecValTok{21}\SpecialCharTok{:}\DecValTok{30}\NormalTok{),}
+              \AttributeTok{strand =} \StringTok{"+"}\NormalTok{, }
+              \AttributeTok{names =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"g"}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{), }
+              \AttributeTok{score =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{)}
+\NormalTok{gr}
+
+\FunctionTok{seqnames}\NormalTok{(gr)}
+\FunctionTok{ranges}\NormalTok{(gr)}
+\FunctionTok{strand}\NormalTok{(gr)}
+\FunctionTok{start}\NormalTok{(gr)}
+\FunctionTok{end}\NormalTok{(gr)}
+
+\FunctionTok{granges}\NormalTok{(gr) }
+\FunctionTok{mcols}\NormalTok{(gr)}
+\FunctionTok{seqlengths}\NormalTok{(gr) }\OtherTok{\textless{}{-}} \DecValTok{50}
+
+\FunctionTok{autoplot}\NormalTok{(gr)}
+
+
+\NormalTok{gr2 }\OtherTok{\textless{}{-}} \FunctionTok{GRanges}\NormalTok{(}\AttributeTok{seqnames =} \StringTok{"chr2"}\NormalTok{, }
+              \AttributeTok{ranges =} \FunctionTok{IRanges}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{, }\DecValTok{21}\SpecialCharTok{:}\DecValTok{30}\NormalTok{),}
+              \AttributeTok{strand =} \StringTok{"+"}\NormalTok{, }
+              \AttributeTok{names =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"g"}\NormalTok{, }\DecValTok{11}\SpecialCharTok{:}\DecValTok{20}\NormalTok{), }
+              \AttributeTok{score =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{)}
+\NormalTok{gr3 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(gr, gr2)}
+\FunctionTok{seqnames}\NormalTok{(gr3)}
+\FunctionTok{seqlengths}\NormalTok{(gr3)}
+
+\FunctionTok{split}\NormalTok{(gr3, }\FunctionTok{c}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\DecValTok{10}\NormalTok{), }\FunctionTok{rep}\NormalTok{(}\StringTok{"b"}\NormalTok{, }\DecValTok{10}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  disjoin
+\item
+  reduce
+\end{itemize}
+
+\hypertarget{class-04-4}{%
+\section{class 04}\label{class-04-4}}
+
+\begin{itemize}
+\tightlist
+\item
+  대장균 지놈 plot
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tmps }\OtherTok{\textless{}{-}} \FunctionTok{entrez\_fetch}\NormalTok{(}\StringTok{"nuccore"}\NormalTok{, }\AttributeTok{id=}\StringTok{"NC\_000913.3"}\NormalTok{, }\AttributeTok{rettype=}\StringTok{"gbwithparts"}\NormalTok{)}
+\FunctionTok{write}\NormalTok{(tmps, }\StringTok{"ecoli{-}mg1655.gb"}\NormalTok{)}
+
+\NormalTok{ecoligb }\OtherTok{\textless{}{-}} \FunctionTok{readGenBank}\NormalTok{(}\StringTok{"ecoli{-}mg1655.gb"}\NormalTok{)}
+\NormalTok{ecoli\_cds }\OtherTok{\textless{}{-}} \FunctionTok{cds}\NormalTok{(ecoligb)}
+\FunctionTok{autoplot}\NormalTok{(ecoli\_cds)}
+\FunctionTok{seqlengths}\NormalTok{(ecoli\_cds)}
+\FunctionTok{ggbio}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{circle}\NormalTok{(ecoli\_cds, }\AttributeTok{geom=}\StringTok{"ideo"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"gray70"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{circle}\NormalTok{(ecoli\_cds, }\AttributeTok{geom=}\StringTok{"scale"}\NormalTok{, }\AttributeTok{size=}\DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{circle}\NormalTok{(ecoli\_cds, }\AttributeTok{geom =} \StringTok{"text"}\NormalTok{, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =}\NormalTok{ locus\_tag), }\AttributeTok{vjust =} \DecValTok{0}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle=}\DecValTok{90}\NormalTok{)}
+\NormalTok{  )}
+
+
+\NormalTok{gr1 }\OtherTok{\textless{}{-}} \FunctionTok{granges}\NormalTok{(ecoli\_cds)}
+\NormalTok{gr2 }\OtherTok{\textless{}{-}} \FunctionTok{granges}\NormalTok{(ecoli\_cds)}
+\FunctionTok{mcols}\NormalTok{(gr2)}\SpecialCharTok{$}\NormalTok{test }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\FunctionTok{length}\NormalTok{(ecoli\_cds))}
+
+\FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{layout\_circle}\NormalTok{(ecoli\_cds, }\AttributeTok{geom =} \StringTok{"ideo"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"gray70"}\NormalTok{, }\AttributeTok{radius =} \DecValTok{9}\NormalTok{, }\AttributeTok{trackWidth =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{layout\_circle}\NormalTok{(ecoli\_cds, }\AttributeTok{geom =} \StringTok{"scale"}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{, }\AttributeTok{trackWidth =} \DecValTok{1}\NormalTok{, }\AttributeTok{scale.n=}\DecValTok{20}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{layout\_circle}\NormalTok{(gr1, }\AttributeTok{geom =} \StringTok{"rect"}\NormalTok{, }\AttributeTok{color =} \StringTok{"steelblue"}\NormalTok{,  }\AttributeTok{radius =} \DecValTok{5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{layout\_circle}\NormalTok{(gr2, }\AttributeTok{geom =} \StringTok{"bar"}\NormalTok{, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y=}\NormalTok{test), }\AttributeTok{size =} \DecValTok{3}\NormalTok{, }\AttributeTok{trackWidth =} \DecValTok{1}\NormalTok{, }\AttributeTok{scale.n=}\DecValTok{20}\NormalTok{, }\AttributeTok{radius =} \DecValTok{4}\NormalTok{) }
+  
+
+\NormalTok{gr1disj }\OtherTok{\textless{}{-}} \FunctionTok{disjoin}\NormalTok{(gr1)}
+
+\FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{layout\_circle}\NormalTok{(ecoli\_cds, }\AttributeTok{geom =} \StringTok{"ideo"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"gray70"}\NormalTok{, }\AttributeTok{radius =} \DecValTok{9}\NormalTok{, }\AttributeTok{trackWidth =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{layout\_circle}\NormalTok{(ecoli\_cds, }\AttributeTok{geom =} \StringTok{"scale"}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{, }\AttributeTok{trackWidth =} \DecValTok{1}\NormalTok{, }\AttributeTok{scale.n=}\DecValTok{20}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{layout\_circle}\NormalTok{(gr1disj, }\AttributeTok{geom =} \StringTok{"rect"}\NormalTok{, }\AttributeTok{color =} \StringTok{"steelblue"}\NormalTok{,  }\AttributeTok{radius =} \DecValTok{5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{layout\_circle}\NormalTok{(gr2, }\AttributeTok{geom =} \StringTok{"bar"}\NormalTok{, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y=}\NormalTok{test), }\AttributeTok{size =} \DecValTok{3}\NormalTok{, }\AttributeTok{trackWidth =} \DecValTok{1}\NormalTok{, }\AttributeTok{scale.n=}\DecValTok{20}\NormalTok{, }\AttributeTok{radius =} \DecValTok{4}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(plyranges)}
+
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{"BiocManager"}\NormalTok{, }\AttributeTok{quietly =} \ConstantTok{TRUE}\NormalTok{))}
+    \FunctionTok{install.packages}\NormalTok{(}\StringTok{"BiocManager"}\NormalTok{)}
+
+\NormalTok{BiocManager}\SpecialCharTok{::}\FunctionTok{install}\NormalTok{(}\StringTok{"plyranges"}\NormalTok{)}
+
+\NormalTok{covidseq }\OtherTok{\textless{}{-}} \FunctionTok{getSeq}\NormalTok{(covidgb)}
+\NormalTok{cdsrng }\OtherTok{\textless{}{-}} \FunctionTok{cds}\NormalTok{(covidgb)}
+\NormalTok{cdsseq }\OtherTok{\textless{}{-}} \FunctionTok{getSeq}\NormalTok{(covidseq, cdsrng)}
+
+\NormalTok{gcratio }\OtherTok{\textless{}{-}} \FunctionTok{rowSums}\NormalTok{(}\FunctionTok{letterFrequency}\NormalTok{(cdsseq, }\FunctionTok{c}\NormalTok{(}\StringTok{"G"}\NormalTok{, }\StringTok{"C"}\NormalTok{))) }\SpecialCharTok{/} \FunctionTok{nchar}\NormalTok{(cdsseq)}
+
+\NormalTok{cdsrng }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(gene, product) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(gcratio)}
+  
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  gggene install --\textgreater{} CRAN
+\item
+  Rstudio \textgreater{} Packages \textgreater{} install
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(gggenes)}
+
+\NormalTok{mydf }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{seqname =} \FunctionTok{seqnames}\NormalTok{(cdsrng),}
+           \AttributeTok{start =} \FunctionTok{start}\NormalTok{(cdsrng), }
+           \AttributeTok{end =} \FunctionTok{end}\NormalTok{(cdsrng), }
+           \AttributeTok{strand =} \FunctionTok{case\_when}\NormalTok{(}
+             \FunctionTok{as.vector}\NormalTok{(}\FunctionTok{strand}\NormalTok{(cdsrng))}\SpecialCharTok{==}\StringTok{"+"}\SpecialCharTok{\textasciitilde{}} \ConstantTok{TRUE}\NormalTok{,}
+             \FunctionTok{as.vector}\NormalTok{(}\FunctionTok{strand}\NormalTok{(cdsrng))}\SpecialCharTok{==}\StringTok{"{-}"}\SpecialCharTok{\textasciitilde{}} \ConstantTok{FALSE}
+\NormalTok{           ),}
+           \AttributeTok{gene =} \FunctionTok{mcols}\NormalTok{(cdsrng)}\SpecialCharTok{$}\NormalTok{gene)}
+
+\FunctionTok{ggplot}\NormalTok{(mydf, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{xmin =}\NormalTok{ start, }
+                 \AttributeTok{xmax =}\NormalTok{ end, }
+                 \AttributeTok{y =}\NormalTok{ seqname,}
+                 \AttributeTok{label =}\NormalTok{ gene, }
+                 \AttributeTok{fill =}\NormalTok{ gene,}
+                 \AttributeTok{forward =}\NormalTok{ strand)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_gene\_arrow}\NormalTok{(}\AttributeTok{arrowhead\_height =}\NormalTok{ grid}\SpecialCharTok{::}\FunctionTok{unit}\NormalTok{(}\DecValTok{12}\NormalTok{, }\StringTok{"mm"}\NormalTok{),}
+    \AttributeTok{arrowhead\_width =}\NormalTok{ grid}\SpecialCharTok{::}\FunctionTok{unit}\NormalTok{(}\DecValTok{6}\NormalTok{, }\StringTok{"mm"}\NormalTok{),}
+    \AttributeTok{arrow\_body\_height =}\NormalTok{ grid}\SpecialCharTok{::}\FunctionTok{unit}\NormalTok{(}\DecValTok{12}\NormalTok{, }\StringTok{"mm"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_gene\_label}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{)}
+      
 \end{Highlighting}
 \end{Shaded}
 

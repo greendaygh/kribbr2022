@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Chapter 25 BLAST on local machine | 2022년 한국생명공학연구원 연구데이터 분석과정 R</title>
+
+    <meta name="author" content="합성생물학전문연구소 김하성" />
+  
+   <meta name="description" content="Lecture" />
+   <meta name="generator" content="placeholder" />
+  <meta property="og:title" content="Chapter 25 BLAST on local machine | 2022년 한국생명공학연구원 연구데이터 분석과정 R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Lecture" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 25 BLAST on local machine | 2022년 한국생명공학연구원 연구데이터 분석과정 R" />
+  
+  <meta name="twitter:description" content="Lecture" />
+  
+  <!-- JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
+    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
+    <script src="libs/bs3compat-0.3.1/transition.js"></script>
+    <script src="libs/bs3compat-0.3.1/tabs.js"></script>
+    <script src="libs/bs3compat-0.3.1/bs3compat.js"></script>
+    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
+    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
+    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
+
+  <!-- CSS -->
+  <style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+      <link rel="stylesheet" href="style.css" />
+  
+</head>
+
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
+    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">2022년 한국생명공학연구원 연구데이터 분석과정 R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+      </form>
+
+      <nav aria-label="Table of contents">
+        <h2>Table of contents</h2>
+        <div id="book-toc"></div>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
+<div id="blast-on-local-machine" class="section level1" number="25">
+<h1><span class="header-section-number">Chapter 25</span> BLAST on local machine</h1>
+<p>일반적으로 유사 서열을 탐색할 경우 ncbi의 blast을 사용합니다. rBLAST는 BLAST local을 설치한 컴퓨터에서 R을 활용해서 blast를 수행할 수 있게 만든 패키지입니다. local blast 설치는 <a href="https://www.ncbi.nlm.nih.gov/books/NBK279690/">BLAST Command Line Applications User Manual</a>을 참고하거나 <a href="https://hub.docker.com/r/ncbi/blast">docker 이미지</a>, <a href="https://github.com/ncbi/blast_plus_docs">docker blast manual</a>을 사용해도 되겠습니다.</p>
+<pre><code>docker pull ncbi/blast
+docker images</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="blast-on-local-machine.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Biostrings)</span>
+<span id="cb23-2"><a href="blast-on-local-machine.html#cb23-2" aria-hidden="true" tabindex="-1"></a>dbfile <span class="ot">&lt;-</span> <span class="st">&quot;ecolicdsseq.fasta&quot;</span></span>
+<span id="cb23-3"><a href="blast-on-local-machine.html#cb23-3" aria-hidden="true" tabindex="-1"></a>ecolicdssec <span class="ot">&lt;-</span> <span class="fu">getSeq</span>(ecoliseq, ecolicds)</span>
+<span id="cb23-4"><a href="blast-on-local-machine.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">writeXStringSet</span>(ecolicdssec, dbfile)</span>
+<span id="cb23-5"><a href="blast-on-local-machine.html#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="blast-on-local-machine.html#cb23-6" aria-hidden="true" tabindex="-1"></a>targetfile <span class="ot">&lt;-</span> <span class="st">&quot;celrseq.fasta&quot;</span></span>
+<span id="cb23-7"><a href="blast-on-local-machine.html#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="fu">writeXStringSet</span>(celr, targetfile)</span></code></pre></div>
+<p>파일탐색기에서 working directory로 이동한 후 cmd 실행. 다음 명령어로 blastn 실행 가능.</p>
+<pre><code>docker run --rm -v %cd%:/myhome ncbi/blast blastn </code></pre>
+<p>데이터베이스 만들기, dbtype은 핵산의 경우에는 ‘nucl’, 단백질의 경우에는 ‘prot’. <code>%cd%</code>는 윈도우 cmd 환경에서 현재 디렉토리를 나타내는 문자</p>
+<pre><code>docker run --rm -v %cd%:/myhome -w /myhome ncbi/blast makeblastdb -in ecolicdsseq.fasta -dbtype nucl -out ecoli</code></pre>
+<p>blastn 수행</p>
+<pre><code>docker run --rm -v %cd%:/myhome -w /myhome ncbi/blast blastn -query celrseq.fasta -db ecoli -out blast_output.txt</code></pre>
+<p>다음 서열을 ribosomalprot.fasta 파일로 저장</p>
+<pre><code>&gt;X02130.1 E. coli genes rpsI and rplM for ribosomal proteins S9 and L13
+AACACTCGTCCGAGAATAACGAGTGGATCTTTGACCCCGACTTCTCTATAATCCTGCGACCCCACGTTAC
+AAGAAAGTTTTTTTCCCAAAACTTTTTGTGTGCTGGCATAGGCTATTCGAAGGGGTAGGTTTGCCGGACT
+TTGTCGTGTGAACCTCAACAATTGAAGACGTTTGGGTGTTCACCAACGTGTAACTATTTATTGGGTAAGC
+TTTTAATGAAAACTTTTACAGCTAAACCAGAAACCGTAAAACGCGACTGGTATGTTGTTGACGCGACCGG
+TAAAACTCTGGGCCGTCTGGCTACTGAACTGGCTCGTCGCCTGCGCGGTAAGCACAAAGCGGAATACACT
+CCGCACGTAGATACCGGTGATTACATCATCGTTCTGAACGCTGACAAAGTTGCTGTAACCGGCAACAAGC
+GTACTGACAAAGTGTACTATCACCACACCGGCCACATCGGTGGTATCAAACAAGCGACCTTTGAAGAGAT
+GATTGCTCGCCGTCCTGAGCGTGTGATTGAAATCGCGGTTAAAGGCATGTTGCCAAAAGGCCCGCTGGGT
+CGTGCTATGTTCCGTAAACTGAAAGTTTACGCGGGTAACGAGCACAACCACGCGGCACAGCAACCGCAAG
+TTCTTGACATCTAATCGGATTATAGGCAATGGCTGAAAATCAATACTACGGCACTGGTCGCCGCAAAAGT
+TCCGCAGCTCGCGTTTTCATCAAACCGGGCAACGGTAAAATCGTAATCAACCAACGTTCTCTGGAACAGT
+ACTTCGGTCGTGAAACTGCCCGCATGGTAGTTCGTCAGCCGCTGGAACTGGTCGACATGGTTGAGAAACT
+GGACCTGTACATCACCGTTAAAGGTGGTGGTATCTCTGGTCAGGCTGGTGCGATCCGTCACGGTATCACC
+CGCGCTCTGATGGAATACGACGAGTCCCTGCGTTCTGAACTGCGTAAAGCTGGCTTCGTTACTCGTGACG
+CTCGTCAGGTTGAACGTAAGAAAGTCGGTCTGCGTAAAGCACGTCGTCGTCCGCAGTTCTCCAAACGTTA
+ATTGGCTTCTGCTCCGGCAGAAAACAATTTTCGAAAAAACCCGCTTCGGCGGGTTTTTTTATAGGGAAGG
+TGCGAACAAGTCCCTGATATGAGATCATGTTTGTCATCTGGAGCCATAGAACAGGGTTCATCAT
+
+&gt;X04022.1 E. coli genes rpsF, rpsR and rplI for ribosomal proteins S6, S18, L9
+CAAGCTTTGCACATCGTCCATATTTCTGGCCTGGTGGTTATTAATTTCAATGGCTGCCCATGTATTTGCA
+CTTAGCAAAAGCACAGCCAGAAGGGCTAAAACACGACTGAACATAGATACCTCCTCGACGGCTGACTTTG
+TGTGCTCTCCTTCCTCGTGATGATCTTCTCGATTTAATTTTAATCAATGATAAAGAAGTTGATGGTGACC
+ATTTCTGATGCAGTTGTTCAAAAAAACCACCATGATGAAGTGTGATGAACTTCAAATCAGCGTGTTAGAG
+GTTAATTGCGAAAGGGGAGATTTATTTCGGCTCTGCCCTTGAGTTTAGCGAGGCATACAAGTACTATAAC
+GGCGTCATTTTTCAGCCGACCTTTAACACGTTCCTTGCCTCCCCGGGATTCGGCTGACCCAGACAGGAGG
+CGTGAATAATCCGTAAGGAGCAATTCGATGCGTCATTACGAAATCGTTTTTATGGTCCATCCTGATCAGA
+GCGAACAGGTTCCGGGCATGATCGAGCGCTACACTGCTGCCATCACTGGTGCAGAAGGCAAGATCCACCG
+TCTGGAAGACTGGGGCCGCCGTCAGCTGGCTTACCCGATCAACAAACTGCACAAAGCACACTACGTTTTG
+ATGAATGTTGAAGCTCCGCAGGAAGTGATCGATGAGCTGGAAACTACCTTCCGCTTCAACGATGCCGTTA
+TCCGCAGCATGGTTATGCGTACCAAGCACGCTGTTACCGAAGCATCTCCGATGGTTAAAGCGAAAGACGA
+GCGCCGTGAGCGTCGCGATGATTTCGCAAACGAAACCGCTGATGATGCTGAAGCTGGGGATTCTGAAGAG
+TAATTTCTGATGACCAACCGTCTGGTGTTGTCCGGCACCGTGTGCAGGGCTCCCCTTCGAAAGGTCAGTC
+CATCAGGAATTCCTCACTGCCAGTTCGTGCTTGAGCATCGTTCTGTGCAGGAGGAAGCCGGCTTTCACCG
+GCAGGCGTGGTGTCAAATGCCCGTTATTGTTAGCGGACACGAAAACCAGGCCATTACTCACAGTATAACG
+GTCGGCAGTCGCATAACCGTTCAGGGGTTCATTTCATGCCACAAGGCAAAGAACGGACTGAGCAAAATGG
+TTTTGCATGCCGAGCAGATTGAATTGATAGATTCTGGAGACTAGCCATATGGCACGTTATTTCCGTCGTC
+GCAAGTTCTGCCGTTTCACCGCGGAAGGCGTTCAAGAGATCGACTATAAAGATATCGCTACGCTGAAAAA
+CTACATCACCGAAAGCGGTAAGATTGTCCCAAGCCGTATCACCGGTACCCGTGCAAAATACCAGCGTCAG
+CTGGCTCGCGCTATCAAACGCGCTCGCTACCTGTCCCTGCTGCCGTACACTGATCGCCATCAGTAATCGG
+TCACAGGTCCATTAATACGACTTTGAGAGGATAAGGTAATGCAAGTTATTCTGCTTGATAAAGTAGCAAA
+CCTGGGTAGCCTGGGTGATCAGGTAAACGTTAAAGCGGGCTATGCTCGTAACTTCCTGGTACCGCAGGGT
+AAAGCTGTTCCAGCTACCAAGAAAAACATTGAATTCTTCGAAGCTCGTCGCGCTGAACTGGAAGCTAAAC
+TGGCTGAAGTTCTGGCAGCTGCTAATGCTCGCGCTGAGAAAATCAATGCACTGGAAACTGTTACCATCGC
+GTCTAAAGCTGGCGACGAAGGTAAACTGTTCGGTTCCATCGGTACTCGCGACATCGCTGACGCTGTAACT
+GCAGCTGGCGTTGAAGTGGCTAAGAGCGAAGTTCGTCTGCCGAACGGCGTTCTGCGTACCACTGGCGAAC
+ACGAAGTGAGCTTCCAGGTTCACAGCGAAGTATTCGCGAAAGTGATCGTAAACGTAGTAGCTGAATAATT
+CGTTATTCAACGAGACGTAAAAAGCGCCCGACCATTGGTCGGCGTTTTGCTTTCTATTTTTCGTCAGGTA
+TTAGTTTCGCAAGTAGATC
+
+&gt;J01677.1 E.coli rpmB and rpmG genes coding for ribosomal proteins L28 and L33
+GGATTTAACCCGCTATGCGCGATCCTTCGGGATCTTTGTCTGTTCGGGACTTGAGCACATCGCTGAGTCA
+GCGTATACTACGCCACCTTTGAGAATCTCGGGTTTGGCATTTGGGCCTGGCAATCGAGAGTTCACAGAAC
+TGCGATGACCGGGCTGTAAAGACCTGACGAGGCGCCAATACCCCATACGAAGCTCGAGCTAATTTGATTT
+TTGGAGAATAGACATGTCCCGAGTCTGCCAAGTTACTGGCAAGCGTCCGGTGACCGGTAACAACCGTTCC
+CACGCACTGAACGCGACTAAACGCCGTTTCCTGCCGAACCTGCACTCTCACCGTTTCTGGGTTGAGAGCG
+AGAAGCGTTTTGTCACCCTGCGCGTATCTGCTAAAGGCATGCGTGTAATCGATAAAAAAGGCATCGATAC
+AGTTCTGGCTGAACTGCGTGCCCGTGGCGAAAAGTACTAAGTACTTAGAGGAAATAAATCATGGCTAAAG
+GTATTCGTGAGAAAATCAAGCTGGTTTCTTCTGCTGGTACTGGTCACTTCTATACCACTACGAAGAACAA
+ACGTACTAAGCCGGAAAAACTGGAACTGAAAAAATTCGATCCAGTTGTTCGCCAGCACGTGATCTACAAA
+GAAGCGAAAATCAAATAATTCTCGCTTTGATGTAACAAAAAACCCCGCCCCGGCGGGGTTTTTTGTTATC
+TGCTTGCCCCCATATTGACTGCATCTGTTCATTCCTGGAGATGCTATGCCTGAATTACCCGAAG</code></pre>
+<pre><code>docker run --rm -v %cd%:/myhome -w /myhome ncbi/blast blastn -query ribosomalprot.fasta -db ecoli -out blast_output.txt</code></pre>
+<p>출력물 분석위한 옵션 설정</p>
+<pre><code>docker run --rm -v %cd%:/myhome -w /myhome ncbi/blast blastn -query ribosomalprot.fasta -db ecoli -outfmt &quot;6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue stitle&quot; -out blast_output.txt</code></pre>
+<p>출력물을 읽어들여 아래와 같이 각 hit (서열) 별로 서열 및 관련 단백질 title 정리</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="blast-on-local-machine.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb30-2"><a href="blast-on-local-machine.html#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="blast-on-local-machine.html#cb30-3" aria-hidden="true" tabindex="-1"></a>blastout <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">&quot;blast_output.txt&quot;</span>, <span class="at">header =</span> F)</span>
+<span id="cb30-4"><a href="blast-on-local-machine.html#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="blast-on-local-machine.html#cb30-5" aria-hidden="true" tabindex="-1"></a>tmplist <span class="ot">&lt;-</span> blastout <span class="sc">%&gt;%</span> </span>
+<span id="cb30-6"><a href="blast-on-local-machine.html#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">query=</span><span class="fu">factor</span>(V1)) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-7"><a href="blast-on-local-machine.html#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(query) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-8"><a href="blast-on-local-machine.html#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_split</span>()</span>
+<span id="cb30-9"><a href="blast-on-local-machine.html#cb30-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-10"><a href="blast-on-local-machine.html#cb30-10" aria-hidden="true" tabindex="-1"></a>seqid <span class="ot">&lt;-</span> <span class="fu">lapply</span>(tmplist, <span class="cf">function</span>(x){<span class="fu">paste</span>(x[<span class="dv">1</span>,<span class="dv">1</span>])}) <span class="sc">%&gt;%</span> unlist</span>
+<span id="cb30-11"><a href="blast-on-local-machine.html#cb30-11" aria-hidden="true" tabindex="-1"></a>hit_seqid <span class="ot">&lt;-</span> <span class="fu">lapply</span>(tmplist, <span class="cf">function</span>(x){<span class="fu">paste</span>(x[<span class="dv">1</span>,<span class="dv">2</span>])}) <span class="sc">%&gt;%</span> unlist</span>
+<span id="cb30-12"><a href="blast-on-local-machine.html#cb30-12" aria-hidden="true" tabindex="-1"></a>hit_evalue <span class="ot">&lt;-</span> <span class="fu">lapply</span>(tmplist, <span class="cf">function</span>(x){<span class="fu">paste</span>(x[<span class="dv">1</span>,<span class="dv">11</span>])}) <span class="sc">%&gt;%</span> unlist</span>
+<span id="cb30-13"><a href="blast-on-local-machine.html#cb30-13" aria-hidden="true" tabindex="-1"></a>hit_prot_title <span class="ot">&lt;-</span> <span class="fu">lapply</span>(tmplist, <span class="cf">function</span>(x){<span class="fu">paste</span>(x[<span class="dv">1</span>,<span class="dv">12</span>])}) <span class="sc">%&gt;%</span> unlist</span>
+<span id="cb30-14"><a href="blast-on-local-machine.html#cb30-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-15"><a href="blast-on-local-machine.html#cb30-15" aria-hidden="true" tabindex="-1"></a>hitdat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(seqid, hit_seqid, hit_prot_title, hit_evalue)</span>
+<span id="cb30-16"><a href="blast-on-local-machine.html#cb30-16" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(hitdat, <span class="at">file =</span> <span class="st">&quot;target_blastout_table.tab&quot;</span>, <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">quote =</span> F, <span class="at">row.names =</span> F)</span></code></pre></div>
+</div>
+  </main>
+
+  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page">
+      <h2>On this page</h2>
+      <div id="book-on-this-page"></div>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5">
+  <div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>2022년 한국생명공학연구원 연구데이터 분석과정 R</strong>" was written by 합성생물학전문연구소 김하성. It was last built on 2022-09-01.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+
+
+</body>
+
+</html>

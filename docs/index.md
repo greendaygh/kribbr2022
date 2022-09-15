@@ -2,7 +2,7 @@
 title: 2022년 한국생명공학연구원 연구데이터 분석과정 R
 #subtitle: R프로그래밍 1차
 author: 합성생물학전문연구소 김하성
-date: "2022-09-01"
+date: "2022-09-15"
 output:
   pdf_document:
     toc: yes
@@ -71,5 +71,8 @@ mainfont : NanumGothic
 - [Modern Statistics for Modern Biology](http://web.stanford.edu/class/bios221/book/index.html)
 - [bios221](https://web.stanford.edu/class/bios221/labs/)
 - [Annotation Workshop 2021](https://jmacdon.github.io/Bioc2021Anno/articles/AnnotationWorkshop.html#summarizedexperiment-objects-1)
+- [CSAMA 2022](https://www.bioconductor.org/help/course-materials/2022/CSAMA/)
+- [RNA-Seq CSAMA 2022](https://www.bioconductor.org/help/course-materials/2022/CSAMA/lab/2-tuesday/lab-03-rnaseq/rnaseqGene_CSAMA2022.html)
 - [Annotation_Resources 2015](https://bioconductor.org/help/course-materials/2015/BioC2015/Annotation_Resources.html)
+- [Sequence analysis](http://bioconductor.org/help/course-materials/2015/LearnBioconductorFeb2015/A01.3_BioconductorForSequenceAnalysis.html)
 - 일반통계학 (영지문화사, 김우철 외)

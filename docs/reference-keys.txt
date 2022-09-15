@@ -182,3 +182,16 @@ class-01-4
 class-02-4
 class-03-4
 class-04-4
+tools-for-high-throughput-data
+high-throughput-genomic-data
+expressionset-class
+summarizedexperiment-class
+high-throughput-genomic-data-analysis
+statistical-inference
+simulation
+z-statistics-with-simulation
+t-statistics
+two-sample-significance-tests
+significance-test
+errors-in-significance-tests
+significance-test-for-the-mean-t-test
