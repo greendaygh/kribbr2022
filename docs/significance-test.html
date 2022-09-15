@@ -129,9 +129,9 @@
 \text{p-value} = P(\text{test statistic is the observed value or is more extreme}|H_0)
 \]</span></p>
 <p>p-value의 크고 작음을 판단하는 대략적인 범위는 다음과 같습니다.</p>
-<div class="inline-figure"><img src="./images/09/01.png"></div>
+<div class="inline-figure"><img src="images/09/01.png" width="700"></div>
 <p>유의성검정에서는 <span class="math inline">\(H_0\)</span>가 참인지 거짓인지 판별하기 보다는 유의수준(significance level, <span class="math inline">\(\alpha\)</span>)이라는 기준에 따라서 H0를 기각할지 안할지를 판단하게 됩니다. 위 영점 예제에서 제1종오류 <span class="math inline">\(alpha\)</span>가 유의수준과 같은 의미 입니다. 일반적인 유의수준은 0.01, 0.05, 0.1 정도로 p-value가 이들 값보다 작게 나오면 <span class="math inline">\(H_0\)</span>를 기각합니다. 앞서 기계 영점에 대한 예제에서와 같이 <span class="math inline">\(\alpha\)</span>를 기준으로 <span class="math inline">\(H_0\)</span>를 기각 할 경우 두 가지 오류, 제1종오류 (type-I error)와 제2종오류 (type-II error)가 발생할 수 있습니다.</p>
-<div class="inline-figure"><img src="./images/09/02.png"></div>
+<div class="inline-figure"><img src="images/09/02.png" width="700"></div>
 <p>귀무가설 참 –&gt; 채택 (o)<br>
 귀무가설 참 –&gt; 기각 (오류)<br>
 귀무가설 거짓 –&gt; 채택 (오류)<br>
@@ -141,7 +141,7 @@
 <p><span class="math display">\[
 H_0: \mu = 0 \text{ vs } H_1: \mu = 1
 \]</span></p>
-<div class="inline-figure"><img src="./images/09/03.png"></div>
+<div class="inline-figure"><img src="images/09/03.png" width="700"></div>
 <p>만약 영점이 맞춰진 상태에서 관측된 값이라면 <span class="math inline">\(Z = {0.7-\mu}/sd = 0.7\)</span> 이므로 p-value는 <code>1-pnorm(0.7, 0, 1)=0.2419</code> 이므로 가설을 기각할만한 증거가 충분치 않습니다. 즉, <span class="math inline">\(H_0: \mu=0\)</span>를 받아들이는 상황인 것인데 그렇지만 0.7은 분명히 0보다는 1에 가까운 (<span class="math inline">\(H_1\)</span>) 값입니다. 이러한 경우에 1 sd 대신 1/sqrt(10) 값을 사용하면 훨씬더 명확한 판단을 내릴 수 있습니다.</p>
 <div class="sourceCode" id="cb504"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
@@ -174,7 +174,7 @@ T = \frac{\bar{x} - E(\bar{x}|H_0)}{SE(\bar{x}|H_0)} = \frac{\bar{x} - \mu_0}{s 
 \]</span></p>
 <p>이제 데이터 <span class="math inline">\(x_1, x_2, ..., x_n\)</span>을 얻고 이로부터 <span class="math inline">\(t = (\bar{x}-\mu_0)/(s/\sqrt{n})\)</span>을 구할 경우 p-value는 다음과 같습니다.</p>
 <div class="figure">
-<img src="./images/09/06.png" alt=""><p class="caption">page304</p>
+<img src="images/09/06.png" alt=""><p class="caption">page304</p>
 </div>
 <p><strong>[Example]</strong> 새 SUV 자동차의 연비가 17miles / gallon 으로 알려져 있다. 소비자 그룹에서는 그러나 이보다 낮은 것으로 의심하고 있다. 다음 데이터들이 관측 되었을 때 해당 신차의 연비가 17mile 보다 작은지 검정하시오.</p>
 <div class="sourceCode" id="cb505"><pre class="downlit sourceCode r">
