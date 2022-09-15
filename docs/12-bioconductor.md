@@ -169,9 +169,19 @@ class(gse2553[[1]])
 mygse <- gse2553[[1]]
 ?ExpressionSet
 methods(class=class(mygse))
-pData(mygse)
-fData(mygse)
-exprs(mygse)
+mypdata <- pData(mygse)
+myfdata <- fData(mygse)
+myexdata <- exprs(mygse)
+
+```
+
+
+
+```r
+mypdata
+
+class(myexdata)
+
 ```
 
 

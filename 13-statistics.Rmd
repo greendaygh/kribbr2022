@@ -1,7 +1,7 @@
 # Statistical inference
 
 
-![](s/12/04-2.png){width=700}
+![](images/12/04-2.png){width=700}
 
 ![](images/12/06.png){width=700}
 

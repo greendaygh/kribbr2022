@@ -175,11 +175,15 @@
 <span class="va">mygse</span> <span class="op">&lt;-</span> <span class="va">gse2553</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
 <span class="op">?</span><span class="va">ExpressionSet</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/methods.html">methods</a></span><span class="op">(</span>class<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">mygse</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/phenoData.html">pData</a></span><span class="op">(</span><span class="va">mygse</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/featureData.html">fData</a></span><span class="op">(</span><span class="va">mygse</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/exprs.html">exprs</a></span><span class="op">(</span><span class="va">mygse</span><span class="op">)</span></code></pre></div>
-<p>GDS 데이터를 ExpressionSet class로 변환하기</p>
+<span class="va">mypdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/phenoData.html">pData</a></span><span class="op">(</span><span class="va">mygse</span><span class="op">)</span>
+<span class="va">myfdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/featureData.html">fData</a></span><span class="op">(</span><span class="va">mygse</span><span class="op">)</span>
+<span class="va">myexdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/exprs.html">exprs</a></span><span class="op">(</span><span class="va">mygse</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb486"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mypdata</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">myexdata</span><span class="op">)</span></code></pre></div>
+<p>GDS 데이터를 ExpressionSet class로 변환하기</p>
+<div class="sourceCode" id="cb487"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">gds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/getGEO.html">getGEO</a></span><span class="op">(</span>filename<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/GDS507.soft.gz"</span>,package<span class="op">=</span><span class="st">"GEOquery"</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">gds</span><span class="op">)</span>
 <span class="va">eset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/coercion.html">GDS2eSet</a></span><span class="op">(</span><span class="va">gds</span>, do.log2<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
@@ -191,7 +195,7 @@
 </h2>
 <p>ExpressionSet은 일반적으로 행이 feature (유전자) 인 마이크로어레이 기반 실험 및 유전자 발현 데이터에 사용되었습니다. 그러나 유전체 분석을 위해서는 유전자 정보 외에도 유전체상의 위치 정보 등이 필요하며 이는 앞서 배운 GenomicRanges 형태의 데이터가 필요합니다. 따라서 최근에는 새로운 버전인 SummarizedExperiment class가 <a href="https://bioconductor.org/packages/release/bioc/html/SummarizedExperiment.html">SummarizedExperiment</a> 개발되어 사용되고 있습니다.</p>
 <div class="inline-figure"><img src="images/summarizedexp.PNG"></div>
-<div class="sourceCode" id="cb487"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb488"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/SummarizedExperiment">SummarizedExperiment</a></span><span class="op">)</span>
 
 <span class="co">#if (!requireNamespace("BiocManager", quietly = TRUE))</span>
@@ -214,7 +218,7 @@
 <span class="co"># Experiment-wide metadata</span>
 <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Annotated-class.html">metadata</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span></code></pre></div>
 <p><code>SummarizedExperiment</code> 생성</p>
-<div class="sourceCode" id="cb488"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb489"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nrows</span> <span class="op">&lt;-</span> <span class="fl">200</span>
 <span class="va">ncols</span> <span class="op">&lt;-</span> <span class="fl">6</span>
 <span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">nrows</span> <span class="op">*</span> <span class="va">ncols</span>, <span class="fl">1</span>, <span class="fl">1e4</span><span class="op">)</span>, <span class="va">nrows</span><span class="op">)</span>

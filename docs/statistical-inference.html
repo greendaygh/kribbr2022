@@ -79,7 +79,7 @@
 <h1>
 <span class="header-section-number">23</span> Statistical inference<a class="anchor" aria-label="anchor" href="#statistical-inference"><i class="fas fa-link"></i></a>
 </h1>
-<div class="inline-figure"><img src="s/12/04-2.png" width="700"></div>
+<div class="inline-figure"><img src="images/12/04-2.png" width="700"></div>
 <div class="inline-figure"><img src="images/12/06.png" width="700"></div>
 <p>통계적 추정이란 모집단으로부터 임의 추출된 표본을 이용하여 모집단을 추정하는 과정을 의미합니다.</p>
 <ul>
@@ -107,7 +107,7 @@
 </h2>
 <p>이번 장에서는 시뮬레이션을 통해 추정의 개념을 이해하는 것을 목적으로 합니다. 확률과 공식의 유도를 통한 추정과정의 이해도 중요하지만 컴퓨팅 기반의 시뮬레이션도 통계적 추정의 개념을 이해하는데 큰 도움이 될 수 있습니다. R에서 분포관련한 시뮬레이션은 앞서 소개한 <code>d</code>, <code>r</code>, <code>p</code>, <code>q</code> 함수를 이용할 수 있습니다.</p>
 <p><strong>[EXERCISE]</strong> <span class="math inline">\(N(0, 1)\)</span>의 분포를 <code><a href="https://rdrr.io/r/stats/Normal.html">dnorm()</a></code>을 이용해 그리시오 (<span class="math inline">\(-4 \le x \le 4\)</span>)</p>
-<div class="sourceCode" id="cb489"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb490"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">4</span>, <span class="fl">4</span>, by<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span>
@@ -116,7 +116,7 @@
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dat</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>지수분포의 경우, 파라미터 (<span class="math inline">\(\lambda\)</span>) 값에 따른 그래프 변화</p>
-<div class="sourceCode" id="cb490"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb491"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">4</span>, by<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span>
 <span class="va">y1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">dexp</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">1</span><span class="op">)</span>
 <span class="va">y2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">dexp</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">2</span><span class="op">)</span>
@@ -126,7 +126,7 @@
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">datlong</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">value</span>, col<span class="op">=</span><span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
 <p><strong>[EXERCISE]</strong> 표준정규분포로부터 16개의 표본을 뽑아 평균을 구하고 각 표본과 평균 값들을 <span class="math inline">\(y=1\)</span> 위치에 점으로 표현하시오 (<code><a href="https://rdrr.io/r/stats/Normal.html">rnorm()</a></code>사용)</p>
-<div class="sourceCode" id="cb491"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb492"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nsample</span> <span class="op">&lt;-</span> <span class="fl">16</span>
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">nsample</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">nsample</span><span class="op">)</span>
@@ -136,7 +136,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, y<span class="op">=</span><span class="fl">1</span><span class="op">)</span>, colour<span class="op">=</span><span class="st">"blue"</span>, size<span class="op">=</span><span class="fl">5</span>, shape<span class="op">=</span><span class="fl">15</span><span class="op">)</span></code></pre></div>
 <p><strong>[EXERCISE]</strong> 위 예제와 같이 표준정규분포로부터 16개의 표본을 뽑아 평균을 구하는 과정을 두 번 반복하되 두 번째 데이터는 <span class="math inline">\(y=0.9\)</span> 위치에 표현하시오</p>
-<div class="sourceCode" id="cb492"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb493"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nsample</span> <span class="op">&lt;-</span> <span class="fl">16</span>
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">nsample</span><span class="op">*</span><span class="fl">2</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">nsample</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">rep</a></span><span class="op">(</span><span class="fl">0.9</span>, <span class="va">nsample</span><span class="op">)</span><span class="op">)</span>
@@ -149,7 +149,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="op">(</span><span class="va">nsample</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>, y<span class="op">=</span><span class="fl">0.9</span><span class="op">)</span>, colour<span class="op">=</span><span class="st">"blue"</span>, size<span class="op">=</span><span class="fl">5</span>, shape<span class="op">=</span><span class="fl">15</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>limits<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1.2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><strong>[EXERCISE]</strong> 위 예제를 10번 반복하되 각 반복 데이터는 각각 <span class="math inline">\(y=1, 0.9, 0.8, ..., 0.1\)</span> 위치에 그리시오</p>
-<div class="sourceCode" id="cb493"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb494"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nsample</span> <span class="op">&lt;-</span> <span class="fl">16</span>
 <span class="va">nrep</span> <span class="op">&lt;-</span> <span class="fl">10</span>
 
@@ -177,7 +177,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span>
   </code></pre></div>
 <p><strong>[EXERCISE]</strong> 위 예제에서 사용된 샘플들의 정규분포 곡선과 <span class="math inline">\(\bar{x}\)</span>의 분포를 같이 그리시오 (<span class="math inline">\(-4 \le x \le 4\)</span>, 앞서 예제의 <code>dat</code>와 <code>dat_mean</code> 사용)</p>
-<div class="sourceCode" id="cb494"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb495"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">head</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">head</a></span><span class="op">(</span><span class="va">dat_mean</span><span class="op">)</span>
@@ -212,7 +212,7 @@ z= \frac{\bar{x} - \mu}{(\sigma/\sqrt{n})}
 \]</span></p>
 <p>z-score는 표본평균에 대한 z-score로서 모평균을 빼주고 모분산/<span class="math inline">\(\sqrt{n}\)</span> 값을 사용합니다.</p>
 <p><strong>[EXERCISE]</strong> A 제과 업체에는 그들이 생산하는 사탕의 평균 무게가 평균 100g이고 표준편차가 16인 정규분포를 따른다고 주장한다. 그런데 소비자들은 이 사탕의 평균 무게가 100g보다 낮다고 의심을 하고 표본 10개를 추출하고 평균을 구했더니 90g이 관측되었다. z-score를 계산하고 표준정규분포에서 위치를 표시하시오.</p>
-<div class="sourceCode" id="cb495"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb496"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">zstat</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">mu</span>, <span class="va">sigma</span><span class="op">)</span><span class="op">{</span>
   <span class="va">z</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">-</span><span class="va">mu</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">sigma</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
   <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span>
@@ -238,7 +238,7 @@ z= \frac{\bar{x} - \mu}{(\sigma/\sqrt{n})}
   
 <span class="va">p</span></code></pre></div>
 <p>정규분포에서 관측값보다 더 작은 값이 관측될 확률 (<span class="math inline">\(p(\bar{X} &lt; 90)=p(Z&lt;-1.98)\)</span>)은 <code>pnorm</code> 함수를 사용해서 구할 수 있으며 시뮬레이션을 이용할 수도 있습니다.</p>
-<div class="sourceCode" id="cb496"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb497"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html">geom_segment</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="op">-</span><span class="fl">2.2</span>, xend<span class="op">=</span><span class="op">-</span><span class="fl">2.2</span>, y<span class="op">=</span><span class="fl">0.1</span>, yend<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span>, 
                  arrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/arrow.html">arrow</a></span><span class="op">(</span>length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="st">"inches"</span><span class="op">)</span><span class="op">)</span>,
                  size<span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="op">+</span> 
@@ -260,7 +260,7 @@ z= \frac{\bar{x} - \mu}{(\sigma/\sqrt{n})}
 t = \frac{\bar{x} - \mu}{(s/\sqrt{n})}
 \]</span></p>
 <p>시뮬레이션을 통해 분포를 그려보겠습니다. <span class="math inline">\(N(0,1)\)</span> 분포에서 랜덤하게 <span class="math inline">\(n\)</span>={4, 10, 20, 50, 100, 1000} 개의 표본을 뽑는 과정을 1000회 반복한 후 boxplot을 그려보겠습니다.</p>
-<div class="sourceCode" id="cb497"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb498"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tstat</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">mu</span><span class="op">)</span><span class="op">{</span>
   <span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">-</span><span class="va">mu</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/var.html">sd</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span>
@@ -299,14 +299,14 @@ t = \frac{\bar{x} - \mu}{(s/\sqrt{n})}
 </h2>
 <p>두 그룹의 데이터 (표본)을 가지고 있을 때 두 그룹이 통계적으로 차이가 있는지를 검증하는 방법으로 (코흐트 데이터, Case-control 데이터) 시뮬레이션에 의한 방법을 먼저 소개하고 다음 장에서 확률 분포를 이용한 통계적 검증을 알아보겠습니다.</p>
 <p>카페인(커피)이 초초한 상태를 유발하는가? 라는 질문에 답하기 위해서 다음 데이터를 얻었습니다. 다음 값들은 커피를 제공한 그룹과 그렇지 않은 그룹의 손가락 탭핑 횟수를 비디오로 분석한 데이터 입니다. 이럴 경우 일반적으로 두 그룹의 평균의 차이를 비교합니다.</p>
-<div class="sourceCode" id="cb498"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb499"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">coff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">245</span>, <span class="fl">246</span>, <span class="fl">246</span>, <span class="fl">248</span>, <span class="fl">248</span>, <span class="fl">248</span>, <span class="fl">250</span>, <span class="fl">250</span>, <span class="fl">250</span>, <span class="fl">252</span><span class="op">)</span>
 <span class="va">nocoff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">242</span>, <span class="fl">242</span>, <span class="fl">242</span>, <span class="fl">244</span>, <span class="fl">244</span>, <span class="fl">245</span>, <span class="fl">246</span>, <span class="fl">247</span>, <span class="fl">248</span>, <span class="fl">248</span><span class="op">)</span>
 <span class="va">obsdiff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/mean.html">mean</a></span><span class="op">(</span><span class="va">coff</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/mean.html">mean</a></span><span class="op">(</span><span class="va">nocoff</span><span class="op">)</span>
 <span class="va">obsdiff</span></code></pre></div>
 <p>차이는 3.5가 나왔지만 이 차이가 얼마나 통계적으로 유의한지를 알아야 합니다. 시뮬레이션에 의한 방법은 위 두 그룹의 데이터들을 랜덤으로 섞은 후 다시 두 그룹으로 나누어 차이를 계산하고 이 과정을 반복해서 분포를 그린 후 유의성을 계산하는 과정입니다.</p>
 <p><strong>[EXERCISE]</strong> 두 그룹 데이터에서 임으로 10명을 두 번 뽑아 그 평균의 차이를 계산하시오</p>
-<div class="sourceCode" id="cb499"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb500"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">caf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">245</span>, <span class="fl">246</span>, <span class="fl">246</span>, <span class="fl">248</span>, <span class="fl">248</span>, <span class="fl">248</span>, <span class="fl">250</span>, <span class="fl">250</span>, <span class="fl">250</span>, <span class="fl">252</span><span class="op">)</span>
 <span class="va">no_caf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">242</span>, <span class="fl">242</span>, <span class="fl">242</span>, <span class="fl">244</span>, <span class="fl">244</span>, <span class="fl">245</span>, <span class="fl">246</span>, <span class="fl">247</span>, <span class="fl">248</span>, <span class="fl">248</span><span class="op">)</span>
@@ -318,7 +318,7 @@ t = \frac{\bar{x} - \mu}{(s/\sqrt{n})}
 
 <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/mean.html">mean</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></code></pre></div>
 <p><strong>[EXERCISE]</strong> 위 예제의 과정을 1000번 반복하고 계산된 차이값들로 분포를 그리시오(for 문 이용)</p>
-<div class="sourceCode" id="cb500"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb501"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">diff_vals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1000</span><span class="op">)</span>
 <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span><span class="op">{</span>
   <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="va">dat</span>, <span class="fl">10</span>, replace<span class="op">=</span><span class="cn">T</span><span class="op">)</span>
@@ -329,7 +329,7 @@ t = \frac{\bar{x} - \mu}{(s/\sqrt{n})}
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">diff_vals</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">diff_vals</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><strong>[EXERCISE]</strong> 분포에서 실제 관측한 3.5 값의 위치를 표시하고 관측값보다 더 극단적인 경우가 나올 경우의 비율을 계산하시오 (위 예제 코드의 연속)</p>
-<div class="sourceCode" id="cb501"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb502"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">emp_pval</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">diff_vals</span> <span class="op">&gt;</span> <span class="va">obs</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">diff_vals</span><span class="op">)</span>
 
 <span class="va">textstring</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/paste.html">paste</a></span><span class="op">(</span><span class="st">"p(X &gt; "</span>, <span class="va">obs</span>, <span class="st">") = "</span>, <span class="va">emp_pval</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>
