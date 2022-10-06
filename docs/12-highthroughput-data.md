@@ -36,12 +36,45 @@ NGS에 대한 자세한 설명은 illuina 사에서 제공하는 [튜토리얼](
 
 ![Data analysis, figures from Illumina](images/12/NGS_data_analysis.png){width=500}
 
-## FASTQ format
+## FASTQ preprocessing
+
+
+FASTQ 파일에는 타깃 서열정보뿐만아니라 바코드나 인덱스 등의 서열이 포함되어 있습니다. 
+
+![](images/12/fastq.png)
+
+따라서 분석을 위해서는 위 서열들을 제거하고 quality에 따라서 read 들을 필터링 하는 작업이 필요합니다. 기존에는 linux 스크립트 기반의 소프트웨어들이 사용되었으나 본 강의에서는 Rstudio에서 바로 설치해서 활용할 수 있는 Rfastq 패키지를 사용하겠습니다. Rfastq는 quality control과 polyX trimming, adapter trimming, paired-ed reads merging 등의 기능을 제공하고 있습니다. 
 
 
 
+```r
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("Rfastp")
+```
 
 
+examples 디렉토리 생성 후 예시 fastq 파일 다운로드, `rfastq` 실행으로 로딩과 필터링을 수행합니다. 참고로 Q10은 약 90%의 정확도, Q20은 약 99%의 정확도, Q30은 약 99.9% 정확도를 갖는 read의 개수 입니다. 
+
+
+
+```r
+library(Rfastp)
+
+download.file(url = "https://github.com/greendaygh/kribbr2022/raw/main/fastq/SRR11549076_1.fastq", destfile = "examples/SRR11549087_1.fastq")
+
+fqfiles <- dir(path = "examples", pattern = "*.fastq")
+
+#?rfastp
+fastq_report <- rfastp(read1 = file.path("examples", fqfiles[1]), 
+                       outputFastq = file.path("examples", paste0("filtered_", fqfiles[1])))
+
+round(qcSummary(fastq_report), 2)
+
+```
+
+ 
 
 ## NGS database
 
@@ -100,7 +133,7 @@ fasterq-dump --split-files SRR11549076
 100000개 read만 별도로 저장 
 
 ~~~
-fastq-dump -X 100000 --split-files SRR11549076
+fastq-dump -X 10000 --split-files SRR11549076
 ~~~
 
 
@@ -381,6 +414,38 @@ assay(se)
 rowRanges(se)
 
 # Column (sample)
+colData(se)
+
+# Experiment-wide metadata
+metadata(se)
+
+```
+
+
+
+
+`SummarizedExperiment` 생성
+
+
+
+```r
+nrows <- 200
+ncols <- 6
+counts <- matrix(runif(nrows * ncols, 1, 1e4), nrows)
+rowRanges <- GRanges(rep(c("chr1", "chr2"), c(50, 150)),
+                     IRanges(floor(runif(200, 1e5, 1e6)), width=100),
+                     strand=sample(c("+", "-"), 200, TRUE),
+                     feature_id=sprintf("ID%03d", 1:200))
+colData <- DataFrame(Treatment=rep(c("ChIP", "Input"), 3),
+                     row.names=LETTERS[1:6])
+
+se <- SummarizedExperiment(assays=list(counts=counts),
+                     rowRanges=rowRanges, colData=colData)
+
+# Row (regions-of-interest) data
+rowRanges(se)
+
+# Column (sample) data
 colData(se)
 
 # Experiment-wide metadata
