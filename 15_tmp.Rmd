@@ -424,3 +424,42 @@ as.list(hgu95av2ENTREZID[ids])
 
 
 
+
+시퀀싱 파일은 GEO 데이터베이스 [GSE52778](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52778)에 있으며 패키지에도 기본으로 포함되어 있습니다. 
+
+```{r, eval=F}
+
+dir <- system.file("extdata", package="airway", mustWork=TRUE)
+list.files(dir)
+readLines(file.path(dir, "Homo_sapiens.GRCh37.75_subset.gtf"))
+
+```
+
+.bam 파일은 RNA-Seq read를 포함하고 있으며 .csv 파일은 실험 디자인, .gtf 파일은 
+
+- gff 파일 포맷과 gtf 파일 포멧 차이
+
+
+```{r, eval=F}
+
+csvfile <- file.path(dir, "sample_table.csv")
+sampleTable <- read.csv(csvfile, row.names = 1)
+
+bamfilenames <- file.path(dir, paste0(sampleTable$Run, "_subset.bam"))
+
+
+```
+
+Rsamtools는 bam이나 sam 파일을 읽을 수 있는 패키지로 yieldSize 파라메터로 메모리 과사용을 막을 수 있습니다. 
+
+```{r, eval=F}
+library(Rsamtools)
+
+bamfiles <- BamFileList(bamfilenames, yieldSize = 2000)
+bamfiles
+class(bamfiles)
+seqinfo(bamfiles[1])
+
+
+```
+
