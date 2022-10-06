@@ -1,37 +1,69 @@
-# High-throughput data II
+# DEG Analysis
 
-## SummarizedExperiment Class
+## Sequence Alignment Map (SAM)
 
-ExpressionSet은 일반적으로 행이 feature (유전자) 인 마이크로어레이 기반 실험 및 유전자 발현 데이터에 사용되었습니다. 그러나 유전체 분석을 위해서는 유전자 정보 외에도 유전체상의 위치 정보 등이 필요하며 이는 앞서 배운  GenomicRanges 형태의 데이터가 필요합니다. 따라서 최근에는 새로운 버전인 SummarizedExperiment class가  [SummarizedExperiment](https://bioconductor.org/packages/release/bioc/html/SummarizedExperiment.html) 개발되어 사용되고 있습니다.
+SAM 파일은 Sequence alignment data를 담고 있는 텍스트 파일(.txt)로 각 내용은 탭(tab)으로 분리되어 alignment, mapping 정보를 담고 있다. Next-generation sequencing (NGS) 을 통해 시퀀싱 된 서열의 전사체 혹은 유전체 서열(Reference, @로 시작되는)에 FASTQ 파일을 다시 mapping 시킨 형태의 파일이다.
+
+SAM 파일은 텍스트 파일의 문자열 형식으로 저장하여 바로 열람할 수 있으며, 이를 압축하고 색인화하여 바이너리 형식으로 변환한 것이 BAM 파일이다.
+
+NGS의 발달로 불특정 다수의 organism에서 유전체 혹은 전사체 서열이 대량으로 시퀀싱 되고 있다. Human의 경우는 개인차에 의한 다수의 변이 정보를 밝히고 이것이 질병과 연관된 변이인지를 밝히기 위해 시퀀싱 된 reads는 유전체 서열에 다시 remapping 되기도 하고, 새로운 organism의 유전체 정보를 밝히기 위해서도 remapping이 이뤄지고 있다. SAM 파일은 '1000 genome project'를 진행하면서 공동 연구의 효율성을 위해 데이터의 공유를 표준화 하려는 방안으로 채택된 remapping의 표준 포맷이다.
+
+Remapping을 위해 많이 이용하는 software인 BWA, Bowtie, CLCAssemblyCell 등은 모두 mapping output으로 SAM 파일을 형성한다.
+
+SAM 파일들을 다루는데 필요한 software package로는 SAMtools 가 있다.
 
 
-![](images/summarizedexp.PNG)
+
+## Binary Alignment Map (BAM) 
+
+시퀀싱 파일은 GEO 데이터베이스 [GSE52778](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52778)에 있으며 패키지에도 기본으로 포함되어 있습니다. 
+
+```{r, eval=F}
+
+dir <- system.file("extdata", package="airway", mustWork=TRUE)
+list.files(dir)
+readLines(file.path(dir, "Homo_sapiens.GRCh37.75_subset.gtf"))
+
+```
+
+.bam 파일은 RNA-Seq read를 포함하고 있으며 .csv 파일은 실험 디자인, .gtf 파일은 
+
+- gff 파일 포맷과 gtf 파일 포멧 차이
 
 
 ```{r, eval=F}
-library(SummarizedExperiment)
 
-#if (!requireNamespace("BiocManager", quietly = TRUE))
-#    install.packages("BiocManager")
+csvfile <- file.path(dir, "sample_table.csv")
+sampleTable <- read.csv(csvfile, row.names = 1)
 
-#BiocManager::install("airway")
+bamfilenames <- file.path(dir, paste0(sampleTable$Run, "_subset.bam"))
 
-library(airway)
-data(airway, package="airway")
-se <- airway
-se
-?RangedSummarizedExperiment 
-
-# Row (features)
-rowRanges(se)
-
-# Column (sample)
-colData(se)
-
-# Experiment-wide metadata
-metadata(se)
 
 ```
+
+Rsamtools는 bam이나 sam 파일을 읽을 수 있는 패키지로 yieldSize 파라메터로 메모리 과사용을 막을 수 있습니다. 
+
+```{r, eval=F}
+library(Rsamtools)
+
+bamfiles <- BamFileList(bamfilenames, yieldSize = 2000)
+bamfiles
+class(bamfiles)
+seqinfo(bamfiles[1])
+
+
+```
+
+bam 파일 내의 read들은 염색체 서열의 각 위치에 mapping 되어 있으며 유전자의 발현을 보기 위해서는 각 유전자에 mapping 된 read들의 수를 세어야 합니다. 
+
+
+
+
+
+
+
+
+
 
 
 `SummarizedExperiment` 생성
@@ -481,3 +513,21 @@ ids <- featureNames(ALL)[1:10]
 as.list(hgu95av2ENTREZID[ids])
 
 ```
+
+
+
+
+```{r, eval=F}
+
+
+
+```
+
+
+
+
+
+
+
+
+

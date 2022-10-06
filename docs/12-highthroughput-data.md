@@ -1,9 +1,50 @@
-# High-throughput data I
+# High-throughput data 
 
 
-## NGS data
+## Next-generation sequencing
+
+Next-generation sequencing (NGS) 는 DNA나 RNA 서열을 해독하는 기술로 2005년 개발될 초기에는 기존의 Sanger sequencing과는 다르게 여러 DNA 가닥을 동시에 해독하는 특징으로 "massively-parallel sequencing" 으로 불리우기도 했습니다. 
 
 ![](images/12/ngs.png){width=600}
+
+
+NGS에 대한 자세한 설명은 illuina 사에서 제공하는 [튜토리얼](https://sapac.illumina.com/science/technology/next-generation-sequencing/beginners/tutorials.html)의 다음 사이트들을 참고하시기 바랍니다. 
+
+- [Sequencing Fundamentals](https://support.illumina.com/content/dam/illumina-support/courses/sequencing-fundamentals/story_html5.html?iframe) 
+- [Sequencing Illumina Technology](https://support.illumina.com/content/dam/illumina-support/courses/Sequencing_Illumina_Technology/story_html5.html?iframe)
+- [Illumina Sequencing by Synthesis](https://www.youtube.com/watch?v=fCd6B5HRaZ8&ab_channel=Illumina)
+
+(Shor read) NGS 워크플로는 다음과 같은 네 단계를 순차적으로 수행합니다.  
+
+![NGS workflow, figures from Illumina](images/12/ngs_workflow.png){width=500}
+
+각 단계별로 보면 다음과 같습니다. 
+
+![Library Prep, figures from Illumina](images/12/illuminaseq_lib_pre.png){width=500}
+
+
+![cluster generation, figures from Illumina](images/12/illuminaseq_cluster_gen.png){width=500}
+
+
+![Sequencing, figures from Illumina](images/12/illuminaseq_seq2.png){width=500}
+
+![Data analysis, figures from Illumina](images/12/illuminaseq_dataanalysis.png){width=500}
+
+
+
+위 단계 중 Secondary analysis에 해당하는 분석이 일반적으로 우리가 수행하는 RNA-Seq 등의 분석입니다. 시퀀싱 장비에서 읽힌 이미지 정보는 Binary Base Call (BCL) 파일로 변환됩니다. 우리가 일반적으로 다루는 FASTQ 파일은 서열 정보와 quality 정보를 text 형태로 저장한 파일로서 BCL 파일로부터 만들어집니다.  
+
+![Data analysis, figures from Illumina](images/12/NGS_data_analysis.png){width=500}
+
+## FASTQ format
+
+
+
+
+
+
+## NGS database
+
 
 
 **Sequence Read Archive**
@@ -149,7 +190,7 @@ class(gpl)
 ```
 
 
-## ExpressionSet class
+## ExpressionSet
 
 `Biobase` 패키지는 지놈 데이터를 관리하기 위한 표준화된 데이터 구조 class인 `ExpressionSet`를 제공합니다. ExpressionSet은 HT assay 데이터와 실험 meta를 포함하고 있습니다.
 
@@ -203,7 +244,7 @@ eset
 pData(eset)
 ```
 
-## ExpressionSet Example 
+** Example **
 
 다음 예제는 GEOquery 패키지에 있는 데이터셋을 활용하여 간단한 DEG 분석을 수행하는 코드로서 DEG 분석의 원리 이해와 해석을 위해 학습하는 예제입니다. 다음 장에 소개되는 통계(추정과 검정)을 먼저 참고하고 실습해 보아도 좋겠습니다. 
 
@@ -308,6 +349,45 @@ ggplot(finaldat, aes(x=normal, y=RCC)) +
 참고로 아래 결과는 p-value 가 0.001 이하인 probe들을 표현한 결과로서 정확한 결과 도출을 위해서는 multiple testing correction을 수행 후 수정된 유의확율을 이용할 필요가 있습니다. 
 
 ![](images/12/000024.png){width=500}
+
+
+## SummarizedExperiment 
+
+ExpressionSet은 일반적으로 행이 feature (유전자) 인 마이크로어레이 기반 실험 및 유전자 발현 데이터에 사용되었습니다. 그러나 유전체 분석을 위해서는 유전자 정보 외에도 유전체상의 위치 정보 등이 필요하며 이는 앞서 배운  GenomicRanges 형태의 데이터가 필요합니다. 따라서 최근에는 새로운 버전인 SummarizedExperiment class가  [SummarizedExperiment](https://bioconductor.org/packages/release/bioc/html/SummarizedExperiment.html) 개발되어 사용되고 있습니다.
+
+
+![](images/summarizedexp.PNG)
+
+
+
+```r
+library(SummarizedExperiment)
+
+#if (!requireNamespace("BiocManager", quietly = TRUE))
+#    install.packages("BiocManager")
+
+#BiocManager::install("airway")
+
+library(airway)
+data(airway, package="airway")
+se <- airway
+se
+?RangedSummarizedExperiment 
+
+# assay data
+assay(se)
+
+# Row (features)
+rowRanges(se)
+
+# Column (sample)
+colData(se)
+
+# Experiment-wide metadata
+metadata(se)
+
+```
+
 
 
 ---
