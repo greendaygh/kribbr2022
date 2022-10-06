@@ -1,4 +1,4 @@
-# DEG analysis with Bioconductor
+# DEG analysis
 
 ## High-throughput genomic data analysis
 
@@ -6,9 +6,11 @@
 ![](images/12/htanalysis.png){width=600}
 
 
-## DEG analysis 
+## DEG analysis with bioconductor
 
-Differentially Expressed Gene 분석은 전통적 two-channel microarray나 RNA-Seq 데이터를 활용한 분석입니다. Genome reference에 fastq 파일의 read들을 맵핑하고 맵핑된 read들을 카운팅하여 해당 유전자의 발현을 정량화하고 이를 기준이 되는 발현값과 비교하여 질병이나 조건에 따라 다른 발현값을 갖는 유전자를 찾는 방법입니다. Reference 서열 정보와 발현된 mRNA 서열을 분석한 fastq 파일이 필요합니다. 다양한 분석 툴이 소개되고 있으며 진핵세포의 경우 splicing 등을 고려한 mapping 기술이 필요합니다. 
+Differentially Expressed Gene 분석은 전통적 two-channel microarray나 RNA-Seq 데이터를 활용한 분석입니다. Genome reference에 fastq 파일의 read들을 맵핑하고 맵핑된 read들을 카운팅하여 해당 유전자의 발현을 정량화하고 이를 기준이 되는 발현값과 비교하여 질병이나 조건에 따라 다른 발현값을 갖는 유전자를 찾는 방법입니다. 
+
+Reference 서열 정보와 발현된 mRNA 서열을 분석한 fastq 파일이 필요하며 BWA, Bowtie, tophat 등의 linux 스크립트 기반 software들이 있으며 Bioconductor에서도 다양한 분석 툴이 소개되고 있습니다. 참고로 진핵세포의 경우 splicing 등을 고려한 mapping 기술이 필요합니다. 
 
 
 ## Creating a reference genome
@@ -24,8 +26,9 @@ download.file(url="https://github.com/greendaygh/kribbr2022/raw/main/ecoli-mg165
 ecoli <- readGenBank("examples/ecoli-mg1655.gb")
 ecoliseq <- getSeq(ecoli)
 
+
 ecoliseqsub <- subseq(ecoliseq, 1, 100000)
-names(ecoliseqsub) <- "ecolisub"
+names(ecoliseqsub) <- "K-12"
 writeXStringSet(ecoliseqsub, "examples/ecolisub.fasta")
 
 ```
@@ -55,7 +58,7 @@ buildindex(basename = file.path("examples", "ecoliexample"),
            reference = file.path("examples", "ecolisub.fasta"))
 ```
 
-# RNA-Seq alignment (Mapping)
+## RNA-Seq alignment (Mapping)
 
 Rsubread 패키지를 활용해서 mapping을 수행합니다. align 함수를 사용하며 splicing 여부에 따라 옵션이 조금씩 다를 수 있습니다. 
 
@@ -65,87 +68,64 @@ Rsubread 패키지를 활용해서 mapping을 수행합니다. align 함수를 �
 library(Rsubread)
 
 alignstat <- align(file.path("examples", "ecoliexample")
-                   , readfile1 = file.path("fastq", "ftn-rep1_S10_L001_R1_001.fastq.gz")
-                   , output_file = file.path(targetdir, "test.BAM")
-                   , nthreads = 13)
+                   , readfile1 = file.path("examples", "filtered_SRR11549076_1.fastq_R1.fastq.gz")
+                   , output_file = file.path("examples", "ecoliexample.BAM")
+                   , nthreads = 6)
 
 
 #alignstat
 
 ```
 
+## sorting
 
+SAM 파일은 Sequence alignment data를 담고 있는 텍스트 파일(.txt)로 각 내용은 탭(tab)으로 분리되어 alignment, mapping 정보를 담고 있습니다. BAM 파일은 SAM 파일의 binary 버전으로 동일한 정보를 담고 있으며 이들 파일을 다루기 위해서는 SAMtools 소프트웨어가 필요합니다. R에서는 SAMtools의 R 버전인 Rsamtools 패키지를 활용할 수 있습니다.
 
-# sorting
-
-
-
-```r
-
-library(Rsamtools)
-
-sortBam(file = file.path(targetdir, "test.BAM")
-        , destination = file.path(targetdir, "sort_test.BAM"))
-
-indexBam(files = file.path(targetdir, "sort_test.BAM.bam"))
-
-```
-
-
-
-SAM 파일은 Sequence alignment data를 담고 있는 텍스트 파일(.txt)로 각 내용은 탭(tab)으로 분리되어 alignment, mapping 정보를 담고 있습니다. 
-
-
-SAM 파일은 텍스트 파일의 문자열 형식으로 저장하여 바로 열람할 수 있으며, 이를 압축하고 색인화하여 바이너리 형식으로 변환한 것이 BAM 파일이다.
-
-NGS의 발달로 불특정 다수의 organism에서 유전체 혹은 전사체 서열이 대량으로 시퀀싱 되고 있다. Human의 경우는 개인차에 의한 다수의 변이 정보를 밝히고 이것이 질병과 연관된 변이인지를 밝히기 위해 시퀀싱 된 reads는 유전체 서열에 다시 remapping 되기도 하고, 새로운 organism의 유전체 정보를 밝히기 위해서도 remapping이 이뤄지고 있다. SAM 파일은 '1000 genome project'를 진행하면서 공동 연구의 효율성을 위해 데이터의 공유를 표준화 하려는 방안으로 채택된 remapping의 표준 포맷이다.
-
-Remapping을 위해 많이 이용하는 software인 BWA, Bowtie, CLCAssemblyCell 등은 모두 mapping output으로 SAM 파일을 형성한다.
-
-SAM 파일들을 다루는데 필요한 software package로는 SAMtools 가 있다.
-
-
-
-## Binary Alignment Map (BAM) 
-
-시퀀싱 파일은 GEO 데이터베이스 [GSE52778](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52778)에 있으며 패키지에도 기본으로 포함되어 있습니다. 
-
-
-```r
-
-dir <- system.file("extdata", package="airway", mustWork=TRUE)
-list.files(dir)
-readLines(file.path(dir, "Homo_sapiens.GRCh37.75_subset.gtf"))
-
-```
-
-.bam 파일은 RNA-Seq read를 포함하고 있으며 .csv 파일은 실험 디자인, .gtf 파일은 
-
-- gff 파일 포맷과 gtf 파일 포멧 차이
-
-
-
-```r
-
-csvfile <- file.path(dir, "sample_table.csv")
-sampleTable <- read.csv(csvfile, row.names = 1)
-
-bamfilenames <- file.path(dir, paste0(sampleTable$Run, "_subset.bam"))
-
-```
-
-Rsamtools는 bam이나 sam 파일을 읽을 수 있는 패키지로 yieldSize 파라메터로 메모리 과사용을 막을 수 있습니다. 
 
 
 ```r
 library(Rsamtools)
 
-bamfiles <- BamFileList(bamfilenames, yieldSize = 2000)
-bamfiles
-class(bamfiles)
-seqinfo(bamfiles[1])
+sortBam(file = file.path("examples", "ecoliexample.BAM")
+        , destination = file.path("examples", "sorted_ecoliexample.BAM"))
+
+indexBam(files = file.path("examples", "sorted_ecoliexample.BAM.bam"))
 
 ```
+
+
+## visualization
+
+[IGV](https://software.broadinstitute.org/software/igv/)를 활용하여 mapping 파일 가시화가 가능합니다. 
+
+
+
+## Counting in gene models
+
+
+```r
+library(GenomicAlignments)
+library(plyranges)
+
+ecolicds <- cds(ecoli)
+ecolicds_sub <- ecolicds %>% 
+  filter(end < 100000)
+seqlengths(ecolicds_sub) <- 100000
+
+
+mybam <- BamFile("examples/sorted_ecoliexample.BAM.bam", yieldSize = 100000)
+myresult <- summarizeOverlaps(ecolicds_sub, mybam, ignore.strand = T)
+
+class(myresult)
+
+assay(myresult)
+
+rowRanges(myresult)
+colData(myresult)
+metadata(myresult)
+
+```
+
 
 
 

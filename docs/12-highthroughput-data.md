@@ -62,7 +62,7 @@ examples 디렉토리 생성 후 예시 fastq 파일 다운로드, `rfastq` 실�
 ```r
 library(Rfastp)
 
-download.file(url = "https://github.com/greendaygh/kribbr2022/raw/main/fastq/SRR11549076_1.fastq", destfile = "examples/SRR11549087_1.fastq")
+download.file(url = "https://github.com/greendaygh/kribbr2022/raw/main/fastq/SRR11549087_1.fastq", destfile = "examples/SRR11549087_1.fastq")
 
 fqfiles <- dir(path = "examples", pattern = "*.fastq")
 
@@ -441,6 +441,8 @@ colData <- DataFrame(Treatment=rep(c("ChIP", "Input"), 3),
 
 se <- SummarizedExperiment(assays=list(counts=counts),
                      rowRanges=rowRanges, colData=colData)
+
+assay(se)
 
 # Row (regions-of-interest) data
 rowRanges(se)

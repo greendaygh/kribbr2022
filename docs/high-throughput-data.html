@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 14 High-throughput data | 2022년 한국생명공학연구원 연구데이터 분석과정 R</title>
+<meta name="author" content="합성생물학전문연구소 김하성">
+<meta name="description" content="14.1 Next-generation sequencing Next-generation sequencing (NGS) 는 DNA나 RNA 서열을 해독하는 기술로 2005년 개발될 초기에는 기존의 Sanger sequencing과는 다르게 여러 DNA 가닥을 동시에 해독하는 특징으로 “massively-parallel sequencing” 으로...">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta property="og:title" content="Chapter 14 High-throughput data | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
+<meta property="og:type" content="book">
+<meta property="og:description" content="14.1 Next-generation sequencing Next-generation sequencing (NGS) 는 DNA나 RNA 서열을 해독하는 기술로 2005년 개발될 초기에는 기존의 Sanger sequencing과는 다르게 여러 DNA 가닥을 동시에 해독하는 특징으로 “massively-parallel sequencing” 으로...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 14 High-throughput data | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
+<meta name="twitter:description" content="14.1 Next-generation sequencing Next-generation sequencing (NGS) 는 DNA나 RNA 서열을 해독하는 기술로 2005년 개발될 초기에는 기존의 Sanger sequencing과는 다르게 여러 DNA 가닥을 동시에 해독하는 특징으로 “massively-parallel sequencing” 으로...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">2022년 한국생명공학연구원 연구데이터 분석과정 R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="rrstudio-basics.html"><span class="header-section-number">2</span> R/Rstudio basics</a></li>
+<li><a class="" href="rmarkdown.html"><span class="header-section-number">3</span> Rmarkdown</a></li>
+<li><a class="" href="r-programming.html"><span class="header-section-number">4</span> R programming</a></li>
+<li><a class="" href="data-transformation.html"><span class="header-section-number">5</span> Data transformation</a></li>
+<li><a class="" href="r-basic-graphics.html"><span class="header-section-number">6</span> R basic graphics</a></li>
+<li><a class="" href="tidyverse.html"><span class="header-section-number">7</span> tidyverse</a></li>
+<li><a class="" href="data-visualization.html"><span class="header-section-number">8</span> Data visualization</a></li>
+<li><a class="" href="ggplot2-examples.html"><span class="header-section-number">9</span> ggplot2 examples</a></li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">10</span> Bioconductor</a></li>
+<li><a class="" href="biostrings.html"><span class="header-section-number">11</span> Biostrings</a></li>
+<li><a class="" href="tools-for-sequences.html"><span class="header-section-number">12</span> Tools for sequences</a></li>
+<li><a class="" href="tools-for-genome-analysis.html"><span class="header-section-number">13</span> Tools for genome analysis</a></li>
+<li><a class="active" href="high-throughput-data.html"><span class="header-section-number">14</span> High-throughput data</a></li>
+<li><a class="" href="inference-and-test.html"><span class="header-section-number">15</span> Inference and test</a></li>
+<li><a class="" href="deg-analysis.html"><span class="header-section-number">16</span> DEG analysis</a></li>
+<li><a class="" href="lecture-note.html"><span class="header-section-number">17</span> Lecture Note</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="high-throughput-data" class="section level1" number="14">
+<h1>
+<span class="header-section-number">14</span> High-throughput data<a class="anchor" aria-label="anchor" href="#high-throughput-data"><i class="fas fa-link"></i></a>
+</h1>
+<div id="next-generation-sequencing" class="section level2" number="14.1">
+<h2>
+<span class="header-section-number">14.1</span> Next-generation sequencing<a class="anchor" aria-label="anchor" href="#next-generation-sequencing"><i class="fas fa-link"></i></a>
+</h2>
+<p>Next-generation sequencing (NGS) 는 DNA나 RNA 서열을 해독하는 기술로 2005년 개발될 초기에는 기존의 Sanger sequencing과는 다르게 여러 DNA 가닥을 동시에 해독하는 특징으로 “massively-parallel sequencing” 으로 불리우기도 했습니다.</p>
+<div class="inline-figure"><img src="images/12/ngs.png" width="600"></div>
+<p>NGS에 대한 자세한 설명은 illuina 사에서 제공하는 <a href="https://sapac.illumina.com/science/technology/next-generation-sequencing/beginners/tutorials.html">튜토리얼</a>의 다음 사이트들을 참고하시기 바랍니다.</p>
+<ul>
+<li><a href="https://support.illumina.com/content/dam/illumina-support/courses/sequencing-fundamentals/story_html5.html?iframe">Sequencing Fundamentals</a></li>
+<li><a href="https://support.illumina.com/content/dam/illumina-support/courses/Sequencing_Illumina_Technology/story_html5.html?iframe">Sequencing Illumina Technology</a></li>
+<li><a href="https://www.youtube.com/watch?v=fCd6B5HRaZ8&amp;ab_channel=Illumina">Illumina Sequencing by Synthesis</a></li>
+</ul>
+<p>(Shor read) NGS 워크플로는 다음과 같은 네 단계를 순차적으로 수행합니다.</p>
+<div class="figure">
+<img src="images/12/ngs_workflow.png" width="500" alt=""><p class="caption">NGS workflow, figures from Illumina</p>
+</div>
+<p>각 단계별로 보면 다음과 같습니다.</p>
+<div class="figure">
+<img src="images/12/illuminaseq_lib_pre.png" width="500" alt=""><p class="caption">Library Prep, figures from Illumina</p>
+</div>
+<div class="figure">
+<img src="images/12/illuminaseq_cluster_gen.png" width="500" alt=""><p class="caption">cluster generation, figures from Illumina</p>
+</div>
+<div class="figure">
+<img src="images/12/illuminaseq_seq2.png" width="500" alt=""><p class="caption">Sequencing, figures from Illumina</p>
+</div>
+<div class="figure">
+<img src="images/12/illuminaseq_dataanalysis.png" width="500" alt=""><p class="caption">Data analysis, figures from Illumina</p>
+</div>
+<p>위 단계 중 Secondary analysis에 해당하는 분석이 일반적으로 우리가 수행하는 RNA-Seq 등의 분석입니다. 시퀀싱 장비에서 읽힌 이미지 정보는 Binary Base Call (BCL) 파일로 변환됩니다. 우리가 일반적으로 다루는 FASTQ 파일은 서열 정보와 quality 정보를 text 형태로 저장한 파일로서 BCL 파일로부터 만들어집니다.</p>
+<div class="figure">
+<img src="images/12/NGS_data_analysis.png" width="500" alt=""><p class="caption">Data analysis, figures from Illumina</p>
+</div>
+</div>
+<div id="fastq-preprocessing" class="section level2" number="14.2">
+<h2>
+<span class="header-section-number">14.2</span> FASTQ preprocessing<a class="anchor" aria-label="anchor" href="#fastq-preprocessing"><i class="fas fa-link"></i></a>
+</h2>
+<p>FASTQ 파일에는 타깃 서열정보뿐만아니라 바코드나 인덱스 등의 서열이 포함되어 있습니다.</p>
+<div class="inline-figure"><img src="images/12/fastq.png"></div>
+<p>따라서 분석을 위해서는 위 서열들을 제거하고 quality에 따라서 read 들을 필터링 하는 작업이 필요합니다. 기존에는 linux 스크립트 기반의 소프트웨어들이 사용되었으나 본 강의에서는 Rstudio에서 바로 설치해서 활용할 수 있는 Rfastq 패키지를 사용하겠습니다. Rfastq는 quality control과 polyX trimming, adapter trimming, paired-ed reads merging 등의 기능을 제공하고 있습니다.</p>
+<div class="sourceCode" id="cb285"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
+
+<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"Rfastp"</span><span class="op">)</span></code></pre></div>
+<p>examples 디렉토리 생성 후 예시 fastq 파일 다운로드, <code>rfastq</code> 실행으로 로딩과 필터링을 수행합니다. 참고로 Q10은 약 90%의 정확도, Q20은 약 99%의 정확도, Q30은 약 99.9% 정확도를 갖는 read의 개수 입니다.</p>
+<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">Rfastp</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span>url <span class="op">=</span> <span class="st">"https://github.com/greendaygh/kribbr2022/raw/main/fastq/SRR11549087_1.fastq"</span>, destfile <span class="op">=</span> <span class="st">"examples/SRR11549087_1.fastq"</span><span class="op">)</span>
+
+<span class="va">fqfiles</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">dir</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"examples"</span>, pattern <span class="op">=</span> <span class="st">"*.fastq"</span><span class="op">)</span>
+
+<span class="co">#?rfastp</span>
+<span class="va">fastq_report</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Rfastp/man/rfastp.html">rfastp</a></span><span class="op">(</span>read1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="va">fqfiles</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>, 
+                       outputFastq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"filtered_"</span>, <span class="va">fqfiles</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Rfastp/man/qcSummary.html">qcSummary</a></span><span class="op">(</span><span class="va">fastq_report</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="ngs-database" class="section level2" number="14.3">
+<h2>
+<span class="header-section-number">14.3</span> NGS database<a class="anchor" aria-label="anchor" href="#ngs-database"><i class="fas fa-link"></i></a>
+</h2>
+<p><strong>Sequence Read Archive</strong></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/sra">SRA</a> SRA (Sequence Read Archive)는 High-throughput 시퀀싱 데이터의 공개 데이터베이스 중 가장 큰 규모의 미국 국립 보건원(NIH)의 1차 데이터베이스로서 서열데이터 뿐만 아니라 메타데이터, 유전체, 및 환경 데이터를 포함합니다. NCBI와 EBI(European Bioinformatics Institute), DDBJ(DNA Database of Japan) 간 국제적 제휴를 통해 세 기관에서 제출 받은 데이터는 서로 공유되고 있습니다.</p>
+<p>간략한 사용법은 <a href="https://www.ncbi.nlm.nih.gov/books/NBK569238/">NBK569238</a> 또는 <a href="https://www.ncbi.nlm.nih.gov/sra/docs/sradownload/">SRA download 문서</a> 이곳을 참고하시기 바랍니다.</p>
+<p>데이터를 다운로드 할 수 있는 <a href="https://github.com/ncbi/sra-tools/wiki/01.-Downloading-SRA-Toolkit">NCBI SRA Toolkit</a>을 제공하며 이 중 <a href="https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/3.0.0/sratoolkit.3.0.0-win64.zip">MS Windows 64 bit architecture</a> 를 다운로드 받아 압축을 풀고 사용할 적절한 디렉토리로 옮겨 줍니다. 여기서는 <code>D:\sratoolkit.3.0.0-win64</code>이 곳에 이동해 두었고 전체 디렉토리 구성은 다음과 같습니다.</p>
+<div class="inline-figure"><img src="images/12/env0.png" width="600"></div>
+<p>명령을 어느 디렉토리에서나 사용하고 싶다면 위 경로의 <code>bin</code> 디렉토리를 <code>path</code>로 잡아주는 과정이 필요합니다. 다음 위치로 이동 후 “내PC &gt; 속성 &gt; 고급 시스템 설정 &gt; 환경변수” 를 클릭하면 다음 창이 생성됩니다.</p>
+<div class="inline-figure"><img src="images/12/env1.png"></div>
+<p>Path를 선택후 편집을 클릭하면 다음 화면이 생성되고 새로만들기를 누른 후 <code>D:\sratoolkit.3.0.0-win64\bin</code>라고 입력해주고 모든 창에서 <code>확인</code>을 눌러주면 되겠습니다.</p>
+<div class="inline-figure"><img src="images/12/env2.png"></div>
+<p>이제 파일 탐색기로 파일을 다운로드 받을 작업 디렉토리로 이동한 후 주소창에 <code>cmd</code>이라고 입력해서 프롬프트가 있는 명령창을 실행합니다.</p>
+<p>fastq-dump.exe를 사용해서 다운로드 받을 수 있으며 최근에는 <a href="https://github.com/ncbi/sra-tools/wiki/HowTo:-fasterq-dump">fasterq-dump</a>를 사용해서 더욱 빠르게 다운로드를 받을 수 있습니다.</p>
+<div class="inline-figure"><img src="images/12/sra.png" width="600"></div>
+<p>뒤에서 설명할 GEO 데이터베이스에서 <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE148719">GSE148719</a> 데이터를 다운로드 해보겠습니다. 위 링크를 클릭해서 들어가면 화면 하단의 SRA Run Selector 라는 링크가 있고 이를 클릭하면 다음과 같은 화면이 보입니다.</p>
+<div class="inline-figure"><img src="images/sra.PNG" width="600"></div>
+<p>Metadata (SraRunTable.txt) 와 Accession list (SRR_Acc_List.txt)를 파일 형태로 다운로드 받은 후 적절한 전처리 후 사용하면 되겠습니다.</p>
+<pre><code>prefetch --option-file SRR_Acc_List.txt</code></pre>
+<p>만약 하나의 fastq 데이터만 다운로드 받을 경우 다음과 같습니다.</p>
+<pre><code>prefetch SRR11549076</code></pre>
+<p>이후 fasta 파일로 변환해 줍니다</p>
+<pre><code>fasterq-dump --split-files SRR11549076</code></pre>
+<p>100000개 read만 별도로 저장</p>
+<pre><code>fastq-dump -X 10000 --split-files SRR11549076</code></pre>
+<p><strong>Gene expression omnibus (GEO)</strong></p>
+<p>GEO는 microarray, next-generation sequencing 등의 high-throughput 유전체 데이터를 보유한 공공 저장소입니다.</p>
+<ul>
+<li>대규모 기능유전체 데이터베이스</li>
+<li>데이터 기탁 쉽게 만들고 고수준 QC 유지</li>
+<li>사용하기 쉬운 인터페이스 유지</li>
+</ul>
+<p><a href="https://www.ncbi.nlm.nih.gov/geo/">GEO</a></p>
+<p>Platform, Sample, Series로 구성되어 있으며 Platform은 사용된 어레이 플랫폼에 대한 설명과 데이터 테이블로 구성되어 있습니다. GPLXXX 형태의 GEO 액세스 번호가 할당되며 하나의 플랫폼은 많은 샘플들에 사용될 수 있습니다. Sample은 개별 샘플이 처리된 조건 등의 설명이 있는 테이블로 구성되며 GSMxxx 형태의 GEO 등록 번호가 할당됩니다. Sample은 하나의 Platform만 참조 가능하며 여러 Series에 포함될 수 있습니다. Series는 관련된 샘플을 그룹화하고 전체 연구의 주요 설명을 제공합니다. GEO 등록 번호 GSExxx가 할당됩니다.</p>
+<div class="inline-figure"><img src="images/04/geo_overview.jpg" width="600"></div>
+<p>위 세 가지 타입 외에 Datasets 이 있으며 Datasets은 GDSxxx 아이디를 가집니다. 앞서 Series (GSExxx) 데이터가 연구자들이 업로드한 raw 데이터라고 한다면 Datasets (GDSxxx)는 관리자들에 의해 큐레이션된 데이터로 볼 수 있습니다. <a href="https://www.ncbi.nlm.nih.gov/geo/summary/">브라우져</a>를 통해 쉽게 검색할 수 있습니다. Bioconductor에서는 <code>GEOquery</code>라는 패키지로 관련 파일들을 다운로드 받을 수 있습니다.</p>
+<div class="sourceCode" id="cb291"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
+
+<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"GEOquery"</span><span class="op">)</span>
+
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/seandavi/GEOquery">GEOquery</a></span><span class="op">)</span>
+<span class="co">#browseVignettes("GEOquery")</span></code></pre></div>
+<p>The <code>GDS</code> class</p>
+<div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/getGEO.html">getGEO</a></span><span class="op">(</span>filename<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/GDS507.soft.gz"</span>,package<span class="op">=</span><span class="st">"GEOquery"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">gds</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/methods.html">methods</a></span><span class="op">(</span>class<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">gds</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/GEOData-accessors.html">Table</a></span><span class="op">(</span><span class="va">gds</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/GEOData-accessors.html">Columns</a></span><span class="op">(</span><span class="va">gds</span><span class="op">)</span></code></pre></div>
+<p>The <code>GSM</code> class - 샘플의 실제 측정값과 실험 조건 등 샘플별 정보 포함. 참고로 MAS 5.0 알고리즘은 서열의 Perfect-Match (PM)과 Mismatch (MM)를 이용해서 유전자의 발현을 정량화 하는 방법으로 (logged) PM-MM의 평균으로 계산함.</p>
+<div class="sourceCode" id="cb293"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gsm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/getGEO.html">getGEO</a></span><span class="op">(</span>filename<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/GSM11805.txt.gz"</span>,package<span class="op">=</span><span class="st">"GEOquery"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/methods.html">methods</a></span><span class="op">(</span>class<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">gsm</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/GEOData-accessors.html">Meta</a></span><span class="op">(</span><span class="va">gsm</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/GEOData-accessors.html">Table</a></span><span class="op">(</span><span class="va">gsm</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/GEOData-accessors.html">Columns</a></span><span class="op">(</span><span class="va">gsm</span><span class="op">)</span></code></pre></div>
+<p>The <code>GPL</code> class - 사용된 칩의 기본 Annotation 정보</p>
+<div class="sourceCode" id="cb294"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gpl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/getGEO.html">getGEO</a></span><span class="op">(</span>filename<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/GPL97.annot.gz"</span>,package<span class="op">=</span><span class="st">"GEOquery"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">gpl</span></code></pre></div>
+<p>The <code>GSE</code> class - 관련된 샘플, annotation 들의 집합 (실험)</p>
+<div class="sourceCode" id="cb295"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/getGEO.html">getGEO</a></span><span class="op">(</span>filename<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/GSE781_family.soft.gz"</span>,package<span class="op">=</span><span class="st">"GEOquery"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/methods.html">methods</a></span><span class="op">(</span>class<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">gse</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/GEOData-accessors.html">Meta</a></span><span class="op">(</span><span class="va">gse</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/GEOData-accessors.html">GSMList</a></span><span class="op">(</span><span class="va">gse</span><span class="op">)</span><span class="op">)</span>
+<span class="va">gsm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/GEOData-accessors.html">GSMList</a></span><span class="op">(</span><span class="va">gse</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/GEOData-accessors.html">Meta</a></span><span class="op">(</span><span class="va">gsm</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/GEOData-accessors.html">Table</a></span><span class="op">(</span><span class="va">gsm</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/GEOData-accessors.html">Columns</a></span><span class="op">(</span><span class="va">gsm</span><span class="op">)</span>
+
+
+<span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/GEOData-accessors.html">GPLList</a></span><span class="op">(</span><span class="va">gse</span><span class="op">)</span>
+<span class="va">gpl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/GEOData-accessors.html">GPLList</a></span><span class="op">(</span><span class="va">gse</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">gpl</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="expressionset" class="section level2" number="14.4">
+<h2>
+<span class="header-section-number">14.4</span> ExpressionSet<a class="anchor" aria-label="anchor" href="#expressionset"><i class="fas fa-link"></i></a>
+</h2>
+<p><code>Biobase</code> 패키지는 지놈 데이터를 관리하기 위한 표준화된 데이터 구조 class인 <code>ExpressionSet</code>를 제공합니다. ExpressionSet은 HT assay 데이터와 실험 meta를 포함하고 있습니다.</p>
+<p><img src="images/12/ExpressionSet.png" width="600">
+출처<a href="https://montilab.github.io/BS831/articles/docs/ExpressionSet.html">BS831 lecture note</a></p>
+<p>GES 데이터 받기 <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE2553">GSE2553</a></p>
+<div class="sourceCode" id="cb296"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gse2553</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/getGEO.html">getGEO</a></span><span class="op">(</span><span class="st">'GSE2553'</span>,GSEMatrix<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">gse2553</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">gse2553</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">gse2553</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
+<span class="va">mygse</span> <span class="op">&lt;-</span> <span class="va">gse2553</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
+<span class="op">?</span><span class="va">ExpressionSet</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/methods.html">methods</a></span><span class="op">(</span>class<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">mygse</span><span class="op">)</span><span class="op">)</span>
+<span class="va">mypdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/phenoData.html">pData</a></span><span class="op">(</span><span class="va">mygse</span><span class="op">)</span>
+<span class="va">myfdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/featureData.html">fData</a></span><span class="op">(</span><span class="va">mygse</span><span class="op">)</span>
+<span class="va">myexdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/exprs.html">exprs</a></span><span class="op">(</span><span class="va">mygse</span><span class="op">)</span>
+
+
+
+<span class="co">## rownames , data.frame</span>
+<span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">myexdata</span><span class="op">)</span>
+
+<span class="co">## filtering</span>
+<span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html">table</a></span><span class="op">(</span><span class="va">mypdata</span><span class="op">$</span><span class="va">description</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb297"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mypdata</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">myexdata</span><span class="op">)</span></code></pre></div>
+<p>GDS 데이터를 ExpressionSet class로 변환하기</p>
+<div class="sourceCode" id="cb298"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/getGEO.html">getGEO</a></span><span class="op">(</span>filename<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/GDS507.soft.gz"</span>,package<span class="op">=</span><span class="st">"GEOquery"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">gds</span><span class="op">)</span>
+<span class="va">eset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/coercion.html">GDS2eSet</a></span><span class="op">(</span><span class="va">gds</span>, do.log2<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">eset</span>
+<span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/phenoData.html">pData</a></span><span class="op">(</span><span class="va">eset</span><span class="op">)</span></code></pre></div>
+<p>** Example **</p>
+<p>다음 예제는 GEOquery 패키지에 있는 데이터셋을 활용하여 간단한 DEG 분석을 수행하는 코드로서 DEG 분석의 원리 이해와 해석을 위해 학습하는 예제입니다. 다음 장에 소개되는 통계(추정과 검정)을 먼저 참고하고 실습해 보아도 좋겠습니다.</p>
+<p><code>GEOquery</code> 패지키에 포함된 GDS507 dataset을 읽어서 ExpressionSet으로 변환합니다. ExpressionSet class를 활용하는 edgeR, DESeq2 등의 패키지를 사용하지는 않지만 변환 후 필요한 데이터를 추출해서 사용하겠습니다.</p>
+<div class="sourceCode" id="cb299"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/getGEO.html">getGEO</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/GDS507.soft.gz"</span>,package<span class="op">=</span><span class="st">"GEOquery"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">gds</span>
+<span class="va">eset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GEOquery/man/coercion.html">GDS2eSet</a></span><span class="op">(</span><span class="va">gds</span>, do.log2<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">eset</span>
+
+<span class="va">myexp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/exprs.html">exprs</a></span><span class="op">(</span><span class="va">eset</span><span class="op">)</span><span class="op">)</span>
+<span class="va">myfeature</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/featureData.html">fData</a></span><span class="op">(</span><span class="va">eset</span><span class="op">)</span>
+<span class="va">mypheno</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/phenoData.html">pData</a></span><span class="op">(</span><span class="va">eset</span><span class="op">)</span></code></pre></div>
+<p>위 세 종류의 데이터 테이블을 추출한 후 샘플들 두 그룹별로 평균을 계산하기 위해서 matrix transpose가 필요합니다. tidyverse는 (대부분의 통계 데이터는) row에 샘플이 위치하고 column에 feature (변수)가 있는 반면 위 myexp는 (ExpressionSet) 특성상 샘플이 컬럼에 위치하므로 transpose 수행 후 평균을 계산할 필요가 있습니다.</p>
+<div class="sourceCode" id="cb300"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html">table</a></span><span class="op">(</span><span class="va">mypheno</span><span class="op">$</span><span class="va">disease.state</span><span class="op">)</span>
+
+<span class="co">## transpose</span>
+<span class="va">mydat1</span> <span class="op">&lt;-</span> <span class="va">myexp</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="op">-</span><span class="va">rowname</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">rowname</span>, values_from <span class="op">=</span> <span class="va">value</span><span class="op">)</span>  
+
+<span class="va">mydat2</span> <span class="op">&lt;-</span> <span class="va">mypheno</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">sample</span>, <span class="va">disease.state</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">mydat1</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="st">"sample"</span> <span class="op">=</span> <span class="st">"name"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>이 후 그룹별로 평균을 계산후 다시 transpose 시켜줍니다.</p>
+<div class="sourceCode" id="cb301"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mymean</span> <span class="op">&lt;-</span> <span class="va">mydat2</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">group_by</a></span><span class="op">(</span><span class="va">disease.state</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/where.html">where</a></span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>, <span class="va">mean</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">mymean2</span> <span class="op">&lt;-</span> <span class="va">mymean</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="op">-</span><span class="va">disease.state</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from<span class="op">=</span><span class="va">disease.state</span>, values_from <span class="op">=</span> <span class="va">value</span><span class="op">)</span></code></pre></div>
+<p>두 그룹의 평균 값에 대한 각 유전자(feature)들의 산포도를 그릴 수 있습니다.</p>
+<div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">mymean2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">normal</span>, y<span class="op">=</span><span class="va">RCC</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>위 데이터는 feature 별로 normal과 RCC 값들의 평균을 가지고 있습니다. 유사한 방법으로 표준편차 값을 구한 후 t값을 계산할 수 있으나 코드가 길어지게 됩니다. 기존 lecture에서는 apply 함수를 활용해서 t.test를 수행하여 p-value를 구할 수 있었으나 더 간단히 아래와 같이 tidyverse 타입의 함수를 사용해서 t.test 를 사용할 수도 있습니다.</p>
+<div class="sourceCode" id="cb303"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ttestval</span> <span class="op">&lt;-</span> <span class="va">mydat2</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span>
+  <span class="co">#dplyr::select(1:10) %&gt;% </span>
+  <span class="fu"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/where.html">where</a></span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
+    <span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="va">disease.state</span><span class="op">==</span><span class="st">"normal"</span><span class="op">]</span>, <span class="va">x</span><span class="op">[</span><span class="va">disease.state</span><span class="op">==</span><span class="st">"RCC"</span><span class="op">]</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="va">z</span><span class="op">$</span><span class="va">p.value</span>, <span class="va">z</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span>
+    <span class="op">}</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">ttestval</span></code></pre></div>
+<p>평균값과 pvalue, tstatistic 등의 값들을 하나의 테이블로 만들기 위해서 위 ttestval 데이터를 transpose 시킨 후 mymean2 데이터와 병합합니다.</p>
+<div class="sourceCode" id="cb304"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">ttestvalt</span> <span class="op">&lt;-</span> <span class="va">ttestval</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">mutate</a></span><span class="op">(</span>rnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="st">"pvalue"</span>, <span class="st">"tstat"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
+  <span class="co">#column_to_rownames(var="rnames") %&gt;% </span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="op">-</span><span class="va">rnames</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">rnames</span><span class="op">)</span>
+
+<span class="va">finaldat</span> <span class="op">&lt;-</span> <span class="va">mymean2</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">ttestvalt</span>, by<span class="op">=</span><span class="st">"name"</span><span class="op">)</span>
+<span class="va">finaldat</span></code></pre></div>
+<p>유의한 데이터를 선별하고 가시화 합니다.</p>
+<div class="sourceCode" id="cb305"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">sigdat</span> <span class="op">&lt;-</span> <span class="va">finaldat</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">filter</a></span><span class="op">(</span><span class="va">pvalue</span> <span class="op">&lt;</span> <span class="fl">0.001</span><span class="op">)</span>
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">finaldat</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">normal</span>, y<span class="op">=</span><span class="va">RCC</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>alpha<span class="op">=</span><span class="fl">0.2</span>, color<span class="op">=</span><span class="st">"#999999"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">sigdat</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">normal</span>, y<span class="op">=</span><span class="va">RCC</span><span class="op">)</span>, color<span class="op">=</span><span class="st">"blue"</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, shape<span class="op">=</span><span class="fl">20</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>참고로 아래 결과는 p-value 가 0.001 이하인 probe들을 표현한 결과로서 정확한 결과 도출을 위해서는 multiple testing correction을 수행 후 수정된 유의확율을 이용할 필요가 있습니다.</p>
+<div class="inline-figure"><img src="images/12/000024.png" width="500"></div>
+</div>
+<div id="summarizedexperiment" class="section level2" number="14.5">
+<h2>
+<span class="header-section-number">14.5</span> SummarizedExperiment<a class="anchor" aria-label="anchor" href="#summarizedexperiment"><i class="fas fa-link"></i></a>
+</h2>
+<p>ExpressionSet은 일반적으로 행이 feature (유전자) 인 마이크로어레이 기반 실험 및 유전자 발현 데이터에 사용되었습니다. 그러나 유전체 분석을 위해서는 유전자 정보 외에도 유전체상의 위치 정보 등이 필요하며 이는 앞서 배운 GenomicRanges 형태의 데이터가 필요합니다. 따라서 최근에는 새로운 버전인 SummarizedExperiment class가 <a href="https://bioconductor.org/packages/release/bioc/html/SummarizedExperiment.html">SummarizedExperiment</a> 개발되어 사용되고 있습니다.</p>
+<div class="inline-figure"><img src="images/summarizedexp.PNG"></div>
+<div class="sourceCode" id="cb306"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/SummarizedExperiment">SummarizedExperiment</a></span><span class="op">)</span>
+
+<span class="co">#if (!requireNamespace("BiocManager", quietly = TRUE))</span>
+<span class="co">#    install.packages("BiocManager")</span>
+
+<span class="co">#BiocManager::install("airway")</span>
+
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">airway</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">airway</span>, package<span class="op">=</span><span class="st">"airway"</span><span class="op">)</span>
+<span class="va">se</span> <span class="op">&lt;-</span> <span class="va">airway</span>
+<span class="va">se</span>
+<span class="op">?</span><span class="va">RangedSummarizedExperiment</span> 
+
+<span class="co"># assay data</span>
+<span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">assay</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span>
+
+<span class="co"># Row (features)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/RangedSummarizedExperiment-class.html">rowRanges</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span>
+
+<span class="co"># Column (sample)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">colData</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span>
+
+<span class="co"># Experiment-wide metadata</span>
+<span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Annotated-class.html">metadata</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span></code></pre></div>
+<p><code>SummarizedExperiment</code> 생성</p>
+<div class="sourceCode" id="cb307"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">nrows</span> <span class="op">&lt;-</span> <span class="fl">200</span>
+<span class="va">ncols</span> <span class="op">&lt;-</span> <span class="fl">6</span>
+<span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">nrows</span> <span class="op">*</span> <span class="va">ncols</span>, <span class="fl">1</span>, <span class="fl">1e4</span><span class="op">)</span>, <span class="va">nrows</span><span class="op">)</span>
+<span class="va">rowRanges</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html">GRanges</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="st">"chr1"</span>, <span class="st">"chr2"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">150</span><span class="op">)</span><span class="op">)</span>,
+                     <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/IRanges-constructor.html">IRanges</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">200</span>, <span class="fl">1e5</span>, <span class="fl">1e6</span><span class="op">)</span><span class="op">)</span>, width<span class="op">=</span><span class="fl">100</span><span class="op">)</span>,
+                     strand<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="st">"+"</span>, <span class="st">"-"</span><span class="op">)</span>, <span class="fl">200</span>, <span class="cn">TRUE</span><span class="op">)</span>,
+                     feature_id<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"ID%03d"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">200</span><span class="op">)</span><span class="op">)</span>
+<span class="va">colData</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/DataFrame-class.html">DataFrame</a></span><span class="op">(</span>Treatment<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="st">"ChIP"</span>, <span class="st">"Input"</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span>,
+                     row.names<span class="op">=</span><span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span><span class="op">)</span>
+
+<span class="va">se</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/RangedSummarizedExperiment-class.html">SummarizedExperiment</a></span><span class="op">(</span>assays<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>counts<span class="op">=</span><span class="va">counts</span><span class="op">)</span>,
+                     rowRanges<span class="op">=</span><span class="va">rowRanges</span>, colData<span class="op">=</span><span class="va">colData</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">assay</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span>
+
+<span class="co"># Row (regions-of-interest) data</span>
+<span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/RangedSummarizedExperiment-class.html">rowRanges</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span>
+
+<span class="co"># Column (sample) data</span>
+<span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">colData</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span>
+
+<span class="co"># Experiment-wide metadata</span>
+<span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Annotated-class.html">metadata</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span></code></pre></div>
+<hr>
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="크리에이티브 커먼즈 라이선스" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png"></a><br>이 저작물은 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제 라이선스</a>에 따라 이용할 수 있습니다.</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="tools-for-genome-analysis.html"><span class="header-section-number">13</span> Tools for genome analysis</a></div>
+<div class="next"><a href="inference-and-test.html"><span class="header-section-number">15</span> Inference and test</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#high-throughput-data"><span class="header-section-number">14</span> High-throughput data</a></li>
+<li><a class="nav-link" href="#next-generation-sequencing"><span class="header-section-number">14.1</span> Next-generation sequencing</a></li>
+<li><a class="nav-link" href="#fastq-preprocessing"><span class="header-section-number">14.2</span> FASTQ preprocessing</a></li>
+<li><a class="nav-link" href="#ngs-database"><span class="header-section-number">14.3</span> NGS database</a></li>
+<li><a class="nav-link" href="#expressionset"><span class="header-section-number">14.4</span> ExpressionSet</a></li>
+<li><a class="nav-link" href="#summarizedexperiment"><span class="header-section-number">14.5</span> SummarizedExperiment</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>2022년 한국생명공학연구원 연구데이터 분석과정 R</strong>" was written by 합성생물학전문연구소 김하성. It was last built on 2022-10-06.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
