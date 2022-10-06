@@ -25,8 +25,9 @@ download.file(url="https://github.com/greendaygh/kribbr2022/raw/main/ecoli-mg165
 ecoli <- readGenBank("examples/ecoli-mg1655.gb")
 ecoliseq <- getSeq(ecoli)
 
+
 ecoliseqsub <- subseq(ecoliseq, 1, 100000)
-names(ecoliseqsub) <- "ecolisub"
+names(ecoliseqsub) <- "K-12"
 writeXStringSet(ecoliseqsub, "examples/ecolisub.fasta")
 
 ```
@@ -88,9 +89,39 @@ indexBam(files = file.path("examples", "sorted_ecoliexample.BAM.bam"))
 ```
 
 
+## visualization
+
+[IGV](https://software.broadinstitute.org/software/igv/)를 활용하여 mapping 파일 가시화가 가능합니다. 
+
 
 
 ## Counting in gene models
+
+```{r, eval=F}
+library(GenomicAlignments)
+library(plyranges)
+
+ecolicds <- cds(ecoli)
+ecolicds_sub <- ecolicds %>% 
+  filter(end < 100000)
+seqlengths(ecolicds_sub) <- 100000
+
+
+mybam <- BamFile("examples/sorted_ecoliexample.BAM.bam", yieldSize = 100000)
+myresult <- summarizeOverlaps(ecolicds_sub, mybam, ignore.strand = T)
+
+class(myresult)
+
+assay(myresult)
+
+rowRanges(myresult)
+colData(myresult)
+metadata(myresult)
+
+
+```
+
+
 
 
 ---

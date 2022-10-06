@@ -425,6 +425,8 @@ colData <- DataFrame(Treatment=rep(c("ChIP", "Input"), 3),
 se <- SummarizedExperiment(assays=list(counts=counts),
                      rowRanges=rowRanges, colData=colData)
 
+assay(se)
+
 # Row (regions-of-interest) data
 rowRanges(se)
 
