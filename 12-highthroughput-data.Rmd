@@ -50,11 +50,15 @@ BiocManager::install("Rfastp")
 ```
 
 
-fastq 파일 다운로드 후 로딩과 필터링 수행 
+예시 fastq 파일 다운로드 후 로딩과 필터링 수행 
 
 
 ```{r, eval=F}
 library(Rfastp)
+
+download.file(url = "https://raw.githubusercontent.com/greendaygh/kribbr2022/main/examples/SRR11549087_1.fastq", destfile = "SRR11549087_1_2.fastq")
+
+
 
 fqfiles <- dir(path = "fastq", pattern = "*.fastq.gz")
 
