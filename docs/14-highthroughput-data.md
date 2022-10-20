@@ -27,7 +27,8 @@ ecoli <- readGenBank("examples/ecoli-mg1655.gb")
 ecoliseq <- getSeq(ecoli)
 
 
-ecoliseqsub <- subseq(ecoliseq, 1, 100000)
+maxlen <- 1000000
+ecoliseqsub <- subseq(ecoliseq, 1, maxlen)
 names(ecoliseqsub) <- "K-12"
 writeXStringSet(ecoliseqsub, "examples/ecolisub.fasta")
 
@@ -35,7 +36,7 @@ writeXStringSet(ecoliseqsub, "examples/ecolisub.fasta")
 
 
 
-## Read Alignment and Mapping 
+## Creation of indexing  
 
 Rsubread 패키지를 활용해서 align을 수행합니다. align 전에 reference genome의 index를 생성해야 하며 지놈이 클 경우 오랜 시간이 소요될 수 있으니 주의가 필요합니다.
 
@@ -60,7 +61,7 @@ buildindex(basename = file.path("examples", "ecoliexample"),
 
 ## RNA-Seq alignment (Mapping)
 
-Rsubread 패키지를 활용해서 mapping을 수행합니다. align 함수를 사용하며 splicing 여부에 따라 옵션이 조금씩 다를 수 있습니다. 
+Rsubread 패키지를 활용해서 mapping을 수행합니다. align 함수를 사용하며 splicing 여부에 따라 옵션이 조금씩 다를 수 있습니다. If the annotation is in GTF format, it can only be provided as a file. If it is in SAF format, it can be provided as a file or a data frame. 
 
 
 
@@ -72,6 +73,7 @@ alignstat <- align(file.path("examples", "ecoliexample")
                    , output_file = file.path("examples", "ecoliexample.BAM")
                    , nthreads = 6)
 
+?alignstat
 
 #alignstat
 
@@ -109,8 +111,8 @@ library(plyranges)
 
 ecolicds <- cds(ecoli)
 ecolicds_sub <- ecolicds %>% 
-  filter(end < 100000)
-seqlengths(ecolicds_sub) <- 100000
+  filter(end < maxlen)
+seqlengths(ecolicds_sub) <- maxlen
 
 
 mybam <- BamFile("examples/sorted_ecoliexample.BAM.bam", yieldSize = 100000)
@@ -118,15 +120,14 @@ myresult <- summarizeOverlaps(ecolicds_sub, mybam, ignore.strand = T)
 
 class(myresult)
 
-assay(myresult)
+tmp <- assay(myresult)
 
 rowRanges(myresult)
 colData(myresult)
 metadata(myresult)
 
+?summarizeOverlaps
 ```
-
-
 
 
 ---

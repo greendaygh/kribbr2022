@@ -1,8 +1,58 @@
----
-title: "Untitled"
-output: html_document
-date: '2022-10-06'
----
+# DEG Excercise
+
+## Counting with multiple RNAseq datasets
+
+- https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE136101
+- https://www.ncbi.nlm.nih.gov/Traces/study/?acc=PRJNA561298&o=acc_s%3Aa 사이트에서 metadata, accession list 파일 다운로드 
+- RNAseq 파일 다운로드
+
+~~~
+prefetch --option-file SRR_Acc_List.txt
+~~~
+
+- fastq 파일 가져오기 
+
+~~~
+fastq-dump -X 100000 --split-files SRR10009019/SRR10009019.sralite
+fastq-dump -X 100000 --split-files SRR10009020/SRR10009020.sralite
+fastq-dump -X 100000 --split-files SRR10009021/SRR10009021.sralite
+fastq-dump -X 100000 --split-files SRR10009022/SRR10009022.sralite
+fastq-dump -X 100000 --split-files SRR10009023/SRR10009023.sralite
+fastq-dump -X 100000 --split-files SRR10009024/SRR10009024.sralite
+~~~
+
+```{r, eval=F}
+dirnames <- dir(file.path("examples", "ecoli"), pattern = "^SRR10")
+```
+
+- QC
+
+```{r, eval=F}
+library(Rfastp)
+
+fastq_report <- rfastp(
+  read1 = file.path("examples", "ecoli", "SRR10009019_1.fastq"),
+  read2 = file.path("examples", "ecoli", "SRR10009019_2.fastq"), 
+  outputFastq = file.path("examples", "ecoli", "filtered_SRR10009019.fastq"))
+
+fastq_report <- rfastp(
+  read1 = file.path("examples", "ecoli", "SRR10009020_1.fastq"),
+  read2 = file.path("examples", "ecoli", "SRR10009020_2.fastq"), 
+  outputFastq = file.path("examples", "ecoli", "filtered_SRR10009020.fastq"))
+
+fastq_report <- rfastp(
+  read1 = file.path("examples", "ecoli", "SRR10009020_1.fastq"),
+  read2 = file.path("examples", "ecoli", "SRR10009020_2.fastq"), 
+  outputFastq = file.path("examples", "ecoli", "filtered_SRR10009020.fastq"))
+
+fastq_report <- rfastp(
+  read1 = file.path("examples", "ecoli", "SRR10009020_1.fastq"),
+  read2 = file.path("examples", "ecoli", "SRR10009020_2.fastq"), 
+  outputFastq = file.path("examples", "ecoli", "filtered_SRR10009020.fastq"))
+
+```
+
+
 
 
 

@@ -149,11 +149,13 @@ deg-analysis
 high-throughput-genomic-data-analysis
 deg-analysis-with-bioconductor
 creating-a-reference-genome
-read-alignment-and-mapping
+creation-of-indexing
 rna-seq-alignment-mapping
 sorting
 visualization-1
 counting-in-gene-models
+deg-excercise
+counting-with-multiple-rnaseq-datasets
 lecture-note
 lecture-02-0526
 lecture-03-0609
@@ -164,3 +166,4 @@ lecture-07-0804
 lecture-08-0811
 lecture-09-0901
 lecture-10-0915
+lecture-11-1006
