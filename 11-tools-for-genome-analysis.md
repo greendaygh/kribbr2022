@@ -1,0 +1,348 @@
+# Tools for genome analysis
+
+
+## genbank file
+
+
+::: rmdnote
+**Exercises **
+ 
+1. `NC_045512.2`는 우한에서 발생한 코로나바이러스의 accession number임. `entrez_fetch` 함수를 사용하여 `nuccore` 데이터베이스에서 genbank 정보를 다운로드 받으시오
+
+2. 받은 택스트를 `covid19wohan.gb`라는 파일로 저장하시오 
+
+
+
+:::
+
+genbank 파일은 DNA 및 단백질 서열을 저장하는데 사용되는 서열 파일 포맷으로서 하나 이상의 시퀀스에 대한 정보와, 주석, 특정 서열 구간의 feature 정보와 메타 데이터도 포함합니다. NCBI에서 개발했으며 표준 DNA 및 단백질 서열 파일 형식으로 공공 데이터베이스 등 널리 사용되고 있습니다. R의 `genbankr` 패키지는 genbank 타입의 데이터를 읽는 `readGenBank` 함수를 제공합니다. 
+
+
+
+
+```r
+require(genbankr)
+
+covid19 <- readGenBank("covid19wuhan.gb")
+covid19
+methods(class="GenBankRecord")
+cds(covid19)
+exons(covid19)
+
+covid19seq <- getSeq(covid19)
+
+```
+
+ 
+## IRanges
+
+유전체 데이터의 대부분을 차지하는 정보는 전체 지놈 서열 중 어디서 어디까지가 유전자 또는 coding sequence 이고 그 번역된 정보가 무엇인지 설명하는 정보 입니다. 즉, 일련의 feature에 대한 위치와 특성 정보를 분석하는 것이 효율적인 지놈을 분석하기 위해 필수입니다. `bioconductor` 에서는 이러한 유전체 정보를 효율적으로 분석하고 가시화 하기위한 방법들이 다양하게 개발되어 왔으며 `IRanges` 와 `GenomicRanges` 라는 패키지가 대표적으로 사용될 수 있습니다. 
+
+IRanges는 간격을 나타내는 임의의 숫자 세트이며 지놈상에 위치한 특정 feature들의 간격이나 통계적 수치들을 효율적으로 나타내기 위해서 만들어진 패키지 입니다 [@Lawrence2013]. 임의의 feature에 대한 시작, 끝, 넓이를 나타내는 숫자들이 리스트로 이루어져 있습니다. 
+
+
+```r
+library(IRanges)
+
+ir <- IRanges(start = c(1,3,5), end = c(3,5,7))
+ir
+
+ir <- IRanges(start = 1:10, width = 10:1)
+ir
+class(ir)
+methods(class="IRanges")
+?IRanges
+
+```
+
+
+IRange 는 Rle (run-length encoding format, 런 렝스 부호화) class 를 사용하며 일종의 압축 방법입니다. 예를 들어 GATTGCCCCCCTAG 라는 서열이 있다고 하면 이를 그대로 text 파일에 저장하지 않고 GAT2GC6TAG 라고 표현함으로써 용량을 줄이는 압축의 기능을 합니다. GenomicRange는 이러한 Rle 개념을 사용하기 위해서 `Rle`라는 기본 함수를 사용합니다. 
+
+
+```r
+library(IRanges)
+
+x <- "GATTGCCCCCCTAG"
+y <- unlist(strsplit(x, split=""))
+yrle <- Rle(y)
+yrle
+
+runLength(yrle)
+runValue(yrle)
+nrun(yrle)
+
+x <- Rle(values = c(1:3), lengths = c(1:3))
+x
+class(x)
+#methods(class="Rle")
+
+# convert Rle to IRanges
+xrange <- IRanges(start(x), end(x))
+xrange
+
+```
+
+
+IRange 생성과는 반대로 IRange 객체로부터 몇몇 함수를 사용하여 정보를 추출할 수 있습니다. 
+
+
+```r
+ir <- IRanges(start = c(1,3), end = c(4,5))
+ir
+
+start(ir)
+end(ir)
+width(ir)
+disjointBins(ir)
+
+ir <- IRanges(start = c(1,3,6), end = c(4,5,7))
+ir
+bins <- disjointBins(ir)
+bins
+
+```
+
+
+이러한 정보를 가시화하는 가장 간단한 방법은 `ggbio`라는 패키지를 사용하는 것 입니다. 
+
+
+
+```r
+library(ggbio)
+
+autoplot(ir) 
+
+autoplot(ir) + 
+  theme_bw()
+
+autoplot(ir, aes(fill=width)) +
+  theme_bw()
+```
+특히 `disjoin`과 `reduce` 함수는 overlap 되어 있는 구간의 분석을 수행하는데 유용하게 활용 됩니다. 
+
+
+```r
+ir2 <- disjoin(ir)
+ir2
+autoplot(ir)
+autoplot(ir2) 
+
+ir3 <- IRanges::reduce(ir)
+ir3
+autoplot(ir3) 
+
+```
+
+::: rmdnote
+**Exercises **
+
+1) 구간의 길이가 각각 100, 15, 30, 45 인  IRange 객체를 만드시오
+
+2) 1부터 100까지의 전체 구간에서 시작 위치가 각각 1, 15, 30, 60 이면서 길이가 20 인 IRange 객체를 만드시오 
+
+:::
+
+
+
+## GenomicRanges
+
+[GenomicRanges](https://bioconductor.org/packages/release/bioc/html/GenomicRanges.html)는 지놈상의 위치정보와 Bioconductor에서 제공하는 다양한 high-throughput 정보들을 같이 표현하기 위해서 만들어진 패키지입니다. 
+
+
+GRanges 함수를 이용해서 생성할 수 있으며 `browseVignettes("GenomicRanges")` 나 `methods()` 함수를 이용해서 관련된 기능을 찾아서 사용할 수 있습니다.  
+
+
+
+```r
+library(GenomicRanges)
+
+
+gr <- GRanges(
+  seqnames = "chr1", 
+  ranges = IRanges(1:10, 101:110),
+  strand = rep("+", 10)
+)
+gr
+class(gr)
+
+```
+
+
+
+
+다양한 함수 사용법을 보여줍니다. 
+
+
+```r
+gr <- GRanges(
+    seqnames = Rle(c("chr1", "chr2", "chr1", "chr3"), c(1, 3, 2, 4)),
+    ranges = IRanges(101:110, end = 111:120, names = head(letters, 10)),
+    strand = Rle(strand(c("-", "+", "*", "+", "-")), c(1, 2, 2, 3, 2)),
+    score = 1:10,
+    GC = seq(1, 0, length=10))
+gr
+
+seqnames(gr)
+ranges(gr)
+strand(gr)
+
+granges(gr) 
+mcols(gr) #meta data
+seqlengths(gr)
+
+seqlengths(gr) <- c(249250621, 243199373, 198022430)
+names(gr)
+```
+
+ggbio의 autoplot을 사용하여 IRange와 같이 가시화 할 수 있으며 split 함수를 사용하면 지정된 규칙에 따라 Grange를 나눌 수 있습니다. 
+
+
+```r
+autoplot(gr)
+sp <- split(gr, rep(1:2, each=5))
+```
+
+
+::: rmdnote
+**Exercises **
+ 
+위 결과에서 chromosome 별로 항목을 나눈 Grange list를 만드시오 
+
+:::
+
+
+
+
+::: rmdnote
+**Exercises **
+ 
+위에서 받은 `NC_045512.2`는 우한에서 발생한 코로나바이러스 서열에 대한 CDS 추출, 서열 비교, 가시화 등을 수행하시오 
+
+
+
+
+:::
+
+
+## plyragnes
+
+위 GenomicRanges 데이터를 dplyr 형태로 좀 더 쉽게 다루기 위한 패키지가 `plyragnes` 입니다. 
+
+
+
+```r
+library(plyranges)
+
+covid19cds
+gcr <- rowSums(letterFrequency(cdsseqs, c("G", "C"), as.prob=T))
+
+covid19cds %>% 
+  dplyr::select(gene, product) %>% 
+  mutate(gc = gcr) #%>%
+  #filter(grepl(pattern = "ORF", gene)) 
+
+```
+
+
+::: rmdnote
+**Exercises **
+ 
+위에서 계산된 GC 비율로 bar 그래프를 그리되 product를 라벨로 지정하여 그리시오 
+
+:::
+
+
+
+
+
+## Visualization
+
+
+
+```r
+require(ggplot2)
+require(gggenes)
+require(plyranges)
+
+targetr <- covid19cds
+
+mcols(targetr)$gene
+ 
+plyranges::summarise(targetr)
+
+plotdf1 <-   data.frame(molecule=seqnames(targetr),
+                         gene=mcols(targetr)$gene,
+                         start=start(targetr),
+                         end=end(targetr),
+                         strand=case_when(
+                                  as.vector(strand(targetr))=="+"~ TRUE,
+                                  as.vector(strand(targetr))=="-"~ FALSE
+                                )
+                         )
+
+
+ggplot(plotdf1, aes(xmin = start, xmax = end, y = molecule, label=gene, fill = gene, forward = strand)) +
+  geom_gene_arrow(
+    #arrowhead_height = unit(3, "mm"), 
+    #arrowhead_width = unit(1, "mm")
+    arrowhead_height = grid::unit(12, "mm"),
+    arrowhead_width = grid::unit(6, "mm"),
+    arrow_body_height = grid::unit(12, "mm")
+    ) +
+  geom_gene_label(align = "left", height = grid::unit(19, "mm"), grow=TRUE) +
+  theme_genes() +
+  theme(legend.position="none")
+
+```
+
+
+
+다음은 대장균 지놈 NC_000913.3 gb 파일을 다운로드 받고 지놈 전체를 가시화 하는 코드입니다. 
+
+
+```r
+library(rentrez)
+library(genbankr)
+
+tmps <- entrez_fetch("nuccore", id="NC_000913.3", rettype="gbwithparts")
+write(tmps, "ecoli-mg1655.gb")
+ecoligb <- readGenBank("ecoli-mg1655.gb")
+
+ecoli_cds <- cds(ecoligb)
+ecoli_cds
+
+p.txdb <- autoplot(ecoli_cds)
+p.txdb
+
+#library(igvR)
+ecoli_cds
+ggbio() + 
+  circle(ecoli_cds, geom = "ideo", fill = "gray70") +
+  circle(ecoli_cds, geom = "scale", size = 5) +
+  circle(ecoli_cds, geom = "text", aes(label = locus_tag), vjust = 0, size = 3) +
+  theme(
+    axis.text.x = element_text(angle=90)
+  )
+
+gr1 <- granges(ecoli_cds)
+gr2 <- granges(ecoli_cds)
+mcols(gr2)$test <- rnorm(length(ecoli_cds))
+ggplot() + 
+  layout_circle(ecoli_cds, geom = "ideo", fill = "gray70", radius = 9, trackWidth = 1) +
+  layout_circle(ecoli_cds, geom = "scale", size = 3, trackWidth = 1, scale.n=20) +
+  layout_circle(gr1, geom = "rect", color = "steelblue",  radius = 5) +
+  layout_circle(gr2, geom = "bar", aes(y=test), size = 3, trackWidth = 1, scale.n=20, radius = 4) 
+  
+
+```
+
+
+
+
+
+
+---
+
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="크리에이티브 커먼즈 라이선스" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />이 저작물은 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제 라이선스</a>에 따라 이용할 수 있습니다.
+

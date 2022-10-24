@@ -14,6 +14,7 @@ rmd_files: ["index.Rmd",
             "13-statistics.Rmd", 
             "14-highthroughput-data.Rmd",
             "15-highthroughput-data.Rmd",
+            "16-highthroughput-data.Rmd",
             "KRIBBR2022-Lecture2-haseong.Rmd",
             "KRIBBR2022-Lecture3-haseong.Rmd",
             "KRIBBR2022-Lecture4-haseong.Rmd", 
@@ -23,7 +24,8 @@ rmd_files: ["index.Rmd",
             "KRIBBR2022-Lecture8-haseong.Rmd",
             "KRIBBR2022-Lecture9-haseong.Rmd", 
             "KRIBBR2022-Lecture10-haseong.Rmd",
-            "KRIBBR2022-Lecture11-haseong.Rmd"
+            "KRIBBR2022-Lecture11-haseong.Rmd",
+            "KRIBBR2022-Lecture12-haseong.Rmd"
             ]
 book_filename: "kribbr2022"
 repo: https://github.com/greendaygh/kribbr2022/

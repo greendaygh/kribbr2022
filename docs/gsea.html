@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 18 GSEA | 2022년 한국생명공학연구원 연구데이터 분석과정 R</title>
+<meta name="author" content="합성생물학전문연구소 김하성">
+<meta name="description" content="https://yulab-smu.top/biomedical-knowledge-mining-book/index.html https://yulab-smu.top/biomedical-knowledge-mining-book/enrichment-overview.html...">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta property="og:title" content="Chapter 18 GSEA | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
+<meta property="og:type" content="book">
+<meta property="og:description" content="https://yulab-smu.top/biomedical-knowledge-mining-book/index.html https://yulab-smu.top/biomedical-knowledge-mining-book/enrichment-overview.html...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 18 GSEA | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
+<meta name="twitter:description" content="https://yulab-smu.top/biomedical-knowledge-mining-book/index.html https://yulab-smu.top/biomedical-knowledge-mining-book/enrichment-overview.html...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">2022년 한국생명공학연구원 연구데이터 분석과정 R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="rrstudio-basics.html"><span class="header-section-number">2</span> R/Rstudio basics</a></li>
+<li><a class="" href="rmarkdown.html"><span class="header-section-number">3</span> Rmarkdown</a></li>
+<li><a class="" href="r-programming.html"><span class="header-section-number">4</span> R programming</a></li>
+<li><a class="" href="data-transformation.html"><span class="header-section-number">5</span> Data transformation</a></li>
+<li><a class="" href="r-basic-graphics.html"><span class="header-section-number">6</span> R basic graphics</a></li>
+<li><a class="" href="tidyverse.html"><span class="header-section-number">7</span> tidyverse</a></li>
+<li><a class="" href="data-visualization.html"><span class="header-section-number">8</span> Data visualization</a></li>
+<li><a class="" href="ggplot2-examples.html"><span class="header-section-number">9</span> ggplot2 examples</a></li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">10</span> Bioconductor</a></li>
+<li><a class="" href="biostrings.html"><span class="header-section-number">11</span> Biostrings</a></li>
+<li><a class="" href="tools-for-sequences.html"><span class="header-section-number">12</span> Tools for sequences</a></li>
+<li><a class="" href="tools-for-genome-analysis.html"><span class="header-section-number">13</span> Tools for genome analysis</a></li>
+<li><a class="" href="high-throughput-data.html"><span class="header-section-number">14</span> High-throughput data</a></li>
+<li><a class="" href="inference-and-test.html"><span class="header-section-number">15</span> Inference and test</a></li>
+<li><a class="" href="deg-analysis.html"><span class="header-section-number">16</span> DEG analysis</a></li>
+<li><a class="" href="deg-excercise.html"><span class="header-section-number">17</span> DEG Excercise</a></li>
+<li><a class="active" href="gsea.html"><span class="header-section-number">18</span> GSEA</a></li>
+<li><a class="" href="lecture-note.html"><span class="header-section-number">19</span> Lecture Note</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="gsea" class="section level1" number="18">
+<h1>
+<span class="header-section-number">18</span> GSEA<a class="anchor" aria-label="anchor" href="#gsea"><i class="fas fa-link"></i></a>
+</h1>
+<ul>
+<li><a href="https://yulab-smu.top/biomedical-knowledge-mining-book/index.html" class="uri">https://yulab-smu.top/biomedical-knowledge-mining-book/index.html</a></li>
+<li><a href="https://yulab-smu.top/biomedical-knowledge-mining-book/enrichment-overview.html" class="uri">https://yulab-smu.top/biomedical-knowledge-mining-book/enrichment-overview.html</a></li>
+<li><a href="https://github.com/hawn-lab/workshops_UW_Seattle/tree/master/2021.07.14_GSEA" class="uri">https://github.com/hawn-lab/workshops_UW_Seattle/tree/master/2021.07.14_GSEA</a></li>
+</ul>
+<div class="inline-figure"><img src="image/gsea.png" width="500"></div>
+<div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igordot.github.io/msigdbr/">msigdbr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yulab-smu.top/biomedical-knowledge-mining-book/">clusterProfiler</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ctlab/fgsea/">fgsea</a></span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageVersion</a></span><span class="op">(</span><span class="st">"msigdbr"</span><span class="op">)</span>
+
+
+<span class="co"># if (!require("BiocManager", quietly = TRUE))</span>
+<span class="co">#     install.packages("BiocManager")</span>
+<span class="co"># </span>
+<span class="co"># BiocManager::install("org.EcK12.eg.db")</span></code></pre></div>
+<ul>
+<li>clusterProfiler 패키지 사용을 위해서는 다음과 같이 설치를 수행함</li>
+<li>만약 설치시 <code>libglpk.so.40</code> 관련 에러가 발생할 경우 <code>apt-get install libglpk40</code> 수행</li>
+</ul>
+<div class="sourceCode" id="cb347"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#if (!require("BiocManager", quietly = TRUE))</span>
+<span class="co">#    install.packages("BiocManager")</span>
+
+<span class="co">#BiocManager::install("clusterProfiler")</span>
+
+<span class="co"># if (!require("BiocManager", quietly = TRUE))</span>
+<span class="co">#     install.packages("BiocManager")</span>
+<span class="co"># </span>
+<span class="co"># BiocManager::install("ReactomePA")</span>
+
+<span class="co"># if (!require("BiocManager", quietly = TRUE))</span>
+<span class="co">#     install.packages("BiocManager")</span>
+<span class="co"># </span>
+<span class="co"># BiocManager::install("enrichplot", force = TRUE)</span>
+
+
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yulab-smu.top/biomedical-knowledge-mining-book/">clusterProfiler</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">org.EcK12.eg.db</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yulab-smu.top/biomedical-knowledge-mining-book/">ReactomePA</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yulab-smu.top/biomedical-knowledge-mining-book/">enrichplot</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/Biostrings">Biostrings</a></span><span class="op">)</span>
+
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">genbankr</span><span class="op">)</span></code></pre></div>
+<div id="geneset-database" class="section level2" number="18.1">
+<h2>
+<span class="header-section-number">18.1</span> Geneset database<a class="anchor" aria-label="anchor" href="#geneset-database"><i class="fas fa-link"></i></a>
+</h2>
+<p>A gene set is an unordered collection of genes that are functionally related. A pathway can be interpreted as a gene set by ignoring functional relationships among genes.</p>
+<ul>
+<li>Gene Ontology (GO)</li>
+<li>Kyoto Encyclopedia of Genes and Genomes (KEGG)</li>
+<li>Reactome (<a href="https://reactome.org/" class="uri">https://reactome.org/</a>)</li>
+<li>org.db</li>
+</ul>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="gsea.html#cb348-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(org.EcK12.eg.db)</span>
+<span id="cb348-2"><a href="gsea.html#cb348-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb348-3"><a href="gsea.html#cb348-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(org.EcK12.eg.db)</span>
+<span id="cb348-4"><a href="gsea.html#cb348-4" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(org.EcK12.eg.db)</span>
+<span id="cb348-5"><a href="gsea.html#cb348-5" aria-hidden="true" tabindex="-1"></a><span class="fu">columns</span>(org.EcK12.eg.db)</span>
+<span id="cb348-6"><a href="gsea.html#cb348-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb348-7"><a href="gsea.html#cb348-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(<span class="st">"package:org.EcK12.eg.db"</span>)</span>
+<span id="cb348-8"><a href="gsea.html#cb348-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb348-9"><a href="gsea.html#cb348-9" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> org.EcK12.egENZYME</span>
+<span id="cb348-10"><a href="gsea.html#cb348-10" aria-hidden="true" tabindex="-1"></a>mapped_genes <span class="ot">&lt;-</span> <span class="fu">mappedkeys</span>(x)</span>
+<span id="cb348-11"><a href="gsea.html#cb348-11" aria-hidden="true" tabindex="-1"></a>xx <span class="ot">&lt;-</span> <span class="fu">as.list</span>(x[mapped_genes]</span>
+<span id="cb348-12"><a href="gsea.html#cb348-12" aria-hidden="true" tabindex="-1"></a>xx <span class="ot">&lt;-</span> <span class="fu">as.list</span>(org.EcK12.egENZYME2EG)</span>
+<span id="cb348-13"><a href="gsea.html#cb348-13" aria-hidden="true" tabindex="-1"></a>              </span>
+<span id="cb348-14"><a href="gsea.html#cb348-14" aria-hidden="true" tabindex="-1"></a><span class="fu">as.list</span>(org.EcK12.egALIAS2EG)[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
+<span id="cb348-15"><a href="gsea.html#cb348-15" aria-hidden="true" tabindex="-1"></a><span class="fu">as.list</span>(org.EcK12.egACCNUM2EG)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb348-16"><a href="gsea.html#cb348-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb348-17"><a href="gsea.html#cb348-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb348-18"><a href="gsea.html#cb348-18" aria-hidden="true" tabindex="-1"></a><span class="fu">as.list</span>(org.EcK12.egPATH)</span>
+<span id="cb348-19"><a href="gsea.html#cb348-19" aria-hidden="true" tabindex="-1"></a>?org.EcK12.egPATH</span>
+<span id="cb348-20"><a href="gsea.html#cb348-20" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> org.EcK12.egPATH</span>
+<span id="cb348-21"><a href="gsea.html#cb348-21" aria-hidden="true" tabindex="-1"></a>mapped_genes <span class="ot">&lt;-</span> <span class="fu">mappedkeys</span>(x)</span>
+<span id="cb348-22"><a href="gsea.html#cb348-22" aria-hidden="true" tabindex="-1"></a>xx <span class="ot">&lt;-</span> <span class="fu">as.list</span>(x[mapped_genes])</span>
+<span id="cb348-23"><a href="gsea.html#cb348-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb348-24"><a href="gsea.html#cb348-24" aria-hidden="true" tabindex="-1"></a><span class="fu">as.list</span>(org.EcK12.egACCNUM) <span class="sc">%&gt;%</span> head</span>
+<span id="cb348-25"><a href="gsea.html#cb348-25" aria-hidden="true" tabindex="-1"></a><span class="fu">as.list</span>(org.EcK12.egACCNUM2EG) <span class="sc">%&gt;%</span> head</span>
+<span id="cb348-26"><a href="gsea.html#cb348-26" aria-hidden="true" tabindex="-1"></a><span class="fu">as.list</span>(org.EcK12.egPATH)</span></code></pre></div>
+</div>
+<div id="read-essential-data" class="section level2" number="18.2">
+<h2>
+<span class="header-section-number">18.2</span> Read essential data<a class="anchor" aria-label="anchor" href="#read-essential-data"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Essential 데이터 읽고 분류</li>
+<li>cgenes: CNN 모형이 예측한 결과</li>
+<li>apgenes: APT 모형이 예측한 결과</li>
+</ul>
+<div class="sourceCode" id="cb349"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/Biostrings">Biostrings</a></span><span class="op">)</span>
+<span class="va">fileno</span> <span class="op">&lt;-</span> <span class="st">"040"</span>
+
+<span class="va">name_md</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">fileno</span>, <span class="st">"-AP_ConvLSTM_relEC"</span><span class="op">)</span>
+<span class="va">name_date</span> <span class="op">=</span> <span class="st">"-220619"</span>
+
+<span class="va">tmps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-io.html">readDNAStringSet</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"06-PredData/"</span>, <span class="va">name_md</span>, <span class="va">name_date</span>, <span class="st">"_trainingset_results.fasta"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">geneinfo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">tmps</span><span class="op">)</span>, split<span class="op">=</span><span class="st">"__"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="va">.</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="va">as.data.frame</span> 
+<span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html">colnames</a></span><span class="op">(</span><span class="va">geneinfo</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="st">"no"</span>, <span class="st">"ess"</span>, <span class="st">"pred"</span>, <span class="st">"id"</span>, <span class="st">"acc"</span><span class="op">)</span>
+<span class="va">essdata</span> <span class="op">&lt;-</span> <span class="va">geneinfo</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>esstrue<span class="op">=</span><span class="va">ess</span><span class="op">==</span><span class="st">"ess"</span>, esspred<span class="op">=</span><span class="va">pred</span><span class="op">==</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="va">no</span>, <span class="va">ess</span>, <span class="va">pred</span><span class="op">)</span><span class="op">)</span>
+
+
+<span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html">table</a></span><span class="op">(</span><span class="va">essdata</span><span class="op">$</span><span class="va">esstrue</span>, <span class="va">essdata</span><span class="op">$</span><span class="va">esspred</span><span class="op">)</span>
+
+<span class="va">geneinfo2</span> <span class="op">&lt;-</span> <span class="va">essdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">acc</span><span class="op">!=</span><span class="st">"-"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="co">#separate(Gene, c("bnum", "accnum"), sep="__") %&gt;% </span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate.html">separate</a></span><span class="op">(</span><span class="va">acc</span>, <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="st">"accnum"</span>, <span class="st">"tmp"</span><span class="op">)</span>, sep<span class="op">=</span><span class="st">"\\."</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">tmp</span><span class="op">)</span>
+
+  <span class="co"># mutate(egnum = {</span>
+  <span class="co">#   x = as.list(org.EcK12.egACCNUM2EG)[accnum]</span>
+  <span class="co">#   x[sapply(x, is.null)] &lt;- NA</span>
+  <span class="co">#   unlist(x, use.names = FALSE)</span>
+  <span class="co">#   }) %&gt;% </span>
+  <span class="co"># mutate(fcval = C_Prob + 1) ## for the use of gseGO</span></code></pre></div>
+<ul>
+<li>read genbank file</li>
+</ul>
+<div class="sourceCode" id="cb350"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#gbinfo &lt;- readGenBank("03-PrepData/BW25113_CP009273.gb")</span></code></pre></div>
+<div class="sourceCode" id="cb351"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">geneinfo3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">mcols</a></span><span class="op">(</span><span class="va">gbinfo</span><span class="op">@</span><span class="va">cds</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="va">as.data.frame</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">gene</span>, <span class="va">locus_tag</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">geneinfo2</span>, by<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="st">"locus_tag"</span><span class="op">=</span><span class="st">"id"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>egnum <span class="op">=</span> <span class="op">{</span>
+    <span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/as.list.html">as.list</a></span><span class="op">(</span><span class="va">org.EcK12.egSYMBOL2EG</span><span class="op">)</span><span class="op">[</span><span class="va">gene</span><span class="op">]</span>
+    <span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html">sapply</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">is.null</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span>
+    <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/unlist.html">unlist</a></span><span class="op">(</span><span class="va">x</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+    <span class="op">}</span><span class="op">)</span>
+
+
+<span class="co">#selgenes018 &lt;- geneinfo3</span>
+<span class="va">selgenes040</span> <span class="op">&lt;-</span> <span class="va">geneinfo3</span>
+
+<span class="va">selgenes018</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">selgenes040</span>, by<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="st">"locus_tag"</span><span class="op">=</span><span class="st">"locus_tag"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">esstrue.x</span> <span class="op">==</span> <span class="cn">T</span> <span class="op">&amp;</span> <span class="va">esstrue.y</span> <span class="op">==</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="go-enrichment-analysis" class="section level2" number="18.3">
+<h2>
+<span class="header-section-number">18.3</span> GO enrichment analysis<a class="anchor" aria-label="anchor" href="#go-enrichment-analysis"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>ACCnumber를 Entrez gene id로 전환</li>
+<li>
+<code>enrichGO</code> 함수 사용</li>
+</ul>
+<div class="sourceCode" id="cb352"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">selgenes</span> <span class="op">&lt;-</span> <span class="va">geneinfo3</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">esspred</span><span class="op">==</span><span class="cn">T</span> <span class="op">&amp;</span> <span class="va">esstrue</span><span class="op">==</span><span class="cn">F</span><span class="op">)</span>
+
+<span class="va">ggo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/groupGO.html">groupGO</a></span><span class="op">(</span>gene     <span class="op">=</span> <span class="va">selgenes</span><span class="op">$</span><span class="va">egnum</span>,
+               OrgDb    <span class="op">=</span> <span class="va">org.EcK12.eg.db</span>,
+               ont      <span class="op">=</span> <span class="st">"CC"</span>,
+               level    <span class="op">=</span> <span class="fl">3</span>,
+               readable <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+
+<span class="va">ggo</span><span class="op">@</span><span class="va">result</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Count</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/MaskCollection-class.html">desc</a></span><span class="op">(</span><span class="va">Count</span><span class="op">)</span><span class="op">)</span>
+  
+
+
+<span class="va">egobp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/enrichGO.html">enrichGO</a></span><span class="op">(</span>gene          <span class="op">=</span> <span class="va">selgenes</span><span class="op">$</span><span class="va">egnum</span>,
+                OrgDb         <span class="op">=</span> <span class="va">org.EcK12.eg.db</span>,
+                ont           <span class="op">=</span> <span class="st">"BP"</span>,
+                pAdjustMethod <span class="op">=</span> <span class="st">"BH"</span>,
+                pvalueCutoff  <span class="op">=</span> <span class="fl">0.1</span>,
+                qvalueCutoff  <span class="op">=</span> <span class="fl">0.5</span>,
+        readable      <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/enrichplot/man/goplot.html">goplot</a></span><span class="op">(</span><span class="va">egobp</span><span class="op">)</span>
+<span class="va">egobp</span><span class="op">@</span><span class="va">result</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">p.adjust</span> <span class="op">&lt;</span> <span class="fl">0.1</span> <span class="op">&amp;</span> <span class="va">qvalue</span> <span class="op">&lt;</span> <span class="fl">0.5</span><span class="op">)</span>
+  
+
+<span class="va">egocc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/enrichGO.html">enrichGO</a></span><span class="op">(</span>gene          <span class="op">=</span> <span class="va">selgenes</span><span class="op">$</span><span class="va">egnum</span>,
+                OrgDb         <span class="op">=</span> <span class="va">org.EcK12.eg.db</span>,
+                ont           <span class="op">=</span> <span class="st">"CC"</span>,
+                pAdjustMethod <span class="op">=</span> <span class="st">"BH"</span>,
+                pvalueCutoff  <span class="op">=</span> <span class="fl">0.1</span>,
+                qvalueCutoff  <span class="op">=</span> <span class="fl">0.5</span>,
+        readable      <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#goplot(egocc)</span>
+<span class="va">egocc</span><span class="op">@</span><span class="va">result</span>
+
+<span class="va">egomf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/enrichGO.html">enrichGO</a></span><span class="op">(</span>gene          <span class="op">=</span> <span class="va">selgenes</span><span class="op">$</span><span class="va">egnum</span>,
+                OrgDb         <span class="op">=</span> <span class="va">org.EcK12.eg.db</span>,
+                ont           <span class="op">=</span> <span class="st">"MF"</span>,
+                pAdjustMethod <span class="op">=</span> <span class="st">"BH"</span>,
+                pvalueCutoff  <span class="op">=</span> <span class="fl">0.1</span>,
+                qvalueCutoff  <span class="op">=</span> <span class="fl">0.5</span>,
+        readable      <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#egomf@result %&gt;% </span>
+<span class="co">#  filter(if_any(where(is.numeric), ~!is.na(.))) </span>
+<span class="co">#goplot(egomf)</span>
+<span class="va">egomf</span><span class="op">@</span><span class="va">result</span></code></pre></div>
+<pre><code>GO:0009244 lipopolysaccharide core region biosynthetic process
+GO:0046401    lipopolysaccharide core region metabolic process
+GO:0009103             lipopolysaccharide biosynthetic process
+GO:0008653                lipopolysaccharide metabolic process
+GO:1903509                    liposaccharide metabolic process
+GO:0009312                oligosaccharide biosynthetic process
+GO:0006629                             lipid metabolic process
+GO:0044255                    cellular lipid metabolic process
+GO:0034637          cellular carbohydrate biosynthetic process
+GO:0008610                          lipid biosynthetic process
+GO:0051246             regulation of protein metabolic process
+GO:0033692        cellular polysaccharide biosynthetic process
+GO:0009628                        response to abiotic stimulus</code></pre>
+</div>
+<div id="kegg-enrichment-analysis" class="section level2" number="18.4">
+<h2>
+<span class="header-section-number">18.4</span> KEGG enrichment analysis<a class="anchor" aria-label="anchor" href="#kegg-enrichment-analysis"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>KEGG</li>
+<li>Supported organisms (<a href="http://www.genome.jp/kegg/catalog/org_list.html" class="uri">http://www.genome.jp/kegg/catalog/org_list.html</a>)</li>
+</ul>
+<div class="sourceCode" id="cb354"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/search_kegg_organism.html">search_kegg_organism</a></span><span class="op">(</span><span class="st">'eco'</span>, by<span class="op">=</span><span class="st">'kegg_code'</span><span class="op">)</span>
+<span class="va">ecoli</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/search_kegg_organism.html">search_kegg_organism</a></span><span class="op">(</span><span class="st">'Escherichia coli'</span>, by<span class="op">=</span><span class="st">'scientific_name'</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>over-representation analysis</li>
+</ul>
+<div class="sourceCode" id="cb355"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">selgenes</span> <span class="op">&lt;-</span> <span class="va">selgenes018</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">esspred</span><span class="op">==</span><span class="cn">T</span> <span class="op">&amp;</span> <span class="va">esstrue</span><span class="op">==</span><span class="cn">F</span><span class="op">)</span> 
+
+<span class="va">kk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/enrichKEGG.html">enrichKEGG</a></span><span class="op">(</span>gene         <span class="op">=</span> <span class="va">selgenes</span><span class="op">$</span><span class="va">egnum</span>,
+                 organism     <span class="op">=</span> <span class="st">'eco'</span>,
+                 keyType <span class="op">=</span> <span class="st">"ncbi-geneid"</span>,
+                 pvalueCutoff <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>
+
+<span class="va">kk</span><span class="op">@</span><span class="va">result</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Description</span>, <span class="va">qvalue</span><span class="op">)</span>
+
+<span class="va">selgenes</span> <span class="op">&lt;-</span> <span class="va">selgenes040</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">esspred</span><span class="op">==</span><span class="cn">T</span> <span class="op">&amp;</span> <span class="va">esstrue</span><span class="op">==</span><span class="cn">F</span><span class="op">)</span> 
+<span class="va">kk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/enrichKEGG.html">enrichKEGG</a></span><span class="op">(</span>gene         <span class="op">=</span> <span class="va">selgenes</span><span class="op">$</span><span class="va">egnum</span>,
+                 organism     <span class="op">=</span> <span class="st">'eco'</span>,
+                 keyType <span class="op">=</span> <span class="st">"ncbi-geneid"</span>,
+                 pvalueCutoff <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>
+
+<span class="va">kk</span><span class="op">@</span><span class="va">result</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Description</span>, <span class="va">qvalue</span><span class="op">)</span></code></pre></div>
+<pre><code>018
+
+eco00540    Lipopolysaccharide biosynthesis 0.00531493  
+eco00030    Pentose phosphate pathway   0.12748791  
+eco00650    Butanoate metabolism    0.17372322  
+eco03440    Homologous recombination    0.20574266  
+eco01250    Biosynthesis of nucleotide sugars   0.20574266
+
+040
+eco00540    Lipopolysaccharide biosynthesis 0.002359464
+eco00650    Butanoate metabolism    0.050898735
+eco02020    Two-component system    0.156421239
+eco01250    Biosynthesis of nucleotide sugars   0.156421239
+eco02010    ABC transporters    0.185342182
+eco00030    Pentose phosphate pathway   0.396099588</code></pre>
+<div class="sourceCode" id="cb357"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/datapplab/pathview">pathview</a></span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/browseKEGG.html">browseKEGG</a></span><span class="op">(</span><span class="va">kk</span>, <span class="st">'eco00540'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/browseKEGG.html">browseKEGG</a></span><span class="op">(</span><span class="va">kk</span>, <span class="st">'eco00030'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/browseKEGG.html">browseKEGG</a></span><span class="op">(</span><span class="va">kk</span>, <span class="st">'eco00650'</span><span class="op">)</span>
+
+<span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/pathview/man/pathview.html">pathview</a></span><span class="op">(</span>gene.data  <span class="op">=</span> <span class="va">selgenes</span><span class="op">$</span><span class="va">egnum</span>,
+                     pathway.id <span class="op">=</span> <span class="st">"eco00540"</span>,
+                     species    <span class="op">=</span> <span class="st">"eco"</span><span class="op">)</span>
+
+<span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/pathview/man/pathview.html">pathview</a></span><span class="op">(</span>gene.data  <span class="op">=</span> <span class="va">selgenes</span><span class="op">$</span><span class="va">egnum</span>,
+                     pathway.id <span class="op">=</span> <span class="st">"eco00030"</span>,
+                     species    <span class="op">=</span> <span class="st">"eco"</span><span class="op">)</span>
+
+<span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/pathview/man/pathview.html">pathview</a></span><span class="op">(</span>gene.data  <span class="op">=</span> <span class="va">selgenes</span><span class="op">$</span><span class="va">egnum</span>,
+                     pathway.id <span class="op">=</span> <span class="st">"eco00650"</span>,
+                     species    <span class="op">=</span> <span class="st">"eco"</span><span class="op">)</span>
+
+<span class="va">kk</span><span class="op">@</span><span class="va">result</span></code></pre></div>
+<ul>
+<li>gene set enrichment analysis</li>
+</ul>
+<div class="sourceCode" id="cb358"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">fcval</span> <span class="op">&lt;-</span> <span class="va">selgenes</span><span class="op">$</span><span class="va">fcval</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">fcval</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">selgenes</span><span class="op">$</span><span class="va">egnum</span>
+<span class="va">fcval</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/sort.html">sort</a></span><span class="op">(</span><span class="va">fcval</span>, decreasing <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+
+<span class="va">kk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/gseKEGG.html">gseKEGG</a></span><span class="op">(</span>gene         <span class="op">=</span> <span class="va">fcval</span>,
+                 organism     <span class="op">=</span> <span class="st">'eco'</span>,
+                 keyType <span class="op">=</span> <span class="st">"ncbi-geneid"</span>,
+                  scoreType <span class="op">=</span> <span class="st">"pos"</span>,
+                 pvalueCutoff <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+
+<span class="va">mkk2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/gseMKEGG.html">gseMKEGG</a></span><span class="op">(</span>geneList <span class="op">=</span> <span class="va">fcval</span>,
+                 organism     <span class="op">=</span> <span class="st">'eco'</span>,
+                 keyType <span class="op">=</span> <span class="st">"ncbi-geneid"</span>,
+                 scoreType <span class="op">=</span> <span class="st">"pos"</span>,
+                 pvalueCutoff <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+
+<span class="va">kk</span><span class="op">@</span><span class="va">result</span>
+
+<span class="va">selgenes018</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">selgenes040</span>, by<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="st">"locus_tag"</span><span class="op">=</span><span class="st">"locus_tag"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="reactome" class="section level2" number="18.5">
+<h2>
+<span class="header-section-number">18.5</span> Reactome<a class="anchor" aria-label="anchor" href="#reactome"><i class="fas fa-link"></i></a>
+</h2>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="deg-excercise.html"><span class="header-section-number">17</span> DEG Excercise</a></div>
+<div class="next"><a href="lecture-note.html"><span class="header-section-number">19</span> Lecture Note</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#gsea"><span class="header-section-number">18</span> GSEA</a></li>
+<li><a class="nav-link" href="#geneset-database"><span class="header-section-number">18.1</span> Geneset database</a></li>
+<li><a class="nav-link" href="#read-essential-data"><span class="header-section-number">18.2</span> Read essential data</a></li>
+<li><a class="nav-link" href="#go-enrichment-analysis"><span class="header-section-number">18.3</span> GO enrichment analysis</a></li>
+<li><a class="nav-link" href="#kegg-enrichment-analysis"><span class="header-section-number">18.4</span> KEGG enrichment analysis</a></li>
+<li><a class="nav-link" href="#reactome"><span class="header-section-number">18.5</span> Reactome</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>2022년 한국생명공학연구원 연구데이터 분석과정 R</strong>" was written by 합성생물학전문연구소 김하성. It was last built on 2022-10-24.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

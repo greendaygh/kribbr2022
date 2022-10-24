@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 19 Lecture 12 (1020) | 2022년 한국생명공학연구원 연구데이터 분석과정 R</title>
+<meta name="author" content="합성생물학전문연구소 김하성">
+<meta name="description" content="Class 01 참고 https://greendaygh.github.io/kribbr2022/lecture-note.html#lecture-07-0804 Reference genome examples 디렉토리 생성 library(genbankr) library(Biostrings)...">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta property="og:title" content="Chapter 19 Lecture 12 (1020) | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Class 01 참고 https://greendaygh.github.io/kribbr2022/lecture-note.html#lecture-07-0804 Reference genome examples 디렉토리 생성 library(genbankr) library(Biostrings)...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 19 Lecture 12 (1020) | 2022년 한국생명공학연구원 연구데이터 분석과정 R">
+<meta name="twitter:description" content="Class 01 참고 https://greendaygh.github.io/kribbr2022/lecture-note.html#lecture-07-0804 Reference genome examples 디렉토리 생성 library(genbankr) library(Biostrings)...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">2022년 한국생명공학연구원 연구데이터 분석과정 R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="rrstudio-basics.html"><span class="header-section-number">2</span> R/Rstudio basics</a></li>
+<li><a class="" href="rmarkdown.html"><span class="header-section-number">3</span> Rmarkdown</a></li>
+<li><a class="" href="r-programming.html"><span class="header-section-number">4</span> R programming</a></li>
+<li><a class="" href="data-transformation.html"><span class="header-section-number">5</span> Data transformation</a></li>
+<li><a class="" href="r-basic-graphics.html"><span class="header-section-number">6</span> R basic graphics</a></li>
+<li><a class="" href="tidyverse.html"><span class="header-section-number">7</span> tidyverse</a></li>
+<li><a class="" href="data-visualization.html"><span class="header-section-number">8</span> Data visualization</a></li>
+<li><a class="" href="ggplot2-examples.html"><span class="header-section-number">9</span> ggplot2 examples</a></li>
+<li><a class="" href="bioconductor.html"><span class="header-section-number">10</span> Bioconductor</a></li>
+<li><a class="" href="biostrings.html"><span class="header-section-number">11</span> Biostrings</a></li>
+<li><a class="" href="tools-for-sequences.html"><span class="header-section-number">12</span> Tools for sequences</a></li>
+<li><a class="" href="tools-for-genome-analysis.html"><span class="header-section-number">13</span> Tools for genome analysis</a></li>
+<li><a class="" href="high-throughput-data.html"><span class="header-section-number">14</span> High-throughput data</a></li>
+<li><a class="" href="inference-and-test.html"><span class="header-section-number">15</span> Inference and test</a></li>
+<li><a class="" href="deg-analysis.html"><span class="header-section-number">16</span> DEG analysis</a></li>
+<li><a class="" href="deg-excercise.html"><span class="header-section-number">17</span> DEG Excercise</a></li>
+<li><a class="" href="lecture-note.html"><span class="header-section-number">18</span> Lecture Note</a></li>
+<li><a class="active" href="lecture-12-1020.html"><span class="header-section-number">19</span> Lecture 12 (1020)</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="lecture-12-1020" class="section level1" number="19">
+<h1>
+<span class="header-section-number">19</span> Lecture 12 (1020)<a class="anchor" aria-label="anchor" href="#lecture-12-1020"><i class="fas fa-link"></i></a>
+</h1>
+<p><strong>Class 01</strong></p>
+<ul>
+<li><p>참고 <a href="https://greendaygh.github.io/kribbr2022/lecture-note.html#lecture-07-0804" class="uri">https://greendaygh.github.io/kribbr2022/lecture-note.html#lecture-07-0804</a></p></li>
+<li><p>Reference genome</p></li>
+<li><p>examples 디렉토리 생성</p></li>
+</ul>
+<div class="sourceCode" id="cb578"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">genbankr</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/Biostrings">Biostrings</a></span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span>url<span class="op">=</span><span class="st">"http://github.com/greendaygh/kribbr2022/raw/main/ecoli-mg1655.gb"</span>, destfile<span class="op">=</span><span class="st">"examples/ecoli-mg1655.gb"</span><span class="op">)</span>
+
+<span class="va">ecoli</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genbankr/man/readGenBank.html">readGenBank</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ecoli-mg1655.gb"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">ecoliseq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/getSeq.html">getSeq</a></span><span class="op">(</span><span class="va">ecoli</span><span class="op">)</span>
+
+<span class="va">maxlen</span> <span class="op">&lt;-</span> <span class="fl">1000000</span>
+<span class="va">ecoliseqsub</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/XVector/man/XVector-class.html">subseq</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">ecoliseq</span>, start <span class="op">=</span> <span class="fl">1</span>, end <span class="op">=</span> <span class="va">maxlen</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-io.html">writeXStringSet</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">ecoliseqsub</span>,
+                filepath <span class="op">=</span> <span class="st">"examples/ex1/ecolisubseq.fasta"</span><span class="op">)</span>
+<span class="op">?</span><span class="va">writeXStringSet</span></code></pre></div>
+<ul>
+<li>generation of index</li>
+</ul>
+<div class="sourceCode" id="cb579"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://bioconductor.org/packages/Rsubread">Rsubread</a></span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/Rsubread/man/buildindex.html">buildindex</a></span><span class="op">(</span>basename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex1"</span>, <span class="st">"ecolisingle"</span><span class="op">)</span>,
+           reference <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex1"</span>, <span class="st">"ecolisubseq.fasta"</span><span class="op">)</span>
+           <span class="op">)</span></code></pre></div>
+<ul>
+<li>NGS fastq 파일 다운로드</li>
+<li>파일 탐색 오픈</li>
+<li>
+<code>D:\Rstudy\lecture12\examples\ex1</code> 이동</li>
+<li>주소창에서 cmd 입력</li>
+<li>다음 명령 실행</li>
+<li>SRA DB <a href="https://greendaygh.github.io/kribbr2022/high-throughput-data.html#ngs-database" class="uri">https://greendaygh.github.io/kribbr2022/high-throughput-data.html#ngs-database</a>
+</li>
+</ul>
+<pre><code>fastq-dump -X 10000 --split-files SRR11549076</code></pre>
+<ul>
+<li>QC</li>
+<li>생성된 html 파일 확인</li>
+</ul>
+<div class="sourceCode" id="cb581"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">Rfastp</span><span class="op">)</span>
+
+<span class="va">myreport</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Rfastp/man/rfastp.html">rfastp</a></span><span class="op">(</span>read1 <span class="op">=</span> <span class="st">"examples/ex1/SRR11549076_1.fastq"</span>, 
+       outputFastq <span class="op">=</span> <span class="st">"examples/ex1/filterd_SRR11549076_1"</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>mapping to reference</li>
+</ul>
+<div class="sourceCode" id="cb582"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://bioconductor.org/packages/Rsubread">Rsubread</a></span><span class="op">)</span>
+
+<span class="va">myaln</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Rsubread/man/align.html">align</a></span><span class="op">(</span>index <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex1"</span>, <span class="st">"ecolisingle"</span><span class="op">)</span>,
+               readfile1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex1"</span>, <span class="st">"filterd_SRR11549076_1_R1.fastq.gz"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>Sorting</li>
+</ul>
+<div class="sourceCode" id="cb583"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/Rsamtools">Rsamtools</a></span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/Rsamtools/man/scanBam.html">sortBam</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex1"</span>, <span class="st">"filterd_SRR11549076_1_R1.fastq.gz.subread.BAM"</span><span class="op">)</span>,
+        destination <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex1"</span>, <span class="st">"sorted_ecolisingle"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/Rsamtools/man/scanBam.html">indexBam</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex1"</span>, <span class="st">"sorted_ecolisingle.bam"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>Counting</li>
+</ul>
+<div class="sourceCode" id="cb584"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/GenomicAlignments">GenomicAlignments</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">plyranges</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+
+<span class="va">ecolisub</span> <span class="op">&lt;-</span> <span class="fu">genbankr</span><span class="fu">::</span><span class="fu">cds</span><span class="op">(</span><span class="va">ecoli</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
+  <span class="fu">plyranges</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">filter</a></span><span class="op">(</span><span class="va">end</span> <span class="op">&lt;</span> <span class="va">maxlen</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">ecolisub</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/GenomeInfoDb/man/seqinfo.html">seqlengths</a></span><span class="op">(</span><span class="va">ecolisub</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">maxlen</span>
+
+<span class="va">mybam</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Rsamtools/man/BamFile-class.html">BamFile</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex1"</span>, <span class="st">"sorted_ecolisingle.bam"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">mybam</span><span class="op">)</span>
+
+<span class="va">mycnt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicAlignments/man/summarizeOverlaps-methods.html">summarizeOverlaps</a></span><span class="op">(</span>features <span class="op">=</span> <span class="va">ecolisub</span>, 
+                  reads <span class="op">=</span> <span class="va">mybam</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">mycnt</span><span class="op">)</span>
+
+
+<span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">assay</a></span><span class="op">(</span><span class="va">mycnt</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">colData</a></span><span class="op">(</span><span class="va">mycnt</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/RangedSummarizedExperiment-class.html">rowRanges</a></span><span class="op">(</span><span class="va">mycnt</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Annotated-class.html">metadata</a></span><span class="op">(</span><span class="va">mycnt</span><span class="op">)</span></code></pre></div>
+<p><strong>Class 02</strong></p>
+<ul>
+<li>SRA software 설치 <a href="https://greendaygh.github.io/kribbr2022/high-throughput-data.html#ngs-database" class="uri">https://greendaygh.github.io/kribbr2022/high-throughput-data.html#ngs-database</a>
+</li>
+<li>ex2 디렉토리 만들고</li>
+<li>파일탐색기 ex2 주소창에 cmd 입력</li>
+<li>raw data 다운로드</li>
+</ul>
+<pre><code>prefetch --option-file SRR_Acc_List.txt</code></pre>
+<ul>
+<li>fastq 파일 생성</li>
+</ul>
+<pre><code>Fastq-dump -X 200000 --split-files SRR10009019/SRR10009019.sra</code></pre>
+<div class="sourceCode" id="cb587"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">no</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">19</span><span class="op">:</span><span class="fl">24</span><span class="op">)</span>
+<span class="va">tmps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/paste.html">paste</a></span><span class="op">(</span><span class="st">"fastq-dump -X 200000 --split-files SRR100090"</span>, <span class="va">no</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>
+<span class="va">tmps</span></code></pre></div>
+<ul>
+<li>ex2 디렉토리에서</li>
+</ul>
+<pre><code>
+fastq-dump -X 200000 --split-files SRR10009019
+fastq-dump -X 200000 --split-files SRR10009020
+fastq-dump -X 200000 --split-files SRR10009021
+fastq-dump -X 200000 --split-files SRR10009022
+fastq-dump -X 200000 --split-files SRR10009023
+fastq-dump -X 200000 --split-files SRR10009024
+</code></pre>
+<ul>
+<li>QC</li>
+</ul>
+<div class="sourceCode" id="cb589"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">Rfastp</span><span class="op">)</span>
+
+
+<span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">19</span><span class="op">:</span><span class="fl">24</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+  <span class="va">fastq_report</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Rfastp/man/rfastp.html">rfastp</a></span><span class="op">(</span>
+  read1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"SRR100090"</span>, <span class="va">i</span>, <span class="st">"_1.fastq"</span><span class="op">)</span><span class="op">)</span>,
+  read2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"SRR100090"</span>, <span class="va">i</span>, <span class="st">"_2.fastq"</span><span class="op">)</span><span class="op">)</span>,
+  outputFastq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"filtered_SRR100090"</span>, <span class="va">i</span>, <span class="st">".fastq"</span><span class="op">)</span><span class="op">)</span>
+<span class="op">)</span>
+  
+<span class="op">}</span></code></pre></div>
+<ul>
+<li>앞에서 만든 ecolisub 파일 ex2 디렉토리에 붙여넣기</li>
+</ul>
+<div class="sourceCode" id="cb590"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">genbankr</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/Biostrings">Biostrings</a></span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span>url<span class="op">=</span><span class="st">"https://github.com/greendaygh/kribbr2022/raw/main/ecoli-mg1655.gb"</span>, destfile<span class="op">=</span><span class="st">"examples/ecoli-mg1655.gb"</span><span class="op">)</span>
+
+<span class="va">ecoli</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genbankr/man/readGenBank.html">readGenBank</a></span><span class="op">(</span><span class="st">"examples/ecoli-mg1655.gb"</span><span class="op">)</span>
+<span class="va">ecoliseq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/getSeq.html">getSeq</a></span><span class="op">(</span><span class="va">ecoli</span><span class="op">)</span>
+
+
+<span class="va">maxlen</span> <span class="op">&lt;-</span> <span class="fl">1000000</span>
+<span class="va">ecoliseqsub</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/XVector/man/XVector-class.html">subseq</a></span><span class="op">(</span><span class="va">ecoliseq</span>, <span class="fl">1</span>, <span class="va">maxlen</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-io.html">writeXStringSet</a></span><span class="op">(</span><span class="va">ecoliseqsub</span>, <span class="st">"examples/ecoli/ecolisub.fasta"</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>index 생성</li>
+</ul>
+<div class="sourceCode" id="cb591"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="fu"><a href="https://rdrr.io/pkg/Rsubread/man/buildindex.html">buildindex</a></span><span class="op">(</span>basename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="st">"ecolimedia"</span><span class="op">)</span>, 
+           reference <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="st">"ecolisubseq.fasta"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>mapping</li>
+</ul>
+<div class="sourceCode" id="cb592"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://bioconductor.org/packages/Rsubread">Rsubread</a></span><span class="op">)</span>
+
+
+<span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fl">19</span><span class="op">:</span><span class="fl">24</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+  
+  <span class="va">alignstat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Rsubread/man/align.html">align</a></span><span class="op">(</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="st">"ecolimedia"</span><span class="op">)</span>,
+    readfile1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"filtered_SRR100090"</span>, <span class="va">i</span>, <span class="st">".fastq_R1.fastq.gz"</span><span class="op">)</span><span class="op">)</span>,
+    readfile2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"filtered_SRR100090"</span>, <span class="va">i</span>, <span class="st">".fastq_R2.fastq.gz"</span><span class="op">)</span><span class="op">)</span>,
+    output_file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"ecolimedia_"</span>, <span class="va">i</span>, <span class="st">".BAM"</span><span class="op">)</span><span class="op">)</span>,
+    nthreads <span class="op">=</span> <span class="fl">6</span><span class="op">)</span>
+
+<span class="op">}</span></code></pre></div>
+<ul>
+<li>sorting</li>
+</ul>
+<div class="sourceCode" id="cb593"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/Rsamtools">Rsamtools</a></span><span class="op">)</span>
+
+
+
+<span class="fu"><a href="https://rdrr.io/pkg/Rsamtools/man/scanBam.html">sortBam</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="st">"ecolimedia_19.BAM"</span><span class="op">)</span>
+        , destination <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="st">"sorted_ecolimedia_19.BAM"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/Rsamtools/man/scanBam.html">sortBam</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="st">"ecolimedia_20.BAM"</span><span class="op">)</span>
+        , destination <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="st">"sorted_ecolimedia_20.BAM"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/Rsamtools/man/scanBam.html">sortBam</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="st">"ecolimedia_21.BAM"</span><span class="op">)</span>
+        , destination <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="st">"sorted_ecolimedia_21.BAM"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/Rsamtools/man/scanBam.html">sortBam</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="st">"ecolimedia_22.BAM"</span><span class="op">)</span>
+        , destination <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="st">"sorted_ecolimedia_22.BAM"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/Rsamtools/man/scanBam.html">sortBam</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="st">"ecolimedia_23.BAM"</span><span class="op">)</span>
+        , destination <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="st">"sorted_ecolimedia_23.BAM"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/Rsamtools/man/scanBam.html">sortBam</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="st">"ecolimedia_24.BAM"</span><span class="op">)</span>
+        , destination <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="st">"sorted_ecolimedia_24.BAM"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/Rsamtools/man/scanBam.html">indexBam</a></span><span class="op">(</span>files <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="st">"sorted_ecolimedia_19.BAM.bam"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/Rsamtools/man/scanBam.html">indexBam</a></span><span class="op">(</span>files <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="st">"sorted_ecolimedia_20.BAM.bam"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/Rsamtools/man/scanBam.html">indexBam</a></span><span class="op">(</span>files <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="st">"sorted_ecolimedia_21.BAM.bam"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/Rsamtools/man/scanBam.html">indexBam</a></span><span class="op">(</span>files <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="st">"sorted_ecolimedia_22.BAM.bam"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/Rsamtools/man/scanBam.html">indexBam</a></span><span class="op">(</span>files <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="st">"sorted_ecolimedia_23.BAM.bam"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/Rsamtools/man/scanBam.html">indexBam</a></span><span class="op">(</span>files <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="st">"sorted_ecolimedia_24.BAM.bam"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>Counting</li>
+</ul>
+<div class="sourceCode" id="cb594"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">ecolicds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicFeatures/man/transcripts.html">cds</a></span><span class="op">(</span><span class="va">ecoli</span><span class="op">)</span>
+<span class="va">ecolicds_sub</span> <span class="op">&lt;-</span> <span class="va">ecolicds</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">filter</a></span><span class="op">(</span><span class="va">end</span> <span class="op">&lt;</span> <span class="va">maxlen</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/GenomeInfoDb/man/seqinfo.html">seqlengths</a></span><span class="op">(</span><span class="va">ecolicds_sub</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">maxlen</span>
+
+
+<span class="va">filelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="st">"sorted_ecolimedia_19.BAM.bam"</span><span class="op">)</span>,
+              <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="st">"sorted_ecolimedia_20.BAM.bam"</span><span class="op">)</span>,
+              <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="st">"sorted_ecolimedia_21.BAM.bam"</span><span class="op">)</span>,
+              <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="st">"sorted_ecolimedia_22.BAM.bam"</span><span class="op">)</span>,
+              <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="st">"sorted_ecolimedia_23.BAM.bam"</span><span class="op">)</span>,
+              <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"ex2"</span>, <span class="st">"sorted_ecolimedia_24.BAM.bam"</span><span class="op">)</span>
+              <span class="op">)</span>
+<span class="va">mybam</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Rsamtools/man/BamFile-class.html">BamFileList</a></span><span class="op">(</span><span class="va">filelist</span><span class="op">)</span>
+<span class="va">myresult</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicAlignments/man/summarizeOverlaps-methods.html">summarizeOverlaps</a></span><span class="op">(</span><span class="va">ecolicds_sub</span>, <span class="va">mybam</span>, ignore.strand <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">assay</a></span><span class="op">(</span><span class="va">myresult</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">rowData</a></span><span class="op">(</span><span class="va">myresult</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">colData</a></span><span class="op">(</span><span class="va">myresult</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Annotated-class.html">metadata</a></span><span class="op">(</span><span class="va">myresult</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>DESeq2</li>
+</ul>
+<div class="sourceCode" id="cb595"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mikelove/DESeq2">DESeq2</a></span><span class="op">)</span>
+
+<span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">assay</a></span><span class="op">(</span><span class="va">myresult</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>mean vs variance</li>
+</ul>
+<div class="sourceCode" id="cb596"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">mydatat</span> <span class="op">&lt;-</span> <span class="va">mydata</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span><span class="op">)</span>  <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="op">-</span><span class="va">rowname</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">rowname</span>, values_from <span class="op">=</span> <span class="va">value</span><span class="op">)</span>
+
+<span class="va">mymeanval</span> <span class="op">&lt;-</span> <span class="va">mydatat</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/where.html">where</a></span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>, <span class="va">mean</span><span class="op">)</span><span class="op">)</span>
+<span class="va">mysdval</span> <span class="op">&lt;-</span> <span class="va">mydatat</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/where.html">where</a></span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>, <span class="va">sd</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">mydf</span> <span class="op">&lt;-</span> <span class="va">mymeanval</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span><span class="op">(</span><span class="va">mysdval</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
+  <span class="va">as.data.frame</span>
+<span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html">rownames</a></span><span class="op">(</span><span class="va">mydf</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="st">"mean"</span>, <span class="st">"sd"</span><span class="op">)</span>
+
+<span class="va">mydft</span> <span class="op">&lt;-</span> <span class="va">mydf</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="op">-</span><span class="va">rowname</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">rowname</span>, values_from <span class="op">=</span> <span class="va">value</span><span class="op">)</span>
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">mydft</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">mean</span>, y<span class="op">=</span><span class="va">sd</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_log10</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_log10</a></span><span class="op">(</span><span class="op">)</span>
+  </code></pre></div>
+<ul>
+<li>DESeq2</li>
+</ul>
+<div class="sourceCode" id="cb597"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mikelove/DESeq2">DESeq2</a></span><span class="op">)</span>
+
+<span class="va">metaData</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html">c</a></span><span class="op">(</span><span class="st">"LB"</span>, <span class="st">"LB"</span>, <span class="st">"LB"</span>, <span class="st">"M63"</span>, <span class="st">"M63"</span>, <span class="st">"M63"</span><span class="op">)</span>, 
+                       row.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html">colnames</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span><span class="op">)</span>
+<span class="va">metaData</span>
+<span class="co">#mygenes &lt;- rowData(myresult)</span>
+
+<span class="va">dds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/DESeq2/man/DESeqDataSet.html">DESeqDataSetFromMatrix</a></span><span class="op">(</span>countData <span class="op">=</span> <span class="va">mydata</span>,
+                       colData <span class="op">=</span> <span class="va">metaData</span>,
+                       design <span class="op">=</span> <span class="op">~</span><span class="va">Group</span>,
+                       rowRanges <span class="op">=</span> <span class="va">mygenes</span>
+                       <span class="op">)</span>
+
+
+<span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">colData</a></span><span class="op">(</span><span class="va">myresult</span><span class="op">)</span><span class="op">$</span><span class="va">Group</span> <span class="op">&lt;-</span> <span class="va">metaData</span><span class="op">$</span><span class="va">Group</span>
+<span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">colData</a></span><span class="op">(</span><span class="va">myresult</span><span class="op">)</span>
+<span class="va">dds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/DESeq2/man/DESeqDataSet.html">DESeqDataSetFromMatrix</a></span><span class="op">(</span><span class="va">myresult</span><span class="op">)</span></code></pre></div>
+
+</div>
+
+
+
+
+
+
+
+
+  <div class="chapter-nav">
+<div class="prev"><a href="lecture-note.html"><span class="header-section-number">18</span> Lecture Note</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#lecture-12-1020"><span class="header-section-number">19</span> Lecture 12 (1020)</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>2022년 한국생명공학연구원 연구데이터 분석과정 R</strong>" was written by 합성생물학전문연구소 김하성. It was last built on 2022-10-24.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
