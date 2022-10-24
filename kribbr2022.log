@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2022.5.11)  16 SEP 2022 08:24
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2022.5.11)  24 OCT 2022 20:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -601,7 +601,8 @@ File: bkm-dvipdfm.def 2019/12/03 v1.28 bookmark driver for dvipdfm (HO)
 \BKM@id=\count314
 )) (/usr/share/texlive/texmf-dist/tex/latex/xurl/xurl.sty
 Package: xurl 2020/01/24 v 0.09 modify URL breaks
-) (./kribbr2022.aux)
+)
+No file kribbr2022.aux.
 \openout1 = `kribbr2022.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 137.
@@ -1317,6 +1318,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 137.
 LaTeX Info: Redefining \pageref on input line 137.
 LaTeX Info: Redefining \nameref on input line 137.
+
+Package hyperref Warning: Rerun to get /PageLabels entry.
+
 LaTeX Font Info:    Font shape `TU/NanumGothic(0)/m/n' will be
 (Font)              scaled to size 17.28pt on input line 139.
 LaTeX Font Info:    Font shape `TU/NanumGothic(0)/m/n' will be
@@ -1378,283 +1382,21 @@ LaTeX Font Info:    Font shape `TU/NanumGothic(0)/m/n' will be
 (Font)              scaled to size 24.88pt on input line 142.
 LaTeX Font Info:    Font shape `TU/NanumGothic(0)/b/n' will be
 (Font)              scaled to size 24.88pt on input line 142.
-(./kribbr2022.toc
-LaTeX Font Info:    Font shape `TU/NanumGothic(0)/b/n' will be
-(Font)              scaled to size 10.0pt on input line 1.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 8.12067pt on input line 2.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 5.80048pt on input line 2.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 11.60202pt on input line 2.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 8.12141pt on input line 2.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 5.80101pt on input line 2.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 11.59973pt on input line 2.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 8.11981pt on input line 2.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 5.79987pt on input line 2.
+\tf@toc=\write4
+\openout4 = `kribbr2022.toc'.
+
 [3]
-Overfull \hbox (2.67998pt too wide) detected at line 92
- []\TU/NanumGothic(0)/m/n/10 101
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 93
- []\TU/NanumGothic(0)/m/n/10 104
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 95
- []\TU/NanumGothic(0)/m/n/10 111
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 96
- []\TU/NanumGothic(0)/m/n/10 113
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 97
- []\TU/NanumGothic(0)/m/n/10 114
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 98
- []\TU/NanumGothic(0)/m/n/10 115
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 99
- []\TU/NanumGothic(0)/m/n/10 116
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 100
- []\TU/NanumGothic(0)/m/n/10 118
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 101
- []\TU/NanumGothic(0)/m/n/10 120
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 102
- []\TU/NanumGothic(0)/m/n/10 120
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 103
- []\TU/NanumGothic(0)/m/n/10 122
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 104
- []\TU/NanumGothic(0)/m/n/10 124
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 106
- []\TU/NanumGothic(0)/m/n/10 126
- []
-
 LaTeX Font Info:    Font shape `TU/NanumGothic(0)/m/sl' will be
-(Font)              scaled to size 10.0pt on input line 107.
+(Font)              scaled to size 10.0pt on input line 145.
 Package microtype Info: Character `\quotesinglbase ' is missing
 (microtype)             in font `\TU/NanumGothic(0)/m/sl/10'.
 (microtype)             Ignoring protrusion settings for this character.
 Package microtype Info: Character `\quotedblbase ' is missing
 (microtype)             in font `\TU/NanumGothic(0)/m/sl/10'.
 (microtype)             Ignoring protrusion settings for this character.
-[4]
-Overfull \hbox (2.67998pt too wide) detected at line 107
- []\TU/NanumGothic(0)/m/sl/10 128
- []
+[4
 
-
-Overfull \hbox (2.67998pt too wide) detected at line 108
- []\TU/NanumGothic(0)/m/sl/10 129
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 109
- []\TU/NanumGothic(0)/m/sl/10 130
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 111
- []\TU/NanumGothic(0)/m/sl/10 133
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 115
- []\TU/NanumGothic(0)/m/sl/10 140
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 116
- []\TU/NanumGothic(0)/m/sl/10 140
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 117
- []\TU/NanumGothic(0)/m/sl/10 142
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 119
- []\TU/NanumGothic(0)/m/sl/10 145
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 120
- []\TU/NanumGothic(0)/m/sl/10 148
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 121
- []\TU/NanumGothic(0)/m/sl/10 149
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 124
- []\TU/NanumGothic(0)/m/sl/10 154
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 126
- []\TU/NanumGothic(0)/m/sl/10 158
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 128
- []\TU/NanumGothic(0)/m/sl/10 159
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 129
- []\TU/NanumGothic(0)/m/sl/10 159
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 130
- []\TU/NanumGothic(0)/m/sl/10 162
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 131
- []\TU/NanumGothic(0)/m/sl/10 163
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 132
- []\TU/NanumGothic(0)/m/sl/10 163
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 134
- []\TU/NanumGothic(0)/m/sl/10 167
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 135
- []\TU/NanumGothic(0)/m/sl/10 175
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 136
- []\TU/NanumGothic(0)/m/sl/10 176
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 138
- []\TU/NanumGothic(0)/m/sl/10 181
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 139
- []\TU/NanumGothic(0)/m/sl/10 184
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 140
- []\TU/NanumGothic(0)/m/sl/10 186
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 141
- []\TU/NanumGothic(0)/m/sl/10 188
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 142
- []\TU/NanumGothic(0)/m/sl/10 188
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 143
- []\TU/NanumGothic(0)/m/sl/10 193
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 144
- []\TU/NanumGothic(0)/m/sl/10 194
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 146
- []\TU/NanumGothic(0)/m/sl/10 197
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 147
- []\TU/NanumGothic(0)/m/sl/10 205
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 148
- []\TU/NanumGothic(0)/m/sl/10 213
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 149
- []\TU/NanumGothic(0)/m/sl/10 221
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 150
- []\TU/NanumGothic(0)/m/sl/10 229
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 151
- []\TU/NanumGothic(0)/m/sl/10 237
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 152
- []\TU/NanumGothic(0)/m/sl/10 244
- []
-
-
-Overfull \hbox (2.67998pt too wide) detected at line 153
- []\TU/NanumGothic(0)/m/sl/10 252
- []
-
-[5]
-Overfull \hbox (2.67998pt too wide) detected at line 154
- []\TU/NanumGothic(0)/m/sl/10 260
- []
-
-)
-\tf@toc=\write4
-\openout4 = `kribbr2022.toc'.
-
-[6]
+]
 Chapter 1.
 LaTeX Font Info:    Font shape `TU/NanumGothic(0)/m/n' will be
 (Font)              scaled to size 20.74pt on input line 145.
@@ -1664,6 +1406,22 @@ LaTeX Font Info:    Font shape `TU/NanumGothic(0)/m/n' will be
 (Font)              scaled to size 14.4pt on input line 148.
 LaTeX Font Info:    Font shape `TU/NanumGothic(0)/b/n' will be
 (Font)              scaled to size 14.4pt on input line 148.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 8.12067pt on input line 159.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 5.80048pt on input line 159.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 11.60202pt on input line 159.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 8.12141pt on input line 159.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 5.80101pt on input line 159.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 11.59973pt on input line 159.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 8.11981pt on input line 159.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 5.79987pt on input line 159.
 
 Underfull \hbox (badness 10000) in paragraph at lines 179--181
 
@@ -1675,9 +1433,10 @@ Underfull \hbox (badness 7186) in paragraph at lines 193--195
 rentially
  []
 
-[7
-
-] [8]
+[5]
+LaTeX Font Info:    Font shape `TU/NanumGothic(0)/b/n' will be
+(Font)              scaled to size 10.0pt on input line 229.
+[6]
 Chapter 2.
 File: images/01/r.jpg Graphic file (type bmp)
 <images/01/r.jpg>
@@ -1697,7 +1456,7 @@ Underfull \hbox (badness 1286) in paragraph at lines 275--276
 패키지를
  []
 
-[9
+[7
 
 ]
 File: images/01/rstudiobottom.png Graphic file (type bmp)
@@ -1709,7 +1468,7 @@ Overfull \hbox (69.04163pt too wide) in paragraph at lines 279--280
 
 LaTeX Font Info:    Font shape `TU/NanumGothic(0)/b/n' will be
 (Font)              scaled to size 12.0pt on input line 287.
-[10]
+[8]
 File: images/01/01-11.PNG Graphic file (type bmp)
 <images/01/01-11.PNG>
 
@@ -1720,7 +1479,7 @@ Overfull \hbox (31.40723pt too wide) in paragraph at lines 329--330
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[11]
+[9]
 Missing character: There is no 마 in font [lmmono10-regular]:!
 Missing character: There is no 우 in font [lmmono10-regular]:!
 Missing character: There is no 스 in font [lmmono10-regular]:!
@@ -1729,12 +1488,12 @@ Missing character: There is no 레 in font [lmmono10-regular]:!
 Missing character: There is no 그 in font [lmmono10-regular]:!
 File: images/01/01-14.PNG Graphic file (type bmp)
 <images/01/01-14.PNG>
-[12]
+[10]
 File: images/01/envandhist.png Graphic file (type bmp)
 <images/01/envandhist.png>
 File: images/01/fileandpackages.png Graphic file (type bmp)
 <images/01/fileandpackages.png>
-[13]
+[11]
 File: images/01/base-r_1.png Graphic file (type bmp)
 <images/01/base-r_1.png>
 File: images/01/base-r_2.png Graphic file (type bmp)
@@ -1752,10 +1511,10 @@ Overfull \hbox (69.05432pt too wide) in paragraph at lines 461--463
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[14]
+[12]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[15]
+[13]
 Underfull \hbox (badness 1571) in paragraph at lines 467--468
 \TU/NanumGothic(0)/m/sl/10 R 패키지는 함수와 데이터셋의 묶음으로 다른 사람들이 만들어 놓은 코드나
  []
@@ -1772,18 +1531,18 @@ File: images/01/01-18.PNG Graphic file (type bmp)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[16]
+[14]
 File: images/01/01-19.PNG Graphic file (type bmp)
 <images/01/01-19.PNG>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[17]
+[15]
 Underfull \hbox (badness 10000) in paragraph at lines 516--517
 []\TU/NanumGothic(0)/m/sl/10 이 저작물은 크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제
  []
 
-[18]
+[16]
 Chapter 3.
 File: images/rmarkdown/rmarkdown-01.PNG Graphic file (type bmp)
 <images/rmarkdown/rmarkdown-01.PNG>
@@ -1792,7 +1551,7 @@ Overfull \hbox (31.42506pt too wide) in paragraph at lines 525--526
  [][] 
  []
 
-[19
+[17
 
 ]
 File: images/rmarkdown/how-1-file.png Graphic file (type bmp)
@@ -1812,10 +1571,10 @@ Overfull \hbox (31.39888pt too wide) in paragraph at lines 554--555
 
 Underfull \vbox (badness 1173) has occurred while \output is active []
 
-[20]
+[18]
 File: images/rmarkdown/ex_pdf.PNG Graphic file (type bmp)
 <images/rmarkdown/ex_pdf.PNG>
-[21]
+[19]
 Underfull \hbox (badness 2221) in paragraph at lines 576--578
 []\TU/lmtt/m/n/10 echo = FALSE \TU/NanumGothic(0)/m/sl/10 : 코드는 실행되고 보고서에 결과가 포
 함되지만 코드는
@@ -1828,7 +1587,7 @@ Underfull \hbox (badness 1082) in paragraph at lines 614--615
 []\TU/NanumGothic(0)/m/sl/10 Rmarkdown에서는 ‘ r‘을 사용해서 코드청크가 아닌 곳에 R 코드를 넣을 수
  []
 
-[22]
+[20]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
 (Font)              Font shape `TU/lmtt/b/n' tried instead on input line 624.
 File: images/02/lecticulate.png Graphic file (type bmp)
@@ -1841,7 +1600,7 @@ Missing character: There is no 줄 in font [lmmono10-regular]:!
 Missing character: There is no 바 in font [lmmono10-regular]:!
 Missing character: There is no 꿈 in font [lmmono10-regular]:!
 Missing character: There is no 이 in font [lmmono10-regular]:!
-[23]
+[21]
 Missing character: There is no 되 in font [lmmono10-regular]:!
 Missing character: There is no 지 in font [lmmono10-regular]:!
 Missing character: There is no 않 in font [lmmono10-regular]:!
@@ -1881,7 +1640,7 @@ Missing character: There is no 연 in font [lmmono10-regular]:!
 Missing character: There is no 비 in font [lmmono10-regular]:!
 Missing character: There is no 분 in font [lmmono10-regular]:!
 Missing character: There is no 포 in font [lmmono10-regular]:!
-[24]
+[22]
 Missing character: There is no 첫 in font [lmmono10-regular]:!
 Missing character: There is no 번 in font [lmmono10-regular]:!
 Missing character: There is no 째 in font [lmmono10-regular]:!
@@ -1911,7 +1670,7 @@ File: images/02/style.png Graphic file (type bmp)
 
 Underfull \vbox (badness 5245) has occurred while \output is active []
 
-[25]
+[23]
 Missing character: There is no 소 in font [lmmono10-regular]:!
 Missing character: There is no 스 in font [lmmono10-regular]:!
 Missing character: There is no 코 in font [lmmono10-regular]:!
@@ -1929,18 +1688,18 @@ Missing character: There is no 밍 in font [lmmono10-regular]:!
 Missing character: There is no 활 in font [lmmono10-regular]:!
 Missing character: There is no 용 in font [lmmono10-regular]:!
 Missing character: There is no 법 in font [lmmono10-regular]:!
-[26]
+[24]
 Underfull \hbox (badness 10000) in paragraph at lines 888--889
 []\TU/NanumGothic(0)/m/sl/10 이 저작물은 크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제
  []
 
-[27] [28
+[25] [26
 
 ]
 Chapter 4.
 File: images/01/24.PNG Graphic file (type bmp)
 <images/01/24.PNG>
-[29]
+[27]
 File: images/01/25.PNG Graphic file (type bmp)
 <images/01/25.PNG>
 Missing character: There is no 변 in font [lmmono10-regular]:!
@@ -1956,36 +1715,36 @@ Missing character: There is no 문 in font [lmmono10-regular]:!
 Missing character: There is no 반 in font [lmmono10-regular]:!
 Missing character: There is no 복 in font [lmmono10-regular]:!
 Missing character: There is no 문 in font [lmmono10-regular]:!
-[30]
+[28]
 File: images/02/01.png Graphic file (type bmp)
 <images/02/01.png>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[31]
+[29]
 LaTeX Font Info:    Font shape `TU/NanumGothic(0)/m/n' will be
 (Font)              scaled to size 11.99997pt on input line 1060.
 
 Underfull \vbox (badness 2573) has occurred while \output is active []
 
-[32]
+[30]
 Underfull \hbox (badness 1147) in paragraph at lines 1162--1163
 \TU/NanumGothic(0)/m/sl/10 numeric 형식의 벡터는 다음과 같은 다양한 편의 함수들을 사용해서 만들수
  []
 
-[33] [34]
+[31] [32]
 Underfull \hbox (badness 6348) in paragraph at lines 1264--1265
 \TU/NanumGothic(0)/m/sl/10 Character(문자형) 벡터의 경우 문자열을 다루는데 자주 쓰이는 \TU/lmtt/m/n/
 10 paste()
  []
 
-[35]
+[33]
 File: images/03/codon_table.png Graphic file (type bmp)
 <images/03/codon_table.png>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[36] [37] [38]
+[34] [35] [36]
 Underfull \hbox (badness 1314) in paragraph at lines 1444--1445
 []\TU/NanumGothic(0)/m/sl/10 여러 row나 column을 참조할 경우 아래와 같이 combine 함수를 사용하여
  []
@@ -2006,7 +1765,7 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 (Font)              Font shape `TU/lmtt/b/sl' tried instead on input line 1482.
 
 
-[39]
+[37]
 Underfull \hbox (badness 1616) in paragraph at lines 1523--1525
 []\TU/lmtt/m/n/10 students\TU/NanumGothic(0)/m/sl/10 라는 변수에 문자형으로 Name1, Name2,
  …, Name10으로
@@ -2015,7 +1774,7 @@ Underfull \hbox (badness 1616) in paragraph at lines 1523--1525
 Missing character: There is no 의 in font [lmmono10-regular]:!
 File: images/03/05.PNG Graphic file (type bmp)
 <images/03/05.PNG>
-[40]
+[38]
 File: images/03/06.PNG Graphic file (type bmp)
 <images/03/06.PNG>
 
@@ -2028,7 +1787,7 @@ Underfull \hbox (badness 1902) in paragraph at lines 1578--1579
 \TU/NanumGothic(0)/m/sl/10 계산해서 출력해 주는 스크립트 명령입니다. R base 패키지에서 기본으로
  []
 
-[41] [42] [43]
+[39] [40] [41]
 Underfull \hbox (badness 2644) in paragraph at lines 1702--1703
 []\TU/lmtt/m/n/10 mysd\TU/NanumGothic(0)/m/sl/10 라는 이름의 (표본)표준편차를 구하는 함수를 \TU/l
 mtt/m/n/10 myscript.R \TU/NanumGothic(0)/m/sl/10 파일에
@@ -2039,10 +1798,15 @@ Underfull \hbox (badness 1142) in paragraph at lines 1744--1745
 \TU/NanumGothic(0)/m/sl/10 함수를 사용함에 따라서 함수 안에서 사용되는 변수와 함수 밖에서 사용되는
  []
 
-[44] [45] [46]
+[42] [43]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 4.1 on input line 1821.
+
+[44]
 File: images/04/01.PNG Graphic file (type bmp)
 <images/04/01.PNG>
-[47]
+[45]
 Missing character: There is no 일 in font [lmmono10-regular]:!
 Missing character: There is no 때 in font [lmmono10-regular]:!
 Missing character: There is no 리 in font [lmmono10-regular]:!
@@ -2070,7 +1834,7 @@ Missing character: There is no 홀 in font [lmmono10-italic]:!
 Missing character: There is no 수 in font [lmmono10-italic]:!
 Missing character: There is no 이 in font [lmmono10-italic]:!
 Missing character: There is no 면 in font [lmmono10-italic]:!
-[48] [49]
+[46] [47]
 Missing character: There is no 이 in font [lmmono10-regular]:!
 Missing character: There is no 름 in font [lmmono10-regular]:!
 Missing character: There is no 점 in font [lmmono10-regular]:!
@@ -2092,7 +1856,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 2087--2088
 []\TU/NanumGothic(0)/m/sl/10 이 저작물은 크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제
  []
 
-[50]
+[48]
 Chapter 5.
 
 Underfull \hbox (badness 1789) in paragraph at lines 2111--2112
@@ -2102,9 +1866,9 @@ Underfull \hbox (badness 1789) in paragraph at lines 2111--2112
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[51
+[49
 
-] [52]
+] [50]
 Underfull \hbox (badness 1616) in paragraph at lines 2167--2168
 []\TU/NanumGothic(0)/m/sl/10 Dataset_S1_sub.txt 파일을 열어보면 다음과 같이 header와 “,”로 구분
 되어
@@ -2119,14 +1883,14 @@ File: images/04/excelfile01.PNG Graphic file (type bmp)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[53] [54]
+[51] [52]
 Overfull \hbox (0.15335pt too wide) in paragraph at lines 2246--2247
 []\TU/NanumGothic(0)/m/sl/10 airquality 데이터에서 \TU/lmtt/m/n/10 Temp\TU/NanumGoth
 ic(0)/m/sl/10 와 \TU/lmtt/m/n/10 Ozone \TU/NanumGothic(0)/m/sl/10 변수로 이루어진 df라는 
 이름의 \TU/lmtt/m/n/10 data.frame\TU/NanumGothic(0)/m/sl/10 을
  []
 
-[55] [56]
+[53] [54]
 Underfull \hbox (badness 2205) in paragraph at lines 2340--2341
 \TU/NanumGothic(0)/m/sl/10 관계를 알아보는 분석을 수행해 보겠습니다. 본 강의를 통해 배우지 않은
  []
@@ -2141,13 +1905,13 @@ mGothic(0)/m/sl/10 (아빠의 몸무게) 변수의
 Overfull \vbox (2.12997pt too high) detected at line 2382
  []
 
-[57]
+[55]
 Missing character: There is no 결 in font [lmmonolt10-boldoblique]:!
 Missing character: There is no 과 in font [lmmonolt10-boldoblique]:!
-[58]
+[56]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[59]
+[57]
 Underfull \hbox (badness 1735) in paragraph at lines 2489--2490
 []\TU/NanumGothic(0)/m/sl/10 state.abb에 사용된 알파벳의 갯수를 구하고 가장 많이 쓰인 알파벳을
  []
@@ -2157,13 +1921,13 @@ File: images/07/01.png Graphic file (type bmp)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[60] [61]
+[58] [59]
 Underfull \hbox (badness 1097) in paragraph at lines 2589--2590
 []\TU/NanumGothic(0)/m/sl/10 다음은 앞에서 수행했던 \TU/lmtt/m/n/10 airquality \TU/NanumG
 othic(0)/m/sl/10 데이터를 월별로 나눈 데이터셋임. 이
  []
 
-[62]
+[60]
 Overfull \hbox (10.88335pt too wide) in paragraph at lines 2629--2630
 []\TU/NanumGothic(0)/m/sl/10 위에서 구해진 두 변수값들을 이용하여 \TU/lmtt/m/n/10 air_means \TU
 /NanumGothic(0)/m/sl/10 라는 이름의 \TU/lmtt/m/n/10 data.frame\TU/NanumGothic(0)/m/s
@@ -2187,7 +1951,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 2664--2665
 []\TU/NanumGothic(0)/m/sl/10 이 저작물은 크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제
  []
 
-[63] [64]
+[61] [62]
 Chapter 6.
 
 Underfull \hbox (badness 5288) in paragraph at lines 2686--2687
@@ -2213,14 +1977,14 @@ Overfull \hbox (3.85225pt too wide) in paragraph at lines 2699--2700
 다. 히스토그램은
  []
 
-[65
+[63
 
 ]
 Underfull \hbox (badness 4193) in paragraph at lines 2743--2744
 []\TU/NanumGothic(0)/m/sl/10 data.frame 타입의 오브젝트에 대해서 boxplot을 그릴 경우 여러 변수의
  []
 
-[66]
+[64]
 Underfull \hbox (badness 1184) in paragraph at lines 2801--2802
 \TU/NanumGothic(0)/m/sl/10 위 예제들에서 사용한 high level function들을 low level function
  (\TU/lmtt/m/n/10 lines\TU/NanumGothic(0)/m/sl/10 ,
@@ -2232,16 +1996,16 @@ Underfull \hbox (badness 1137) in paragraph at lines 2801--2802
 Gothic(0)/m/sl/10 패키지를 이용한 그래프 사용법
  []
 
-[67]
+[65]
 File: images/05/01.png Graphic file (type bmp)
 <images/05/01.png>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[68]
+[66]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[69] [70]
+[67] [68]
 Underfull \hbox (badness 1735) in paragraph at lines 2941--2942
 []\TU/NanumGothic(0)/m/sl/10 state.abb에 사용된 알파벳의 갯수를 구하고 가장 많이 쓰인 알파벳을
  []
@@ -2251,7 +2015,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 2963--2964
 []\TU/NanumGothic(0)/m/sl/10 이 저작물은 크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제
  []
 
-[71] [72
+[69] [70
 
 ]
 Chapter 7.
@@ -2264,7 +2028,7 @@ Overfull \hbox (69.05318pt too wide) in paragraph at lines 2970--2971
 
 File: images/07/data-science.png Graphic file (type bmp)
 <images/07/data-science.png>
-[73] [74]
+[71] [72]
 
 LaTeX Font Warning: Font shape `TU/NanumGothic(0)/m/it' undefined
 (Font)              using `TU/NanumGothic(0)/m/sl' instead on input line 3050.
@@ -2288,13 +2052,13 @@ File: images/07/05.png Graphic file (type bmp)
 
 Underfull \vbox (badness 2635) has occurred while \output is active []
 
-[75]
+[73]
 File: images/07/06.png Graphic file (type bmp)
 <images/07/06.png>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[76] [77]
+[74] [75]
 File: images/07/02.PNG Graphic file (type bmp)
 <images/07/02.PNG>
 
@@ -2319,7 +2083,7 @@ Overfull \hbox (0.78003pt too wide) in paragraph at lines 3138--3139
 NanumGothic(0)/m/sl/10 데이터의 Month와 Day 변수(컬럼)을
  []
 
-[78]
+[76]
 Overfull \hbox (12.71669pt too wide) in paragraph at lines 3144--3145
 \TU/NanumGothic(0)/m/sl/10 위해서는 \TU/lmtt/m/n/10 tidyverse \TU/NanumGothic(0)/m/
 sl/10 패키지에 속한 \TU/lmtt/m/n/10 tidyr \TU/NanumGothic(0)/m/sl/10 패키지의 \TU/lmtt/m/
@@ -2329,7 +2093,7 @@ numGothic(0)/m/sl/10 를
 
 File: images/07/wide2long.JPG Graphic file (type bmp)
 <images/07/wide2long.JPG>
-[79]
+[77]
 Underfull \hbox (badness 10000) in paragraph at lines 3203--3205
 
  []
@@ -2343,7 +2107,7 @@ Underfull \hbox (badness 2671) in paragraph at lines 3220--3221
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[80] [81]
+[78] [79]
 Underfull \hbox (badness 4595) in paragraph at lines 3272--3273
 []\TU/NanumGothic(0)/m/sl/10 위 함수들과 (특히 \TU/lmtt/m/n/10 filter\TU/NanumGothic(0
 )/m/sl/10 , \TU/lmtt/m/n/10 select\TU/NanumGothic(0)/m/sl/10 , \TU/lmtt/m/n/10 
@@ -2357,7 +2121,7 @@ Underfull \hbox (badness 1742) in paragraph at lines 3309--3310
 lumn) 선택하여
  []
 
-[82]
+[80]
 File: images/07/03.png Graphic file (type bmp)
 <images/07/03.png>
 
@@ -2368,13 +2132,13 @@ Overfull \hbox (31.42004pt too wide) in paragraph at lines 3382--3383
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[83]
+[81]
 Underfull \hbox (badness 3907) in paragraph at lines 3406--3407
 \TU/lmtt/m/n/10 mutate() \TU/NanumGothic(0)/m/sl/10 함수는 새로운 변수를 추가할 수 있는 기능을 제공
 하며 앞에서
  []
 
-[84]
+[82]
 Missing character: There is no 기 in font [lmmono10-regular]:!
 Missing character: There is no 본 in font [lmmono10-regular]:!
 Missing character: There is no 적 in font [lmmono10-regular]:!
@@ -2422,7 +2186,7 @@ Missing character: There is no 다 in font [lmmono10-regular]:!
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[85]
+[83]
 Underfull \hbox (badness 1102) in paragraph at lines 3471--3472
 \TU/NanumGothic(0)/m/sl/10 대해서 임의의 함수 \TU/lmtt/m/n/10 function(x)... \TU/NanumG
 othic(0)/m/sl/10 를 수행하는 역할을 합니다. 마지막
@@ -2449,7 +2213,7 @@ Overfull \hbox (31.40955pt too wide) in paragraph at lines 3517--3518
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[86] [87]
+[84] [85]
 File: images/08/00002e.png Graphic file (type bmp)
 <images/08/00002e.png>
 
@@ -2461,7 +2225,7 @@ Underfull \hbox (badness 2460) in paragraph at lines 3571--3572
 Overfull \vbox (1.87556pt too high) detected at line 3584
  []
 
-[88]
+[86]
 File: images/08/Rplot02.png Graphic file (type bmp)
 <images/08/Rplot02.png>
 
@@ -2480,7 +2244,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 3631--3632
 []\TU/NanumGothic(0)/m/sl/10 이 저작물은 크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제
  []
 
-[89] [90
+[87] [88
 
 ]
 Chapter 8.
@@ -2495,7 +2259,7 @@ Underfull \hbox (badness 5064) in paragraph at lines 3653--3654
 othic(0)/m/sl/10 에서는 \TU/lmtt/m/n/10 +\TU/NanumGothic(0)/m/sl/10 를 이용해서 레이어들을
  []
 
-[91]
+[89]
 Underfull \hbox (badness 3815) in paragraph at lines 3683--3684
 []\TU/NanumGothic(0)/m/sl/10 ggplot만을 실행할 경우 데이터와 x, y 축만 지정한 상태로 어떤 그래프
  []
@@ -2517,21 +2281,21 @@ Underfull \hbox (badness 4441) in paragraph at lines 3731--3732
 \TU/NanumGothic(0)/m/sl/10 사용하여 필요한 레이어를 차례로 추가하면서 그래프를 그릴 수 있습니다.
  []
 
-[92]
+[90]
 Underfull \hbox (badness 1231) in paragraph at lines 3756--3757
 \TU/NanumGothic(0)/m/sl/10 그릴 경우 다음과 같이 \TU/lmtt/m/n/10 Error: stat_count() mus
 t not be used with a y
  []
 
-[93] [94]
+[91] [92]
 File: images/07/barploterrorbar.png Graphic file (type bmp)
 <images/07/barploterrorbar.png>
-[95]
+[93]
 Underfull \hbox (badness 7704) in paragraph at lines 3956--3957
 []\TU/NanumGothic(0)/m/sl/10 여기서는 fill 옵션이 geom_bar에 하나 geom_point에 하나씩 쓰였는데
  []
 
-[96] [97]
+[94] [95]
 Underfull \hbox (badness 1997) in paragraph at lines 4016--4017
 \TU/NanumGothic(0)/m/sl/10 각 레이어마다 mapping을 지정할 수 있다는 것이고 이 원리를 이해한다면
  []
@@ -2539,18 +2303,18 @@ Underfull \hbox (badness 1997) in paragraph at lines 4016--4017
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[98]
+[96]
 Underfull \hbox (badness 1354) in paragraph at lines 4078--4079
 \TU/NanumGothic(0)/m/sl/10 있는지를 막대그래프로 표현해 보도록 하겠습니다. 혈액형의 타입별로 다른
  []
 
-[99]
+[97]
 Underfull \hbox (badness 4391) in paragraph at lines 4087--4088
 \TU/NanumGothic(0)/m/sl/10 나란히 막대를 위치시킨 후 크기를 비교하기 위해서 \TU/lmtt/m/n/10 position
 ="dodge"\TU/NanumGothic(0)/m/sl/10 를
  []
 
-[100]
+[98]
 Underfull \hbox (badness 1383) in paragraph at lines 4164--4165
 \TU/lmtt/m/n/10 facet_grid()\TU/NanumGothic(0)/m/sl/10 는 두 개 변수의 조합에 의한 그래프들을 그
 릴 때 사용합니다.
@@ -2566,7 +2330,7 @@ Underfull \hbox (badness 1694) in paragraph at lines 4186--4187
 []\TU/NanumGothic(0)/m/sl/10 이제 mycate와 Species 두 범주형 변수에 대해서 facet 그래프를 그려보면
  []
 
-[101]
+[99]
 Underfull \hbox (badness 1342) in paragraph at lines 4216--4217
 []\TU/lmtt/m/n/10 Orange \TU/NanumGothic(0)/m/sl/10 데이터셋은 다섯 그루의 오랜지 나무에 대한 시간에
 (age-days) 따른
@@ -2575,14 +2339,14 @@ Underfull \hbox (badness 1342) in paragraph at lines 4216--4217
 File: 07-ggplot_files/figure-latex/unnamed-chunk-41-1.pdf Graphic file (type pd
 f)
 <use 07-ggplot_files/figure-latex/unnamed-chunk-41-1.pdf>
-[102]
+[100]
 File: 07-ggplot_files/figure-latex/unnamed-chunk-42-1.pdf Graphic file (type pd
 f)
 <use 07-ggplot_files/figure-latex/unnamed-chunk-42-1.pdf>
 File: 07-ggplot_files/figure-latex/unnamed-chunk-43-1.pdf Graphic file (type pd
 f)
 <use 07-ggplot_files/figure-latex/unnamed-chunk-43-1.pdf>
-[103]
+[101]
 File: 07-ggplot_files/figure-latex/unnamed-chunk-44-1.pdf Graphic file (type pd
 f)
 <use 07-ggplot_files/figure-latex/unnamed-chunk-44-1.pdf>
@@ -2611,12 +2375,12 @@ Overfull \hbox (21.6689pt too wide) in paragraph at lines 4270--4271
 0 scale_fill_discrete
  []
 
-[104]
+[102]
 Underfull \hbox (badness 2293) in paragraph at lines 4280--4281
 \TU/NanumGothic(0)/m/sl/10 이곳을 참고하시기 바랍니다. 여기서 mapping은 그대로인채로 모양 등의
  []
 
-[105]
+[103]
 Underfull \hbox (badness 1728) in paragraph at lines 4344--4345
 \TU/lmtt/m/n/10 scale_<aesthetic>_<type> \TU/NanumGothic(0)/m/sl/10 이며 \TU/lmtt
 /m/n/10 <aesthetic>\TU/NanumGothic(0)/m/sl/10 과 \TU/lmtt/m/n/10 <type>\TU/Nanum
@@ -2635,7 +2399,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 4365--4366
 mtt/m/n/10 aes(color=bloodtype)\TU/NanumGothic(0)/m/sl/10 으로
  []
 
-[106]
+[104]
 Overfull \hbox (11.31668pt too wide) in paragraph at lines 4376--4377
 []\TU/NanumGothic(0)/m/sl/10 위 히스토그램의 x축을 로그 스케일로 전환하고자 할 때 다음과 같이 \TU/lmtt/m/n
 /10 scale_x_log10()
@@ -2646,7 +2410,7 @@ File: images/06/ex6-4-2.png Graphic file (type bmp)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[107]
+[105]
 Underfull \hbox (badness 1472) in paragraph at lines 4414--4415
 []\TU/NanumGothic(0)/m/sl/10 다음과 같이 배기량과 고속도로/도심 연비의 관계를 나타내는 추세선을
  []
@@ -2656,7 +2420,7 @@ File: images/06/ex6-4-4.png Graphic file (type bmp)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[108]
+[106]
 Underfull \hbox (badness 1742) in paragraph at lines 4424--4425
 \TU/NanumGothic(0)/m/sl/10 설정, 범례의 title을 지울때는 \TU/lmtt/m/n/10 name=element_bla
 nk()\TU/NanumGothic(0)/m/sl/10 , Title의 택스트
@@ -2667,7 +2431,7 @@ File: images/06/ex6-4-5.png Graphic file (type bmp)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[109] [110]
+[107] [108]
 Chapter 9.
 
 Underfull \hbox (badness 1142) in paragraph at lines 4432--4433
@@ -2679,7 +2443,7 @@ File: images/10/000013.png Graphic file (type bmp)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[111
+[109
 
 ]
 Underfull \vbox (badness 10000) detected at line 4494
@@ -2688,25 +2452,25 @@ Underfull \vbox (badness 10000) detected at line 4494
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[112]
+[110]
 File: images/10/000049.png Graphic file (type bmp)
 <images/10/000049.png>
-[113]
+[111]
 File: images/10/00000e.png Graphic file (type bmp)
 <images/10/00000e.png>
-[114]
+[112]
 File: images/10/00000b.png Graphic file (type bmp)
 <images/10/00000b.png>
-[115]
+[113]
 File: images/10/000002.png Graphic file (type bmp)
 <images/10/000002.png>
-[116]
+[114]
 File: images/10/000008.png Graphic file (type bmp)
 <images/10/000008.png>
-[117]
+[115]
 File: images/10/000009a.png Graphic file (type bmp)
 <images/10/000009a.png>
-[118]
+[116]
 File: images/10/000006.png Graphic file (type bmp)
 <images/10/000006.png>
 File: images/10/000003.png Graphic file (type bmp)
@@ -2714,7 +2478,7 @@ File: images/10/000003.png Graphic file (type bmp)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[119] [120]
+[117] [118]
 File: images/10/00000a.png Graphic file (type bmp)
 <images/10/00000a.png>
 File: images/10/000046.png Graphic file (type bmp)
@@ -2722,24 +2486,24 @@ File: images/10/000046.png Graphic file (type bmp)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[121]
+[119]
 File: images/10/000005.png Graphic file (type bmp)
 <images/10/000005.png>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[122]
+[120]
 File: images/10/000004.png Graphic file (type bmp)
 <images/10/000004.png>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[123]
+[121]
 Underfull \hbox (badness 10000) in paragraph at lines 4863--4864
 []\TU/NanumGothic(0)/m/sl/10 이 저작물은 크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제
  []
 
-[124]
+[122]
 Chapter 10.
 
 Underfull \hbox (badness 3078) in paragraph at lines 4874--4875
@@ -2761,7 +2525,7 @@ Overfull \hbox (106.69887pt too wide) in paragraph at lines 4878--4879
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[125
+[123
 
 ]
 File: images/bioconductor_list.PNG Graphic file (type bmp)
@@ -2774,7 +2538,7 @@ Overfull \hbox (106.69263pt too wide) in paragraph at lines 4907--4908
 
 Underfull \vbox (badness 2846) has occurred while \output is active []
 
-[126]
+[124]
 Underfull \hbox (badness 10000) in paragraph at lines 4931--4932
 []\TU/lmtt/m/n/10 Bioconductor\TU/NanumGothic(0)/m/sl/10 에서 제공하는 패키지를 설치하기 위해서는
  \TU/lmtt/m/n/10 BiocManager\TU/NanumGothic(0)/m/sl/10 를
@@ -2786,7 +2550,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 4931--4932
 ger\TU/NanumGothic(0)/m/sl/10 에는
  []
 
-[127]
+[125]
 Underfull \hbox (badness 7238) in paragraph at lines 4945--4946
 []\TU/NanumGothic(0)/m/sl/10 OrganismDb는 meta-package의 형태로 OrgDb, TxDb, 그리고 GO.
 db
@@ -2795,12 +2559,12 @@ db
 
 Underfull \vbox (badness 5260) has occurred while \output is active []
 
-[128]
+[126]
 
-Package natbib Warning: Citation `AdvancedR' on page 129 undefined on input lin
+Package natbib Warning: Citation `AdvancedR' on page 127 undefined on input lin
 e 4979.
 
-[129]
+[127]
 Underfull \hbox (badness 1092) in paragraph at lines 5042--5043
 \TU/NanumGothic(0)/m/sl/10 사용합니다. R의 객체지향프로그래밍에 대한 상세한 내용은 []Advanced R[]를
  []
@@ -2825,12 +2589,12 @@ iment\TU/NanumGothic(0)/m/sl/10 나 \TU/lmtt/m/n/10 annotation\TU/NanumGothic(0)
 m/sl/10 은
  []
 
-[130]
+[128]
 Underfull \hbox (badness 10000) in paragraph at lines 5108--5109
 []\TU/NanumGothic(0)/m/sl/10 이 저작물은 크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제
  []
 
-[131] [132
+[129] [130
 
 ]
 Chapter 11.
@@ -2841,7 +2605,7 @@ l/10 패키지는 생물학적 서열을 효과적으로 활용하기 위한 핵
  []
 
 
-Package natbib Warning: Citation `sippl1999biological' on page 133 undefined on
+Package natbib Warning: Citation `sippl1999biological' on page 131 undefined on
  input line 5118.
 
 File: images/04/biostrings.JPG Graphic file (type bmp)
@@ -2849,55 +2613,55 @@ File: images/04/biostrings.JPG Graphic file (type bmp)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[133]
+[131]
 Underfull \vbox (badness 1997) detected at line 5164
  []
 
 
 Underfull \vbox (badness 1210) has occurred while \output is active []
 
-[134]
+[132]
 File: images/rna-codon-chart.jpg Graphic file (type bmp)
 <images/rna-codon-chart.jpg>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[135]
+[133]
 Underfull \hbox (badness 3098) in paragraph at lines 5227--5228
 []\TU/NanumGothic(0)/m/sl/10 AA_ALPHABET은 IUPAC에서 정의된 아미노산 서열 알파벳이 저장된
  []
 
-[136]
+[134]
 Underfull \hbox (badness 3189) in paragraph at lines 5262--5263
 []\TU/NanumGothic(0)/m/sl/10 RNA나 아미노산 역시 동일한 방식으로 적용 가능하며 \TU/lmtt/m/n/10 c \T
 U/NanumGothic(0)/m/sl/10 함수를 이용해서
  []
 
-[137]
+[135]
 Underfull \hbox (badness 1946) in paragraph at lines 5349--5350
 []\TU/NanumGothic(0)/m/sl/10 위 x0 스트링들을 XStringSet으로 바꾸고 GC 비율을 구한 후 bargraph를
  []
 
-[138] [139]
+[136] [137]
 Underfull \hbox (badness 1931) in paragraph at lines 5462--5463
 \TU/NanumGothic(0)/m/sl/10 많은 종류의 ORF 탐색 툴이 나와있지만 본 강의에서는 NCBI에서 제공하는
  []
 
-[140]
+[138]
 File: images/orffinder.PNG Graphic file (type bmp)
 <images/orffinder.PNG>
-[141]
+[139]
 Underfull \hbox (badness 2181) in paragraph at lines 5536--5537
 \TU/lmtt/m/n/10 Biostrings \TU/NanumGothic(0)/m/sl/10 패키지에는 하나의 subject 서열에 특정 
 pattern이 존재하는지
  []
 
-[142]
+[140]
 Underfull \hbox (badness 10000) in paragraph at lines 5555--5556
 []\TU/NanumGothic(0)/m/sl/10 이 저작물은 크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제
  []
 
-[143] [144
+[141] [142
 
 ]
 Chapter 12.
@@ -2923,20 +2687,20 @@ Underfull \hbox (badness 1558) in paragraph at lines 5579--5580
 TU/NanumGothic(0)/m/sl/10 를 사용하면 되겠습니다.
  []
 
-[145]
+[143]
 Underfull \vbox (badness 10000) detected at line 5636
  []
 
 
 Underfull \vbox (badness 4792) has occurred while \output is active []
 
-[146]
+[144]
 Underfull \hbox (badness 1067) in paragraph at lines 5640--5641
 \TU/NanumGothic(0)/m/sl/10 NC_001474, NC_001475, NC_002640 해당 DNA 서열을 fasta 형식으
 로
  []
 
-[147]
+[145]
 Underfull \hbox (badness 2644) in paragraph at lines 5747--5748
 []\TU/NanumGothic(0)/m/sl/10 위에서 서열 정렬이 된 결과를 \TU/lmtt/m/n/10 DNAString \TU/Nan
 umGothic(0)/m/sl/10 class의 변수에 저장한 후 해당
@@ -2947,7 +2711,7 @@ Underfull \hbox (badness 5431) in paragraph at lines 5747--5748
 \TU/NanumGothic(0)/m/sl/10 class에서 제공하는 다양한 함수를 동일하게 적용할 수 있습니다. 또한
  []
 
-[148] [149]
+[146] [147]
 Underfull \hbox (badness 3849) in paragraph at lines 5819--5820
 []\TU/lmtt/m/n/10 MsaDNAMultipleAlignment \TU/NanumGothic(0)/m/sl/10 class는 Bio
 string 패키지의 \TU/lmtt/m/n/10 DNAString \TU/NanumGothic(0)/m/sl/10 class를
@@ -2965,10 +2729,10 @@ Overfull \hbox (15.20224pt too wide) in paragraph at lines 5830--5831
 aDNAMultipleAlignment
  []
 
-[150]
+[148]
 Underfull \vbox (badness 6268) has occurred while \output is active []
 
-[151]
+[149]
 Overfull \hbox (2.5691pt too wide) in paragraph at lines 5900--5901
 []\TU/lmtt/m/n/10 DECIPHER \TU/NanumGothic(0)/m/sl/10 패키지의 \TU/lmtt/m/n/10 Dige
 stDNA\TU/NanumGothic(0)/m/sl/10 함수를 이용하면 enzyme digestion을 시뮬레이션할
@@ -2984,7 +2748,7 @@ Overfull \hbox (6.78775pt too wide) in paragraph at lines 5946--5949
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[152]
+[150]
 File: images/aaacode.png Graphic file (type bmp)
 <images/aaacode.png>
 
@@ -2995,13 +2759,13 @@ Overfull \hbox (125.35214pt too wide) in paragraph at lines 5949--5951
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[153]
+[151]
 Overfull \hbox (1.5pt too wide) in paragraph at lines 5960--5960
 []    \TU/lmtt/m/n/10 ((t2:0.04,t1:0.34):0.89,(t5:0.37,(t4:0.03,t3:0.67):0.9):0
 .59);[] 
  []
 
-[154]
+[152]
 Underfull \hbox (badness 4391) in paragraph at lines 5974--5975
 \TU/NanumGothic(0)/m/sl/10 사용한 \TU/lmtt/m/n/10 mas\TU/NanumGothic(0)/m/sl/10 나 
 \TU/lmtt/m/n/10 DECIPHER \TU/NanumGothic(0)/m/sl/10 패키지로 얻어진 MSA 결과는 모두 \TU/lmt
@@ -3032,7 +2796,7 @@ Underfull \hbox (badness 6204) in paragraph at lines 5994--5995
 \TU/NanumGothic(0)/m/sl/10 함수가 있습니다. 이 함수를 이용하면 역시 같은 패키지에서 제공하는
  []
 
-[155] [156] [157]
+[153] [154] [155]
 Underfull \hbox (badness 1442) in paragraph at lines 6136--6137
 \TU/NanumGothic(0)/m/sl/10 BLAST를 로컬컴퓨터에 설치하거나 docker를 이용해서 활용할 수 있으나 본
  []
@@ -3062,7 +2826,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 6158--6159
 []\TU/NanumGothic(0)/m/sl/10 이 저작물은 크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제
  []
 
-[158]
+[156]
 Chapter 13.
 
 Underfull \hbox (badness 4634) in paragraph at lines 6171--6173
@@ -3070,17 +2834,17 @@ Underfull \hbox (badness 4634) in paragraph at lines 6171--6173
 0 nuccore \TU/NanumGothic(0)/m/sl/10 데이터베이스에서 genbank
  []
 
-[159
+[157
 
 ]
 
-Package natbib Warning: Citation `Lawrence2013' on page 160 undefined on input 
+Package natbib Warning: Citation `Lawrence2013' on page 158 undefined on input 
 line 6197.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[160]
+[158]
 Underfull \hbox (badness 1033) in paragraph at lines 6303--6304
 []\TU/NanumGothic(0)/m/sl/10 GenomicRanges[]는 지놈상의 위치정보와 Bioconductor에서 제공하는 다양
 한
@@ -3089,42 +2853,104 @@ Underfull \hbox (badness 1033) in paragraph at lines 6303--6304
 
 Underfull \vbox (badness 2020) has occurred while \output is active []
 
-[161]
+[159]
 Overfull \hbox (7.25pt too wide) in paragraph at lines 6305--6306
 []\TU/NanumGothic(0)/m/sl/10 GRanges 함수를 이용해서 생성할 수 있으며 \TU/lmtt/m/n/10 browseV
 ignettes("GenomicRanges")
  []
 
-[162]
+[160]
 Underfull \hbox (badness 1097) in paragraph at lines 6385--6386
 []\TU/NanumGothic(0)/m/sl/10 위에서 계산된 GC 비율로 bar 그래프를 그리되 product를 라벨로 지정하여
  []
 
-[163]
+[161]
 Overfull \vbox (0.45996pt too high) detected at line 6464
  []
 
-[164]
+[162]
 Underfull \hbox (badness 10000) in paragraph at lines 6468--6469
 []\TU/NanumGothic(0)/m/sl/10 이 저작물은 크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제
  []
 
-[165] [166
+[163] [164
 
 ]
 Chapter 14.
+
+Underfull \hbox (badness 10000) in paragraph at lines 6476--6477
+\TU/NanumGothic(0)/m/sl/10 가닥을 동시에 해독하는 특징으로 “massively-parallel sequencing” 으로
+
+ []
+
 File: images/12/ngs.png Graphic file (type bmp)
 <images/12/ngs.png>
 
-Overfull \hbox (106.67795pt too wide) in paragraph at lines 6476--6477
-[] 
+Overfull \hbox (106.67795pt too wide) in paragraph at lines 6478--6479
+[][] 
  []
 
-[167]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[165]
+File: images/12/ngs_workflow.png Graphic file (type bmp)
+<images/12/ngs_workflow.png>
+
+Overfull \hbox (31.41167pt too wide) in paragraph at lines 6496--6497
+ [][] 
+ []
+
+File: images/12/illuminaseq_lib_pre.png Graphic file (type bmp)
+<images/12/illuminaseq_lib_pre.png>
+
+Overfull \hbox (31.41382pt too wide) in paragraph at lines 6504--6505
+ [][] 
+ []
+
+File: images/12/illuminaseq_cluster_gen.png Graphic file (type bmp)
+<images/12/illuminaseq_cluster_gen.png>
+
+Overfull \hbox (31.41147pt too wide) in paragraph at lines 6510--6511
+ [][] 
+ []
+
+File: images/12/illuminaseq_seq2.png Graphic file (type bmp)
+<images/12/illuminaseq_seq2.png>
+
+Overfull \hbox (31.40956pt too wide) in paragraph at lines 6516--6517
+ [][] 
+ []
+
+File: images/12/illuminaseq_dataanalysis.png Graphic file (type bmp)
+<images/12/illuminaseq_dataanalysis.png>
+
+Overfull \hbox (31.41475pt too wide) in paragraph at lines 6522--6523
+ [][] 
+ []
+
+File: images/12/NGS_data_analysis.png Graphic file (type bmp)
+<images/12/NGS_data_analysis.png>
+
+Overfull \hbox (31.39857pt too wide) in paragraph at lines 6530--6531
+ [][] 
+ []
+
+File: images/12/fastq.png Graphic file (type bmp)
+<images/12/fastq.png>
+
+Underfull \vbox (badness 2277) has occurred while \output is active []
+
+[166] [167] [168] [169] [170]
+Underfull \hbox (badness 1881) in paragraph at lines 6541--6542
+[]\TU/NanumGothic(0)/m/sl/10 따라서 분석을 위해서는 위 서열들을 제거하고 quality에 따라서 read 들을
+ []
+
+[171]
 File: images/12/env0.png Graphic file (type bmp)
 <images/12/env0.png>
 
-Overfull \hbox (106.69287pt too wide) in paragraph at lines 6486--6487
+Overfull \hbox (106.69287pt too wide) in paragraph at lines 6581--6582
 [][] 
  []
 
@@ -3133,7 +2959,7 @@ File: images/12/env1.png Graphic file (type bmp)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[168]
+[172]
 Missing character: There is no 확 in font [lmmono10-regular]:!
 Missing character: There is no 인 in font [lmmono10-regular]:!
 File: images/12/env2.png Graphic file (type bmp)
@@ -3141,471 +2967,340 @@ File: images/12/env2.png Graphic file (type bmp)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[169]
+[173]
 File: images/12/sra.png Graphic file (type bmp)
 <images/12/sra.png>
 
-Overfull \hbox (106.68451pt too wide) in paragraph at lines 6500--6501
+Overfull \hbox (106.68451pt too wide) in paragraph at lines 6595--6596
 [][] 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[170]
-Underfull \hbox (badness 10000) in paragraph at lines 6502--6503
+[174]
+Underfull \hbox (badness 10000) in paragraph at lines 6597--6598
 []\TU/NanumGothic(0)/m/sl/10 뒤에서 설명할 GEO 데이터베이스에서 []GSE148719[] 데이터를 다운로드
  []
 
 File: images/sra.PNG Graphic file (type bmp)
 <images/sra.PNG>
 
-Overfull \hbox (106.69809pt too wide) in paragraph at lines 6504--6505
+Overfull \hbox (106.69809pt too wide) in paragraph at lines 6599--6600
 [][] 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[171]
-Underfull \hbox (badness 3907) in paragraph at lines 6532--6533
+[175]
+Underfull \hbox (badness 3907) in paragraph at lines 6627--6628
 []\TU/NanumGothic(0)/m/sl/10 GEO는 microarray, next-generation sequencing 등의 hig
 h-throughput
  []
 
-[172]
+[176]
 File: images/04/geo_overview.jpg Graphic file (type bmp)
 <images/04/geo_overview.jpg>
 
-Overfull \hbox (106.70895pt too wide) in paragraph at lines 6548--6549
+Overfull \hbox (106.70895pt too wide) in paragraph at lines 6643--6644
 [][] 
  []
 
-[173] [174]
+[177] [178]
 File: images/12/ExpressionSet.png Graphic file (type bmp)
 <images/12/ExpressionSet.png>
 
-Overfull \hbox (106.71016pt too wide) in paragraph at lines 6622--6624
+Overfull \hbox (106.71016pt too wide) in paragraph at lines 6717--6719
 [][]
  []
 
-[175]
-Underfull \hbox (badness 3568) in paragraph at lines 6675--6676
+[179]
+Underfull \hbox (badness 3568) in paragraph at lines 6769--6770
 []\TU/lmtt/m/n/10 GEOquery \TU/NanumGothic(0)/m/sl/10 패지키에 포함된 GDS507 dataset을 
 읽어서 ExpressionSet으로
  []
 
-[176] [177]
+[180]
+Overfull \vbox (0.88992pt too high) detected at line 6854
+ []
+
+[181]
 File: images/12/000024.png Graphic file (type bmp)
 <images/12/000024.png>
 
-Overfull \hbox (31.40616pt too wide) in paragraph at lines 6779--6780
+Overfull \hbox (31.40616pt too wide) in paragraph at lines 6873--6874
 [][] 
  []
 
+File: images/summarizedexp.PNG Graphic file (type bmp)
+<images/summarizedexp.PNG>
 
-Underfull \hbox (badness 10000) in paragraph at lines 6783--6784
+Underfull \vbox (badness 1314) has occurred while \output is active []
+
+[182]
+Underfull \vbox (badness 10000) detected at line 6909
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[183]
+Underfull \hbox (badness 10000) in paragraph at lines 6943--6944
 []\TU/NanumGothic(0)/m/sl/10 이 저작물은 크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제
  []
 
-[178]
+[184]
 Chapter 15.
 File: images/12/04-2.png Graphic file (type bmp)
 <images/12/04-2.png>
 
-Overfull \hbox (106.70026pt too wide) in paragraph at lines 6788--6789
+Overfull \hbox (106.70026pt too wide) in paragraph at lines 6948--6949
 [] 
  []
 
 File: images/12/06.png Graphic file (type bmp)
 <images/12/06.png>
 
-Overfull \hbox (106.69029pt too wide) in paragraph at lines 6790--6791
+Overfull \hbox (106.69029pt too wide) in paragraph at lines 6950--6951
 [][] 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[179
+[185
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 6807--6809
+Underfull \hbox (badness 10000) in paragraph at lines 6967--6969
 
  []
 
-[180]
+[186]
 File: images/12/01.png Graphic file (type bmp)
 <images/12/01.png>
 
-Underfull \hbox (badness 4752) in paragraph at lines 6833--6834
+Underfull \hbox (badness 4752) in paragraph at lines 6993--6994
 \TU/NanumGothic(0)/m/sl/10 이번 장에서는 시뮬레이션을 통해 추정의 개념을 이해하는 것을 목적으로
  []
 
-[181] [182]
-Overfull \hbox (7.19795pt too wide) in paragraph at lines 6897--6898
+[187] [188]
+Overfull \hbox (7.19795pt too wide) in paragraph at lines 7057--7058
 []\TU/NanumGothic(0)/b/n/10 [EXERCISE] \TU/NanumGothic(0)/m/sl/10 위 예제를 10번 반복하
 되 각 반복 데이터는 각각 $[] [] [][] [][][][] [][][][] [][][][] [][][]$
  []
 
-[183]
-Underfull \hbox (badness 6094) in paragraph at lines 6963--6964
+[189]
+Underfull \hbox (badness 6094) in paragraph at lines 7123--7124
 \TU/NanumGothic(0)/m/sl/10 정규분포에서 추출된 표본들의 평균(표본평균)은 $[]$의 수가 많지 않더라도
  []
 
 
-Underfull \hbox (badness 3758) in paragraph at lines 6971--6972
+Underfull \hbox (badness 3758) in paragraph at lines 7131--7132
 []\TU/NanumGothic(0)/m/sl/10 z-score는 표본평균에 대한 z-score로서 모평균을 빼주고 모분산/$[]$ 값을
  []
 
-[184]
-Underfull \hbox (badness 2726) in paragraph at lines 7026--7027
+[190]
+Underfull \hbox (badness 2726) in paragraph at lines 7186--7187
 \TU/NanumGothic(0)/m/sl/10 위와 같은 z-score를 계산하기 위해서는 모표준편차가 필요하지만 모분산은
  []
 
 
-Underfull \hbox (badness 1354) in paragraph at lines 7026--7027
+Underfull \hbox (badness 1354) in paragraph at lines 7186--7187
 \TU/NanumGothic(0)/m/sl/10 일반적으로 알려져있지 않기 때문에 z-score를 사용한 검정의 활용은 한정적
  []
 
 
-Underfull \hbox (badness 1259) in paragraph at lines 7026--7027
+Underfull \hbox (badness 1259) in paragraph at lines 7186--7187
 \TU/NanumGothic(0)/m/sl/10 t 통계량은 t분포를 가지며 t분포는 $[]$ 이 무한에 가까워지면 표준정규분포와
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[185]
-Overfull \vbox (1.30507pt too high) detected at line 7068
+[191]
+Overfull \vbox (1.30507pt too high) detected at line 7228
  []
 
-[186]
-Underfull \hbox (badness 1946) in paragraph at lines 7087--7088
+[192]
+Underfull \hbox (badness 1946) in paragraph at lines 7247--7248
 []\TU/NanumGothic(0)/b/n/10 [EXERCISE] \TU/NanumGothic(0)/m/sl/10 위 예제의 과정을 100
 0번 반복하고 계산된 차이값들로 분포를
  []
 
-[187]
-Underfull \hbox (badness 1789) in paragraph at lines 7132--7133
+[193]
+Underfull \hbox (badness 1789) in paragraph at lines 7292--7293
 \TU/NanumGothic(0)/m/sl/10 나누어도 높은 확률로 관측 가능한 값이라는 의미입니다. 반면 가장자리에
  []
 
 
-Underfull \hbox (badness 2698) in paragraph at lines 7141--7142
+Underfull \hbox (badness 2698) in paragraph at lines 7301--7302
 \TU/NanumGothic(0)/m/sl/10 해당 값이 가정된 분포로부터 관측될 확률을 계산하여 가설에 대한 판단을
  []
 
 
-Underfull \hbox (badness 1142) in paragraph at lines 7143--7144
+Underfull \hbox (badness 1142) in paragraph at lines 7303--7304
 []\TU/NanumGothic(0)/m/sl/10 유의성검정을 재판 과정의 검사와 배심원 입장으로 생각하면 이해가 쉬울 수
  []
 
-[188]
-Underfull \hbox (badness 1596) in paragraph at lines 7168--7169
+[194]
+Underfull \hbox (badness 1596) in paragraph at lines 7328--7329
 []\TU/NanumGothic(0)/m/sl/10 위 그래프에서 실제 기계들의 평균 영점이 0임인 분포만을 생각하면 면적의
  []
 
 
-Underfull \vbox (badness 1430) detected at line 7194
+Underfull \vbox (badness 1430) detected at line 7354
  []
 
 
 Underfull \vbox (badness 1097) has occurred while \output is active []
 
-[189]
-Underfull \hbox (badness 4819) in paragraph at lines 7200--7201
+[195]
+Underfull \hbox (badness 4819) in paragraph at lines 7360--7361
 \TU/NanumGothic(0)/m/sl/10 hypothesis)이라 합니다. 일반적으로 $[][]$이 사람들이 관심있는 주장이고
  []
 
 
-Underfull \hbox (badness 1701) in paragraph at lines 7200--7201
+Underfull \hbox (badness 1701) in paragraph at lines 7360--7361
 \TU/NanumGothic(0)/m/sl/10 하에서 만들어진 통계량의 관측될 확률이 작으면 가정이 틀린 것으로 $[][]$를
  []
 
 
-Underfull \hbox (badness 1603) in paragraph at lines 7200--7201
+Underfull \hbox (badness 1603) in paragraph at lines 7360--7361
 \TU/NanumGothic(0)/m/sl/10 확률을 유의확률(p-value) 이라 하며 유의성검정은 p-value를 계산하는 것과
  []
 
 File: ./images/09/01.png Graphic file (type bmp)
 <./images/09/01.png>
 
-Overfull \hbox (106.69012pt too wide) in paragraph at lines 7208--7209
+Overfull \hbox (106.69012pt too wide) in paragraph at lines 7368--7369
 [][] 
  []
 
-[190]
+[196]
 File: ./images/09/02.png Graphic file (type bmp)
 <./images/09/02.png>
 
-Overfull \hbox (106.68721pt too wide) in paragraph at lines 7212--7213
+Overfull \hbox (106.68721pt too wide) in paragraph at lines 7372--7373
 [][] 
  []
 
-[191]
+[197]
 File: ./images/09/03.png Graphic file (type bmp)
 <./images/09/03.png>
 
-Overfull \hbox (106.74173pt too wide) in paragraph at lines 7227--7228
+Overfull \hbox (106.74173pt too wide) in paragraph at lines 7387--7388
 [][] 
  []
 
-[192]
-Underfull \hbox (badness 1648) in paragraph at lines 7240--7241
+[198]
+Underfull \hbox (badness 1648) in paragraph at lines 7400--7401
 []\TU/NanumGothic(0)/m/sl/10 위와 같은 p-value는 가설을 검정하는데 사용되는 핵심 기준이 되며 가설을
  []
 
 File: ./images/09/06.png Graphic file (type bmp)
 <./images/09/06.png>
 
-Overfull \hbox (31.40364pt too wide) in paragraph at lines 7279--7280
+Overfull \hbox (31.40364pt too wide) in paragraph at lines 7439--7440
  [][] 
  []
 
-[193] [194] [195] [196
+[199] [200] [201] [202
 
 ]
 Chapter 16.
-Missing character: There is no 사 in font [lmmono10-regular]:!
-Missing character: There is no 용 in font [lmmono10-regular]:!
-Missing character: There is no 법 in font [lmmono10-regular]:!
-Missing character: There is no 및 in font [lmmono10-regular]:!
-Missing character: There is no 데 in font [lmmono10-regular]:!
-Missing character: There is no 이 in font [lmmono10-regular]:!
-Missing character: There is no 터 in font [lmmono10-regular]:!
-Missing character: There is no 분 in font [lmmono10-regular]:!
-Missing character: There is no 석 in font [lmmono10-regular]:!
-Missing character: There is no 기 in font [lmmono10-regular]:!
-Missing character: There is no 초 in font [lmmono10-regular]:!
-Missing character: There is no 목 in font [lmmono10-regular]:!
-Missing character: There is no 목 in font [lmmono10-regular]:!
-[197]
-Underfull \vbox (badness 1117) has occurred while \output is active []
+File: images/12/htanalysis.png Graphic file (type bmp)
+<images/12/htanalysis.png>
 
-[198] [199] [200] [201] [202] [203] [204]
-Missing character: There is no 결 in font [lmmonolt10-boldoblique]:!
-Missing character: There is no 과 in font [lmmonolt10-boldoblique]:!
-[205] [206]
-Missing character: There is no 를 in font [lmmono10-italic]:!
-Missing character: There is no 누 in font [lmmono10-italic]:!
-Missing character: There is no 르 in font [lmmono10-italic]:!
-Missing character: There is no 면 in font [lmmono10-italic]:!
-Missing character: There is no 주 in font [lmmono10-italic]:!
-Missing character: There is no 석 in font [lmmono10-italic]:!
-[207] [208] [209]
-Underfull \vbox (badness 10000) detected at line 8419
+Overfull \hbox (106.67732pt too wide) in paragraph at lines 7504--7505
+[] 
+ []
+
+
+Underfull \hbox (badness 2951) in paragraph at lines 7509--7510
+\TU/NanumGothic(0)/m/sl/10 Differentially Expressed Gene 분석은 전통적 two-channel mi
+croarray나
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[210]
-Overfull \vbox (2.18996pt too high) detected at line 8489
+[203]
+Underfull \hbox (badness 3068) in paragraph at lines 7537--7538
+\TU/NanumGothic(0)/m/sl/10 Rsubread 패키지를 활용해서 align을 수행합니다. align 전에 reference
  []
 
-[211] [212] [213] [214]
-Overfull \hbox (180.0pt too wide) in paragraph at lines 8722--8722
-[]\TU/lmtt/m/n/10 https://raw.githubusercontent.com/greendaygh/kribbr2022/main/
-examples/gse93819_expression_values.csv[] 
+[204] [205]
+Underfull \hbox (badness 10000) in paragraph at lines 7631--7632
+[]\TU/NanumGothic(0)/m/sl/10 이 저작물은 크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제
  []
 
-Missing character: There is no 위 in font [lmmono10-regular]:!
-Missing character: There is no 주 in font [lmmono10-regular]:!
-Missing character: There is no 소 in font [lmmono10-regular]:!
-Missing character: There is no 그 in font [lmmono10-regular]:!
-Missing character: There is no 대 in font [lmmono10-regular]:!
-Missing character: There is no 로 in font [lmmono10-regular]:!
-Missing character: There is no 복 in font [lmmono10-regular]:!
-Missing character: There is no 사 in font [lmmono10-regular]:!
-Missing character: There is no 후 in font [lmmono10-regular]:!
-Missing character: There is no 브 in font [lmmono10-regular]:!
-Missing character: There is no 라 in font [lmmono10-regular]:!
-Missing character: There is no 우 in font [lmmono10-regular]:!
-Missing character: There is no 저 in font [lmmono10-regular]:!
-Missing character: There is no 주 in font [lmmono10-regular]:!
-Missing character: There is no 소 in font [lmmono10-regular]:!
-Missing character: There is no 창 in font [lmmono10-regular]:!
-Missing character: There is no 에 in font [lmmono10-regular]:!
-Missing character: There is no 입 in font [lmmono10-regular]:!
-Missing character: There is no 력 in font [lmmono10-regular]:!
-Missing character: There is no 로 in font [lmmono10-regular]:!
-Missing character: There is no 모 in font [lmmono10-regular]:!
-Missing character: There is no 두 in font [lmmono10-regular]:!
-Missing character: There is no 선 in font [lmmono10-regular]:!
-Missing character: There is no 택 in font [lmmono10-regular]:!
-Missing character: There is no 후 in font [lmmono10-regular]:!
-Missing character: There is no 복 in font [lmmono10-regular]:!
-Missing character: There is no 사 in font [lmmono10-regular]:!
-Missing character: There is no 생 in font [lmmono10-regular]:!
-Missing character: There is no 성 in font [lmmono10-regular]:!
-Missing character: There is no 후 in font [lmmono10-regular]:!
-Missing character: There is no 붙 in font [lmmono10-regular]:!
-Missing character: There is no 여 in font [lmmono10-regular]:!
-Missing character: There is no 넣 in font [lmmono10-regular]:!
-Missing character: There is no 기 in font [lmmono10-regular]:!
-Missing character: There is no 로 in font [lmmono10-regular]:!
-Missing character: There is no 저 in font [lmmono10-regular]:!
-Missing character: There is no 장 in font [lmmono10-regular]:!
-[215]
-Underfull \vbox (badness 1221) detected at line 8823
- []
+[206]
+Chapter 17.
 
-[216]
-Underfull \vbox (badness 3029) has occurred while \output is active []
-
-[217] [218] [219] [220]
-Underfull \hbox (badness 10000) in paragraph at lines 9139--9141
-[]\TU/NanumGothic(0)/m/sl/10 Rstudio > Tools > Global options > \TU/lmtt/m/n/10
- [Default] [64-bit]
- []
-
-[221] [222] [223] [224] [225]
-Underfull \hbox (badness 1107) in paragraph at lines 9540--9541
-[]\TU/NanumGothic(0)/m/sl/10 몸무게와 키의 산포도를 그리고 반별로 어떻게 상관성이 다른지 그리고
+Overfull \hbox (1.5pt too wide) in paragraph at lines 7666--7666
+[]\TU/lmtt/m/n/10 fastq-dump -X 100000 --split-files SRR10009019/SRR10009019.sr
+alite[] 
  []
 
 
-Overfull \vbox (1.35991pt too high) detected at line 9571
- []
-
-[226]
-Underfull \vbox (badness 10000) detected at line 9629
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[227] [228] [229] [230]
-Overfull \vbox (1.39996pt too high) detected at line 9921
- []
-
-[231] [232] [233]
-Underfull \vbox (badness 10000) detected at line 10145
+Overfull \hbox (1.5pt too wide) in paragraph at lines 7666--7666
+[]\TU/lmtt/m/n/10 fastq-dump -X 100000 --split-files SRR10009020/SRR10009020.sr
+alite[] 
  []
 
 
-Underfull \vbox (badness 5133) has occurred while \output is active []
-
-[234]
-Overfull \vbox (1.32997pt too high) detected at line 10199
- []
-
-[235] [236] [237] [238] [239] [240] [241] [242] [243] [244] [245] [246]
-Overfull \hbox (9.64001pt too wide) in paragraph at lines 11023--11024
-[]\TU/NanumGothic(0)/m/sl/10 코로나 바이러스 ID들에 대해서 정렬을 수행하고 \TU/lmtt/m/n/10 writePa
-irwiseAlignments\TU/NanumGothic(0)/m/sl/10 를
+Overfull \hbox (1.5pt too wide) in paragraph at lines 7666--7666
+[]\TU/lmtt/m/n/10 fastq-dump -X 100000 --split-files SRR10009021/SRR10009021.sr
+alite[] 
  []
 
 
-Overfull \vbox (0.37997pt too high) detected at line 11060
- []
-
-[247]
-Overfull \hbox (16.36002pt too wide) in paragraph at lines 11065--11066
-[]\TU/NanumGothic(0)/m/sl/10 (참고) 문자열 나누기 코드, \TU/lmtt/m/n/10 sapply\TU/NanumGo
-thic(0)/m/sl/10 와 사용자 정의 함수 \TU/lmtt/m/n/10 extract_first_element
+Overfull \hbox (1.5pt too wide) in paragraph at lines 7666--7666
+[]\TU/lmtt/m/n/10 fastq-dump -X 100000 --split-files SRR10009022/SRR10009022.sr
+alite[] 
  []
 
 
-Underfull \vbox (badness 10000) detected at line 11098
+Overfull \hbox (1.5pt too wide) in paragraph at lines 7666--7666
+[]\TU/lmtt/m/n/10 fastq-dump -X 100000 --split-files SRR10009023/SRR10009023.sr
+alite[] 
  []
 
 
-Underfull \vbox (badness 4792) has occurred while \output is active []
-
-[248] [249]
-Missing character: There is no 아 in font [lmmono10-regular]:!
-Missing character: There is no 래 in font [lmmono10-regular]:!
-Missing character: There is no 관 in font [lmmono10-regular]:!
-Missing character: There is no 련 in font [lmmono10-regular]:!
-Missing character: There is no 알 in font [lmmono10-regular]:!
-Missing character: There is no 아 in font [lmmono10-regular]:!
-Missing character: There is no 보 in font [lmmono10-regular]:!
-Missing character: There is no 기 in font [lmmono10-regular]:!
-Missing character: There is no 적 in font [lmmono10-regular]:!
-Missing character: There is no 용 in font [lmmono10-regular]:!
-Missing character: There is no 여 in font [lmmono10-regular]:!
-Missing character: There is no 부 in font [lmmono10-regular]:!
-[250]
-Underfull \vbox (badness 10000) detected at line 11300
+Overfull \hbox (1.5pt too wide) in paragraph at lines 7666--7666
+[]\TU/lmtt/m/n/10 fastq-dump -X 100000 --split-files SRR10009024/SRR10009024.sr
+alite[] 
  []
 
+[207
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[251] [252]
-Overfull \vbox (1.87996pt too high) detected at line 11429
+] [208] [209]
+Overfull \vbox (0.37997pt too high) detected at line 7879
  []
 
-[253]
-Underfull \hbox (badness 7203) in paragraph at lines 11434--11435
-[]\TU/NanumGothic(0)/m/sl/10 IRanges 설치Bioconductor landing page (구글에서 biocondu
-ctor
+[210] [211]
+Underfull \hbox (badness 10000) in paragraph at lines 8014--8015
+[]\TU/NanumGothic(0)/m/sl/10 이 저작물은 크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제
  []
 
+[212]
+Chapter 18.
 
-Overfull \vbox (1.63994pt too high) detected at line 11526
- []
+LaTeX Warning: File `image/gsea.png' not found on input line 8029.
 
-[254] [255]
-Underfull \hbox (badness 10000) in paragraph at lines 11595--11597
-
- []
-
-[256]
-Underfull \vbox (badness 1701) detected at line 11754
- []
-
-[257] [258]
-Underfull \vbox (badness 10000) detected at line 11831
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[259] [260] [261] [262] [263]
-Underfull \vbox (badness 10000) detected at line 12187
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[264] [265]
-Overfull \vbox (1.78995pt too high) detected at line 12312
- []
-
-[266]
-Overfull \vbox (0.38997pt too high) detected at line 12361
- []
-
-[267] (./kribbr2022.bbl [268]
-
-Package natbib Warning: Empty `thebibliography' environment on input line 3.
-
-)
-
-Package natbib Warning: There were undefined citations.
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 12366.
-[269
-
-]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 12366.
-(./kribbr2022.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 12366.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 12366.
-
-LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
- ) 
+! Unable to load picture or PDF file 'image/gsea.png'.
+<to be read again> 
+                   }
+l.8029 ...33in,height=\textheight]{image/gsea.png}
+                                                   
 Here is how much of TeX's memory you used:
- 21105 strings out of 479819
- 367425 string characters out of 5895846
- 810848 words of memory out of 5000000
- 37801 multiletter control sequences out of 15000+600000
+ 21051 strings out of 479819
+ 366834 string characters out of 5895846
+ 803644 words of memory out of 5000000
+ 37722 multiletter control sequences out of 15000+600000
  538999 words of font info for 91 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  58i,18n,118p,809b,560s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on kribbr2022.pdf (269 pages).
+Output written on kribbr2022.pdf (212 pages).

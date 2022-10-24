@@ -4,7 +4,7 @@
 -   <https://yulab-smu.top/biomedical-knowledge-mining-book/enrichment-overview.html>
 -   <https://github.com/hawn-lab/workshops_UW_Seattle/tree/master/2021.07.14_GSEA>
 
-![](image/gsea.png){width="500"}
+![](images/gsea.png){width="500"}
 
 
 ```r
